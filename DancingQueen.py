@@ -37,13 +37,21 @@ def dance():
     misty.display_image("e_Joy3.jpg")
 
 person_detected = False
+song = open("sweetcaroline.mp3")
 
+# This is the pre conversation part of misty
+# misty will dance and play music until the human chaperone is detected.
 # misty will continue to dance while space bar is not pressed
 while person_detected == False:
+    # add music
     dance()
     time.sleep(.5)
 
     if keyboard.is_pressed("space"):
+        # put wave greeting and introduction
+        # how are you
+        # maybe prompt "would you like to talk to me"
+        talk = False
         print("loop exited")
         person_detected = True
 
