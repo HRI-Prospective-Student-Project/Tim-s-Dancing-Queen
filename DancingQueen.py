@@ -2,10 +2,13 @@ from mistyPy.Robot import Robot
 from mistyPy.Events import Events
 import random
 import time
+from flask import Flask, requests, jsonify
 # import math
 import keyboard
 
 misty = Robot("192.168.1.10")
+# app = Flask(__name__)
+
 # misty.change_led(0, 255, 0)
 # misty.move_head(0, 0, 0)
 
@@ -58,6 +61,7 @@ def wave_back(arm):
     waving_now = False
 
 def dance():
+    misty.drive(0, 20)
     misty.play_audio("s_Success3.wav")
     misty.move_arms(80, -80)
     misty.move_head(0, 20, 0)
@@ -68,15 +72,16 @@ def dance():
     misty.display_image("e_Joy3.jpg")
 
 person_detected = False
-song = open("sweetcaroline.mp3")
+song_is_playing = False
+Duration = 0
 
-# This is the pre conversation part of misty
-# misty will dance and play music until the human chaperone is detected.
-# misty will continue to dance while space bar is not pressed
+misty.set_default_volume(30)
+
 while person_detected == False:
     # add music
     dance()
-    misty.drive(0, 20)
+    misty.play_audio("sweetcaroline.mp3")
+    time.sleep(.5)
 
     if keyboard.is_pressed("space"):
         # put wave greeting and introduction
@@ -88,6 +93,11 @@ while person_detected == False:
 
 misty.drive(0, 0)
 
+introQuestions = ["Do you have any questions?", "What would you like to learn about F and M", "What's up, what do you wanna know?"]
+
+question = random.randint(0, len(introQuestions) - 1)
+
 wave_back("right")
 misty.speak("Hello, my name is Misty.")
-misty.speak("Do you have any questions?")
+misty.speak(introQuestions[question])
+misty.speak("Pick something from the dashboard")
