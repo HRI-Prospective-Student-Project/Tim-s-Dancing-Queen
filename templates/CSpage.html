@@ -40,8 +40,8 @@
             <h2 class="text-xl font-bold text-primary mb-4 flex items-center">
                 <i data-feather="info" class="mr-2"></i> What is Computer Science at F&M?
             </h2>
-            <p class="mb-4 text-gray-700">
-                At F&M, computer science is one of the most versatile fields of study, connecting technology with real-world impact. 
+            <p id = "CScontent" class="mb-4 text-gray-700">
+                At F and M, computer science is one of the most versatile fields of study, connecting technology with real-world impact. 
                 The program emphasizes both the mathematical foundations of computer science and strong programming skills, and encourages you to put theory into practice.
             </p>
             <ul class="space-y-3 mb-4">
@@ -176,6 +176,21 @@
 
     <script>
         feather.replace();
+
+    function speakWithMisty() {
+        var text = document.getElementById("CScontent").innerHTML
+        console.log(text)
+        fetch("http://127.0.0.1:5001/speak", {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify({ 'text': text })
+        })
+        .then(r => r.text())
+        .then(console.log)
+        .catch(console.error)
+    }
+
+    speakWithMisty()
 </script>
 </body>
 </html>

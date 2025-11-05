@@ -80,7 +80,7 @@ misty.set_default_volume(30)
 while person_detected == False:
     # add music
     dance()
-    misty.play_audio("sweetcaroline.mp3")
+    # misty.play_audio("sweetcaroline.mp3")
     time.sleep(.5)
 
     if keyboard.is_pressed("space"):

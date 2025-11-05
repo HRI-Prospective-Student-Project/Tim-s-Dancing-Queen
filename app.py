@@ -2,12 +2,15 @@
 Flask Application for F&M Computer Science Major Page
 """
 
-from flask import Flask, render_template
+from flask import Flask, render_template, request, jsonify
 from mistyPy.Robot import Robot
+import requests
 
 app = Flask(__name__)
+MISTY_IP = "192.168.1.10"
 
-misty = Robot("192.168.1.10")
+
+misty = Robot(MISTY_IP)
 
 @app.route('/')
 def index():
@@ -28,6 +31,18 @@ def neuro_page():
 def academics_page():
     """Academics page"""
     return render_template('academics.html')
+
+@app.route('/speak', methods = ["GET", "POST"])
+def misty_speak():
+    # textObj = json.load(request.data)
+    # print(textObj["text"])
+    # misty.speak(textObj["text"])
+
+    text = request.json.get('text', '')
+    print("Speaking:", text)
+    # Add your Misty call here
+    misty.speak(text)
+    return jsonify({"message": f"Misty speaking: {text}"})
 
 
 @app.errorhandler(404)
