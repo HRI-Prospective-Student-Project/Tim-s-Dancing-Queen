@@ -3,7 +3,6 @@ from mistyPy.Events import Events
 import random
 import time
 # import math
-import keyboard
 
 misty = Robot("192.168.1.10")
 

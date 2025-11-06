@@ -9,7 +9,7 @@ import subprocess
 import os
 
 app = Flask(__name__)
-MISTY_IP = "192.168.1.10"
+MISTY_IP = "192.168.1.4"
 
 misty = Robot(MISTY_IP)
 
@@ -24,12 +24,12 @@ def index():
 @app.route('/cs')
 def cs_page():
     """Computer Science major page"""
-    return render_template('CSpage.html')
+    return render_template('CS_enhanced.html')
 
 @app.route('/neuro')
 def neuro_page():
     """Neuroscience major page"""
-    return render_template('neuropage.html')
+    return render_template('neuropage_enhanced.html')
 
 @app.route('/academics')
 def academics_page():
