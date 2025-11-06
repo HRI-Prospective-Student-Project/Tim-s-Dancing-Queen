@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Franklin & Marshall · Neuroscience</title>
+  <meta name="description" content="Explore the Neuroscience major at Franklin & Marshall—molecules to behavior. Courses, research labs, outcomes, and FAQs for admitted students." />
+
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#002D72',
+            secondary: '#C8102E',
+            ink: {
+              50: '#F8FAFC',100:'#F1F5F9',200:'#E2E8F0',300:'#CBD5E1',400:'#94A3B8',500:'#64748B',600:'#475569',700:'#334155',800:'#1E293B',900:'#0F172A'
+            },
+          },
+          boxShadow: {
+            soft: '0 10px 30px rgba(2, 6, 23, .08)',
+            lift: '0 14px 40px rgba(2, 6, 23, .12)'
+          }
+        }
+      }
+    }
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+  <style>
+    .blob { filter: blur(40px); opacity:.25 }
+    @keyframes float { 0%,100%{ transform: translateY(0)} 50%{ transform: translateY(-8px)} }
+    .float { animation: float 9s ease-in-out infinite }
+    @media (prefers-reduced-motion: reduce) { .float { animation: none } }
+  </style>
+</head>
+<body class="bg-gradient-to-br from-indigo-50 via-sky-50 to-teal-50 text-ink-800 dark:from-slate-950 dark:via-slate-900 dark:to-slate-900 dark:text-ink-100 min-h-screen">
+  <!-- Background decor -->
+  <div aria-hidden="true" class="pointer-events-none fixed inset-0 overflow-hidden -z-10">
+    <div class="blob float absolute -top-24 -left-16 h-80 w-80 rounded-full bg-indigo-400/50"></div>
+    <div class="blob float absolute bottom-0 right-0 h-96 w-96 rounded-full bg-teal-300/40" style="animation-delay:-5s"></div>
+  </div>
+
+  <!-- NAVBAR -->
+  <header class="sticky top-0 z-50 bg-white/70 backdrop-blur border-b border-white/50 shadow-soft">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3 flex items-center justify-between">
+      <a href="#" class="flex items-center gap-2 text-primary font-extrabold tracking-tight">
+        <span class="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-primary/10"><i data-feather="activity" class="h-5 w-5"></i></span>
+        F&M Neuroscience
+      </a>
+      <nav class="hidden md:flex items-center gap-6 text-sm">
+        <a href="#why" class="hover:text-primary">Why Neuroscience</a>
+        <a href="#structure" class="hover:text-primary">Program</a>
+        <a href="#research" class="hover:text-primary">Research</a>
+        <a href="#outcomes" class="hover:text-primary">Outcomes</a>
+        <a href="#faq" class="hover:text-primary">FAQ</a>
+      </nav>
+      <div class="flex items-center gap-2">
+        <a href="#apply" class="hidden sm:inline-flex bg-secondary text-white text-xs font-semibold px-3 py-2 rounded-full hover:bg-secondary/90 shadow">Admitted Day</a>
+        <button id="ttsBtn" class="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-ink-200 hover:bg-ink-50 text-ink-700" aria-label="Read page intro"><i data-feather="volume-2" class="h-4 w-4"></i></button>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section id="why" class="relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-16 md:py-20 grid md:grid-cols-2 gap-10 items-center">
+      <div>
+        <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight text-ink-900">From <span class="bg-gradient-to-r from-primary to-teal-600 bg-clip-text text-transparent">molecules</span> to <span class="bg-gradient-to-r from-secondary to-indigo-600 bg-clip-text text-transparent">mind</span>.</h1>
+        <p class="mt-4 text-ink-600" id="NeuroContent">Neuroscience at F&amp;M lives in the Biological Foundations of Behavior (BFB) Program. It’s an interdisciplinary major spanning biology, psychology, chemistry, physics, and mathematics—connecting neural mechanisms to behavior and cognition.</p>
+        <div class="mt-6 flex flex-wrap gap-3">
+          <a href="#structure" class="inline-flex items-center gap-2 bg-primary text-white px-5 py-3 rounded-xl shadow-lift hover:-translate-y-0.5 transition"><i data-feather="book-open" class="h-5 w-5"></i> Explore the program</a>
+          <a href="#research" class="inline-flex items-center gap-2 bg-white/80 backdrop-blur border border-white/60 px-5 py-3 rounded-xl shadow-soft hover:-translate-y-0.5 transition"><i data-feather="microscope" class="h-5 w-5 text-primary"></i> See labs</a>
+        </div>
+        <dl class="mt-8 grid grid-cols-3 gap-4 text-center">
+          <div class="rounded-xl bg-white/70 backdrop-blur p-4 border border-white/60 shadow-soft"><dt class="text-xs text-ink-500">Courses</dt><dd class="text-2xl font-extrabold text-primary">15</dd></div>
+          <div class="rounded-xl bg-white/70 backdrop-blur p-4 border border-white/60 shadow-soft"><dt class="text-xs text-ink-500">Area Electives</dt><dd class="text-2xl font-extrabold text-secondary">3</dd></div>
+          <div class="rounded-xl bg-white/70 backdrop-blur p-4 border border-white/60 shadow-soft"><dt class="text-xs text-ink-500">Student Labs</dt><dd class="text-2xl font-extrabold text-teal-600">12+</dd></div>
+        </dl>
+      </div>
+      <!-- Hero card -->
+      <div class="relative">
+        <div class="absolute -inset-2 rounded-3xl bg-gradient-to-br from-primary/10 via-indigo-300/10 to-teal-300/10 blur-2xl"></div>
+        <div class="relative rounded-3xl bg-white/80 backdrop-blur border border-white/60 shadow-soft p-6">
+          <div class="grid grid-cols-2 gap-4">
+            <div class="rounded-2xl border border-ink-100 p-4"><i data-feather="activity" class="h-5 w-5 text-primary"></i><p class="mt-2 text-sm font-semibold">Systems & Circuits</p><p class="text-xs text-ink-600">From sensory pathways to motor control.</p></div>
+            <div class="rounded-2xl border border-ink-100 p-4"><i data-feather="aperture" class="h-5 w-5 text-teal-600"></i><p class="mt-2 text-sm font-semibold">Behavior & Cognition</p><p class="text-xs text-ink-600">Learning, memory, attention, decision‑making.</p></div>
+            <div class="rounded-2xl border border-ink-100 p-4"><i data-feather="cpu" class="h-5 w-5 text-secondary"></i><p class="mt-2 text-sm font-semibold">Cellular & Molecular</p><p class="text-xs text-ink-600">Ion channels, synapses, neuromodulation.</p></div>
+            <div class="rounded-2xl border border-ink-100 p-4"><i data-feather="heart" class="h-5 w-5 text-indigo-600"></i><p class="mt-2 text-sm font-semibold">Health & Society</p><p class="text-xs text-ink-600">Neuroethics, wellbeing, clinical links.</p></div>
+          </div>
+          <div class="mt-4 text-xs text-ink-500">💡 Interdisciplinary by design. Evidence‑driven and hands‑on.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROGRAM STRUCTURE (Tabs) -->
+  <section id="structure" class="py-14">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+      <h2 class="text-3xl font-extrabold tracking-tight">Program structure</h2>
+      <p class="mt-2 text-ink-600 max-w-2xl">A scaffolded path from fundamentals to advanced lab‑based inquiry.</p>
+
+      <div class="mt-6 rounded-2xl bg-white/80 backdrop-blur border border-white/60 shadow-soft p-2">
+        <div class="flex flex-wrap gap-2 p-2">
+          <button class="tab-btn active" data-tab="core">Core</button>
+          <button class="tab-btn" data-tab="physmath">Physical Sci & Math</button>
+          <button class="tab-btn" data-tab="neurofund">Neuro Fundamentals</button>
+          <button class="tab-btn" data-tab="areastudies">Area Studies</button>
+          <button class="tab-btn" data-tab="research">Research</button>
+        </div>
+        <div class="p-4 md:p-6">
+          <!-- Core Biology -->
+          <div class="tab-panel" id="tab-core">
+            <ul class="grid md:grid-cols-2 gap-3">
+              <li class="flex items-center gap-2"><i data-feather="book" class="text-secondary"></i> BIO 101 – Evolution, Ecology & Biodiversity</li>
+              <li class="flex items-center gap-2"><i data-feather="book" class="text-secondary"></i> BIO 102 – Cell Biology & Genetics</li>
+              <li class="md:col-span-2 flex items-center gap-2"><i data-feather="book" class="text-secondary"></i> BIO 200 – Integrative Biology</li>
+            </ul>
+          </div>
+          <!-- Physical Sciences & Math -->
+          <div class="tab-panel hidden" id="tab-physmath">
+            <div class="grid md:grid-cols-2 gap-3">
+              <div class="flex items-center gap-2"><i data-feather="check" class="text-secondary"></i> CHM 111 – General Chemistry I</div>
+              <div class="flex items-center gap-2"><i data-feather="check" class="text-secondary"></i> CHM 112 – General Chemistry II</div>
+              <div class="flex items-center gap-2"><i data-feather="check" class="text-secondary"></i> CHM 211 – Organic Chemistry I</div>
+              <div class="flex items-center gap-2"><i data-feather="check" class="text-secondary"></i> PHY 101 or PHY 111 – Physics</div>
+              <div class="md:col-span-2 flex items-center gap-2"><i data-feather="check" class="text-secondary"></i> MAT 109 – Calculus I</div>
+            </div>
+          </div>
+          <!-- Neuro Fundamentals -->
+          <div class="tab-panel hidden" id="tab-neurofund">
+            <ul class="space-y-2">
+              <li class="flex items-center gap-2"><i data-feather="book" class="text-secondary"></i> BIO 240 – Neuroscience</li>
+              <li class="flex items-center gap-2"><i data-feather="book" class="text-secondary"></i> PSY 351 – Biopsychology w/ Lab <span class="text-ink-500">or</span> PSY 27x – Biopsychology</li>
+            </ul>
+          </div>
+          <!-- Area Studies -->
+          <div class="tab-panel hidden" id="tab-areastudies">
+            <div class="grid md:grid-cols-2 gap-4">
+              <div class="rounded-xl border border-ink-100 p-4">
+                <h3 class="font-semibold">Neuro-focused (samples)</h3>
+                <ul class="mt-2 list-disc list-inside text-sm text-ink-600 space-y-1">
+                  <li>BIO 330 – Advanced Neurobiology</li>
+                  <li>BIO 343 – Functional Human Neuroanatomy</li>
+                  <li>PSY 357 – Hormones & Behavior (Lab)</li>
+                  <li>BIO 341 – Neurochemistry</li>
+                </ul>
+              </div>
+              <div class="rounded-xl border border-ink-100 p-4">
+                <h3 class="font-semibold">Behavior & Cognition</h3>
+                <ul class="mt-2 list-disc list-inside text-sm text-ink-600 space-y-1">
+                  <li>PSY 305 – Cognitive Psychology</li>
+                  <li>PSY 320 – Animal Behavior (Lab)</li>
+                  <li>PSY 355 – Face Perception (Lab)</li>
+                  <li>PSY 371 – Evolutionary Psychology</li>
+                </ul>
+              </div>
+              <div class="rounded-xl border border-ink-100 p-4 md:col-span-2">
+                <h3 class="font-semibold">Related / Interdisciplinary</h3>
+                <ul class="mt-2 list-disc list-inside text-sm text-ink-600 space-y-1">
+                  <li>BIO 306 – Developmental Biology</li>
+                  <li>BIO 332 – Molecular Biology</li>
+                  <li>PSY 200 – Neuroethics</li>
+                  <li>Approved courses in Philosophy, Anthropology, Environmental Studies</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <!-- Research requirement -->
+          <div class="tab-panel hidden" id="tab-research">
+            <div class="rounded-xl border border-ink-100 p-4">
+              <p class="text-sm text-ink-700 mb-2">Complete one advanced research experience:</p>
+              <ul class="list-disc list-inside text-sm text-ink-600 space-y-1">
+                <li>BFB 390 – Directed Research</li>
+                <li>BFB 490 – Independent Research</li>
+                <li>Psychology Collaborative Research (PSY 460 or 48x)</li>
+                <li>Approved 300‑level Biology laboratory course</li>
+              </ul>
+              <p class="text-xs text-ink-500 mt-2">Area studies courses may not double‑count toward the advanced research requirement and vice versa.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RESEARCH & LABS -->
+  <section id="research" class="py-14">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+      <div class="grid lg:grid-cols-3 gap-6 items-start">
+        <div class="lg:col-span-1">
+          <<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Franklin & Marshall · Neuroscience</title>
+  <meta name="description" content="Explore the Neuroscience major at Franklin & Marshall—molecules to behavior. Courses, research labs, outcomes, and FAQs for admitted students." />
+
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#002D72',
+            secondary: '#C8102E',
+            ink: {
+              50: '#F8FAFC',100:'#F1F5F9',200:'#E2E8F0',300:'#CBD5E1',400:'#94A3B8',500:'#64748B',600:'#475569',700:'#334155',800:'#1E293B',900:'#0F172A'
+            },
+          },
+          boxShadow: {
+            soft: '0 10px 30px rgba(2, 6, 23, .08)',
+            lift: '0 14px 40px rgba(2, 6, 23, .12)'
+          }
+        }
+      }
+    }
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+  <style>
+    .blob { filter: blur(40px); opacity:.25 }
+    @keyframes float { 0%,100%{ transform: translateY(0)} 50%{ transform: translateY(-8px)} }
+    .float { animation: float 9s ease-in-out infinite }
+    @media (prefers-reduced-motion: reduce) { .float { animation: none } }
+  </style>
+</head>
+          <h2 class="text-3xl font-extrabold tracking-tight">Research & labs</h2>
+          <p class="mt-2 text-ink-600">Join labs studying neural systems, behavior, hormones, cognition, and brain health. Many first‑years contribute to ongoing projects.</p>
+          <ul class="mt-4 space-y-2 text-sm text-ink-700">
+            <li class="flex gap-2"><i data-feather="check-circle" class="text-teal-600"></i> Neurobiology & development</li>
+            <li class="flex gap-2"><i data-feather="check-circle" class="text-teal-600"></i> Behavioral & cognitive neuroscience</li>
+            <li class="flex gap-2"><i data-feather="check-circle" class="text-teal-600"></i> Neurochemistry & hormones</li>
+          </ul>
+        </div>
+        <div class="lg:col-span-2 grid sm:grid-cols-2 gap-4">
+          <article class="rounded-2xl bg-white/80 backdrop-blur border border-white/60 shadow-soft p-4">
+            <header class="flex items-center gap-2 text-sm font-semibold"><i data-feather="microscope" class="text-primary"></i> Cellular / Molecular Neuro</header>
+            <p class="mt-2 text-sm text-ink-700">Synaptic physiology, neuromodulators, and circuit plasticity using electrophysiology and imaging.</p>
+            <footer class="mt-3 text-xs text-ink-500">Faculty: Prof. Ryan T. Lacy</footer>
+          </article>
+          <article class="rounded-2xl bg-white/80 backdrop-blur border border-white/60 shadow-soft p-4">
+            <header class="flex items-center gap-2 text-sm font-semibold"><i data-feather="mouse-pointer" class="text-secondary"></i> Behavior & Cognition</header>
+            <p class="mt-2 text-sm text-ink-700">Learning, attention, and decision‑making with animal models and human studies.</p>
+            <footer class="mt-3 text-xs text-ink-500">Faculty: Psychology/BFB</footer>
+          </article>
+          <article class="rounded-2xl bg-white/80 backdrop-blur border border-white/60 shadow-soft p-4">
+            <header class="flex items-center gap-2 text-sm font-semibold"><i data-feather="thermometer" class="text-teal-600"></i> Hormones & Behavior</header>
+            <p class="mt-2 text-sm text-ink-700">Endocrine influences on stress, reproduction, and social behavior across species.</p>
+            <footer class="mt-3 text-xs text-ink-500">Faculty: Biology/Psychology</footer>
+          </article>
+          <article class="rounded-2xl bg-white/80 backdrop-blur border border-white/60 shadow-soft p-4">
+            <header class="flex items-center gap-2 text-sm font-semibold"><i data-feather="heart" class="text-indigo-600"></i> Brain Health</header>
+            <p class="mt-2 text-sm text-ink-700">Neuroethics, wellbeing, and clinical collaborations focused on translational outcomes.</p>
+            <footer class="mt-3 text-xs text-ink-500">Faculty: Cross‑disciplinary</footer>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- OUTCOMES TIMELINE -->
+  <section id="outcomes" class="py-14">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+      <h2 class="text-3xl font-extrabold tracking-tight">What happens after F&M?</h2>
+      <div class="mt-6 relative pl-6">
+        <div class="absolute left-2 top-0 bottom-0 w-px bg-ink-200"></div>
+        <ol class="space-y-6">
+          <li class="relative"><span class="absolute -left-2 top-1.5 h-3 w-3 rounded-full bg-primary"></span>
+            <div class="rounded-xl bg-white/80 backdrop-blur border border-white/60 shadow-soft p-4"><p class="font-semibold">Research & Healthcare</p><p class="text-sm text-ink-600">Labs, hospitals, and institutes—technician roles, study coordinators, and data analysis.</p></div>
+          </li>
+          <li class="relative"><span class="absolute -left-2 top-1.5 h-3 w-3 rounded-full bg-secondary"></span>
+            <div class="rounded-xl bg-white/80 backdrop-blur border border-white/60 shadow-soft p-4"><p class="font-semibold">Graduate / Professional School</p><p class="text-sm text-ink-600">MS/PhD in Neuroscience, Psychology, or Biology; pathways to MD/DO/PA/OT etc.</p></div>
+          </li>
+          <li class="relative"><span class="absolute -left-2 top-1.5 h-3 w-3 rounded-full bg-teal-600"></span>
+            <div class="rounded-xl bg-white/80 backdrop-blur border border-white/60 shadow-soft p-4"><p class="font-semibold">Interdisciplinary Careers</p><p class="text-sm text-ink-600">Neurodata science, UX research, biotech policy, science communication.</p></div>
+          </li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" class="py-14">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6">
+      <h2 class="text-3xl font-extrabold tracking-tight">Frequently asked</h2>
+      <div class="mt-6 space-y-3">
+        <details class="group rounded-xl bg-white/80 backdrop-blur border border-white/60 shadow-soft p-4">
+          <summary class="flex cursor-pointer items-center justify-between"><span class="font-semibold">How early can I join a lab?</span><i data-feather="chevron-down" class="group-open:rotate-180 transition h-4 w-4"></i></summary>
+          <p class="mt-2 text-sm text-ink-700">Many labs welcome first‑years. Ask faculty about reading groups and pilot projects.</p>
+        </details>
+        <details class="group rounded-xl bg-white/80 backdrop-blur border border-white/60 shadow-soft p-4">
+          <summary class="flex cursor-pointer items-center justify-between"><span class="font-semibold">Is there a clinical track?</span><i data-feather="chevron-down" class="group-open:rotate-180 transition h-4 w-4"></i></summary>
+          <p class="mt-2 text-sm text-ink-700">While not pre‑med specific, the curriculum aligns well with medical and allied‑health prerequisites.</p>
+        </details>
+        <details class="group rounded-xl bg-white/80 backdrop-blur border border-white/60 shadow-soft p-4">
+          <summary class="flex cursor-pointer items-center justify-between"><span class="font-semibold">Do I need programming experience?</span><i data-feather="chevron-down" class="group-open:rotate-180 transition h-4 w-4"></i></summary>
+          <p class="mt-2 text-sm text-ink-700">No—quantitative skills are developed in‑program; electives like bioinformatics are optional.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- APPLY / CONTACT -->
+  <section id="apply" class="py-14">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 text-center">
+      <div class="relative">
+        <div class="absolute -inset-2 rounded-3xl bg-gradient-to-br from-secondary/10 via-indigo-300/10 to-teal-300/10 blur-2xl"></div>
+        <div class="relative rounded-3xl bg-white/80 backdrop-blur border border-white/60 shadow-soft px-6 py-8">
+          <h3 class="text-2xl font-extrabold">Admitted Students Day</h3>
+          <p class="mt-2 text-ink-600">Meet faculty, tour labs, and join a mini‑lesson. Bring questions—we’ll bring demos.</p>
+          <div class="mt-6 flex flex-wrap justify-center gap-3">
+            <a href="#" class="inline-flex items-center gap-2 bg-primary text-white px-5 py-3 rounded-xl shadow-lift hover:-translate-y-0.5 transition"><i data-feather="calendar" class="h-5 w-5"></i> Reserve a spot</a>
+            <a href="mailto:rlacy@fandm.edu" class="inline-flex items-center gap-2 bg-white/80 backdrop-blur border border-white/60 px-5 py-3 rounded-xl shadow-soft"><i data-feather="mail" class="h-5 w-5 text-primary"></i> Email Prof. Lacy</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="border-t border-white/60 bg-white/70 backdrop-blur py-6 text-center text-xs text-ink-500">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">© <span id="year"></span> Franklin & Marshall College · Neuroscience</div>
+  </footer>
+
+  <!-- Sticky action buttons -->
+  <div class="fixed left-1/2 -translate-x-1/2 bottom-6 flex gap-3">
+    <button id="scrollTop" class="hidden w-10 h-10 rounded-lg bg-white/90 backdrop-blur border border-white/70 shadow-soft items-center justify-center" aria-label="Back to top"><i data-feather="arrow-up" class="h-4 w-4"></i></button>
+    <a href="#apply" class="w-10 h-10 rounded-lg bg-primary text-white shadow-lift flex items-center justify-center" aria-label="Admitted Day"><i data-feather="map-pin" class="h-4 w-4"></i></a>
+  </div>
+
+  <script>
+    // Icons and year
+    document.addEventListener('DOMContentLoaded', () => {
+      if (window.feather) feather.replace();
+      document.getElementById('year').textContent = new Date().getFullYear();
+    });
+
+    // Tabs
+    const btns = document.querySelectorAll('.tab-btn');
+    const panels = {
+      core: document.getElementById('tab-core'),
+      physmath: document.getElementById('tab-physmath'),
+      neurofund: document.getElementById('tab-neurofund'),
+      areastudies: document.getElementById('tab-areastudies'),
+      research: document.getElementById('tab-research')
+    };
+    function setActive(key){
+      btns.forEach(b=>b.classList.toggle('active', b.dataset.tab===key));
+      Object.entries(panels).forEach(([k,el])=>{ if(!el) return; el.classList.toggle('hidden', k!==key); });
+    }
+    btns.forEach(b=>{
+      b.classList.add('inline-flex','items-center','gap-2','px-3','py-2','rounded-lg','text-sm','font-semibold','text-ink-600','hover:bg-ink-50');
+      b.addEventListener('click', ()=> setActive(b.dataset.tab));
+    });
+    setActive('core');
+
+    // Scroll to top visibility
+    const topBtn = document.getElementById('scrollTop');
+    const observer = new IntersectionObserver(([entry])=>{ if(!topBtn) return; topBtn.classList.toggle('hidden', entry.isIntersecting); }, { rootMargin: '-80px 0px 0px 0px' });
+    observer.observe(document.querySelector('header'));
+    if(topBtn) topBtn.addEventListener('click', ()=> window.scrollTo({top:0, behavior:'smooth'}));
+
+    // TTS button using local endpoint
+    async function speakIntro(){
+      const textEl = document.getElementById('NeuroContent');
+      const text = textEl ? textEl.textContent.trim() : 'Welcome to Franklin and Marshall Neuroscience.';
+      try { await fetch('http://127.0.0.1:5001/speak', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ text }) }); }
+      catch(e){ console.warn('TTS unavailable:', e); }
+    }
+    const tts = document.getElementById('ttsBtn');
+    if(tts) tts.addEventListener('click', speakIntro);
