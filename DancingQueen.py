@@ -89,6 +89,10 @@ try:
     print("Stop the robot by pressing ctrl+C")
     while person_detected == False:
 
+        if moving == False:
+            misty.drive(0, 20)
+            moving = True
+
         dance()
 
         audTrack = random.randint(0, len(audioTracks) - 1)
@@ -99,10 +103,6 @@ try:
         misty.play_audio(audioTracks[audTrack])
         misty.display_image(faces[face])
         misty.change_led(r, g, b)
-
-        if moving == False:
-            misty.drive(0, 20)
-            moving = True
 
 except KeyboardInterrupt:
     print("Exited manually")
