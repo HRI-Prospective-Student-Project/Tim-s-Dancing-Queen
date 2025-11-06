@@ -23,7 +23,7 @@ class Events:
         'SourceTrackDataMessage', 'TextToSpeechComplete', 'TimeOfFlight',
         'TouchSensor', 'UserSkillData', 'VoiceRecord', 'WorldState'
     ]
-
+    
     ActuatorPosition = 'ActuatorPosition'
     ArTagDetection = 'ArTagDetection'
     AudioPlayComplete = 'AudioPlayComplete'

@@ -2,12 +2,10 @@ from mistyPy.Robot import Robot
 from mistyPy.Events import Events
 import random
 import time
-from flask import Flask, requests, jsonify
 # import math
 import keyboard
 
 misty = Robot("192.168.1.10")
-# app = Flask(__name__)
 
 # misty.change_led(0, 255, 0)
 # misty.move_head(0, 0, 0)
@@ -72,33 +70,25 @@ def dance():
     misty.display_image("e_Joy3.jpg")
 
 person_detected = False
-song_is_playing = False
-Duration = 0
-moving = True # Whether Misty is moving or not
+moving = False # Whether Misty is moving or not
 
-misty.set_default_volume(30)
+misty.set_default_volume(10)
 
-while person_detected == False:
-    # add music
-    dance()
-    # misty.play_audio("sweetcaroline.mp3")
-    time.sleep(.5)
+try:
+    print("Stop the robot by pressing ctrl+C")
+    while person_detected == False:
+        # add music
 
-    if moving == False:
-        misty.drive(0, 20)
-        moving = True
+        dance()
+        # misty.play_audio("sweetcaroline.mp3")
+        misty.play_audio("s_Awe.wav")
+except KeyboardInterrupt:
+    print("Exited manually")
 
-    if keyboard.is_pressed("space"):
-        # put wave greeting and introduction
-        # how are you 
-        # maybe prompt "would you like to talk to me"
-        
-        print("loop exited")
-        person_detected = True
+misty.stop_audio()
+misty.stop()
 
-misty.drive(0, 0)
-
-introQuestions = ["Do you have any questions?", "What would you like to learn about F and M", "What's up, what do you wanna know?"]
+introQuestions = ["Do you have any questions?", "What would you like to learn about F and M", "What's up. what do you wanna know?"]
 
 question = random.randint(0, len(introQuestions) - 1)
 

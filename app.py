@@ -11,7 +11,9 @@ MISTY_IP = "192.168.1.10"
 
 
 misty = Robot(MISTY_IP)
-misty.set_default_volume(30)
+
+# to change the volume at which misty speaks
+misty.set_default_volume(20) 
 
 @app.route('/')
 def index():
