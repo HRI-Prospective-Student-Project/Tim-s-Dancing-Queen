@@ -5,7 +5,6 @@ Flask Application for F&M Computer Science Major Page
 from flask import Flask, render_template, request, jsonify
 from mistyPy.Robot import Robot
 import requests
-import subprocess
 import os
 
 app = Flask(__name__)
