@@ -4,7 +4,7 @@ import random
 import time
 # import math
 
-misty = Robot("192.168.1.10")
+misty = Robot("192.168.1.4")
 
 # misty.change_led(0, 255, 0)
 # misty.move_head(0, 0, 0)
@@ -71,27 +71,54 @@ person_detected = False
 moving = False # Whether Misty is moving or not
 
 misty.set_default_volume(10)
-misty.stop_audio()
+
+audioTracks = ["s_Ecstacy2.wav", "s_Joy.wav", "s_Awe.wav", "s_Acceptance.wav"]
+faces = ["e_Suprise.jpg", "e_Joy.jpg", "e_Love.jpg", "e_Thinking.jpg"]
+
+colors = [
+    (255, 0, 0),    # Red
+    (0, 255, 0),    # Green
+    (0, 0, 255),    # Blue
+    (255, 255, 0),  # Yellow
+    (0, 255, 255),  # Cyan
+    (255, 0, 255),  # Magenta
+    (255, 255, 255) # white
+]
 
 try:
     print("Stop the robot by pressing ctrl+C")
     while person_detected == False:
-        # add music
+
+        if moving == False:
+            misty.drive(0, 20)
+            moving = True
 
         dance()
-        # misty.play_audio("sweetcaroline.mp3")
-        misty.play_audio("s_Awe.wav")
+
+        audTrack = random.randint(0, len(audioTracks) - 1)
+        face = random.randint(0, len(faces) - 1)
+        color = random.randint(0, len(colors) - 1)
+        r, g, b = colors[color]
+
+        misty.play_audio(audioTracks[audTrack])
+        misty.display_image(faces[face])
+        misty.change_led(r, g, b)
+
 except KeyboardInterrupt:
     print("Exited manually")
 
-misty.stop_audio()
 misty.stop()
+misty.stop_audio()
+misty.display_image("e_DefaultContent.jpg")
+misty.move_arms(random.randint(70, 89), random.randint(70, 89))
 
-introQuestions = ["Do you have any questions?", "What would you like to learn about F and M", "What's up. what do you wanna know?"]
+introQuestions = ["Do you have any questions?", "What would you like to learn about F and M", "What's up... what do you wanna know?"]
 
 question = random.randint(0, len(introQuestions) - 1)
 
+misty.speak("Hello")
+time.sleep(.5)
 wave_back("right")
-misty.speak("Hello, my name is Misty.")
+misty.speak("My name is Misty.")
 misty.speak(introQuestions[question])
 misty.speak("Pick something from the dashboard")

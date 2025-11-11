@@ -58,6 +58,9 @@
       </nav>
       <div class="flex items-center gap-2">
         <a href="#apply" class="hidden sm:inline-flex bg-secondary text-white text-xs font-semibold px-3 py-2 rounded-full hover:bg-secondary/90 shadow">Admitted Day</a>
+         <a href="/" class="hidden sm:inline-flex bg-secondary text-white text-xs font-semibold px-3 py-2 rounded-full hover:bg-secondary/90 shadow">
+                ← Back to Home
+            </a>
         <button id="ttsBtn" class="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-ink-200 hover:bg-ink-50 text-ink-700" aria-label="Read page intro"><i data-feather="volume-2" class="h-4 w-4"></i></button>
       </div>
     </div>
@@ -190,6 +193,43 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6">
       <div class="grid lg:grid-cols-3 gap-6 items-start">
         <div class="lg:col-span-1">
+          <<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Franklin & Marshall · Neuroscience</title>
+  <meta name="description" content="Explore the Neuroscience major at Franklin & Marshall—molecules to behavior. Courses, research labs, outcomes, and FAQs for admitted students." />
+
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#002D72',
+            secondary: '#C8102E',
+            ink: {
+              50: '#F8FAFC',100:'#F1F5F9',200:'#E2E8F0',300:'#CBD5E1',400:'#94A3B8',500:'#64748B',600:'#475569',700:'#334155',800:'#1E293B',900:'#0F172A'
+            },
+          },
+          boxShadow: {
+            soft: '0 10px 30px rgba(2, 6, 23, .08)',
+            lift: '0 14px 40px rgba(2, 6, 23, .12)'
+          }
+        }
+      }
+    }
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+  <style>
+    .blob { filter: blur(40px); opacity:.25 }
+    @keyframes float { 0%,100%{ transform: translateY(0)} 50%{ transform: translateY(-8px)} }
+    .float { animation: float 9s ease-in-out infinite }
+    @media (prefers-reduced-motion: reduce) { .float { animation: none } }
+  </style>
+</head>
           <h2 class="text-3xl font-extrabold tracking-tight">Research & labs</h2>
           <p class="mt-2 text-ink-600">Join labs studying neural systems, behavior, hormones, cognition, and brain health. Many first‑years contribute to ongoing projects.</p>
           <ul class="mt-4 space-y-2 text-sm text-ink-700">
@@ -335,6 +375,6 @@
     }
     const tts = document.getElementById('ttsBtn');
     if(tts) tts.addEventListener('click', speakIntro);
-  </script>
+    </script>
 </body>
 </html>

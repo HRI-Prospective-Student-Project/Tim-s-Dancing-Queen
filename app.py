@@ -5,7 +5,6 @@ Flask Application for F&M Computer Science Major Page
 from flask import Flask, render_template, request, jsonify
 from mistyPy.Robot import Robot
 import requests
-import subprocess
 import os
 
 app = Flask(__name__)
@@ -19,17 +18,18 @@ misty.set_default_volume(20)
 @app.route('/')
 def index():
     """Home page - renders the index template"""
+    misty.stop_speaking()
     return render_template('indexenhanced.html')
 
 @app.route('/cs')
 def cs_page():
     """Computer Science major page"""
-    return render_template('CS_enhanced.html')
+    return render_template('CSpage.html')
 
 @app.route('/neuro')
 def neuro_page():
     """Neuroscience major page"""
-    return render_template('neuropage_enhanced.html')
+    return render_template('neuropage.html')
 
 @app.route('/academics')
 def academics_page():
@@ -52,7 +52,7 @@ def misty_speak():
 def misty_goodbye():
 
     misty.speak("Goodbye")
-    os.system('start cmd /k "python run_command.py"')
+    os.system('start cmd /k "python DancingQueen.py"')
 
     return render_template('indexenhanced.html')
 
