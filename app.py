@@ -24,7 +24,7 @@ def index():
 @app.route('/cs')
 def cs_page():
     """Computer Science major page"""
-    return render_template('CSpage.html')
+    return render_template('CS_enhanced.html')
 
 @app.route('/neuro')
 def neuro_page():
