@@ -42,7 +42,7 @@
         </p>
 
       <div class="flex flex-wrap gap-3">
-        <button class="toggle-btn px-4 py-2 rounded-full border border-gray-200 hover:border-primary hover:text-primary transition" data-target="#ovr-highlights">Program Highlights</button>
+        <button class="toggle-btn px-4 py-2 rounded-full border border-gray-200 hover:border-primary hover:text-primary transition" data-target="#ovr-highlights" onclick="speakOnClick('ovr-highlights')">Program Highlights</button>
         
         <button class="toggle-btn px-4 py-2 rounded-full border border-gray-200 hover:border-primary hover:text-primary transition" data-target="#ovr-contact">Department Contact</button>
       </div>
@@ -78,8 +78,8 @@
 
       <div class="flex flex-wrap gap-3">
         
-        <button class="toggle-btn px-4 py-2 rounded-full border border-gray-200 hover:border-primary hover:text-primary transition" data-target="#glance-cs-electives">CS Electives</button>
-        <button class="toggle-btn px-4 py-2 rounded-full border border-gray-200 hover:border-primary hover:text-primary transition" data-target="#glance-related">Related Non‑CS</button>
+        <button class="toggle-btn px-4 py-2 rounded-full border border-gray-200 hover:border-primary hover:text-primary transition" data-target="#glance-cs-electives" onclick="speakOnClick('glance-cs-electives')">CS Electives</button>
+        <button class="toggle-btn px-4 py-2 rounded-full border border-gray-200 hover:border-primary hover:text-primary transition" data-target="#glance-related" onclick="speakOnClick('glance-related')">Related Non‑CS</button>
       </div>
 
       <div id="glance-counts" class=" mt-4 grid grid-cols-2 gap-4">
@@ -98,19 +98,19 @@
       <div id="glance-cs-electives" class="hidden mt-4">
         <h3 class="font-semibold text-gray-800 mb-2">CS Electives (300+ level)</h3>
         <ul class="list-disc list-inside text-sm text-gray-700 space-y-1">
-          <li>CPS 360 – Introduction to Machine Learning</li>
-          <li>CPS 363 – Introduction to Bioinformatics</li>
-          <li>CPS 367 – Artificial Intelligence</li>
-          <li>CPS 372 – Information Theory</li>
+          <li><span>CPS 360 – Introduction to Machine Learning</span></li>
+          <li><span>CPS 363 – Introduction to Bioinformatics</span></li>
+          <li><span>CPS 367 – Artificial Intelligence</span></li>
+          <li><span>CPS 372 – Information Theor</span></li>
         </ul>
       </div>
 
       <div id="glance-related" class="hidden mt-4">
         <h3 class="font-semibold text-gray-800 mb-2">Related non‑CS elective options</h3>
         <ul class="list-disc list-inside text-sm text-gray-700 space-y-1">
-          <li>PHI 244 – Symbolic Logic</li>
-          <li>PSY/SPM 305 – Cognitive Psychology</li>
-          <li>PHI/PSY 203 – Embodied Cognition</li>
+          <li><span>PHI 244 – Symbolic Logic</span></li>
+          <li><span>PSY/SPM 305 – Cognitive Psychology</span></li>
+          <li><span>PHI/PSY 203 – Embodied Cognition</span></li>
         </ul>
       </div>
     </section>
@@ -121,8 +121,8 @@
       <p class="text-sm text-gray-500 mb-4">Click a button to see details.</p>
 
       <div class="flex flex-wrap gap-3">
-        <button class="toggle-btn px-4 py-2 rounded-full border border-gray-200 hover:border-primary hover:text-primary transition" data-target="#req-core">Core CS (7)</button>
-        <button class="toggle-btn px-4 py-2 rounded-full border border-gray-200 hover:border-primary hover:text-primary transition" data-target="#req-math">Math Requirement</button>
+        <button class="toggle-btn px-4 py-2 rounded-full border border-gray-200 hover:border-primary hover:text-primary transition" data-target="#req-core" onclick="speakOnClick('req-core')">Core CS (7)</button>
+        <button class="toggle-btn px-4 py-2 rounded-full border border-gray-200 hover:border-primary hover:text-primary transition" data-target="#req-math" onclick="speakOnClick('req-math')">Math Requirement</button>
       </div>
 
       <div id="req-core" class="hidden mt-4">
@@ -138,11 +138,11 @@
       </div>
 
       <div id="req-math" class="hidden mt-4">
-        <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
-          <div class="flex items-center mb-2"><i data-feather="check" class="text-secondary mr-2"></i><span>MAT 109 – Calculus I</span></div>
-          <div class="flex items-center mb-2"><i data-feather="check" class="text-secondary mr-2"></i><span>MAT 110 – Calculus II</span></div>
-          <div class="flex items-center"><i data-feather="check" class="text-secondary mr-2"></i><span>MAT 216 <span class="text-gray-500">or</span> MAT 229</span></div>
-        </div>
+        <ul class="bg-gray-50 p-4 rounded-lg border border-gray-200">
+          <li class="flex items-center mb-2"><i data-feather="check" class="text-secondary mr-2"></i><span>MAT 109 – Calculus I</span></li>
+          <li class="flex items-center mb-2"><i data-feather="check" class="text-secondary mr-2"></i><span>MAT 110 – Calculus II</span></li>
+          <li class="flex items-center"><i data-feather="check" class="text-secondary mr-2"></i><span>MAT 216 <span class="text-gray-500">or</span> MAT 229</span></li>
+        </ul>
       </div>
     </section>
   </main>
@@ -166,6 +166,39 @@
         btn.setAttribute('aria-expanded', String(isHidden));
       });
     });
+
+    function speakOnClick(sectionId) {
+
+      const section = document.getElementById(sectionId);
+      const texts = Array.from(section.querySelectorAll('li span')).map(span => span.textContent.trim())
+      texts.unshift(sectionId)
+
+      console.log('Collected text:', texts);
+
+      fetch("http://127.0.0.1:5001/speakOnClick", {
+          method: "POST",
+          headers: {"Content-Type": "application/json"},
+          body: JSON.stringify({ 'text': texts })
+      })
+      .then(r => r.text())
+      .then(console.log)
+      .catch(console.error)
+    }
+
+    function speakWithMisty() {
+        var text = document.getElementById("CScontent").innerHTML
+        console.log(text)
+        fetch("http://127.0.0.1:5001/speak", {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify({ 'text': text })
+        })
+        .then(r => r.text())
+        .then(console.log)
+        .catch(console.error)
+    }
+
+    // speakWithMisty()
 
     // Icons
     feather.replace();

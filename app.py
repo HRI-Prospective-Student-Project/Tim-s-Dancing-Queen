@@ -3,22 +3,22 @@ Flask Application for F&M Computer Science Major Page
 """
 
 from flask import Flask, render_template, request, jsonify
-from mistyPy.Robot import Robot
+# from mistyPy.Robot import Robot
 import requests
 import os
 
 app = Flask(__name__)
-MISTY_IP = "192.168.1.4"
+# MISTY_IP = "192.168.1.11"
 
-misty = Robot(MISTY_IP)
+# misty = Robot(MISTY_IP)
 
 # to change the volume at which misty speaks
-misty.set_default_volume(20) 
+# misty.set_default_volume(10) 
 
 @app.route('/')
 def index():
     """Home page - renders the index template"""
-    misty.stop_speaking()
+    # misty.stop_speaking()
     return render_template('indexenhanced.html')
 
 @app.route('/cs')
@@ -45,13 +45,26 @@ def misty_speak():
     text = request.json.get('text', '')
     print("Speaking:", text)
     # Add your Misty call here
-    misty.speak(text)
+    # misty.speak(text)
+    return jsonify({"message": f"Misty speaking: {text}"})
+
+@app.route('/speakOnClick', methods = ["GET", "POST"])
+def misty_speakOnClick():
+    # textObj = json.load(request.data)
+    # print(textObj["text"])
+    # misty.speak(textObj["text"])
+
+    text = request.json.get('text', '')
+    print("Speaking:", text)
+    # Add your Misty call here
+    print(text)
+    #misty.speak(text)
     return jsonify({"message": f"Misty speaking: {text}"})
 
 @app.route('/exit')
 def misty_goodbye():
 
-    misty.speak("Goodbye")
+    # misty.speak("Goodbye")
     os.system('start cmd /k "python DancingQueen.py"')
 
     return render_template('indexenhanced.html')
