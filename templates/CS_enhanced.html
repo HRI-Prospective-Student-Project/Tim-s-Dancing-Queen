@@ -34,7 +34,7 @@
     <!-- Card 1 -->
     <section class="bg-white p-6 rounded-xl shadow-sm flex flex-col" id="card-overview">
       <h2 class="text-xl font-bold text-primary mb-2 flex items-center"><i data-feather="info" class="mr-2"></i> What is Computer Science at F&M?</h2>
-      <p class="text-sm text-gray-500 mb-4">Click a button to see details.</p>
+      <p id ="directive" class="text-sm text-gray-500 mb-4">Click a button to see details.</p>
 
        <p id = "CScontent" class="mb-4 text-gray-700">
                 At F and M, computer science is one of the most versatile fields of study, connecting technology with real-world impact. 
@@ -42,7 +42,7 @@
         </p>
 
       <div class="flex flex-wrap gap-3">
-        <button class="toggle-btn px-4 py-2 rounded-full border border-gray-200 hover:border-primary hover:text-primary transition" data-target="#ovr-highlights" onclick="speakOnClick('ovr-highlights')">Program Highlights</button>
+        <button id="highlights" class="toggle-btn px-4 py-2 rounded-full border border-gray-200 hover:border-primary hover:text-primary transition" data-target="#ovr-highlights" onclick="speakOnClick('highlights','Here are the ')">Program Highlights</button>
         
         <button class="toggle-btn px-4 py-2 rounded-full border border-gray-200 hover:border-primary hover:text-primary transition" data-target="#ovr-contact">Department Contact</button>
       </div>
@@ -78,8 +78,8 @@
 
       <div class="flex flex-wrap gap-3">
         
-        <button class="toggle-btn px-4 py-2 rounded-full border border-gray-200 hover:border-primary hover:text-primary transition" data-target="#glance-cs-electives" onclick="speakOnClick('glance-cs-electives')">CS Electives</button>
-        <button class="toggle-btn px-4 py-2 rounded-full border border-gray-200 hover:border-primary hover:text-primary transition" data-target="#glance-related" onclick="speakOnClick('glance-related')">Related Non‑CS</button>
+        <button id = "electives" class="toggle-btn px-4 py-2 rounded-full border border-gray-200 hover:border-primary hover:text-primary transition" data-target="#glance-cs-electives" onclick="speakOnClick('electives', 'Check out some of the ')">CS Electives</button>
+        <button  id = "related"  class="toggle-btn px-4 py-2 rounded-full border border-gray-200 hover:border-primary hover:text-primary transition" data-target="#glance-related" onclick="speakOnClick('related', 'Here are some ')">Related Non‑CS Courses</button>
       </div>
 
       <div id="glance-counts" class=" mt-4 grid grid-cols-2 gap-4">
@@ -121,8 +121,8 @@
       <p class="text-sm text-gray-500 mb-4">Click a button to see details.</p>
 
       <div class="flex flex-wrap gap-3">
-        <button class="toggle-btn px-4 py-2 rounded-full border border-gray-200 hover:border-primary hover:text-primary transition" data-target="#req-core" onclick="speakOnClick('req-core')">Core CS (7)</button>
-        <button class="toggle-btn px-4 py-2 rounded-full border border-gray-200 hover:border-primary hover:text-primary transition" data-target="#req-math" onclick="speakOnClick('req-math')">Math Requirement</button>
+        <button id = "core" class="toggle-btn px-4 py-2 rounded-full border border-gray-200 hover:border-primary hover:text-primary transition" data-target="#req-core" onclick="speakOnClick('core', 'These are the ')">Core CS Courses</button>
+        <button id = "math" class="toggle-btn px-4 py-2 rounded-full border border-gray-200 hover:border-primary hover:text-primary transition" data-target="#req-math" onclick="speakOnClick('math', 'These are the ')">Math Requirement Courses</button>
       </div>
 
       <div id="req-core" class="hidden mt-4">
@@ -167,18 +167,17 @@
       });
     });
 
-    function speakOnClick(sectionId) {
+    function speakOnClick(sectionId, extra="") {
 
-      const section = document.getElementById(sectionId);
-      const texts = Array.from(section.querySelectorAll('li span')).map(span => span.textContent.trim())
-      texts.unshift(sectionId)
+      var text = document.getElementById(sectionId).innerHTML
+      var full_text = extra + text 
 
-      console.log('Collected text:', texts);
+      console.log('Collected text:', full_text);
 
       fetch("http://127.0.0.1:5001/speakOnClick", {
           method: "POST",
           headers: {"Content-Type": "application/json"},
-          body: JSON.stringify({ 'text': texts })
+          body: JSON.stringify({ 'text': full_text })
       })
       .then(r => r.text())
       .then(console.log)
@@ -187,18 +186,21 @@
 
     function speakWithMisty() {
         var text = document.getElementById("CScontent").innerHTML
-        console.log(text)
+        var text2 = document.getElementById("directive").innerHTML
+
+        full_text = text + " " + text2
+        console.log(full_text)
         fetch("http://127.0.0.1:5001/speak", {
             method: "POST",
             headers: {"Content-Type": "application/json"},
-            body: JSON.stringify({ 'text': text })
+            body: JSON.stringify({ 'text': full_text })
         })
         .then(r => r.text())
         .then(console.log)
         .catch(console.error)
     }
 
-    // speakWithMisty()
+    speakWithMisty()
 
     // Icons
     feather.replace();
