@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Additional Information | Franklin & Marshall College</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/feather-icons"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#002D72',  // F&M blue
+            secondary: '#C8102E' // F&M red
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-gray-50 font-sans min-h-screen flex flex-col">
+  <!-- Header -->
+  <header class="w-full bg-primary text-white p-4 flex justify-between items-center shadow-md">
+    <h1 class="text-xl md:text-2xl font-bold">Additional Information about Franklin &amp; Marshall College</h1>
+    <div class="flex items-center gap-4">
+      <a href="/" class="bg-secondary hover:bg-secondary/90 px-4 py-2 rounded-full text-xs md:text-sm font-medium transition-colors">
+        ← Back to Home
+      </a>
+      <span class="bg-secondary/90 px-3 py-1 rounded-full text-xs md:text-sm font-medium">
+        Admitted Students Day
+      </span>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="flex-1 grid grid-cols-1 lg:grid-cols-3 gap-6 p-6 max-w-7xl mx-auto w-full">
+    <!-- Card 1: About F&M -->
+    <section class="bg-white p-6 rounded-xl shadow-sm flex flex-col">
+      <h2 class="text-xl font-bold text-primary mb-2 flex items-center">
+        <i data-feather="info" class="mr-2"></i>
+        About Franklin &amp; Marshall
+      </h2>
+
+      <p id="FMcontent" class="mb-3 text-sm text-gray-700">
+        Franklin &amp; Marshall College is a private, residential liberal arts college in Lancaster, Pennsylvania.
+        Founded in 1787 and later renamed Franklin &amp; Marshall after a merger in 1853, the college enrolls
+        roughly 1,800–1,900 undergraduates and focuses exclusively on bachelor's-level education in the arts and sciences. :contentReference[oaicite:0]{index=0}
+      </p>
+      <p id="directive" class="text-sm text-gray-500 mb-4">
+        Click a button to explore more details about F&amp;M’s history, campus, and setting.
+      </p>
+
+      <div class="flex flex-wrap gap-3">
+        <button
+          id="overviewBtn"
+          class="toggle-btn px-4 py-2 rounded-full border border-gray-200 hover:border-primary hover:text-primary transition"
+          data-target="#about-overview"
+          data-group="about"
+          onclick="speakOnClick('overviewBtn','Here is an overview of Franklin and Marshall College. ')"
+        >
+          College Overview
+        </button>
+        <button
+          id="historyBtn"
+          class="toggle-btn px-4 py-2 rounded-full border border-gray-200 hover:border-primary hover:text-primary transition"
+          data-target="#about-history"
+          data-group="about"
+          onclick="speakOnClick('historyBtn','Here is some history and tradition. ')"
+        >
+          History &amp; Traditions
+        </button>
+        <button
+          id="locationBtn"
+          class="toggle-btn px-4 py-2 rounded-full border border-gray-200 hover:border-primary hover:text-primary transition"
+          data-target="#about-location"
+          data-group="about"
+          onclick="speakOnClick('locationBtn','This is where the college is located. ')"
+        >
+          Location &amp; Campus
+        </button>
+      </div>
+
+      <!-- Panels -->
+      <div
+        id="about-overview"
+        data-panel-group="about"
+        class="hidden mt-4 text-sm text-gray-700 space-y-2"
+      >
+        <p>
+          F&amp;M is a coeducational liberal arts college awarding the Bachelor of Arts degree in more than
+          50 fields of study across the humanities, social sciences, natural sciences, and interdisciplinary areas. :contentReference[oaicite:1]{index=1}
+        </p>
+        <ul class="list-disc list-inside space-y-1">
+          <li>Small classes with close faculty–student interaction and a strong emphasis on writing, discussion, and research. :contentReference[oaicite:2]{index=2}</li>
+          <li>All students are undergraduates, so faculty attention and resources are focused on them. :contentReference[oaicite:3]{index=3}</li>
+          <li>The motto is <span class="italic">Lux et Lex</span> (“Light and Law”). :contentReference[oaicite:4]{index=4}</li>
+        </ul>
+      </div>
+
+      <div
+        id="about-history"
+        data-panel-group="about"
+        class="hidden mt-4 text-sm text-gray-700 space-y-2"
+      >
+        <p>
+          Franklin &amp; Marshall traces its roots to Franklin College, chartered in 1787 with support from Benjamin
+          Franklin, and Marshall College, founded in 1836 and named for Chief Justice John Marshall. The two colleges
+          merged in 1853 in Lancaster, creating Franklin &amp; Marshall College. :contentReference[oaicite:5]{index=5}
+        </p>
+        <p>
+          Historic campus buildings such as Old Main, Goethean Hall, and Diagnothian Hall are listed on the National
+          Register of Historic Places and reflect the college’s long history in American higher education. :contentReference[oaicite:6]{index=6}
+        </p>
+      </div>
+
+      <div
+        id="about-location"
+        data-panel-group="about"
+        class="hidden mt-4 text-sm text-gray-700 space-y-2"
+      >
+        <p>
+          F&amp;M is located in Lancaster, Pennsylvania, a small city of about 60,000 people that serves as the hub of a
+          larger county of more than half a million residents. :contentReference[oaicite:7]{index=7}
+        </p>
+        <ul class="list-disc list-inside space-y-1">
+          <li>City–suburban campus of roughly 220 acres. :contentReference[oaicite:8]{index=8}</li>
+          <li>Easy train access to Philadelphia, Baltimore, and New York City. :contentReference[oaicite:9]{index=9}</li>
+          <li>Blend of historic architecture, green spaces, and nearby arts, food, and cultural scenes in downtown Lancaster.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Card 2: Academics & Opportunities -->
+    <section class="bg-white p-6 rounded-xl shadow-sm flex flex-col">
+      <h2 class="text-xl font-bold text-primary mb-2 flex items-center">
+        <i data-feather="book-open" class="mr-2"></i>
+        Academics &amp; Opportunities
+      </h2>
+      <p class="text-sm text-gray-500 mb-4">
+        Explore what and how you can study at F&amp;M.
+      </p>
+
+      <div class="grid grid-cols-3 gap-3 mb-4">
+        <div class="bg-primary/10 p-3 rounded-lg text-center">
+          <div class="text-xl font-bold text-primary">50+</div>
+          <div class="text-xs text-gray-700">Fields of Study</div>
+        </div>
+        <div class="bg-secondary/10 p-3 rounded-lg text-center">
+          <div class="text-xl font-bold text-secondary">1,800+</div>
+          <div class="text-xs text-gray-700">Undergraduates</div>
+        </div>
+        <div class="bg-emerald-100 p-3 rounded-lg text-center">
+          <div class="text-xl font-bold text-emerald-700">91%</div>
+          <div class="text-xs text-gray-700">First-Year Retention</div>
+        </div>
+      </div>
+
+      <p class="text-sm text-gray-500 mb-3">Click a button to learn more about academics at F&amp;M.</p>
+
+      <div class="flex flex-wrap gap-3">
+        <button
+          id="liberalArtsBtn"
+          class="toggle-btn px-4 py-2 rounded-full border border-gray-200 hover:border-primary hover:text-primary transition"
+          data-target="#acad-liberalarts"
+          data-group="acad"
+          onclick="speakOnClick('liberalArtsBtn','These are some details about academics at Franklin and Marshall. ')"
+        >
+          Liberal Arts &amp; Majors
+        </button>
+        <button
+          id="researchBtn"
+          class="toggle-btn px-4 py-2 rounded-full border border-gray-200 hover:border-primary hover:text-primary transition"
+          data-target="#acad-research"
+          data-group="acad"
+          onclick="speakOnClick('researchBtn','Here is information about research and mentored learning. ')"
+        >
+          Research &amp; Mentored Learning
+        </button>
+        <button
+          id="globalBtn"
+          class="toggle-btn px-4 py-2 rounded-full border border-gray-200 hover:border-primary hover:text-primary transition"
+          data-target="#acad-global"
+          data-group="acad"
+          onclick="speakOnClick('globalBtn','Here is information about global and off campus study. ')"
+        >
+          Global &amp; Off-Campus Study
+        </button>
+      </div>
+
+      <!-- Panels -->
+      <div
+        id="acad-liberalarts"
+        data-panel-group="acad"
+        class="hidden mt-4 text-sm text-gray-700 space-y-2"
+      >
+        <p>
+          F&amp;M offers more than 50 fields of study, including traditional disciplines and interdisciplinary
+          programs like Biological Foundations of Behavior and Scientific and Philosophical Studies of the Mind. :contentReference[oaicite:10]{index=10}
+        </p>
+        <p>
+          Students work closely with faculty, often in small seminars and advanced tutorials, and can design joint or
+          individualized majors that cut across departments. :contentReference[oaicite:11]{index=11}
+        </p>
+      </div>
+
+      <div
+        id="acad-research"
+        data-panel-group="acad"
+        class="hidden mt-4 text-sm text-gray-700 space-y-2"
+      >
+        <p>
+          Undergraduate research and independent projects are a major part of the F&amp;M experience. Students partner
+          with faculty in the sciences, social sciences, and humanities on long-term investigations, fieldwork, and
+          creative work. :contentReference[oaicite:12]{index=12}
+        </p>
+        <ul class="list-disc list-inside space-y-1">
+          <li>Opportunities to present at conferences and co-author publications.</li>
+          <li>On-campus summer research programs and academic-year collaborations.</li>
+          <li>Mentored experiences that prepare students for graduate school, professional school, or research careers.</li>
+        </ul>
+      </div>
+
+      <div
+        id="acad-global"
+        data-panel-group="acad"
+        class="hidden mt-4 text-sm text-gray-700 space-y-2"
+      >
+        <p>
+          About half of F&amp;M students participate in off-campus study, including study abroad, domestic programs, and
+          field-based learning. :contentReference[oaicite:13]{index=13}
+        </p>
+        <ul class="list-disc list-inside space-y-1">
+          <li>Programs across Europe, Latin America, Africa, Asia, and Oceania.</li>
+          <li>Special partnerships such as an advanced studies program in Bath, England. :contentReference[oaicite:14]{index=14}</li>
+          <li>Structured advising to connect programs with academic and professional goals. :contentReference[oaicite:15]{index=15}</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Card 3: Student Life & Outcomes -->
+    <section class="bg-white p-6 rounded-xl shadow-sm flex flex-col">
+      <h2 class="text-xl font-bold text-primary mb-2 flex items-center">
+        <i data-feather="users" class="mr-2"></i>
+        Student Life &amp; Outcomes
+      </h2>
+      <p class="text-sm text-gray-500 mb-4">What it’s like to live and learn at F&amp;M—and what comes next.</p>
+
+      <div class="flex flex-wrap gap-3">
+        <button
+          id="campusLifeBtn"
+          class="toggle-btn px-4 py-2 rounded-full border border-gray-200 hover:border-primary hover:text-primary transition"
+          data-target="#life-campus"
+          data-group="life"
+          onclick="speakOnClick('campusLifeBtn','Here is information about campus life at Franklin and Marshall. ')"
+        >
+          Campus Life &amp; Community
+        </button>
+        <button
+          id="athleticsBtn"
+          class="toggle-btn px-4 py-2 rounded-full border border-gray-200 hover:border-primary hover:text-primary transition"
+          data-target="#life-athletics"
+          data-group="life"
+          onclick="speakOnClick('athleticsBtn','Here is information about athletics and student organizations. ')"
+        >
+          Athletics &amp; Organizations
+        </button>
+        <button
+          id="outcomesBtn"
+          class="toggle-btn px-4 py-2 rounded-full border border-gray-200 hover:border-primary hover:text-primary transition"
+          data-target="#life-outcomes"
+          data-group="life"
+          onclick="speakOnClick('outcomesBtn','Here is information about outcomes and rankings. ')"
+        >
+          Outcomes &amp; Rankings
+        </button>
+      </div>
+
+      <!-- Panels -->
+      <div
+        id="life-campus"
+        data-panel-group="life"
+        class="hidden mt-4 text-sm text-gray-700 space-y-2"
+      >
+        <p>
+          F&amp;M is a residential college: most students live on campus in a system of College Houses and residence
+          halls that anchor academic, social, and co-curricular life. :contentReference[oaicite:16]{index=16}
+        </p>
+        <ul class="list-disc list-inside space-y-1">
+          <li>More than 100 student clubs and organizations, from cultural groups to performance, politics, and service. :contentReference[oaicite:17]{index=17}</li>
+          <li>Events on campus and in Lancaster, including arts, music, food, and community engagement.</li>
+          <li>A diverse student body representing many U.S. states and around 50 countries. :contentReference[oaicite:18]{index=18}</li>
+        </ul>
+      </div>
+
+      <div
+        id="life-athletics"
+        data-panel-group="life"
+        class="hidden mt-4 text-sm text-gray-700 space-y-2"
+      >
+        <p>
+          The F&amp;M Diplomats compete mainly in NCAA Division III’s Centennial Conference, with Division I wrestling
+          and nationally competitive squash. :contentReference[oaicite:19]{index=19}
+        </p>
+        <ul class="list-disc list-inside space-y-1">
+          <li>Varsity, club, and intramural options for a wide range of sports and fitness interests.</li>
+          <li>Athletics are integrated into the broader campus culture rather than separated from academics. :contentReference[oaicite:20]{index=20}</li>
+        </ul>
+      </div>
+
+      <div
+        id="life-outcomes"
+        data-panel-group="life"
+        class="hidden mt-4 text-sm text-gray-700 space-y-2"
+      >
+        <p>
+          F&amp;M emphasizes outcomes and long-term success. The college reports strong retention and graduation rates
+          and attracts students aiming for graduate school, professional school, and a wide range of careers. :contentReference[oaicite:21]{index=21}
+        </p>
+        <ul class="list-disc list-inside space-y-1">
+          <li>High first-to-second-year retention (about 90%+) and competitive four- and six-year graduation rates. :contentReference[oaicite:22]{index=22}</li>
+          <li>Ranked among top national liberal arts colleges and “Best Value” schools by several publications. :contentReference[oaicite:23]{index=23}</li>
+          <li>Alumni paths include research, healthcare, law, business, education, nonprofit work, and more.</li>
+        </ul>
+      </div>
+
+      <div class="mt-auto pt-4 border-t border-gray-100">
+        <p class="text-sm text-gray-500 italic">
+          F&amp;M aims to combine rigorous academics, a close-knit residential community, and strong mentoring so that
+          students can “achieve beyond what they themselves thought possible.” :contentReference[oaicite:24]{index=24}
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    // Toggle logic shared by all cards
+    document.querySelectorAll('.toggle-btn').forEach(btn => {
+      const targetSel = btn.getAttribute('data-target');
+      const group = btn.getAttribute('data-group');
+      const target = document.querySelector(targetSel);
+      if (!target) return;
+
+      btn.setAttribute('aria-expanded', 'false');
+
+      btn.addEventListener('click', () => {
+        const isHidden = target.classList.contains('hidden');
+
+        // Hide other panels in the same group
+        document.querySelectorAll(`[data-panel-group="${group}"]`).forEach(el => {
+          if (el !== target) el.classList.add('hidden');
+        });
+
+        // Toggle this panel
+        target.classList.toggle('hidden');
+        btn.setAttribute('aria-expanded', String(isHidden));
+      });
+    });
+
+    // Speech helpers (same pattern as your CS / Neuro pages)
+    function speakOnClick(sectionId, extra = "") {
+      var text = document.getElementById(sectionId).innerHTML;
+      var full_text = extra + text;
+
+      console.log('Collected text (F&M additional info):', full_text);
+
+      fetch("http://127.0.0.1:5001/speakOnClick", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({ 'text': full_text })
+      })
+      .then(r => r.text())
+      .then(console.log)
+      .catch(console.error);
+    }
+
+    function speakWithMisty() {
+      var text = document.getElementById("FMcontent").innerHTML;
+      var text2 = document.getElementById("directive").innerHTML;
+
+      var full_text = text + " " + text2;
+      console.log('Intro speech (F&M additional info):', full_text);
+
+      fetch("http://127.0.0.1:5001/speak", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({ 'text': full_text })
+      })
+      .then(r => r.text())
+      .then(console.log)
+      .catch(console.error);
+    }
+
+    // Trigger intro speech on load
+    speakWithMisty();
+
+    // Feather icons
+    feather.replace();
+  </script>
+</body>
+</html>

@@ -37,6 +37,11 @@ def academics_page():
     """Academics page"""
     return render_template('RPSgame.html')
 
+@app.route('/additionalinfo')
+def additionalinfo_page():
+    """Additional info page"""
+    return render_template('additional_info.html')
+
 @app.route('/speak', methods = ["GET", "POST"])
 def misty_speak():
     # textObj = json.load(request.data)
