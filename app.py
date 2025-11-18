@@ -5,10 +5,11 @@ Flask Application for F&M Computer Science Major Page
 from flask import Flask, render_template, request, jsonify
 from mistyPy.Robot import Robot
 import requests
+import time
 import os
 
 app = Flask(__name__)
-MISTY_IP = "192.168.1.11"
+MISTY_IP = "192.168.1.7"
 
 misty = Robot(MISTY_IP)
 
@@ -58,16 +59,27 @@ def misty_speakOnClick():
     print("Speaking:", text)
     # Add your Misty call here
     print(text)
-    # misty.speak(text)
+    misty.speak(text)
     return jsonify({"message": f"Misty speaking: {text}"})
 
 @app.route('/mistyStart', methods = ["POST"])
 def misty_start():
+    misty.move_arm("right", 0)
     misty.speak("Rock")
+    time.sleep(.2)
+    misty.move_arm("right", 30)
     misty.speak("Paper")
+    time.sleep(.2)
+    misty.move_arm("right", 0)
     misty.speak("Scissor")
+    time.sleep(.2)
+    misty.move_arm("right", 30)
+    time.sleep(.2)
     misty.speak("Shoot")
-
+    misty.move_arm("right", 0)
+    time.sleep(.2)
+    misty.move_arm('right', 90)
+    
     return jsonify({"message": "Misty is starting"})
 
 @app.route('/directSpeak', methods = ["GET","POST"])

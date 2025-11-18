@@ -277,7 +277,7 @@ async function showCpuAnimation(finalMove) {
   const cycle = ['✊', '✋', '✌️', '✋', '✊', '✌️'];
   for (let i = 0; i < cycle.length; i++) {
     cpuEmoji.textContent = cycle[i];
-    await sleep(120);
+    await sleep(600);
   }
 
   // Show the final emoji choice
@@ -286,12 +286,12 @@ async function showCpuAnimation(finalMove) {
     finalMove === 'paper' ? '✋' :
     '✌️';
 
-    finalMove === 'rock' ? directSpeak("Rock") :
-    finalMove === 'paper' ? directSpeak("Paper") :
-    directSpeak("Scissors");
+    finalMove === 'rock' ? directSpeak("rock") :
+    finalMove === 'paper' ? directSpeak('paper') :
+    directSpeak("scissor");
 
   // Wait a bit before hiding animation
-  await sleep(1500);
+  await sleep(3000);
   cpuAnim.classList.add('hidden');
 }
 

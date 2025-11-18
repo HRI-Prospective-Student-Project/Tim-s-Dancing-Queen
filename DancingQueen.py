@@ -4,7 +4,9 @@ import random
 import time
 # import math
 
-misty = Robot("192.168.1.4")
+MISTY_IP = "192.168.1.7"
+
+misty = Robot(MISTY_IP)
 
 # misty.change_led(0, 255, 0)
 # misty.move_head(0, 0, 0)
