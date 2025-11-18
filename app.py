@@ -29,7 +29,7 @@ def cs_page():
 @app.route('/neuro')
 def neuro_page():
     """Neuroscience major page"""
-    return render_template('neuropage.html')
+    return render_template('neuro_simplified.html')
 
 @app.route('/RockPaperScissors')
 def academics_page():

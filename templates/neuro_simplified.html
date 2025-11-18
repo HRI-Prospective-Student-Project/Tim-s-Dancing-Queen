@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>F&M Neuroscience | Simplified</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/feather-icons"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#002D72',
+            secondary: '#C8102E'
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-gray-50 font-sans min-h-screen flex flex-col">
+  <!-- Header -->
+  <header class="w-full bg-primary text-white p-4 flex justify-between items-center shadow-md">
+    <h1 class="text-xl md:text-2xl font-bold">Neuroscience at Franklin & Marshall</h1>
+    <div class="flex items-center gap-4">
+      <a href="/" class="bg-secondary hover:bg-secondary/90 px-4 py-2 rounded-full text-xs md:text-sm font-medium transition-colors">
+        ← Back to Home
+      </a>
+      <span class="bg-secondary/90 px-3 py-1 rounded-full text-xs md:text-sm font-medium">
+        Admitted Students Day
+      </span>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="flex-1 grid grid-cols-1 lg:grid-cols-3 gap-6 p-6 max-w-7xl mx-auto w-full">
+    <!-- Card 1: Overview -->
+    <section class="bg-white p-6 rounded-xl shadow-sm flex flex-col" id="card-overview">
+      <h2 class="text-xl font-bold text-primary mb-2 flex items-center">
+        <i data-feather="activity" class="mr-2"></i>
+        What is Neuroscience at F&M?
+      </h2>
+
+      <!-- Intro text + directive for Misty speech -->
+      <p id="Neurocontent" class="mb-3 text-sm text-gray-700">
+        Neuroscience at F&M is part of the Biological Foundations of Behavior (BFB) program. 
+        It connects brain, behavior, and mind, from molecules and cells to systems, cognition, and real-world questions.
+      </p>
+      <p id="directive" class="text-sm text-gray-500 mb-4">
+        Click a button to see details.
+      </p>
+
+      <div class="flex flex-wrap gap-3">
+        <button
+          id="highlights"
+          class="toggle-btn px-4 py-2 rounded-full border border-gray-200 hover:border-primary hover:text-primary transition"
+          data-target="#ovr-highlights"
+          data-group="ovr"
+          onclick="speakOnClick('highlights','Here are the ')"
+        >
+          Program Highlights
+        </button>
+        <button
+          id="interdisciplinary"
+          class="toggle-btn px-4 py-2 rounded-full border border-gray-200 hover:border-primary hover:text-primary transition"
+          data-target="#ovr-interdisciplinary"
+          data-group="ovr"
+          onclick="speakOnClick('interdisciplinary','This major is ')"
+        >
+          Interdisciplinary Focus
+        </button>
+        <button
+          id="contact"
+          class="toggle-btn px-4 py-2 rounded-full border border-gray-200 hover:border-primary hover:text-primary transition"
+          data-target="#ovr-contact"
+          data-group="ovr"
+          onclick="speakOnClick('contact','Here is the ')"
+        >
+          Program Contact
+        </button>
+      </div>
+
+      <div
+        id="ovr-highlights"
+        data-panel-group="ovr"
+        class="hidden mt-4 space-y-2 text-gray-700 text-sm"
+      >
+        <ul class="space-y-2">
+          <li class="flex items-start">
+            <i data-feather="check-circle" class="text-secondary mr-2 mt-0.5 flex-shrink-0"></i>
+            <span>
+              Connects neural mechanisms to behavior, cognition, and mental processes.
+            </span>
+          </li>
+          <li class="flex items-start">
+            <i data-feather="check-circle" class="text-secondary mr-2 mt-0.5 flex-shrink-0"></i>
+            <span>
+              Progresses from molecules and cells to circuits, systems, and complex behaviors.
+            </span>
+          </li>
+          <li class="flex items-start">
+            <i data-feather="check-circle" class="text-secondary mr-2 mt-0.5 flex-shrink-0"></i>
+            <span>
+              Emphasizes hands-on lab work and faculty-mentored research across multiple levels of analysis.
+            </span>
+          </li>
+        </ul>
+      </div>
+
+      <div
+        id="ovr-interdisciplinary"
+        data-panel-group="ovr"
+        class="hidden mt-4 text-sm text-gray-700 space-y-2"
+      >
+        <p>
+          Neuroscience is deeply interdisciplinary. You’ll integrate:
+        </p>
+        <ul class="list-disc list-inside space-y-1">
+          <li>Biology (neuroanatomy, physiology, cellular &amp; molecular mechanisms).</li>
+          <li>Psychology (behavior, cognition, emotion, learning, and decision-making).</li>
+          <li>Chemistry, physics, and mathematics for quantitative and mechanistic insight.</li>
+        </ul>
+      </div>
+
+      <div
+        id="ovr-contact"
+        data-panel-group="ovr"
+        class="hidden mt-4 text-gray-700 text-sm"
+      >
+        <p class="font-semibold mb-1">Program Contact (example)</p>
+        <p><span class="font-semibold">Program:</span> Biological Foundations of Behavior – Neuroscience</p>
+        <p><span class="font-semibold">Email:</span> neuroscience@fandm.edu</p>
+        <p class="text-xs text-gray-500 mt-2">
+          Please refer to the official F&amp;M website for the most current contact information and faculty list.
+        </p>
+      </div>
+
+      <div class="mt-auto pt-4 border-t border-gray-100">
+        <p class="text-sm text-gray-500 italic">
+          "From molecules to mind" — integrating neural mechanisms, behavior, and cognition.
+        </p>
+      </div>
+    </section>
+
+    <!-- Card 2: Program Structure -->
+    <section class="bg-white p-6 rounded-xl shadow-sm flex flex-col" id="card-structure">
+      <h2 class="text-xl font-bold text-primary mb-2 flex items-center">
+        <i data-feather="layers" class="mr-2"></i>
+        Program Structure
+      </h2>
+      <p class="text-sm text-gray-500 mb-4">Core requirements and how the major is built.</p>
+
+      <!-- Always-visible quick counts -->
+      <div class="grid grid-cols-3 gap-3 mb-4">
+        <div class="bg-primary/10 p-3 rounded-lg text-center">
+          <div class="text-xl font-bold text-primary">~15</div>
+          <div class="text-xs text-gray-700">Courses in major</div>
+        </div>
+        <div class="bg-secondary/10 p-3 rounded-lg text-center">
+          <div class="text-xl font-bold text-secondary">3+</div>
+          <div class="text-xs text-gray-700">Area electives</div>
+        </div>
+        <div class="bg-emerald-100 p-3 rounded-lg text-center">
+          <div class="text-xl font-bold text-emerald-700">Many</div>
+          <div class="text-xs text-gray-700">Lab experiences</div>
+        </div>
+      </div>
+
+      <p class="text-sm text-gray-500 mb-3">Click to see what’s in each piece.</p>
+
+      <div class="flex flex-wrap gap-3">
+        <button
+          id="coreBio"
+          class="toggle-btn px-4 py-2 rounded-full border border-gray-200 hover:border-primary hover:text-primary transition"
+          data-target="#prog-core"
+          data-group="prog"
+          onclick="speakOnClick('coreBio','These are the ')"
+        >
+          Core Biology
+        </button>
+        <button
+          id="physMath"
+          class="toggle-btn px-4 py-2 rounded-full border border-gray-200 hover:border-primary hover:text-primary transition"
+          data-target="#prog-physmath"
+          data-group="prog"
+          onclick="speakOnClick('physMath','These are the ')"
+        >
+          Physical Sci &amp; Math
+        </button>
+        <button
+          id="neuroFund"
+          class="toggle-btn px-4 py-2 rounded-full border border-gray-200 hover:border-primary hover:text-primary transition"
+          data-target="#prog-neurofund"
+          data-group="prog"
+          onclick="speakOnClick('neuroFund','These are the ')"
+        >
+          Neuro Fundamentals
+        </button>
+        <button
+          id="areaStudies"
+          class="toggle-btn px-4 py-2 rounded-full border border-gray-200 hover:border-primary hover:text-primary transition"
+          data-target="#prog-areastudies"
+          data-group="prog"
+          onclick="speakOnClick('areaStudies','Here are some ')"
+        >
+          Area Studies
+        </button>
+        <button
+          id="researchReq"
+          class="toggle-btn px-4 py-2 rounded-full border border-gray-200 hover:border-primary hover:text-primary transition"
+          data-target="#prog-research"
+          data-group="prog"
+          onclick="speakOnClick('researchReq','This is the ')"
+        >
+          Research Requirement
+        </button>
+      </div>
+
+      <!-- Panels -->
+      <div
+        id="prog-core"
+        data-panel-group="prog"
+        class="hidden mt-4 text-sm text-gray-700"
+      >
+        <h3 class="font-semibold text-gray-800 mb-2">Core Biology</h3>
+        <ul class="space-y-1">
+          <li>BIO 101 – Evolution, Ecology &amp; Biodiversity</li>
+          <li>BIO 102 – Cell Biology &amp; Genetics</li>
+          <li>BIO 200 – Integrative Biology</li>
+        </ul>
+      </div>
+
+      <div
+        id="prog-physmath"
+        data-panel-group="prog"
+        class="hidden mt-4 text-sm text-gray-700"
+      >
+        <h3 class="font-semibold text-gray-800 mb-2">Physical Sciences &amp; Math</h3>
+        <ul class="space-y-1">
+          <li>CHM 111 – General Chemistry I</li>
+          <li>CHM 112 – General Chemistry II</li>
+          <li>CHM 211 – Organic Chemistry I</li>
+          <li>PHY 101 or PHY 111 – Physics</li>
+          <li>MAT 109 – Calculus I</li>
+        </ul>
+      </div>
+
+      <div
+        id="prog-neurofund"
+        data-panel-group="prog"
+        class="hidden mt-4 text-sm text-gray-700"
+      >
+        <h3 class="font-semibold text-gray-800 mb-2">Neuroscience Fundamentals</h3>
+        <ul class="space-y-1">
+          <li>BIO 240 – Neuroscience</li>
+          <li>
+            PSY 351 – Biopsychology w/ Lab
+            <span class="text-gray-500">or</span> PSY 27x – Biopsychology
+          </li>
+        </ul>
+      </div>
+
+      <div
+        id="prog-areastudies"
+        data-panel-group="prog"
+        class="hidden mt-4 space-y-3 text-sm text-gray-700"
+      >
+        <div>
+          <p class="font-semibold mb-1">Neuro-focused examples</p>
+          <ul class="list-disc list-inside space-y-1">
+            <li>BIO 330 – Advanced Neurobiology</li>
+            <li>BIO 343 – Functional Human Neuroanatomy</li>
+            <li>PSY 357 – Hormones &amp; Behavior (Lab)</li>
+            <li>BIO 341 – Neurochemistry</li>
+          </ul>
+        </div>
+        <div>
+          <p class="font-semibold mb-1">Behavior &amp; Cognition</p>
+          <ul class="list-disc list-inside space-y-1">
+            <li>PSY 305 – Cognitive Psychology</li>
+            <li>PSY 320 – Animal Behavior (Lab)</li>
+            <li>PSY 355 – Face Perception (Lab)</li>
+            <li>PSY 371 – Evolutionary Psychology</li>
+          </ul>
+        </div>
+      </div>
+
+      <div
+        id="prog-research"
+        data-panel-group="prog"
+        class="hidden mt-4 text-sm text-gray-700"
+      >
+        <p class="mb-2">
+          Every Neuroscience major completes an advanced research experience such as:
+        </p>
+        <ul class="list-disc list-inside space-y-1">
+          <li>BFB 390 – Directed Research</li>
+          <li>BFB 490 – Independent Research</li>
+          <li>Psychology Collaborative Research (PSY 460 or 48x)</li>
+          <li>Approved 300-level Biology laboratory course</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Card 3: Research, Outcomes, FAQ -->
+    <section class="bg-white p-6 rounded-xl shadow-sm flex flex-col" id="card-experience">
+      <h2 class="text-xl font-bold text-primary mb-2 flex items-center">
+        <i data-feather="microscope" class="mr-2"></i>
+        Research, Outcomes &amp; FAQ
+      </h2>
+      <p class="text-sm text-gray-500 mb-4">What you’ll do in labs and where students go after F&amp;M.</p>
+
+      <div class="flex flex-wrap gap-3">
+        <button
+          id="researchLabs"
+          class="toggle-btn px-4 py-2 rounded-full border border-gray-200 hover:border-primary hover:text-primary transition"
+          data-target="#exp-research"
+          data-group="exp"
+          onclick="speakOnClick('researchLabs','These are the ')"
+        >
+          Research &amp; Labs
+        </button>
+        <button
+          id="outcomes"
+          class="toggle-btn px-4 py-2 rounded-full border border-gray-200 hover:border-primary hover:text-primary transition"
+          data-target="#exp-outcomes"
+          data-group="exp"
+          onclick="speakOnClick('outcomes','Here are some ')"
+        >
+          After F&amp;M
+        </button>
+        <button
+          id="faq"
+          class="toggle-btn px-4 py-2 rounded-full border border-gray-200 hover:border-primary hover:text-primary transition"
+          data-target="#exp-faq"
+          data-group="exp"
+          onclick="speakOnClick('faq','Here are some ')"
+        >
+          FAQ
+        </button>
+      </div>
+
+      <div
+        id="exp-research"
+        data-panel-group="exp"
+        class="hidden mt-4 text-sm text-gray-700 space-y-2"
+      >
+        <p class="font-semibold">Research &amp; Labs</p>
+        <p>
+          Students join labs studying neural systems, hormones, behavior, cognition, and brain health. Many first-years contribute to ongoing projects.
+        </p>
+        <ul class="list-disc list-inside space-y-1">
+          <li>Cellular &amp; molecular neuroscience (synapses, neuromodulators, plasticity).</li>
+          <li>Behavior and cognition (learning, attention, decision-making).</li>
+          <li>Hormones and behavior (stress, reproduction, social behavior).</li>
+        </ul>
+      </div>
+
+      <div
+        id="exp-outcomes"
+        data-panel-group="exp"
+        class="hidden mt-4 text-sm text-gray-700 space-y-2"
+      >
+        <p class="font-semibold">What happens after F&amp;M?</p>
+        <ul class="list-disc list-inside space-y-1">
+          <li>
+            <span class="font-semibold">Research &amp; Healthcare:</span>
+            lab technicians, clinical research coordinators, and neuroscience-focused roles.
+          </li>
+          <li>
+            <span class="font-semibold">Graduate / Professional School:</span>
+            MS/PhD in Neuroscience, Psychology, or Biology; preparation for MD/DO/PA and other health professions.
+          </li>
+          <li>
+            <span class="font-semibold">Interdisciplinary Careers:</span>
+            data science, UX research, biotech, science communication, and policy.
+          </li>
+        </ul>
+      </div>
+
+      <div
+        id="exp-faq"
+        data-panel-group="exp"
+        class="hidden mt-4 space-y-3 text-sm text-gray-700"
+      >
+        <div>
+          <p class="font-semibold">How early can I join a lab?</p>
+          <p>Many students start in their first or second year by talking with faculty and joining research groups or journal clubs.</p>
+        </div>
+        <div>
+          <p class="font-semibold">Is Neuroscience good preparation for medical careers?</p>
+          <p>Yes. The major overlaps with many pre-health requirements and gives strong training in biology, behavior, and quantitative skills.</p>
+        </div>
+        <div>
+          <p class="font-semibold">Do I need prior neuroscience experience?</p>
+          <p>No. Introductory biology and psychology courses help you build the foundation you need to succeed in upper-level neuroscience work.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    // Toggle logic shared by all cards (similar to CS, but using data-group / data-panel-group)
+    document.querySelectorAll('.toggle-btn').forEach(btn => {
+      const targetSel = btn.getAttribute('data-target');
+      const group = btn.getAttribute('data-group');
+      const target = document.querySelector(targetSel);
+      if (!target) return;
+
+      btn.setAttribute('aria-expanded', 'false');
+
+      btn.addEventListener('click', () => {
+        const isHidden = target.classList.contains('hidden');
+
+        // Hide other panels in the same group
+        document.querySelectorAll(`[data-panel-group="${group}"]`).forEach(el => {
+          if (el !== target) el.classList.add('hidden');
+        });
+
+        // Toggle this panel
+        target.classList.toggle('hidden');
+        btn.setAttribute('aria-expanded', String(isHidden));
+      });
+    });
+
+    // Same speech helpers as CS page, adapted to Neuro IDs
+    function speakOnClick(sectionId, extra = "") {
+      var text = document.getElementById(sectionId).innerHTML;
+      var full_text = extra + text;
+
+      console.log('Collected text (Neuro):', full_text);
+
+      fetch("http://127.0.0.1:5001/speakOnClick", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({ 'text': full_text })
+      })
+      .then(r => r.text())
+      .then(console.log)
+      .catch(console.error);
+    }
+
+    function speakWithMisty() {
+      var text = document.getElementById("Neurocontent").innerHTML;
+      var text2 = document.getElementById("directive").innerHTML;
+
+      var full_text = text + " " + text2;
+      console.log('Intro speech (Neuro):', full_text);
+
+      fetch("http://127.0.0.1:5001/speak", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({ 'text': full_text })
+      })
+      .then(r => r.text())
+      .then(console.log)
+      .catch(console.error);
+    }
+
+    // Trigger intro speech like the CS page
+    speakWithMisty();
+
+    // Feather icons
+    feather.replace();
+  </script>
+</body>
+</html>
