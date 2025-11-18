@@ -54,7 +54,7 @@ def misty_speakOnClick():
     # textObj = json.load(request.data)
     # print(textObj["text"])
     # misty.speak(textObj["text"])
-
+    misty.stop_speaking()
     text = request.json.get('text', '')
     print("Speaking:", text)
     # Add your Misty call here
