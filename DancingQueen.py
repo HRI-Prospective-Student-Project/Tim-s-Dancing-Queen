@@ -24,6 +24,12 @@ misty = Robot("192.168.1.4")
 # curr_head_yaw = 0
 # waving_now = False
 
+# -----------------------------
+# TOUCH GESTURE COOL-DOWN SETUP
+# -----------------------------
+last_touch_time = 0
+cooldown_seconds = 3  # Misty responds to front-touch once every 3 seconds
+
 def wave_back(arm):
     global waving_now
     if arm == "left":
@@ -66,6 +72,72 @@ def dance():
     misty.move_head(0, -20, 0)
     time.sleep(.5)
     misty.display_image("e_Joy3.jpg")
+
+# ----------------------------------------
+# NEW: HEAD-FRONT TOUCH GESTURE + COOLDOWN
+# ----------------------------------------
+
+def on_front_touch(data):
+    global last_touch_time
+
+    sensor = data["message"].get("sensorPosition")
+    touched = data["message"].get("isContacted")
+
+    # Only react to actual touch (not release)
+    if sensor == "HeadFront" and touched is True:
+
+        current = time.time()
+
+        # Log every detection in terminal
+        print(f"[FrontTouch] Touch detected at {current:.2f}")
+
+        # Cooldown check
+        if current - last_touch_time < cooldown_seconds:
+            print(f"[FrontTouch] Ignored (cooldown active)")
+            return
+
+        last_touch_time = current
+        print(f"[FrontTouch] Gesture triggered")
+
+        # STOP movement + audio before the gesture
+        misty.stop()
+        misty.stop_audio()
+
+        # Soft welcome animation (NO SOUND)
+        misty.display_image("e_Love.jpg")
+
+        misty.transition_led(
+            40, 0, 90,       # start color
+            200, 100, 255,   # end color
+            "Breathe",
+            1200
+        )
+
+        # Gentle wave (right arm)
+        misty.move_arms(0, 70)
+        time.sleep(0.4)
+        misty.move_arms(0, 0)
+        time.sleep(0.3)
+        misty.move_arms(0, 70)
+        time.sleep(0.4)
+
+        # Reset
+        misty.display_image("e_DefaultContent.jpg")
+        misty.transition_led(
+            0, 40, 90,
+            0, 130, 255,
+            "Breathe",
+            1400
+        )
+
+
+# Register the event
+misty.register_event(
+    "FrontTouch",
+    Events.TouchSensor,
+    on_front_touch,
+    keep_alive=True
+)
 
 person_detected = False
 moving = False # Whether Misty is moving or not
