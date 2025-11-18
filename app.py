@@ -4,6 +4,7 @@ Flask Application for F&M Computer Science Major Page
 
 from flask import Flask, render_template, request, jsonify
 from mistyPy.Robot import Robot
+from DancingQueen import idle
 import requests
 import time
 import os
@@ -95,7 +96,7 @@ def misty_direct():
 def misty_goodbye():
 
     misty.speak("Goodbye")
-    os.system('start cmd /k "python DancingQueen.py"')
+    idle()
 
     return render_template('indexenhanced.html')
 

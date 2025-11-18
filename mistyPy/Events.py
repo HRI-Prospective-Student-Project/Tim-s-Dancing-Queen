@@ -21,10 +21,11 @@ class Events:
         'RobotInteractionState', 'SelfState', 'SerialMessage', 'SkillData',
         'SkillSystemStateChange', 'SourceFocusConfigMessage',
         'SourceTrackDataMessage', 'TextToSpeechComplete', 'TimeOfFlight',
-        'TouchSensor', 'UserSkillData', 'VoiceRecord', 'WorldState'
+        'TouchSensor', 'UserSkillData', 'VoiceRecord', 'WorldState', "FrontTouch"
     ]
     
     ActuatorPosition = 'ActuatorPosition'
+    FrontTouch = 'FrontTouch'
     ArTagDetection = 'ArTagDetection'
     AudioPlayComplete = 'AudioPlayComplete'
     BatteryCharge = 'BatteryCharge'

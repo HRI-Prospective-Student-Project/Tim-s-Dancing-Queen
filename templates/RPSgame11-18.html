@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rock • Paper • Scissors</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#0f172a',
+            accent: '#6366f1'
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-gradient-to-br from-indigo-50 via-sky-50 to-emerald-50 min-h-screen flex items-center justify-center p-6">
+  <main class="w-full max-w-3xl">
+    <!-- Header -->
+    <header class="text-center mb-8">
+      <h1 class="text-4xl font-extrabold tracking-tight text-primary">Rock • Paper • Scissors</h1>
+      <p class="text-slate-600 mt-2">First to 3 wins! Choose your move below.</p>
+    </header>
+
+    <!-- Scoreboard -->
+    <section class="grid grid-cols-2 gap-4 mb-6">
+      <div class="rounded-2xl bg-white shadow p-5 border border-slate-100">
+        <h2 class="text-sm uppercase tracking-wider text-slate-500">You</h2>
+        <p id="playerScore" class="text-4xl font-bold">0</p>
+      </div>
+      <div class="rounded-2xl bg-white shadow p-5 border border-slate-100">
+        <h2 class="text-sm uppercase tracking-wider text-slate-500">Computer</h2>
+        <p id="cpuScore" class="text-4xl font-bold">0</p>
+      </div>
+    </section>
+
+    <!-- CPU Animation -->
+    <section id="cpuAnim" class="rounded-2xl bg-white shadow p-5 border border-slate-100 mb-6 hidden text-center">
+      <p class="text-sm uppercase tracking-wider text-slate-500 mb-2">Computer is choosing…</p>
+      <div class="flex flex-col items-center gap-3">
+      <!-- If you have a generic shuffle GIF, put its path in data-shuffle below -->
+      <img id="cpuGif" alt="CPU choice animation" class="h-24 w-24 object-contain select-none"/>
+      <div id="cpuEmoji" class="text-5xl leading-none select-none hidden">✊</div>
+    </div>
+  </section>
+
+
+    <!-- Result Banner -->
+    <section id="resultBanner" class="rounded-2xl bg-white shadow p-5 border border-slate-100 mb-6 hidden">
+      <p id="roundResult" class="text-lg font-semibold"></p>
+      <p id="roundDetail" class="text-slate-600"></p>
+    </section>
+
+    <!-- Choices -->
+    <section class="grid grid-cols-3 gap-4 mb-8" aria-label="Choose your move">
+      <button data-move="rock" onclick="mistyStart()" class="choice group rounded-2xl bg-white shadow hover:shadow-lg border border-slate-100 p-6 flex flex-col items-center gap-3 transition active:scale-[0.98] focus:outline-none focus:ring-4 focus:ring-indigo-200">
+        <span class="text-5xl leading-none" aria-hidden="true">✊</span>
+        <span class="font-semibold">Rock</span>
+        <span class="text-xs text-slate-500">Beats Scissors</span>
+      </button>
+      <button data-move="paper" onclick="mistyStart()" class="choice group rounded-2xl bg-white shadow hover:shadow-lg border border-slate-100 p-6 flex flex-col items-center gap-3 transition active:scale-[0.98] focus:outline-none focus:ring-4 focus:ring-indigo-200">
+        <span class="text-5xl leading-none" aria-hidden="true">✋</span>
+        <span class="font-semibold">Paper</span>
+        <span class="text-xs text-slate-500">Beats Rock</span>
+      </button>
+      <button data-move="scissors" onclick="mistyStart()" class="choice group rounded-2xl bg-white shadow hover:shadow-lg border border-slate-100 p-6 flex flex-col items-center gap-3 transition active:scale-[0.98] focus:outline-none focus:ring-4 focus:ring-indigo-200">
+        <span class="text-5xl leading-none" aria-hidden="true">✌️</span>
+        <span class="font-semibold">Scissors</span>
+        <span class="text-xs text-slate-500">Beats Paper</span>
+      </button>
+    </section>
+
+    <!-- History + Controls -->
+    <section class="grid md:grid-cols-2 gap-4 items-start">
+      <div class="rounded-2xl bg-white shadow border border-slate-100">
+        <div class="p-5 border-b border-slate-100">
+          <h3 class="font-semibold">Round History</h3>
+          <p class="text-xs text-slate-500">Newest on top</p>
+        </div>
+        <ol id="history" class="max-h-64 overflow-auto p-4 space-y-2" aria-live="polite"></ol>
+      </div>
+      <div class="rounded-2xl bg-white shadow p-5 border border-slate-100 flex flex-col gap-4">
+        <div>
+          <h3 class="font-semibold">Game Status</h3>
+          <p id="gameStatus" class="text-slate-600">First to 3 — make your move.</p>
+        </div>
+        <div class="flex flex-col gap-2">
+          <button id="resetBtn" class="px-4 py-2 rounded-xl bg-accent text-white font-semibold shadow hover:shadow-lg transition active:scale-[0.98]">Reset</button>
+          <a href="/" class="px-4 py-2 rounded-xl bg-slate-200 text-slate-700 font-semibold shadow hover:shadow-lg transition text-center">
+            ← Go Home
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    // --- Game State ---
+    let player = 0;
+    let cpu = 0;
+
+    const playerEl = document.getElementById('playerScore');
+    const cpuEl = document.getElementById('cpuScore');
+    const historyEl = document.getElementById('history');
+    const gameStatusEl = document.getElementById('gameStatus');
+    const resultBanner = document.getElementById('resultBanner');
+    const roundResult = document.getElementById('roundResult');
+    const roundDetail = document.getElementById('roundDetail');
+    const resetBtn = document.getElementById('resetBtn');
+
+    const choices = ['rock', 'paper', 'scissors'];
+    const beats = { rock: 'scissors', paper: 'rock', scissors: 'paper' };
+
+    function cpuPick() {
+      return choices[Math.floor(Math.random() * choices.length)];
+    }
+
+    function updateScores() {
+      playerEl.textContent = player;
+      cpuEl.textContent = cpu;
+    }
+
+    function directSpeak(text) {
+      fetch("http://127.0.0.1:5001/directSpeak", {
+          method: "POST",
+          headers: {"Content-Type": "application/json"},
+          body: JSON.stringify({ 'text': text })
+      })
+
+      console.log(text)
+    }
+
+    function mistyStart() {
+      fetch("http://127.0.0.1:5001/mistyStart", {
+          method: "POST",
+          headers: {"Content-Type": "application/json"},
+          // body: JSON.stringify({ 'text': texts })
+      })
+      .then(r => r.text())
+      .then(console.log)
+      .catch(console.error)
+    }
+
+    function banner(show, main = '', detail = '') {
+      resultBanner.classList.toggle('hidden', !show);
+      roundResult.textContent = main;
+      roundDetail.textContent = detail;
+    }
+
+    function appendHistory(text) {
+      const li = document.createElement('li');
+      li.className = 'text-sm text-slate-700 bg-slate-50 border border-slate-200 rounded-lg p-2';
+      li.textContent = text;
+      historyEl.prepend(li);
+    }
+
+    function isGameOver() {
+      return player === 3 || cpu === 3; // first to 3
+    }
+
+    function winnerText() {
+      if (player > cpu) return 'You win the game! 🎉';
+      if (cpu > player) return 'Computer wins the game! 🤖';
+      return 'It\'s a draw!';
+    }
+
+    function disableChoices(disabled) {
+      document.querySelectorAll('.choice').forEach(btn => {
+        btn.disabled = disabled;
+        btn.classList.toggle('opacity-50', disabled);
+        btn.classList.toggle('cursor-not-allowed', disabled);
+      });
+    }
+
+    // UPDATED: animated version
+async function playRound(playerMove) {
+  if (isGameOver()) return;
+
+  const c = cpuPick();        // computer's final move (decided now)
+  disableChoices(true);       // lock inputs during animation
+  await showCpuAnimation(c);  // run shuffle + reveal GIF/emoji
+
+  // --- scoring logic (unchanged) ---
+  if (playerMove === c) {
+    banner(true, 'Tie 🤝', `${fmt(playerMove)} ties ${fmt(c)}.`);
+    directSpeak("Tie")
+    appendHistory(`Tie — You: ${fmt(playerMove)} | CPU: ${fmt(c)}`);
+  } else if (beats[playerMove] === c) {
+    player++;
+    banner(true, 'You win this round! ✅', `${fmt(playerMove)} beats ${fmt(c)}.`);
+    directSpeak("You win this round!")
+    appendHistory(`Win — ${fmt(playerMove)} beats ${fmt(c)}.`);
+  } else {
+    cpu++;
+    banner(true, 'You lose this round ❌', `${fmt(c)} beats ${fmt(playerMove)}.`);
+    directSpeak("You lose this round")
+    appendHistory(`Loss — ${fmt(c)} beats ${fmt(playerMove)}.`);
+  }
+
+  updateScores();
+
+  if (isGameOver()) {
+    gameStatusEl.textContent = winnerText();
+    directSpeak(winnerText())
+    directSpeak("Do you want to play again? Click reset")
+    // keep inputs disabled at game end
+  } else {
+    gameStatusEl.textContent = "First to 3. Keep going!";
+    disableChoices(false); // unlock inputs for next round
+  }
+}
+const choiceGifs = {
+  rock:     "./assets/rps-rock.gif",
+  paper:    "./assets/rps-paper.gif",
+  scissors: "./assets/rps-scissors.gif",
+};
+
+const cpuAnim  = document.getElementById('cpuAnim'); // wrapper section
+const cpuGif   = document.getElementById('cpuGif');  // <img>
+const cpuEmoji = document.getElementById('cpuEmoji'); // emoji fallback
+
+function sleep(ms){ return new Promise(r => setTimeout(r, ms)); }
+
+// async function showCpuAnimation(finalMove) {
+//   const shuffleSrc = cpuGif?.dataset?.shuffle || ""; // optional generic shuffle gif
+//   cpuAnim.classList.remove('hidden');
+
+//   if (shuffleSrc) {
+//     cpuEmoji.classList.add('hidden');
+//     cpuGif.classList.remove('hidden');
+//     cpuGif.src = shuffleSrc;           // show generic shuffle
+//     await sleep(800);
+//   } else {
+//     // emoji shuffle fallback
+//     cpuGif.classList.add('hidden');
+//     cpuEmoji.classList.remove('hidden');
+//     const cycle = ['✊','✋','✌️','✋','✊','✌️'];
+//     for (let i = 0; i < cycle.length; i++) { cpuEmoji.textContent = cycle[i]; await sleep(120); }
+//   }
+
+//   // reveal final move
+//   const src = "./static/assets/rps-shuffle.gif";
+//   if (src) {
+//     cpuEmoji.classList.add('hidden');
+//     cpuGif.classList.remove('hidden');
+//     cpuGif.src = src;
+//   } else {
+//     cpuGif.classList.add('hidden');
+//     cpuEmoji.classList.remove('hidden');
+//     cpuEmoji.textContent = finalMove === 'rock' ? '✊' : finalMove === 'paper' ? '✋' : '✌️';
+//   }
+
+//   await sleep(2000);
+//   cpuAnim.classList.add('hidden');
+// }
+
+async function showCpuAnimation(finalMove) {
+  const cpuAnim = document.getElementById('cpuAnim');
+  const cpuGif = document.getElementById('cpuGif');
+  const cpuEmoji = document.getElementById('cpuEmoji');
+
+  cpuAnim.classList.remove('hidden');
+
+  // Hide GIF image and show emoji shuffle
+  cpuGif.classList.add('hidden');
+  cpuEmoji.classList.remove('hidden');
+
+  // Shuffle emoji to simulate "thinking"
+  const cycle = ['✊', '✋', '✌️', '✋', '✊', '✌️'];
+  for (let i = 0; i < cycle.length; i++) {
+    cpuEmoji.textContent = cycle[i];
+    await sleep(120);
+  }
+
+  // Show the final emoji choice
+  cpuEmoji.textContent =
+    finalMove === 'rock' ? '✊' :
+    finalMove === 'paper' ? '✋' :
+    '✌️';
+
+    finalMove === 'rock' ? directSpeak("Rock") :
+    finalMove === 'paper' ? directSpeak("Paper") :
+    directSpeak("Scissors");
+
+  // Wait a bit before hiding animation
+  await sleep(1500);
+  cpuAnim.classList.add('hidden');
+}
+
+    function fmt(move) {
+      return move.charAt(0).toUpperCase() + move.slice(1);
+    }
+
+    function resetGame() {
+      player = 0; cpu = 0;
+      updateScores();
+      historyEl.innerHTML = '';
+      banner(false);
+      disableChoices(false);
+      gameStatusEl.textContent = 'First to 3 — make your move.';
+    }
+
+    // Event listeners for buttons
+    document.querySelectorAll('.choice').forEach(btn => {
+      btn.addEventListener('click', () => playRound(btn.dataset.move));
+    });
+
+    resetBtn.addEventListener('click', resetGame);
+
+    // Initialize
+    resetGame();
+  </script>
+</body>
+</html>

@@ -4,7 +4,7 @@ import random
 import time
 # import math
 
-MISTY_IP = "192.168.1.7"
+MISTY_IP = "192.168.1.4"
 
 misty = Robot(MISTY_IP)
 
@@ -123,7 +123,23 @@ def on_front_touch(data):
         misty.move_arms(0, 70)
         time.sleep(0.4)
 
-        # Reset
+        # Reset 
+
+        misty.display_image("e_DefaultContent.jpg")
+        misty.move_arms(random.randint(70, 89), random.randint(70, 89))
+
+        introQuestions = ["Do you have any questions?", "What would you like to learn about F and M", "What's up... what do you wanna know?"]
+
+        question = random.randint(0, len(introQuestions) - 1)
+
+        misty.speak("Hello")
+        time.sleep(.5)
+        wave_back("right")
+        misty.speak("My name is Misty.")
+        misty.speak(introQuestions[question])
+        misty.speak("Pick something from the dashboard")
+
+
         misty.display_image("e_DefaultContent.jpg")
         misty.transition_led(
             0, 40, 90,
@@ -132,67 +148,78 @@ def on_front_touch(data):
             1400
         )
 
+def start_touch_sensing():
+    # Register the event
+    misty.register_event(
+        event_name="FrontTouch",
+        event_type=Events.TouchSensor,
+        callback_function=on_front_touch,
+        keep_alive=True
+    )
 
-# Register the event
-misty.register_event(
-    "FrontTouch",
-    Events.TouchSensor,
-    on_front_touch,
-    keep_alive=True
-)
+def idle():
+    person_detected = False
+    moving = False # Whether Misty is moving or not
 
-person_detected = False
-moving = False # Whether Misty is moving or not
+    misty.set_default_volume(10)
 
-misty.set_default_volume(10)
+    audioTracks = ["s_Ecstacy2.wav", "s_Joy.wav", "s_Awe.wav", "s_Acceptance.wav"]
+    faces = ["e_Suprise.jpg", "e_Joy.jpg", "e_Love.jpg", "e_Thinking.jpg"]
 
-audioTracks = ["s_Ecstacy2.wav", "s_Joy.wav", "s_Awe.wav", "s_Acceptance.wav"]
-faces = ["e_Suprise.jpg", "e_Joy.jpg", "e_Love.jpg", "e_Thinking.jpg"]
+    colors = [
+        (255, 0, 0),    # Red
+        (0, 255, 0),    # Green
+        (0, 0, 255),    # Blue
+        (255, 255, 0),  # Yellow
+        (0, 255, 255),  # Cyan
+        (255, 0, 255),  # Magenta
+        (255, 255, 255) # white
+    ]
 
-colors = [
-    (255, 0, 0),    # Red
-    (0, 255, 0),    # Green
-    (0, 0, 255),    # Blue
-    (255, 255, 0),  # Yellow
-    (0, 255, 255),  # Cyan
-    (255, 0, 255),  # Magenta
-    (255, 255, 255) # white
-]
+    try:
+        print("Stop the robot by pressing ctrl+C")
+        while person_detected == False:
 
-try:
-    print("Stop the robot by pressing ctrl+C")
-    while person_detected == False:
+            if moving == False:
+                misty.drive(0, 20)
+                moving = True
 
-        if moving == False:
-            misty.drive(0, 20)
-            moving = True
+            dance()
 
-        dance()
+            audTrack = random.randint(0, len(audioTracks) - 1)
+            face = random.randint(0, len(faces) - 1)
+            color = random.randint(0, len(colors) - 1)
+            r, g, b = colors[color]
 
-        audTrack = random.randint(0, len(audioTracks) - 1)
-        face = random.randint(0, len(faces) - 1)
-        color = random.randint(0, len(colors) - 1)
-        r, g, b = colors[color]
+            misty.play_audio(audioTracks[audTrack])
+            misty.display_image(faces[face])
+            misty.change_led(r, g, b)
 
-        misty.play_audio(audioTracks[audTrack])
-        misty.display_image(faces[face])
-        misty.change_led(r, g, b)
+    except KeyboardInterrupt:
+        print("Exited manually")
 
-except KeyboardInterrupt:
-    print("Exited manually")
+    misty.stop()
+    misty.stop_audio()
+    # misty.display_image("e_DefaultContent.jpg")
+    # misty.move_arms(random.randint(70, 89), random.randint(70, 89))
 
-misty.stop()
-misty.stop_audio()
-misty.display_image("e_DefaultContent.jpg")
-misty.move_arms(random.randint(70, 89), random.randint(70, 89))
+    # introQuestions = ["Do you have any questions?", "What would you like to learn about F and M", "What's up... what do you wanna know?"]
 
-introQuestions = ["Do you have any questions?", "What would you like to learn about F and M", "What's up... what do you wanna know?"]
+    # question = random.randint(0, len(introQuestions) - 1)
 
-question = random.randint(0, len(introQuestions) - 1)
+    # misty.speak("Hello")
+    # time.sleep(.5)
+    # wave_back("right")
+    # misty.speak("My name is Misty.")
+    # misty.speak(introQuestions[question])
+    # misty.speak("Pick something from the dashboard")
 
-misty.speak("Hello")
-time.sleep(.5)
-wave_back("right")
-misty.speak("My name is Misty.")
-misty.speak(introQuestions[question])
-misty.speak("Pick something from the dashboard")
+def idle_behavior():
+    start_touch_sensing()
+    idle()
+
+def main():
+    idle_behavior()
+
+if __name__ == "__main__":
+    main()
