@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>F&M Cognitive Science | Simplified</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/feather-icons"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#002D72',
+            secondary: '#C8102E'
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-gray-50 font-sans min-h-screen flex flex-col">
+  <!-- Header -->
+  <header class="w-full bg-primary text-white p-4 flex justify-between items-center shadow-md">
+    <h1 class="text-xl md:text-2xl font-bold">Cognitive Science at Franklin & Marshall</h1>
+    <div class="flex items-center gap-4">
+      <a href="/" class="bg-secondary hover:bg-secondary/90 px-4 py-2 rounded-full text-xs md:text-sm font-medium transition-colors">← Back to Home</a>
+      <span class="bg-secondary/90 px-3 py-1 rounded-full text-xs md:text-sm font-medium">Admitted Students Day</span>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="flex-1 grid grid-cols-1 lg:grid-cols-3 gap-6 p-6 max-w-7xl mx-auto w-full">
+    <!-- Card 1 -->
+    <section class="bg-white p-6 rounded-xl shadow-sm flex flex-col" id="card-overview">
+      <h2 class="text-xl font-bold text-primary mb-2 flex items-center">
+        <i data-feather="info" class="mr-2"></i> What is Cognitive Science at F&M?
+      </h2>
+      <p id="directive" class="text-sm text-gray-500 mb-4">Click a button to see details.</p>
+
+      <p id="CogSciContent" class="mb-4 text-gray-700">
+        Cognitive Science at F&M is an interdisciplinary major that explores the mind through multiple perspectives: psychology, neuroscience, computer science, philosophy, and linguistics. Students investigate how we think, learn, perceive, and use language, drawing on scientific methods and computational models to understand cognition.
+      </p>
+
+      <div class="flex flex-wrap gap-3">
+        <button
+          id="highlights"
+          class="toggle-btn px-4 py-2 rounded-full border border-gray-200 hover:border-primary hover:text-primary transition"
+          data-target="#ovr-highlights"
+          onclick="speakOnClick('highlights','Here are the ')"
+        >
+          Program Highlights
+        </button>
+
+        <button
+          id="contact"
+          class="toggle-btn px-4 py-2 rounded-full border border-gray-200 hover:border-primary hover:text-primary transition"
+          data-target="#ovr-contact"
+          onclick="speakOnClick('contact','Here is the ')"
+        >
+          Department Contact
+        </button>
+      </div>
+
+      <div id="ovr-highlights" class="hidden mt-4 space-y-2 text-gray-700">
+        <ul class="space-y-2">
+          <li class="flex items-start">
+            <i data-feather="check-circle" class="text-secondary mr-2 mt-0.5 flex-shrink-0"></i>
+            <span>Interdisciplinary approach combining psychology, neuroscience, computer science, philosophy, and linguistics.</span>
+          </li>
+          <li class="flex items-start">
+            <i data-feather="check-circle" class="text-secondary mr-2 mt-0.5 flex-shrink-0"></i>
+            <span>Hands-on research opportunities in cognitive labs and computational modeling.</span>
+          </li>
+          <li class="flex items-start">
+            <i data-feather="check-circle" class="text-secondary mr-2 mt-0.5 flex-shrink-0"></i>
+            <span>Explore artificial intelligence, language processing, perception, and decision-making.</span>
+          </li>
+        </ul>
+      </div>
+
+      <div id="ovr-contact" class="hidden mt-4 text-gray-700">
+        <div class="space-y-1">
+          <p><span class="font-semibold">Head of Program:</span> Professor Sarah Johnson</p>
+          <p><span class="font-semibold">Program:</span> Cognitive Science (interdisciplinary)</p>
+          <p><span class="font-semibold">Email:</span> sjohnson@fandm.edu</p>
+          <p><span class="font-semibold">Office:</span> Hackman Hall 245</p>
+        </div>
+      </div>
+
+      <div class="mt-auto pt-4 border-t border-gray-100">
+        <p class="text-sm text-gray-500 italic">"Understanding minds, natural and artificial." — F&M Cognitive Science</p>
+      </div>
+    </section>
+
+    <!-- Card 2 - Required Classes (Middle Section) -->
+    <section class="bg-white p-6 rounded-xl shadow-sm flex flex-col" id="card-required">
+      <h2 class="text-xl font-bold text-primary mb-2 flex items-center">
+        <i data-feather="book" class="mr-2"></i> Required Classes
+      </h2>
+      <p class="text-sm text-gray-500 mb-4">Click a button to see details.</p>
+
+      <!-- Course count boxes above the buttons -->
+      <div id="glance-counts" class="mb-4 grid grid-cols-3 gap-3">
+        <div class="bg-primary/10 p-3 rounded-lg text-center">
+          <div class="text-3xl font-bold text-primary">12</div>
+          <div class="text-xs text-gray-600">Core courses</div>
+        </div>
+        <div class="bg-secondary/10 p-3 rounded-lg text-center">
+          <div class="text-3xl font-bold text-secondary">4</div>
+          <div class="text-xs text-gray-600">Electives</div>
+        </div>
+        <div class="bg-primary/10 p-3 rounded-lg text-center">
+          <div class="text-3xl font-bold text-primary">5</div>
+          <div class="text-xs text-gray-600">Disciplines</div>
+        </div>
+      </div>
+
+      <div class="flex flex-wrap gap-3">
+        <button
+          id="core"
+          class="toggle-btn px-4 py-2 rounded-full border border-gray-200 hover:border-primary hover:text-primary transition"
+          data-target="#req-core"
+          onclick="speakOnClick('core', 'These are the ')"
+        >
+          Core Requirements
+        </button>
+        <button
+          id="psychology"
+          class="toggle-btn px-4 py-2 rounded-full border border-gray-200 hover:border-primary hover:text-primary transition"
+          data-target="#req-psychology"
+          onclick="speakOnClick('psychology', 'These are the ')"
+        >
+          Psychology Foundation
+        </button>
+        <button
+          id="computational"
+          class="toggle-btn px-4 py-2 rounded-full border border-gray-200 hover:border-primary hover:text-primary transition"
+          data-target="#req-computational"
+          onclick="speakOnClick('computational', 'These are the ')"
+        >
+          Computational Track
+        </button>
+        <button
+          id="electives"
+          class="toggle-btn px-4 py-2 rounded-full border border-gray-200 hover:border-primary hover:text-primary transition"
+          data-target="#req-electives"
+          onclick="speakOnClick('electives', 'Here are some ')"
+        >
+          Interdisciplinary Electives
+        </button>
+        <button
+          id="capstone"
+          class="toggle-btn px-4 py-2 rounded-full border border-gray-200 hover:border-primary hover:text-primary transition"
+          data-target="#req-capstone"
+          onclick="speakOnClick('capstone', 'The program culminates with ')"
+        >
+          Senior Capstone
+        </button>
+      </div>
+
+      <!-- Core Requirements -->
+      <div id="req-core" class="hidden mt-4">
+        <ul class="space-y-2">
+          <li class="flex items-start">
+            <i data-feather="book" class="text-secondary mr-2 mt-0.5 flex-shrink-0"></i>
+            <span>COG 100 – Introduction to Cognitive Science</span>
+          </li>
+          <li class="flex items-start">
+            <i data-feather="book" class="text-secondary mr-2 mt-0.5 flex-shrink-0"></i>
+            <span>PHI 203 – Philosophy of Mind</span>
+          </li>
+          <li class="flex items-start">
+            <i data-feather="book" class="text-secondary mr-2 mt-0.5 flex-shrink-0"></i>
+            <span>PSY 110 – General Psychology</span>
+          </li>
+          <li class="flex items-start">
+            <i data-feather="book" class="text-secondary mr-2 mt-0.5 flex-shrink-0"></i>
+            <span>CPS 111 – Computer Science I</span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Psychology Foundation -->
+      <div id="req-psychology" class="hidden mt-4">
+        <ul class="bg-gray-50 p-4 rounded-lg border border-gray-200">
+          <li class="flex items-center mb-2">
+            <i data-feather="check" class="text-secondary mr-2"></i>
+            <span>PSY 200 – Research Methods in Psychology</span>
+          </li>
+          <li class="flex items-center mb-2">
+            <i data-feather="check" class="text-secondary mr-2"></i>
+            <span>PSY 305 – Cognitive Psychology</span>
+          </li>
+          <li class="flex items-center">
+            <i data-feather="check" class="text-secondary mr-2"></i>
+            <span>NSC 200 – Introduction to Neuroscience</span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Computational Track -->
+      <div id="req-computational" class="hidden mt-4">
+        <ul class="space-y-2">
+          <li class="flex items-start">
+            <i data-feather="book" class="text-secondary mr-2 mt-0.5 flex-shrink-0"></i>
+            <span>CPS 112 – Computer Science II</span>
+          </li>
+          <li class="flex items-start">
+            <i data-feather="book" class="text-secondary mr-2 mt-0.5 flex-shrink-0"></i>
+            <span>CPS 367 – Artificial Intelligence</span>
+          </li>
+          <li class="flex items-start">
+            <i data-feather="book" class="text-secondary mr-2 mt-0.5 flex-shrink-0"></i>
+            <span>MAT 215 – Statistics for Research</span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Interdisciplinary Electives -->
+      <div id="req-electives" class="hidden mt-4">
+        <div class="space-y-3">
+          <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
+            <h3 class="font-semibold text-gray-800 mb-2">Language & Communication</h3>
+            <ul class="list-disc list-inside text-sm text-gray-700 space-y-1">
+              <li>LIN 200 – Introduction to Linguistics</li>
+              <li>LIN 350 – Psycholinguistics</li>
+              <li>CPS 372 – Natural Language Processing</li>
+            </ul>
+          </div>
+
+          <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
+            <h3 class="font-semibold text-gray-800 mb-2">Philosophy & Mind</h3>
+            <ul class="list-disc list-inside text-sm text-gray-700 space-y-1">
+              <li>PHI 244 – Logic & Reasoning</li>
+              <li>PHI 350 – Philosophy of Language</li>
+              <li>PHI 360 – Ethics of AI</li>
+            </ul>
+          </div>
+
+          <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
+            <h3 class="font-semibold text-gray-800 mb-2">Advanced Psychology & Neuroscience</h3>
+            <ul class="list-disc list-inside text-sm text-gray-700 space-y-1">
+              <li>PSY 340 – Learning & Memory</li>
+              <li>PSY 350 – Social Cognition</li>
+              <li>NSC 350 – Computational Neuroscience</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Senior Capstone -->
+      <div id="req-capstone" class="hidden mt-4">
+        <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
+          <p class="text-sm text-gray-700 mb-2">Choose one capstone experience:</p>
+          <ul class="list-disc list-inside text-sm text-gray-700 space-y-1">
+            <li>COG 490 – Senior Research Project (independent research)</li>
+            <li>COG 495 – Cognitive Science Internship (industry/lab experience)</li>
+          </ul>
+          <p class="text-xs text-gray-500 mt-2">
+            Students work closely with faculty mentors to design and complete an original research project or gain hands-on experience in cognitive science applications.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Card 3 - FAQ Section (Right Section) -->
+    <section class="bg-white p-6 rounded-xl shadow-sm flex flex-col" id="card-faq">
+      <h2 class="text-xl font-bold text-primary mb-2 flex items-center">
+        <i data-feather="help-circle" class="mr-2"></i> Frequently Asked Questions
+      </h2>
+      <p class="text-sm text-gray-500 mb-4">Click a question to see the answer.</p>
+
+      <div class="space-y-3">
+        <!-- FAQ Item 1 -->
+        <div class="faq-item border border-gray-200 rounded-lg overflow-hidden">
+          <button
+            class="faq-question w-full px-4 py-3 text-left flex justify-between items-center hover:bg-gray-50 transition"
+            data-target="#faq-answer-1"
+          >
+            <span class="font-medium text-gray-800">What makes Cognitive Science different from Psychology?</span>
+            <i data-feather="chevron-down" class="faq-icon text-gray-400 transition-transform"></i>
+          </button>
+          <div
+            id="faq-answer-1"
+            class="faq-answer hidden px-4 py-3 bg-gray-50 text-sm text-gray-700 border-t border-gray-200"
+          >
+            <p>
+              While Psychology focuses primarily on human behavior and mental processes, Cognitive Science takes a broader, interdisciplinary approach. We combine insights from psychology, computer science, neuroscience, philosophy, and linguistics to understand cognition in both humans and artificial systems.
+            </p>
+          </div>
+        </div>
+
+        <!-- FAQ Item 2 -->
+        <div class="faq-item border border-gray-200 rounded-lg overflow-hidden">
+          <button
+            class="faq-question w-full px-4 py-3 text-left flex justify-between items-center hover:bg-gray-50 transition"
+            data-target="#faq-answer-2"
+          >
+            <span class="font-medium text-gray-800">Do I need programming experience?</span>
+            <i data-feather="chevron-down" class="faq-icon text-gray-400 transition-transform"></i>
+          </button>
+          <div
+            id="faq-answer-2"
+            class="faq-answer hidden px-4 py-3 bg-gray-50 text-sm text-gray-700 border-t border-gray-200"
+          >
+            <p>
+              No prior programming experience is required. You'll start with CPS 111 (Computer Science I) and build computational skills gradually. Many cognitive science applications use programming for modeling cognition, analyzing data, and creating AI systems.
+            </p>
+          </div>
+        </div>
+
+        <!-- FAQ Item 3 -->
+        <div class="faq-item border border-gray-200 rounded-lg overflow-hidden">
+          <button
+            class="faq-question w-full px-4 py-3 text-left flex justify-between items-center hover:bg-gray-50 transition"
+            data-target="#faq-answer-3"
+          >
+            <span class="font-medium text-gray-800">What research opportunities are available?</span>
+            <i data-feather="chevron-down" class="faq-icon text-gray-400 transition-transform"></i>
+          </button>
+          <div
+            id="faq-answer-3"
+            class="faq-answer hidden px-4 py-3 bg-gray-50 text-sm text-gray-700 border-t border-gray-200"
+          >
+            <p>
+              Students can participate in faculty research labs studying language processing, decision-making, memory, artificial intelligence, and human-computer interaction. Many students present their work at conferences and co-author publications.
+            </p>
+          </div>
+        </div>
+
+        <!-- FAQ Item 4 -->
+        <div class="faq-item border border-gray-200 rounded-lg overflow-hidden">
+          <button
+            class="faq-question w-full px-4 py-3 text-left flex justify-between items-center hover:bg-gray-50 transition"
+            data-target="#faq-answer-4"
+          >
+            <span class="font-medium text-gray-800">What careers does Cognitive Science prepare me for?</span>
+            <i data-feather="chevron-down" class="faq-icon text-gray-400 transition-transform"></i>
+          </button>
+          <div
+            id="faq-answer-4"
+            class="faq-answer hidden px-4 py-3 bg-gray-50 text-sm text-gray-700 border-t border-gray-200"
+          >
+            <p>
+              Graduates pursue careers in user experience design, artificial intelligence, data science, research, education, and graduate programs in psychology, neuroscience, or computer science. The interdisciplinary training is valued in technology, healthcare, and research industries.
+            </p>
+          </div>
+        </div>
+
+        <!-- FAQ Item 5 -->
+        <div class="faq-item border border-gray-200 rounded-lg overflow-hidden">
+          <button
+            class="faq-question w-full px-4 py-3 text-left flex justify-between items-center hover:bg-gray-50 transition"
+            data-target="#faq-answer-5"
+          >
+            <span class="font-medium text-gray-800">Can I combine Cognitive Science with other majors?</span>
+            <i data-feather="chevron-down" class="faq-icon text-gray-400 transition-transform"></i>
+          </button>
+          <div
+            id="faq-answer-5"
+            class="faq-answer hidden px-4 py-3 bg-gray-50 text-sm text-gray-700 border-t border-gray-200"
+          >
+            <p>
+              Yes! Cognitive Science pairs well with Computer Science, Psychology, Philosophy, Linguistics, or Neuroscience. Many students create individualized joint majors or add complementary minors to focus on specific applications like AI, language, or human factors.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    // Convert each button to a disclosure toggle for its target content
+    document.querySelectorAll('.toggle-btn').forEach(btn => {
+      const targetSel = btn.getAttribute('data-target');
+      const target = document.querySelector(targetSel);
+      if (!target) return;
+      btn.setAttribute('aria-expanded', 'false');
+      btn.addEventListener('click', () => {
+        const isHidden = target.classList.contains('hidden');
+        const container = btn.closest('section');
+        const sectionId = container.id;
+        
+        // For the required classes section, allow multiple sections to be open at once
+        // and never hide the course count boxes
+        if (sectionId === 'card-required') {
+          // Only toggle the current target, don't hide other req- sections
+          // Never touch the glance-counts div - it should always remain visible
+          target.classList.toggle('hidden');
+          btn.setAttribute('aria-expanded', String(!isHidden));
+        } else {
+          // For other sections, hide siblings as before
+          container.querySelectorAll('[id^="ovr-"], [id^="glance-"], [id^="req-"]').forEach(el => {
+            // Exclude the course count boxes and the current target
+            if (el !== target && el.id !== 'glance-counts') {
+              el.classList.add('hidden');
+            }
+          });
+          // Toggle selected
+          target.classList.toggle('hidden');
+          btn.setAttribute('aria-expanded', String(!isHidden));
+        }
+      });
+    });
+    
+    // Ensure the course count boxes are always visible (extra protection)
+    const glanceCounts = document.getElementById('glance-counts');
+    if (glanceCounts) {
+      glanceCounts.classList.remove('hidden');
+      // Prevent it from being hidden by any means
+      const observer = new MutationObserver(() => {
+        if (glanceCounts.classList.contains('hidden')) {
+          glanceCounts.classList.remove('hidden');
+        }
+      });
+      observer.observe(glanceCounts, { attributes: true, attributeFilter: ['class'] });
+    }
+
+    // FAQ expand/collapse functionality
+    document.querySelectorAll('.faq-question').forEach(btn => {
+      const targetSel = btn.getAttribute('data-target');
+      const target = document.querySelector(targetSel);
+      const icon = btn.querySelector('.faq-icon');
+      if (!target) return;
+      
+      btn.addEventListener('click', () => {
+        const isHidden = target.classList.contains('hidden');
+        
+        // Close all other FAQ items in the same section
+        const container = btn.closest('section');
+        container.querySelectorAll('.faq-answer').forEach(answer => {
+          if (answer !== target) {
+            answer.classList.add('hidden');
+            const otherBtn = container.querySelector(`[data-target="#${answer.id}"]`);
+            if (otherBtn) {
+              const otherIcon = otherBtn.querySelector('.faq-icon');
+              if (otherIcon) otherIcon.style.transform = 'rotate(0deg)';
+            }
+          }
+        });
+        
+        // Toggle current FAQ item
+        target.classList.toggle('hidden');
+        
+        // Rotate icon
+        if (icon) {
+          if (isHidden) {
+            icon.style.transform = 'rotate(180deg)';
+          } else {
+            icon.style.transform = 'rotate(0deg)';
+          }
+        }
+      });
+    });
+
+    function speakOnClick(sectionId, extra="") {
+      var text = document.getElementById(sectionId).innerHTML
+      var full_text = extra + text 
+
+      console.log('Collected text:', full_text);
+
+      fetch("http://127.0.0.1:5001/speakOnClick", {
+          method: "POST",
+          headers: {"Content-Type": "application/json"},
+          body: JSON.stringify({ 'text': full_text })
+      })
+      .then(r => r.text())
+      .then(console.log)
+      .catch(console.error)
+    }
+
+    function speakWithMisty() {
+        var text = document.getElementById("CogSciContent").innerHTML
+        var text2 = document.getElementById("directive").innerHTML
+
+        full_text = text + " " + text2
+        console.log(full_text)
+        fetch("http://127.0.0.1:5001/speak", {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify({ 'text': full_text })
+        })
+        .then(r => r.text())
+        .then(console.log)
+        .catch(console.error)
+    }
+
+    speakWithMisty()
+
+    // Icons
+    feather.replace();
+  </script>
+</body>
+</html>

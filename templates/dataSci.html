@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>F&M Data Science | Simplified</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/feather-icons"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#002D72',
+            secondary: '#C8102E'
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-gray-50 font-sans min-h-screen flex flex-col">
+  <!-- Header -->
+  <header class="w-full bg-primary text-white p-4 flex justify-between items-center shadow-md">
+    <h1 class="text-xl md:text-2xl font-bold">Data Science at Franklin & Marshall</h1>
+    <div class="flex items-center gap-4">
+      <a href="/" class="bg-secondary hover:bg-secondary/90 px-4 py-2 rounded-full text-xs md:text-sm font-medium transition-colors">← Back to Home</a>
+      <span class="bg-secondary/90 px-3 py-1 rounded-full text-xs md:text-sm font-medium">Admitted Students Day</span>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="flex-1 grid grid-cols-1 lg:grid-cols-3 gap-6 p-6 max-w-7xl mx-auto w-full">
+    <!-- Card 1 -->
+    <section class="bg-white p-6 rounded-xl shadow-sm flex flex-col" id="card-overview">
+      <h2 class="text-xl font-bold text-primary mb-2 flex items-center">
+        <i data-feather="info" class="mr-2"></i> What is Data Science at F&M?
+      </h2>
+      <p id="directive" class="text-sm text-gray-500 mb-4">Click a button to see details.</p>
+
+      <p id="Neurocontent" class="mb-4 text-gray-700">
+        Data Science at F&amp;M is a multidisciplinary major that blends statistics, computational thinking, and machine learning with social and ethical perspectives. Students learn how to turn messy, real-world data into evidence that supports decision-making across science, business, policy, and the public sphere.
+      </p>
+
+      <div class="flex flex-wrap gap-3">
+        <button
+          id="highlights"
+          class="toggle-btn px-4 py-2 rounded-full border border-gray-200 hover:border-primary hover:text-primary transition"
+          data-target="#ovr-highlights"
+          onclick="speakOnClick('highlights','Here are the ')"
+        >
+          Program Highlights
+        </button>
+
+        <button
+          class="toggle-btn px-4 py-2 rounded-full border border-gray-200 hover:border-primary hover:text-primary transition"
+          data-target="#ovr-contact"
+        >
+          Department Contact
+        </button>
+      </div>
+
+      <div id="ovr-highlights" class="hidden mt-4 space-y-2 text-gray-700">
+        <ul class="space-y-2">
+          <li class="flex items-start">
+            <i data-feather="check-circle" class="text-secondary mr-2 mt-0.5 flex-shrink-0"></i>
+            <span>Interdisciplinary training across mathematics, statistics, computer science, and the social sciences.</span>
+          </li>
+          <li class="flex items-start">
+            <i data-feather="check-circle" class="text-secondary mr-2 mt-0.5 flex-shrink-0"></i>
+            <span>Core sequence in calculus, linear algebra, probability, statistical modeling, and computational thinking.</span>
+          </li>
+          <li class="flex items-start">
+            <i data-feather="check-circle" class="text-secondary mr-2 mt-0.5 flex-shrink-0"></i>
+            <span>Electives in machine learning, algorithms, bioinformatics, ethics, religion, sociology, and more to put data in context.</span>
+          </li>
+        </ul>
+      </div>
+
+      <div id="ovr-contact" class="hidden mt-4 text-gray-700">
+        <div class="space-y-1">
+          <p><span class="font-semibold">Head of Program:</span> Professor Iwan Praton</p>
+          <p><span class="font-semibold">Program:</span> Data Science (interdisciplinary)</p>
+          <p><span class="font-semibold">Contact:</span> See the F&amp;M directory for current email and office details.</p>
+        </div>
+      </div>
+
+      <div class="mt-auto pt-4 border-t border-gray-100">
+        <p class="text-sm text-gray-500 italic">"From data to decisions." — F&amp;M Data Science</p>
+      </div>
+    </section>
+
+    <!-- Card 2 - Required Classes (Middle Section) -->
+    <section class="bg-white p-6 rounded-xl shadow-sm flex flex-col" id="card-required">
+      <h2 class="text-xl font-bold text-primary mb-2 flex items-center">
+        <i data-feather="book" class="mr-2"></i> Required Classes
+      </h2>
+      <p class="text-sm text-gray-500 mb-4">Click a button to see details.</p>
+
+      <!-- Course count boxes above the buttons -->
+      <div id="glance-counts" class="mb-4 grid grid-cols-3 gap-3">
+        <div class="bg-primary/10 p-3 rounded-lg text-center">
+          <div class="text-3xl font-bold text-primary">14</div>
+          <div class="text-xs text-gray-600">Courses in the major*</div>
+        </div>
+        <div class="bg-secondary/10 p-3 rounded-lg text-center">
+          <div class="text-3xl font-bold text-secondary">3</div>
+          <div class="text-xs text-gray-600">Data science electives</div>
+        </div>
+        <div class="bg-primary/10 p-3 rounded-lg text-center">
+          <div class="text-3xl font-bold text-primary">4+</div>
+          <div class="text-xs text-gray-600">Partner disciplines</div>
+        </div>
+      </div>
+
+      <div class="flex flex-wrap gap-3">
+        <button
+          id="core"
+          class="toggle-btn px-4 py-2 rounded-full border border-gray-200 hover:border-primary hover:text-primary transition"
+          data-target="#req-core"
+          onclick="speakOnClick('core', 'These are the ')"
+        >
+          Core Computing Courses
+        </button>
+        <button
+          id="physmath"
+          class="toggle-btn px-4 py-2 rounded-full border border-gray-200 hover:border-primary hover:text-primary transition"
+          data-target="#req-physmath"
+          onclick="speakOnClick('physmath', 'These are the ')"
+        >
+          Calculus &amp; Linear Algebra
+        </button>
+        <button
+          id="neurofund"
+          class="toggle-btn px-4 py-2 rounded-full border border-gray-200 hover:border-primary hover:text-primary transition"
+          data-target="#req-neurofund"
+          onclick="speakOnClick('neurofund', 'These are the ')"
+        >
+          Statistics &amp; Data Science
+        </button>
+        <button
+          id="areastudies"
+          class="toggle-btn px-4 py-2 rounded-full border border-gray-200 hover:border-primary hover:text-primary transition"
+          data-target="#req-areastudies"
+          onclick="speakOnClick('areastudies', 'Here are some ')"
+        >
+          Interdisciplinary Electives
+        </button>
+        <button
+          id="research"
+          class="toggle-btn px-4 py-2 rounded-full border border-gray-200 hover:border-primary hover:text-primary transition"
+          data-target="#req-research"
+          onclick="speakOnClick('research', 'These courses emphasize ')"
+        >
+          Reasoning &amp; Ethics
+        </button>
+      </div>
+
+      <!-- Core Computing -->
+      <div id="req-core" class="hidden mt-4">
+        <ul class="space-y-2">
+          <li class="flex items-start">
+            <i data-feather="book" class="text-secondary mr-2 mt-0.5 flex-shrink-0"></i>
+            <span>CPS 111 – Computer Science I</span>
+          </li>
+          <li class="flex items-start">
+            <i data-feather="book" class="text-secondary mr-2 mt-0.5 flex-shrink-0"></i>
+            <span>CPS 112 – Computer Science II</span>
+          </li>
+          <li class="flex items-start">
+            <i data-feather="book" class="text-secondary mr-2 mt-0.5 flex-shrink-0"></i>
+            <span>CPS 222 – Computer Science III</span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Calculus & Linear Algebra -->
+      <div id="req-physmath" class="hidden mt-4">
+        <ul class="bg-gray-50 p-4 rounded-lg border border-gray-200">
+          <li class="flex items-center mb-2">
+            <i data-feather="check" class="text-secondary mr-2"></i>
+            <span>MAT 109 – Calculus I</span>
+          </li>
+          <li class="flex items-center mb-2">
+            <i data-feather="check" class="text-secondary mr-2"></i>
+            <span>MAT 110 – Calculus II</span>
+          </li>
+          <li class="flex items-center mb-2">
+            <i data-feather="check" class="text-secondary mr-2"></i>
+            <span>MAT 111 – Calculus III</span>
+          </li>
+          <li class="flex items-center">
+            <i data-feather="check" class="text-secondary mr-2"></i>
+            <span>MAT 229 – Linear Algebra &amp; Differential Equations</span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Statistics & Data Science -->
+      <div id="req-neurofund" class="hidden mt-4">
+        <ul class="space-y-2">
+          <li class="flex items-start">
+            <i data-feather="book" class="text-secondary mr-2 mt-0.5 flex-shrink-0"></i>
+            <span>MAT 175 – Introduction to Data Science</span>
+          </li>
+          <li class="flex items-start">
+            <i data-feather="book" class="text-secondary mr-2 mt-0.5 flex-shrink-0"></i>
+            <span>MAT 215 – Introduction to Statistical Modeling</span>
+          </li>
+          <li class="flex items-start">
+            <i data-feather="book" class="text-secondary mr-2 mt-0.5 flex-shrink-0"></i>
+            <span>MAT 216 – Probability &amp; Statistics I</span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Interdisciplinary Electives -->
+      <div id="req-areastudies" class="hidden mt-4">
+        <div class="space-y-3">
+          <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
+            <h3 class="font-semibold text-gray-800 mb-2">Group 1 – Computing &amp; Advanced Methods (examples)</h3>
+            <ul class="list-disc list-inside text-sm text-gray-700 space-y-1">
+              <li>CPS 261 – Algorithms</li>
+              <li>CPS 360 – Introduction to Machine Learning</li>
+              <li>CPS 363 – Introduction to Bioinformatics</li>
+              <li>CPS 367 – Artificial Intelligence</li>
+              <li>CPS 372 – Information Theory</li>
+              <li>MAT 316 – Probability &amp; Statistics II</li>
+              <li>MAT 323 – Stochastic Processes</li>
+              <li>MAT 374 – Introduction to Statistical Learning</li>
+              <li>MAT 416 – Design &amp; Analysis of Experiments</li>
+            </ul>
+          </div>
+
+          <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
+            <h3 class="font-semibold text-gray-800 mb-2">Group 2 – Society, Ethics &amp; Context (examples)</h3>
+            <ul class="list-disc list-inside text-sm text-gray-700 space-y-1">
+              <li>ECO 171 – Inequality, Power, and Justice</li>
+              <li>RST 270 – Why Religion Matters Today</li>
+              <li>RST 373 – Artificial Intelligence &amp; You</li>
+              <li>PHI 223 – Biomedical Ethics</li>
+              <li>PHI 372 – Digital Knowledge</li>
+              <li>STS 311 – History of Medicine</li>
+              <li>SOC 210 – Class, Status and Power</li>
+              <li>SOC 360 – Race and Ethnic Relations</li>
+            </ul>
+          </div>
+
+          <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
+            <h3 class="font-semibold text-gray-800 mb-2">Sample Domain Electives (by approval)</h3>
+            <ul class="list-disc list-inside text-sm text-gray-700 space-y-1">
+              <li>BIO 362 – Data Science in Ecology and the Environment</li>
+              <li>BOS 335 – Business and the Natural Environment</li>
+              <li>Other approved courses connecting data with health, policy, environment, or society</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Reasoning & Ethics -->
+      <div id="req-research" class="hidden mt-4">
+        <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
+          <p class="text-sm text-gray-700 mb-2">Required reasoning &amp; ethics course:</p>
+          <ul class="list-disc list-inside text-sm text-gray-700 space-y-1">
+            <li>PHI 130 – Good Reasons (critical thinking, arguments, and evaluating evidence).</li>
+          </ul>
+          <p class="text-xs text-gray-500 mt-2">
+            Many students also pursue research projects, internships, or independent study that apply data science in real-world settings; talk with your adviser about options.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Card 3 - FAQ Section (Right Section) -->
+    <section class="bg-white p-6 rounded-xl shadow-sm flex flex-col" id="card-faq">
+      <h2 class="text-xl font-bold text-primary mb-2 flex items-center">
+        <i data-feather="help-circle" class="mr-2"></i> Frequently Asked Questions
+      </h2>
+      <p class="text-sm text-gray-500 mb-4">Click a question to see the answer.</p>
+
+      <div class="space-y-3">
+        <!-- FAQ Item 1 -->
+        <div class="faq-item border border-gray-200 rounded-lg overflow-hidden">
+          <button
+            class="faq-question w-full px-4 py-3 text-left flex justify-between items-center hover:bg-gray-50 transition"
+            data-target="#faq-answer-1"
+          >
+            <span class="font-medium text-gray-800">What does the Data Science major emphasize?</span>
+            <i data-feather="chevron-down" class="faq-icon text-gray-400 transition-transform"></i>
+          </button>
+          <div
+            id="faq-answer-1"
+            class="faq-answer hidden px-4 py-3 bg-gray-50 text-sm text-gray-700 border-t border-gray-200"
+          >
+            <p>
+              The major builds a strong foundation in statistics, computational thinking, and machine learning while connecting data work to ethics, society, and real-world decision-making. You learn both how to build models and how to interpret their impact on people and institutions.
+            </p>
+          </div>
+        </div>
+
+        <!-- FAQ Item 2 -->
+        <div class="faq-item border border-gray-200 rounded-lg overflow-hidden">
+          <button
+            class="faq-question w-full px-4 py-3 text-left flex justify-between items-center hover:bg-gray-50 transition"
+            data-target="#faq-answer-2"
+          >
+            <span class="font-medium text-gray-800">Do I need prior programming experience?</span>
+            <i data-feather="chevron-down" class="faq-icon text-gray-400 transition-transform"></i>
+          </button>
+          <div
+            id="faq-answer-2"
+            class="faq-answer hidden px-4 py-3 bg-gray-50 text-sm text-gray-700 border-t border-gray-200"
+          >
+            <p>
+              No specific background is assumed. Most students start with CPS 111 (Computer Science I) and MAT 175 (Introduction to Data Science) in their first or second year, where they learn programming, data manipulation, and computational problem-solving from the ground up.
+            </p>
+          </div>
+        </div>
+
+        <!-- FAQ Item 3 -->
+        <div class="faq-item border border-gray-200 rounded-lg overflow-hidden">
+          <button
+            class="faq-question w-full px-4 py-3 text-left flex justify-between items-center hover:bg-gray-50 transition"
+            data-target="#faq-answer-3"
+          >
+            <span class="font-medium text-gray-800">How math-heavy is the major?</span>
+            <i data-feather="chevron-down" class="faq-icon text-gray-400 transition-transform"></i>
+          </button>
+          <div
+            id="faq-answer-3"
+            class="faq-answer hidden px-4 py-3 bg-gray-50 text-sm text-gray-700 border-t border-gray-200"
+          >
+            <p>
+              Data Science is quantitatively demanding: you take a full calculus sequence (I–III), linear algebra and differential equations, probability and statistics, and courses in data science and statistical modeling. In return, you get serious skills for graduate study or data-driven roles in many industries.
+            </p>
+          </div>
+        </div>
+
+        <!-- FAQ Item 4 -->
+        <div class="faq-item border border-gray-200 rounded-lg overflow-hidden">
+          <button
+            class="faq-question w-full px-4 py-3 text-left flex justify-between items-center hover:bg-gray-50 transition"
+            data-target="#faq-answer-4"
+          >
+            <span class="font-medium text-gray-800">Can I combine Data Science with other majors or minors?</span>
+            <i data-feather="chevron-down" class="faq-icon text-gray-400 transition-transform"></i>
+          </button>
+          <div
+            id="faq-answer-4"
+            class="faq-answer hidden px-4 py-3 bg-gray-50 text-sm text-gray-700 border-t border-gray-200"
+          >
+            <p>
+              There is a separate joint-major option in Data Science, but it cannot be combined in a joint major with Computer Science because of overlapping requirements. You can, however, pair the Data Science major with other fields (for example, Biology, Government, Economics, Public Health, or Sociology); work with advisers to build a combination that fits your goals.
+            </p>
+          </div>
+        </div>
+
+        <!-- FAQ Item 5 -->
+        <div class="faq-item border border-gray-200 rounded-lg overflow-hidden">
+          <button
+            class="faq-question w-full px-4 py-3 text-left flex justify-between items-center hover:bg-gray-50 transition"
+            data-target="#faq-answer-5"
+          >
+            <span class="font-medium text-gray-800">What can I do after majoring in Data Science?</span>
+            <i data-feather="chevron-down" class="faq-icon text-gray-400 transition-transform"></i>
+          </button>
+          <div
+            id="faq-answer-5"
+            class="faq-answer hidden px-4 py-3 bg-gray-50 text-sm text-gray-700 border-t border-gray-200"
+          >
+            <p>
+              Graduates are positioned for roles in analytics, technology, finance, health, policy, and research, as well as for quantitatively focused graduate programs. The mix of technical tools and critical thinking is designed to travel well across sectors.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    // Convert each button to a disclosure toggle for its target content
+    document.querySelectorAll('.toggle-btn').forEach(btn => {
+      const targetSel = btn.getAttribute('data-target');
+      const target = document.querySelector(targetSel);
+      if (!target) return;
+      btn.setAttribute('aria-expanded', 'false');
+      btn.addEventListener('click', () => {
+        const isHidden = target.classList.contains('hidden');
+        const container = btn.closest('section');
+        const sectionId = container.id;
+        
+        // For the required classes section, allow multiple sections to be open at once
+        // and never hide the course count boxes
+        if (sectionId === 'card-required') {
+          // Only toggle the current target, don't hide other req- sections
+          // Never touch the glance-counts div - it should always remain visible
+          target.classList.toggle('hidden');
+          btn.setAttribute('aria-expanded', String(!isHidden));
+        } else {
+          // For other sections, hide siblings as before
+          container.querySelectorAll('[id^="ovr-"], [id^="glance-"], [id^="req-"]').forEach(el => {
+            // Exclude the course count boxes and the current target
+            if (el !== target && el.id !== 'glance-counts') {
+              el.classList.add('hidden');
+            }
+          });
+          // Toggle selected
+          target.classList.toggle('hidden');
+          btn.setAttribute('aria-expanded', String(!isHidden));
+        }
+      });
+    });
+    
+    // Ensure the course count boxes are always visible (extra protection)
+    const glanceCounts = document.getElementById('glance-counts');
+    if (glanceCounts) {
+      glanceCounts.classList.remove('hidden');
+      // Prevent it from being hidden by any means
+      const observer = new MutationObserver(() => {
+        if (glanceCounts.classList.contains('hidden')) {
+          glanceCounts.classList.remove('hidden');
+        }
+      });
+      observer.observe(glanceCounts, { attributes: true, attributeFilter: ['class'] });
+    }
+
+    // FAQ expand/collapse functionality
+    document.querySelectorAll('.faq-question').forEach(btn => {
+      const targetSel = btn.getAttribute('data-target');
+      const target = document.querySelector(targetSel);
+      const icon = btn.querySelector('.faq-icon');
+      if (!target) return;
+      
+      btn.addEventListener('click', () => {
+        const isHidden = target.classList.contains('hidden');
+        
+        // Close all other FAQ items in the same section
+        const container = btn.closest('section');
+        container.querySelectorAll('.faq-answer').forEach(answer => {
+          if (answer !== target) {
+            answer.classList.add('hidden');
+            const otherBtn = container.querySelector(`[data-target="#${answer.id}"]`);
+            if (otherBtn) {
+              const otherIcon = otherBtn.querySelector('.faq-icon');
+              if (otherIcon) otherIcon.style.transform = 'rotate(0deg)';
+            }
+          }
+        });
+        
+        // Toggle current FAQ item
+        target.classList.toggle('hidden');
+        
+        // Rotate icon
+        if (icon) {
+          if (isHidden) {
+            icon.style.transform = 'rotate(180deg)';
+          } else {
+            icon.style.transform = 'rotate(0deg)';
+          }
+        }
+      });
+    });
+
+    function speakOnClick(sectionId, extra="") {
+
+      var text = document.getElementById(sectionId).innerHTML
+      var full_text = extra + text 
+
+      console.log('Collected text:', full_text);
+
+      fetch("http://127.0.0.1:5001/speakOnClick", {
+          method: "POST",
+          headers: {"Content-Type": "application/json"},
+          body: JSON.stringify({ 'text': full_text })
+      })
+      .then(r => r.text())
+      .then(console.log)
+      .catch(console.error)
+    }
+
+    function speakWithMisty() {
+        var text = document.getElementById("Neurocontent").innerHTML
+        var text2 = document.getElementById("directive").innerHTML
+
+        full_text = text + " " + text2
+        console.log(full_text)
+        fetch("http://127.0.0.1:5001/speak", {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify({ 'text': full_text })
+        })
+        .then(r => r.text())
+        .then(console.log)
+        .catch(console.error)
+    }
+
+    speakWithMisty()
+
+    // Icons
+    feather.replace();
+  </script>
+</body>
+</html>

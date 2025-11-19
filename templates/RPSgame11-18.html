@@ -273,7 +273,7 @@ async function showCpuAnimation(finalMove) {
   const cycle = ['✊', '✋', '✌️', '✋', '✊', '✌️'];
   for (let i = 0; i < cycle.length; i++) {
     cpuEmoji.textContent = cycle[i];
-    await sleep(120);
+    await sleep(500);
   }
 
   // Show the final emoji choice
@@ -287,7 +287,7 @@ async function showCpuAnimation(finalMove) {
     directSpeak("Scissors");
 
   // Wait a bit before hiding animation
-  await sleep(1500);
+  await sleep(2500);
   cpuAnim.classList.add('hidden');
 }
 

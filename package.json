@@ -1,0 +1,25 @@
+{
+  "name": "dancing-queen-robot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HRI-Prospective-Student-Project/Dancing-Queen-Robot.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/HRI-Prospective-Student-Project/Dancing-Queen-Robot/issues"
+  },
+  "homepage": "https://github.com/HRI-Prospective-Student-Project/Dancing-Queen-Robot#readme",
+  "dependencies": {
+    "feather-icons": "^4.29.2",
+    "tailwindcss": "^4.1.17"
+  }
+}

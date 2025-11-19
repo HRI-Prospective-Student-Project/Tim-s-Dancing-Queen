@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CS Pathways · F&M</title>
+  <style>
+    /* --- Reset & Base --- */
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: sans-serif; }
+    body { min-height: 100vh; background: linear-gradient(135deg, #e0e7ff, #e0f7fa, #d1fae5); color: #1e293b; display: flex; justify-content: center; align-items: center; padding: 1rem; }
+    a { text-decoration: none; color: inherit; }
+
+    /* --- Blobs --- */
+    .blob { position: absolute; border-radius: 50%; filter: blur(40px); opacity: 0.35; animation: float 16s ease-in-out infinite; }
+    .blob.delay { animation-delay: -8s; }
+    @keyframes float {
+      0%, 100% { transform: translateY(0) translateX(0) scale(1); }
+      50% { transform: translateY(-24px) translateX(16px) scale(1.05); }
+    }
+
+    /* --- Card Container --- */
+    .card-shell { position: relative; z-index: 1; width: 100%; max-width: 960px; background: rgba(255,255,255,0.7); border-radius: 2rem; border: 1px solid rgba(255,255,255,0.6); backdrop-filter: blur(12px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); padding: 2rem; }
+
+    /* --- Header --- */
+    header { text-align: center; margin-bottom: 1.5rem; }
+    header h1 { font-size: 2rem; font-weight: 800; }
+    /* header h1 span { background: linear-gradient(90deg, #4f46e5, #14b8a6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; } */
+    header p { color: #475569; margin-top: 0.5rem; font-size: 0.9rem; }
+
+    /* --- Grid --- */
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1rem; }
+    .choice { position: relative; background: rgba(255,255,255,0.8); border: 1px solid #e2e8f0; border-radius: 1rem; padding: 1.5rem; box-shadow: 0 4px 8px rgba(0,0,0,0.05); transition: transform 0.3s, box-shadow 0.3s; }
+    .choice:hover { transform: translateY(-3px); box-shadow: 0 8px 16px rgba(0,0,0,0.1); }
+    .choice .icon { font-size: 2rem; display: block; margin-bottom: 0.5rem; }
+    .choice h3 { font-size: 1.2rem; font-weight: 600; margin-bottom: 0.25rem; }
+    .choice p { font-size: 0.85rem; color: #475569; margin-bottom: 0.5rem; }
+    .choice span { font-size: 0.85rem; font-weight: 500; color: #4f46e5; display: inline-flex; align-items: center; gap: 0.25rem; }
+
+    /* --- Floating CTA --- */
+    .cta { position: fixed; bottom: 5rem; left: 50%; transform: translateX(-50%); width: 3rem; height: 3rem; background: #4f46e5; color: white; border-radius: 0.5rem; display: flex; justify-content: center; align-items: center; box-shadow: 0 5px 15px rgba(0,0,0,0.2); transition: transform 0.3s; }
+    .cta:hover { transform: translateX(-50%) translateY(-3px); }
+
+    /* --- Decorative squares --- */
+    .blob-square { position: absolute; border-radius: 1rem; opacity: 0.7; }
+
+  </style>
+</head>
+<body>
+
+  <!-- Decorative blobs -->
+  <div class="blob" style="top:-80px; left:-60px; width:288px; height:288px; background:#c7d2fe;"></div>
+  <div class="blob delay" style="bottom:-96px; right:-40px; width:320px; height:320px; background:#5eead4;"></div>
+
+  <main class="card-shell">
+    <!-- Header -->
+    <header>
+      <h1>Learn More about <span>F&amp;M</span></h1>
+      <p>Pick a pathway to explore programs, courses, and opportunities.</p>
+    </header>
+
+    <!-- Choices Grid -->
+    <section>
+      <div class="grid">
+        <!-- Choice A -->
+        <a href="/cs" class="choice">
+          <div class="icon">💻</div>
+          <h3>Computer Science</h3>
+          <p>Curriculum, tracks, and research in CS.</p>
+          <span>Explore →</span>
+        </a>
+
+        <!-- Choice B -->
+        <a href="/neuro" class="choice">
+          <div class="icon">🧠</div>
+          <h3>Neuroscience</h3>
+          <p>Brain & behavior, labs, and faculty.</p>
+          <span>Discover →</span>
+        </a>
+
+        <!-- Choice C -->
+        <a href="/RockPaperScissors" class="choice">
+          <div class="icon">✂️</div>
+          <h3>Rock Paper Scissors</h3>
+          <p>Play a game with us!</p>
+          <span>Start Game →</span>
+        </a>
+
+        <!-- Choice D -->
+        <a href="/datascience" class="choice">
+          <div class="icon">📊</div>
+          <h3>Data Science</h3>
+          <p>Statistics, machine learning, and data analysis</p>
+          <span>Discover →</span>
+        </a>
+
+        <!-- Choice E -->
+        <a href="/cognitivescience" class="choice">
+          <div class="icon">🧠</div>
+          <h3>Cognitive Science</h3>
+          <p>Mind, cognition, and artificial intelligence</p>
+          <span>Explore →</span>
+        </a>
+
+        <!-- Choice F -->
+        <a href="#more" class="choice">
+          <div class="icon">ℹ️</div>
+          <h3>Additional Information</h3>
+          <p>Admissions, campus life, and FAQs.</p>
+          <span>Learn more →</span>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <!-- Floating CTA -->
+  <a href="/exit" class="cta">→</a>
+
+</body>
+</html>

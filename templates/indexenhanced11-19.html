@@ -4,8 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>CS Pathways · F&M</title>
-  <script src='/scripts/tailwindcdn.js'></script>
-  <script src='/scripts/feather.min.js'></script>
+  <script src="../scripts/tailwind.min.js"></script>
+  <script src="../scripts/feather.js"></script>
+  <link rel="stylesheet" href="{{ url_for('static', filename='tailwind.css') }}">
   <style>
     /* Optional: subtle animated background blobs */
     .blob {
@@ -45,7 +46,7 @@
 
       <!-- Choices Grid -->
       <section class="px-4 sm:px-8 pb-8">
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-6">
+        <div class="grid grid-cols-3 gap-4 sm:gap-5">
           <!-- Choice A -->
           <a href="/cs" class="group relative overflow-hidden rounded-2xl border border-slate-200 bg-white/80 p-6 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500">
             <div class="absolute -right-6 -top-6 h-24 w-24 rotate-12 rounded-xl bg-indigo-100/80"></div>
@@ -84,8 +85,33 @@
               </span>
             </div>
           </a>
-
           <!-- Choice D (info) -->
+          <a href="/datascience" class="group relative overflow-hidden rounded-2xl border border-slate-200 bg-white/80 p-6 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500">
+            <div class="absolute -right-6 -top-6 h-24 w-24 rotate-12 rounded-xl bg-emerald-100/70"></div>
+            <div class="relative">
+              <i data-feather="database" class="w-12 h-12 text-emerald-600"></i>
+              <h3 class="mt-4 text-xl font-semibold">Data Science</h3>
+              <p class="mt-1 text-sm text-slate-600">Statistics, machine learning, and data analysis</p>
+              <span class="mt-4 inline-flex items-center gap-1 text-sm font-medium text-emerald-600">
+                Discover <i data-feather="arrow-right" class="w-4 h-4 transition-transform group-hover:translate-x-0.5"></i>
+              </span>
+            </div>
+          </a>
+          
+          <!-- Choice E (Cognitive Science) -->
+          <a href="/cognitivescience" class="group relative overflow-hidden rounded-2xl border border-slate-200 bg-white/80 p-6 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-purple-500">
+            <div class="absolute -right-6 -top-6 h-24 w-24 -rotate-6 rounded-xl bg-purple-100/70"></div>
+            <div class="relative">
+              <i data-feather="brain" class="w-12 h-12 text-purple-600"></i>
+              <h3 class="mt-4 text-xl font-semibold">Cognitive Science</h3>
+              <p class="mt-1 text-sm text-slate-600">Mind, cognition, and artificial intelligence</p>
+              <span class="mt-4 inline-flex items-center gap-1 text-sm font-medium text-purple-600">
+                Explore <i data-feather="arrow-right" class="w-4 h-4 transition-transform group-hover:translate-x-0.5"></i>
+              </span>
+            </div>
+          </a>
+          
+          <!-- Choice F (info) -->
           <a href="#more" class="group relative overflow-hidden rounded-2xl border border-slate-200 bg-white/80 p-6 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-500">
             <div class="absolute -right-6 -top-6 h-24 w-24 -rotate-12 rounded-xl bg-sky-100/70"></div>
             <div class="relative">
@@ -103,17 +129,6 @@
       </section>
     </div>
   </main>
-
-  <!-- Floating Survey Button -->
-<a 
-  href="https://tacit-pleat-94841258.figma.site/"
-  target="_blank"
-  class="fixed bottom-6 right-6 w-20 h-20 rounded-full bg-pink-600 text-white shadow-lg flex items-center justify-center transition-transform hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-pink-500"
-  aria-label="Open Survey"
->
-  <i data-feather="clipboard" class="w-8 h-8"></i>
-</a>
-
 
   <!-- Floating square CTA (adjust size with w-12 h-12; move with bottom-*) -->
   <a href="/exit" class="fixed left-1/2 -translate-x-1/2 bottom-20 w-12 h-12 rounded-lg bg-indigo-600 text-white shadow-lg flex items-center justify-center transition-transform hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-indigo-500" aria-label="Get Started">

@@ -4,13 +4,12 @@ Flask Application for F&M Computer Science Major Page
 
 from flask import Flask, render_template, request, jsonify
 from mistyPy.Robot import Robot
-from DancingQueen import idle
 import requests
 import time
 import os
 
 app = Flask(__name__)
-MISTY_IP = "192.168.1.7"
+MISTY_IP = "192.168.1.3"
 
 misty = Robot(MISTY_IP)
 
@@ -21,26 +20,38 @@ misty.set_default_volume(10)
 def index():
     """Home page - renders the index template"""
     misty.stop_speaking()
-    return render_template('indexenhanced.html')
+    return render_template('index11-192.html')
 
 @app.route('/cs')
 def cs_page():
     """Computer Science major page"""
-    return render_template('CS_enhanced.html')
+    return render_template('CS2page11-18.html')
 
 @app.route('/neuro')
 def neuro_page():
     """Neuroscience major page"""
-    return render_template('neuro_simplified.html')
+    return render_template('neuropage11-18.html')
+
+@app.route('/datascience')
+def data_page():
+    """Neuroscience major page"""
+    return render_template('dataSci.html')
+
+@app.route('/cognitivescience')
+def cog_page():
+    """Neuroscience major page"""
+    return  render_template('cogSci.html')
 
 @app.route('/RockPaperScissors')
 def academics_page():
     """Academics page"""
-    return render_template('RPSgame.html')
+
+    return render_template('RPSgame11-18.html')
 
 @app.route('/additionalinfo')
 def additionalinfo_page():
     """Additional info page"""
+    
     return render_template('additional_info.html')
 
 @app.route('/speak', methods = ["GET", "POST"])
@@ -101,9 +112,9 @@ def misty_direct():
 def misty_goodbye():
 
     misty.speak("Goodbye")
-    idle()
+    #idle()
 
-    return render_template('indexenhanced.html')
+    return render_template('indexe11-192.html')
 
 @app.errorhandler(404)
 def not_found(error):
