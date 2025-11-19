@@ -4,6 +4,7 @@ Flask Application for F&M Computer Science Major Page
 
 from flask import Flask, render_template, request, jsonify
 from mistyPy.Robot import Robot
+from DancingQueen import dance
 import requests
 import time
 import os
@@ -48,7 +49,7 @@ def academics_page():
 
     return render_template('RPSgame11-18.html')
 
-@app.route('/additionalinfo')
+@app.route('/more')
 def additionalinfo_page():
     """Additional info page"""
     
@@ -105,6 +106,9 @@ def misty_direct():
     print("Speaking:", text)
 
     misty.speak(text)
+
+    if ("lose" in text or "Computer" in text):
+        dance()
 
     return jsonify({"message": "text"})
 

@@ -8,7 +8,6 @@ MISTY_IP = "192.168.1.3"
 
 misty = Robot(MISTY_IP)
 
-print("connected")
 
 # misty.change_led(0, 255, 0)
 # misty.move_head(0, 0, 0)
@@ -283,6 +282,7 @@ def idle():
     # misty.speak("Pick something from the dashboard")
 
 def idle_behavior():
+    print("connected")
     start_touch_sensing()
     idle()
 
