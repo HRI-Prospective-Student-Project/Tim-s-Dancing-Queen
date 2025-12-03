@@ -83,20 +83,21 @@ def misty_speakOnClick():
 @app.route('/mistyStart', methods = ["POST"])
 def misty_start():
     misty.move_arm("right", 0)
+    time.sleep(.2)
+    misty.move_arm("right", 90)
     misty.speak("Rock")
     time.sleep(.2)
-    misty.move_arm("right", 30)
+    misty.move_arm("left", 0)
+    time.sleep(.2)
+    misty.move_arm("left", 90)
     misty.speak("Paper")
     time.sleep(.2)
-    misty.move_arm("right", 0)
+    misty.move_arms(0)
+    time.sleep(.2)
+    misty.move_arms(90)
     misty.speak("Scissor")
     time.sleep(.2)
-    misty.move_arm("right", 30)
-    time.sleep(.2)
     misty.speak("Shoot")
-    misty.move_arm("right", 0)
-    time.sleep(.2)
-    misty.move_arm('right', 90)
     
     return jsonify({"message": "Misty is starting"})
 
@@ -108,6 +109,8 @@ def misty_direct():
     misty.speak(text)
 
     if ("lose" in text or "Computer" in text):
+        dance()
+        dance()
         dance()
 
     return jsonify({"message": "text"})
