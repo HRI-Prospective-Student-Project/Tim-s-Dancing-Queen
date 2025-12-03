@@ -112,6 +112,9 @@ def misty_direct():
         dance()
         dance()
         dance()
+    elif("kidding" in text ):
+        misty.speak("Hahahaha")
+        misty.display_image["e_Surprise.jpg"]
 
     return jsonify({"message": "text"})
 
