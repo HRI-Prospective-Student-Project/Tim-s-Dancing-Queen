@@ -187,10 +187,26 @@ python DancingQueen.py
 ---
 
 ### Key Scripts & Purpose
-- `app.py`: Main Flask app that interacts with Misty via `mistyPy.Robot`. Provides routes used by the web dashboard and several JSON endpoints (`/speak`, `/mistyStart`, `/directSpeak`).
-- `DancingQueen.py`: A robot script that contains behavior for dancing, touch-based interactions, and event-driven behavior (pose estimation and object/person tracking).
-- `Examples/generate_robot.py`: Script that uses `mistyPy.GenerateRobot.RobotGenerator` to regenerate command wrappers for a robot at a given IP (used when customizing SDK wrappers for a specific robot).
-- `Examples/examples_first_skill.py`: Example robot behavior demonstrating speech and event subscription. In order to add new events, you also need to add it to Events.py under the mistyPy folder. add the name to the available_events list as a string and then create a variable that is equal to that name.
+- **`app.py`**  
+  Main Flask application that interacts with the Misty robot via `mistyPy.Robot`.  
+  Provides routes used by the web dashboard, including JSON endpoints such as:
+  - `/speak`
+  - `/mistyStart`
+  - `/directSpeak`
+
+- **`DancingQueen.py`**  
+  Primary robot behavior script.  
+  Implements dancing routines, touch-based interactions, and event-driven behavior such as pose estimation and object/person tracking.
+
+- **`Examples/generate_robot.py`**  
+  Utility script that uses `mistyPy.GenerateRobot.RobotGenerator` to regenerate command wrappers for a robot at a specified IP address.  
+  This is used when customizing or updating SDK wrappers to match a specific robot or firmware version.
+
+- **`Examples/example_first_skill.py`**  
+  Example robot behavior demonstrating basic speech and event subscription.  
+  To add new events:
+  - add the event name as a string to the `available_events` list in `mistyPy/Events.py`, and  
+  - create a variable corresponding to that event name.
 ---
 ### Configuring the Robot IP
 - Several files hardcode a robot IP (e.g., `192.168.1.9`, `192.168.1.4`, `192.168.1.1`). Update the `MISTY_IP` or `Robot(...)` lines to the actual IP of your Misty robot before running the scripts.
