@@ -3,22 +3,23 @@ Flask Application for F&M Computer Science Major Page
 """
 
 from flask import Flask, render_template, request, jsonify
-# from mistyPy.Robot import Robot
+from mistyPy.Robot import Robot
+import json
 import requests
 import os
 
 app = Flask(__name__)
-# MISTY_IP = "192.168.1.11"
+MISTY_IP = "192.168.1.3"
 
-# misty = Robot(MISTY_IP)
+misty = Robot(MISTY_IP)
 
 # to change the volume at which misty speaks
-# misty.set_default_volume(10) 
+misty.set_default_volume(20) 
 
 @app.route('/')
 def index():
     """Home page - renders the index template"""
-    # misty.stop_speaking()
+    misty.stop_speaking()
     return render_template('index11-192.html')
 
 @app.route('/cs')
@@ -53,37 +54,33 @@ def additionalinfo_page():
     
     return render_template('additional_info.html')
 
-@app.route('/speak', methods = ["GET", "POST"])
-def misty_speak():
-    # textObj = json.load(request.data)
-    # print(textObj["text"])
-    # misty.speak(textObj["text"])
+def extract_text():
+    if request.is_json:
+        return request.json.get('text', '')
+    return request.get_data(as_text=True)
 
-    text = request.json.get('text', '')
+
+@app.route('/speak', methods=['POST'])
+def misty_speak():
+    text = extract_text()
     print("Speaking:", text)
-    # Add your Misty call here
-    # misty.speak(text)
+    misty.speak(text)
     return jsonify({"message": f"Misty speaking: {text}"})
 
-@app.route('/speakOnClick', methods = ["GET", "POST"])
-def misty_speakOnClick():
-    # textObj = json.load(request.data)
-    # print(textObj["text"])
-    # misty.speak(textObj["text"])
 
-    text = request.json.get('text', '')
+@app.route('/speakOnClick', methods=['POST'])
+def misty_speakOnClick():
+    text = extract_text()
     print("Speaking:", text)
-    # Add your Misty call here
-    print(text)
-    # misty.speak(text)
+    misty.speak(text)
     return jsonify({"message": f"Misty speaking: {text}"})
 
 @app.route('/mistyStart', methods = ["POST"])
 def misty_start():
-    # misty.speak("Rock")
-    # misty.speak("Paper")
-    # misty.speak("Scissor")
-    # misty.speak("Shoot")
+    misty.speak("Rock")
+    misty.speak("Paper")
+    misty.speak("Scissor")
+    misty.speak("Shoot")
 
     return jsonify({"message": "Misty is starting"})
 
@@ -95,7 +92,7 @@ def misty_direct():
 @app.route('/exit')
 def misty_goodbye():
 
-    # misty.speak("Goodbye")
+    misty.speak("Goodbye")
 
     return render_template('index11-192.html')
 

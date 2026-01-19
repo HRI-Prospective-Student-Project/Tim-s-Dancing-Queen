@@ -1,8 +1,6 @@
 Flask==3.0.0
 Werkzeug==3.0.1
-
-python >= 3.8
-
 requests>=2.25.1
 websocket-client<=0.57.0
 yapf>=0.30.0
+#python >= 3.8
