@@ -4,7 +4,7 @@ import random
 import time
 import math
 
-misty = Robot("192.168.1.4")
+misty = Robot("192.168.1.3")
 misty.change_led(0, 255, 0)
 misty.move_head(0, 0, 0)
 

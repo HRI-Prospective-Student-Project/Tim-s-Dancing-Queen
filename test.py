@@ -7,6 +7,8 @@ from mistyPy.Robot import Robot
 import json
 import requests
 import os
+import re
+import html
 
 app = Flask(__name__)
 MISTY_IP = "192.168.1.3"
@@ -56,8 +58,17 @@ def additionalinfo_page():
 
 def extract_text():
     if request.is_json:
-        return request.json.get('text', '')
-    return request.get_data(as_text=True)
+        text = request.json.get('text', '')
+    else:
+        text = request.get_data(as_text=True)
+
+    # Decode HTML entities (&amp; → &)
+    text = html.unescape(text)
+
+    # Remove HTML tags
+    text = re.sub(r'<[^>]+>', '', text)
+
+    return text.strip()
 
 
 @app.route('/speak', methods=['POST'])
