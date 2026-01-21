@@ -11,17 +11,17 @@ import re
 import html
 
 app = Flask(__name__)
-MISTY_IP = "192.168.1.3"
+# MISTY_IP = "192.168.1.3"
 
-misty = Robot(MISTY_IP)
+# misty = Robot(MISTY_IP)
 
-# to change the volume at which misty speaks
-misty.set_default_volume(20) 
+# # to change the volume at which misty speaks
+# misty.set_default_volume(20) 
 
 @app.route('/')
 def index():
     """Home page - renders the index template"""
-    misty.stop_speaking()
+    #misty.stop_speaking()
     return render_template('index11-192.html')
 
 @app.route('/cs')
@@ -75,7 +75,7 @@ def extract_text():
 def misty_speak():
     text = extract_text()
     print("Speaking:", text)
-    misty.speak(text)
+    # misty.speak(text)
     return jsonify({"message": f"Misty speaking: {text}"})
 
 
@@ -83,15 +83,15 @@ def misty_speak():
 def misty_speakOnClick():
     text = extract_text()
     print("Speaking:", text)
-    misty.speak(text)
+    # misty.speak(text)
     return jsonify({"message": f"Misty speaking: {text}"})
 
 @app.route('/mistyStart', methods = ["POST"])
 def misty_start():
-    misty.speak("Rock")
-    misty.speak("Paper")
-    misty.speak("Scissor")
-    misty.speak("Shoot")
+    # misty.speak("Rock")
+    # misty.speak("Paper")
+    # misty.speak("Scissor")
+    # misty.speak("Shoot")
 
     return jsonify({"message": "Misty is starting"})
 
@@ -103,7 +103,7 @@ def misty_direct():
 @app.route('/exit')
 def misty_goodbye():
 
-    misty.speak("Goodbye")
+    # misty.speak("Goodbye")
 
     return render_template('index11-192.html')
 
