@@ -11,17 +11,16 @@ import re
 import html
 
 app = Flask(__name__)
-# MISTY_IP = "192.168.1.3"
 
-# misty = Robot(MISTY_IP)
+misty = Robot("192.168.1.3") #misty IP
 
-# # to change the volume at which misty speaks
+# to change the volume at which misty speaks
 # misty.set_default_volume(20) 
 
 @app.route('/')
 def index():
     """Home page - renders the index template"""
-    #misty.stop_speaking()
+    # misty.stop_speaking()
     return render_template('index11-192.html')
 
 @app.route('/cs')
@@ -55,6 +54,11 @@ def additionalinfo_page():
     """Additional info page"""
     
     return render_template('additional_info.html')
+
+@app.route("/gemini")
+def gemini():
+    """Gemini Chat Page"""
+    return render_template('gemini.html')
 
 def extract_text():
     if request.is_json:

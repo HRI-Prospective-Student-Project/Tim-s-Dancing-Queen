@@ -9,7 +9,7 @@ import time
 import os
 
 app = Flask(__name__)
-MISTY_IP = "192.168.1.9"
+MISTY_IP = "192.168.1.2"
 
 misty = Robot(MISTY_IP)
 
@@ -63,6 +63,11 @@ def additionalinfo_page():
     """Additional info page"""
     
     return render_template('additional_info.html')
+
+@app.route("/gemini")
+def Gemini():
+    """Gemini Chat Page"""
+    return render_template('gemini.html')
 
 @app.route('/speak', methods = ["GET", "POST"])
 def misty_speak():
