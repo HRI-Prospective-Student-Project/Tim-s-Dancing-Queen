@@ -97,18 +97,62 @@
     const messagesEl = document.getElementById("messages");
     const recordBtn = document.getElementById("recordBtn");
 
-    recordBtn.addEventListener("click", async () => {
-      messagesEl.innerHTML += '<div class="message user">Recording...</div>';
-      messagesEl.scrollTop = messagesEl.scrollHeight;
+    let mediaRecorder;
+    let audioChunks = [];
+    let stream;
 
-      // Here you would start recording audio and send it to your AI backend
-      // For now, we simulate a response
-      setTimeout(() => {
-        messagesEl.innerHTML += '<div class="message gemini">Gemini: Hello! I heard you.</div>';
+    // START talking (press)
+    async function startRecording() {
+      stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+
+      mediaRecorder = new MediaRecorder(stream);
+      audioChunks = [];
+
+      mediaRecorder.ondataavailable = e => audioChunks.push(e.data);
+      mediaRecorder.start();
+
+      messagesEl.innerHTML += `<div class="message user">🎤 Listening...</div>`;
+      messagesEl.scrollTop = messagesEl.scrollHeight;
+    }
+
+    // STOP talking (release)
+    async function stopRecording() {
+      if (!mediaRecorder) return;
+
+      mediaRecorder.stop();
+
+      mediaRecorder.onstop = async () => {
+        stream.getTracks().forEach(t => t.stop());
+
+        const audioBlob = new Blob(audioChunks, { type: "audio/wav" });
+        const formData = new FormData();
+        formData.append("audio", audioBlob);
+
+        messagesEl.innerHTML += `<div class="message user">🧠 Processing...</div>`;
+
+        const res = await fetch("/stt", {
+          method: "POST",
+          body: formData
+        });
+
+        const data = await res.json();
+        messagesEl.innerHTML += `<div class="message gemini">${data.text}</div>`;
         messagesEl.scrollTop = messagesEl.scrollHeight;
-      }, 1500);
+      };
+    }
+
+    // 🖱 Desktop
+    recordBtn.addEventListener("mousedown", startRecording);
+    recordBtn.addEventListener("mouseup", stopRecording);
+
+    // 📱 Mobile
+    recordBtn.addEventListener("touchstart", e => {
+      e.preventDefault();
+      startRecording();
     });
+    recordBtn.addEventListener("touchend", stopRecording);
   </script>
+
 
 </body>
 </html>

@@ -79,7 +79,7 @@ def extract_text():
 def misty_speak():
     text = extract_text()
     print("Speaking:", text)
-    # misty.speak(text)
+    misty.speak(text)
     return jsonify({"message": f"Misty speaking: {text}"})
 
 
@@ -87,15 +87,15 @@ def misty_speak():
 def misty_speakOnClick():
     text = extract_text()
     print("Speaking:", text)
-    # misty.speak(text)
+    misty.speak(text)
     return jsonify({"message": f"Misty speaking: {text}"})
 
 @app.route('/mistyStart', methods = ["POST"])
 def misty_start():
-    # misty.speak("Rock")
-    # misty.speak("Paper")
-    # misty.speak("Scissor")
-    # misty.speak("Shoot")
+    misty.speak("Rock")
+    misty.speak("Paper")
+    misty.speak("Scissor")
+    misty.speak("Shoot")
 
     return jsonify({"message": "Misty is starting"})
 
@@ -107,7 +107,7 @@ def misty_direct():
 @app.route('/exit')
 def misty_goodbye():
 
-    # misty.speak("Goodbye")
+    misty.speak("Goodbye")
 
     return render_template('index11-192.html')
 

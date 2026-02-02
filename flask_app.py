@@ -7,9 +7,12 @@ from mistyPy.Robot import Robot
 import requests
 import time
 import os
+import io
+import base64
+from STT_vosk import transcribe_wav_bytes
 
 app = Flask(__name__)
-MISTY_IP = "192.168.1.2"
+MISTY_IP = "192.168.1.3"
 
 misty = Robot(MISTY_IP)
 
@@ -145,6 +148,29 @@ def misty_direct():
     misty.display_image("e_DefaultContent.jpg")
 
     return jsonify({"message": "text"})
+
+@app.route("/stt", methods=["POST"])
+def stt():
+    """
+    Accepts audio as base64 from the frontend,
+    converts it to WAV bytes, and transcribes with Vosk.
+    """
+    # Expect JSON with a key "audio" containing base64 string
+    audio_base64 = request.json.get("audio")
+    if not audio_base64:
+        return jsonify({"error": "No audio provided"}), 400
+
+    # Decode base64 to bytes
+    audio_bytes = io.BytesIO(base64.b64decode(audio_base64))
+
+    # Pass bytes to your STT function
+    try:
+        text = transcribe_wav_bytes(audio_bytes)
+    except ValueError as e:
+        return jsonify({"error": str(e)}), 400
+
+    print("STT:", text)
+    return jsonify({"text": text})
 
 @app.route('/exit')
 def misty_goodbye():
