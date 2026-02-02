@@ -9,6 +9,7 @@ import time
 import os
 import io
 import base64
+from threading import Thread
 from STT_vosk import transcribe_wav_bytes
 
 app = Flask(__name__)
@@ -28,6 +29,11 @@ def dance():
     misty.move_head(0, -20, 0)
     time.sleep(.5)
     misty.display_image("e_Joy3.jpg")
+
+def speak_async(text):
+    """Stops any current speech and tells Misty to speak asynchronously."""
+    misty.stop_speaking()  # interrupt any ongoing speech
+    misty.speak(text)
 
 @app.route('/')
 def index():
@@ -72,29 +78,18 @@ def Gemini():
     """Gemini Chat Page"""
     return render_template('gemini.html')
 
-@app.route('/speak', methods = ["GET", "POST"])
+@app.route('/speak', methods=["POST"])
 def misty_speak():
-    # textObj = json.load(request.data)
-    # print(textObj["text"])
-    # misty.speak(textObj["text"])
-
     text = request.json.get('text', '')
-    print("Speaking:", text)
-    # Add your Misty call here
-    misty.speak(text)
+    print("Speaking (async):", text)
+    Thread(target=speak_async, args=(text,)).start()  # run in background
     return jsonify({"message": f"Misty speaking: {text}"})
 
-@app.route('/speakOnClick', methods = ["GET", "POST"])
+@app.route('/speakOnClick', methods=["POST"])
 def misty_speakOnClick():
-    # textObj = json.load(request.data)
-    # print(textObj["text"])
-    # misty.speak(textObj["text"])
-    # misty.stop_speaking()
     text = request.json.get('text', '')
-    print("Speaking:", text)
-    # Add your Misty call here
-    print(text)
-    misty.speak(text)
+    print("Speaking onClick (async):", text)
+    Thread(target=speak_async, args=(text,)).start()
     return jsonify({"message": f"Misty speaking: {text}"})
 
 @app.route('/mistyStart', methods = ["POST"])
@@ -123,53 +118,41 @@ def misty_start():
     
     return jsonify({"message": "Misty is starting"})
 
-@app.route('/directSpeak', methods = ["GET","POST"])
+@app.route('/directSpeak', methods=["POST"])
 def misty_direct():
     text = request.json.get('text', '')
-    print("Speaking:", text)
+    print("Direct Speak (async):", text)
+    Thread(target=speak_async, args=(text,)).start()
 
-    misty.speak(text)
+    # Optional reactions (dances, movements) can also be async
+    def reactions(txt):
+        if "lose" in txt:
+            dance()
+            time.sleep(0.5)
+            dance()
+            misty.move_arms(90)
+        elif "kidding" in txt:
+            misty.drive_time(0, 30, 14500)
+            misty.display_image("e_Joy.jpg")
+            misty.play_audio("s_Joy.wav")
+            misty.speak("HahahahahaHahahahahaHahahahaha"
+                        "HahahahahaHahahahahaHa hahahahaHahahahahahahahaha"
+                        " hahahahaHahahahahahahahaha")
+        misty.display_image("e_DefaultContent.jpg")
 
-    if ("lose" in text):
-        print("HERE lose")
-        dance()
-        time.sleep(.5)
-        dance()
-        misty.move_arms(90)
-    elif("kidding" in text ):
-        print("HERE KIDDING")
-        #time.sleep(10)
-        misty.drive_time(0, 30, 14500)
-        misty.display_image("e_Joy.jpg")
-        misty.play_audio("s_Joy.wav")
-        misty.speak("HahahahahaHahahahahaHahahahaha" \
-        "HahahahahaHahahahahaHa     hahahahaHahahahahahahahaha     hahahahaHahahahahahahahaha")
+    Thread(target=reactions, args=(text,)).start()
 
-    misty.display_image("e_DefaultContent.jpg")
-
-    return jsonify({"message": "text"})
+    return jsonify({"message": f"Direct speak triggered for text: {text}"})
 
 @app.route("/stt", methods=["POST"])
 def stt():
-    """
-    Accepts audio as base64 from the frontend,
-    converts it to WAV bytes, and transcribes with Vosk.
-    """
-    # Expect JSON with a key "audio" containing base64 string
-    audio_base64 = request.json.get("audio")
+    data = request.get_json()
+    audio_base64 = data.get("audio")
     if not audio_base64:
-        return jsonify({"error": "No audio provided"}), 400
+        return jsonify({"error": "No audio"}), 400
 
-    # Decode base64 to bytes
     audio_bytes = io.BytesIO(base64.b64decode(audio_base64))
-
-    # Pass bytes to your STT function
-    try:
-        text = transcribe_wav_bytes(audio_bytes)
-    except ValueError as e:
-        return jsonify({"error": str(e)}), 400
-
-    print("STT:", text)
+    text = transcribe_wav_bytes(audio_bytes)
     return jsonify({"text": text})
 
 @app.route('/exit')

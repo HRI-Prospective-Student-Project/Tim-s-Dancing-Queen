@@ -125,19 +125,32 @@
         stream.getTracks().forEach(t => t.stop());
 
         const audioBlob = new Blob(audioChunks, { type: "audio/wav" });
-        const formData = new FormData();
-        formData.append("audio", audioBlob);
+        const reader = new FileReader();
 
-        messagesEl.innerHTML += `<div class="message user">🧠 Processing...</div>`;
+        reader.onloadend = async () => {
+          const base64Audio = reader.result.split(',')[1];
 
-        const res = await fetch("/stt", {
-          method: "POST",
-          body: formData
-        });
+          messagesEl.innerHTML += `<div class="message user">🧠 Processing...</div>`;
 
-        const data = await res.json();
-        messagesEl.innerHTML += `<div class="message gemini">${data.text}</div>`;
-        messagesEl.scrollTop = messagesEl.scrollHeight;
+          const res = await fetch("/stt", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ audio: base64Audio })
+          });
+
+          const data = await res.json();
+          messagesEl.innerHTML += `<div class="message gemini">${data.text}</div>`;
+          messagesEl.scrollTop = messagesEl.scrollHeight;
+
+          // Misty speaks
+          await fetch("/speak", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ text: data.text })
+          });
+        };
+
+        reader.readAsDataURL(audioBlob);
       };
     }
 
@@ -152,6 +165,8 @@
     });
     recordBtn.addEventListener("touchend", stopRecording);
   </script>
+
+
 
 
 </body>
