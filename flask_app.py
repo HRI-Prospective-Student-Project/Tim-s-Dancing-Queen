@@ -10,7 +10,7 @@ import os
 import io
 import base64
 from threading import Thread
-from STT_vosk import transcribe_wav_bytes
+from STT_google import transcribe_wav_bytes
 
 app = Flask(__name__)
 MISTY_IP = "192.168.1.3"

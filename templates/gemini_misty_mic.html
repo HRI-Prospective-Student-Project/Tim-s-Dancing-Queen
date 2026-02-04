@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Gemini (Misty Mic)</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      background: linear-gradient(135deg, #ffecd2, #fcb69f); /* Different color so you know which version this is */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+    }
+
+    .chat-container {
+      width: 100%;
+      max-width: 600px;
+      background: rgba(255,255,255,0.95);
+      border-radius: 1.5rem;
+      padding: 1rem;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      display: flex;
+      flex-direction: column;
+      height: 80vh;
+    }
+
+    .messages {
+      flex: 1;
+      overflow-y: auto;
+      padding: 0.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .message {
+      padding: 0.5rem 0.75rem;
+      border-radius: 0.75rem;
+      max-width: 80%;
+      word-wrap: break-word;
+    }
+
+    .message.user {
+      align-self: flex-end;
+      background: #ea580c; /* Orange for Misty Mic */
+      color: white;
+      border-bottom-right-radius: 0;
+    }
+
+    .message.gemini {
+      align-self: flex-start;
+      background: #e2e8f0;
+      color: #1e293b;
+      border-bottom-left-radius: 0;
+    }
+
+    .controls {
+      display: flex;
+      justify-content: center;
+      margin-top: 0.5rem;
+    }
+
+    .record-btn {
+      background: #ea580c;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      font-size: 1.5rem;
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      transition: transform 0.2s;
+    }
+
+    .record-btn:hover { transform: scale(1.1); }
+    
+    .record-btn.recording {
+      background: #ef4444;
+      animation: pulse 1.5s infinite;
+    }
+
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7); }
+      70% { box-shadow: 0 0 0 10px rgba(239, 68, 68, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="chat-container">
+    <div class="messages" id="messages">
+      <div class="message gemini">I'm listening with my own ears now! Hold the button to speak.</div>
+    </div>
+
+    <div class="controls">
+      <button id="recordBtn" class="record-btn">🤖</button>
+    </div>
+  </div>
+
+  <script>
+    const messagesEl = document.getElementById("messages");
+    const recordBtn = document.getElementById("recordBtn");
+
+    function appendMessage(html, type) {
+      const div = document.createElement('div');
+      div.className = `message ${type}`;
+      div.innerHTML = html;
+      messagesEl.appendChild(div);
+      messagesEl.scrollTop = messagesEl.scrollHeight;
+      return div;
+    }
+
+    // START (Mouse Down)
+    async function startRecording() {
+      recordBtn.classList.add("recording");
+      
+      // Send signal to Python to start Misty's recorder
+      try {
+        await fetch("/misty/start_listening", { method: "POST" });
+        const statusMsg = appendMessage("👂 Misty is listening...", "user");
+        statusMsg.id = "temp-status";
+      } catch (e) {
+        console.error(e);
+        alert("Could not connect to Misty.");
+      }
+    }
+
+    // STOP (Mouse Up)
+    async function stopRecording() {
+      recordBtn.classList.remove("recording");
+      
+      const statusMsg = document.getElementById("temp-status");
+      // Update status so user knows why there is a delay
+      if (statusMsg) statusMsg.innerHTML = "📡 Downloading audio from robot...";
+
+      try {
+        // Send signal to stop, download, and transcribe
+        const res = await fetch("/misty/stop_and_process", { method: "POST" });
+        const data = await res.json();
+        
+        if (statusMsg) statusMsg.remove();
+
+        if (data.text) {
+          appendMessage(data.text, "user");
+        } else {
+          appendMessage("<i>(I heard silence or motor noise)</i>", "gemini");
+        }
+      } catch (e) {
+        console.error(e);
+        if (statusMsg) statusMsg.innerHTML = "Error retrieving audio.";
+      }
+    }
+
+    // Events
+    recordBtn.addEventListener("mousedown", startRecording);
+    recordBtn.addEventListener("mouseup", stopRecording);
+    recordBtn.addEventListener("mouseleave", stopRecording);
+    
+    // Mobile
+    recordBtn.addEventListener("touchstart", (e) => { e.preventDefault(); startRecording(); });
+    recordBtn.addEventListener("touchend", (e) => { e.preventDefault(); stopRecording(); });
+  </script>
+
+</body>
+</html>

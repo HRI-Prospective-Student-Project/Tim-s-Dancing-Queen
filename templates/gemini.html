@@ -40,18 +40,21 @@
       padding: 0.5rem 0.75rem;
       border-radius: 0.75rem;
       max-width: 80%;
+      word-wrap: break-word; /* Prevents long words from breaking layout */
     }
 
     .message.user {
       align-self: flex-end;
       background: #4f46e5;
       color: white;
+      border-bottom-right-radius: 0;
     }
 
     .message.gemini {
       align-self: flex-start;
       background: #e2e8f0;
       color: #1e293b;
+      border-bottom-left-radius: 0;
     }
 
     .controls {
@@ -73,11 +76,22 @@
       justify-content: center;
       align-items: center;
       box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-      transition: transform 0.2s;
+      transition: transform 0.2s, background 0.2s;
     }
 
     .record-btn:hover {
       transform: scale(1.1);
+    }
+
+    .record-btn.recording {
+      background: #ef4444; /* Red when recording */
+      animation: pulse 1.5s infinite;
+    }
+
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7); }
+      70% { box-shadow: 0 0 0 10px rgba(239, 68, 68, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
     }
   </style>
 </head>
@@ -85,7 +99,7 @@
 
   <div class="chat-container">
     <div class="messages" id="messages">
-      <!-- Chat messages appear here -->
+      <div class="message gemini">Hi! I'm Misty. Click the mic to talk to me.</div>
     </div>
 
     <div class="controls">
@@ -101,9 +115,24 @@
     let audioChunks = [];
     let stream;
 
+    // Helper to add messages to the chat safely
+    function appendMessage(html, type) {
+      const div = document.createElement('div');
+      div.className = `message ${type}`;
+      div.innerHTML = html;
+      messagesEl.appendChild(div);
+      messagesEl.scrollTop = messagesEl.scrollHeight;
+      return div; // Return the element so we can remove it later if needed
+    }
+
     // START talking (press)
     async function startRecording() {
-      stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      try {
+        stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      } catch (err) {
+        alert("Microphone access denied or not found.");
+        return;
+      }
 
       mediaRecorder = new MediaRecorder(stream);
       audioChunks = [];
@@ -111,18 +140,28 @@
       mediaRecorder.ondataavailable = e => audioChunks.push(e.data);
       mediaRecorder.start();
 
-      messagesEl.innerHTML += `<div class="message user">🎤 Listening...</div>`;
-      messagesEl.scrollTop = messagesEl.scrollHeight;
+      // Visual feedback
+      recordBtn.classList.add("recording");
+      
+      // Add a temporary status message
+      const statusMsg = appendMessage("🎤 Listening...", "user");
+      statusMsg.id = "temp-status"; // Tag it so we can find it
     }
 
     // STOP talking (release)
     async function stopRecording() {
-      if (!mediaRecorder) return;
+      if (!mediaRecorder || mediaRecorder.state === "inactive") return;
 
       mediaRecorder.stop();
+      recordBtn.classList.remove("recording");
 
       mediaRecorder.onstop = async () => {
+        // Stop the microphone stream
         stream.getTracks().forEach(t => t.stop());
+
+        // Update status
+        const statusMsg = document.getElementById("temp-status");
+        if (statusMsg) statusMsg.innerHTML = "🧠 Processing...";
 
         const audioBlob = new Blob(audioChunks, { type: "audio/wav" });
         const reader = new FileReader();
@@ -130,44 +169,58 @@
         reader.onloadend = async () => {
           const base64Audio = reader.result.split(',')[1];
 
-          messagesEl.innerHTML += `<div class="message user">🧠 Processing...</div>`;
+          try {
+            const res = await fetch("/stt", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ audio: base64Audio })
+            });
 
-          const res = await fetch("/stt", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ audio: base64Audio })
-          });
+            const data = await res.json();
+            
+            // Remove the temporary status message completely
+            if (statusMsg) statusMsg.remove();
 
-          const data = await res.json();
-          messagesEl.innerHTML += `<div class="message gemini">${data.text}</div>`;
-          messagesEl.scrollTop = messagesEl.scrollHeight;
+            if (data.text) {
+              // 1. Show User Transcript (Right Side)
+              appendMessage(data.text, "user");
 
-          // Misty speaks
-          await fetch("/speak", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ text: data.text })
-          });
+              // 2. Send to Misty to speak
+              await fetch("/speak", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ text: data.text })
+              });
+            } else {
+               appendMessage("<i>(I didn't catch that)</i>", "gemini");
+            }
+
+          } catch (error) {
+            console.error(error);
+            if (statusMsg) statusMsg.remove();
+            appendMessage("Error connecting to server.", "gemini");
+          }
         };
 
         reader.readAsDataURL(audioBlob);
       };
     }
 
-    // 🖱 Desktop
+    // 🖱 Desktop Events
     recordBtn.addEventListener("mousedown", startRecording);
     recordBtn.addEventListener("mouseup", stopRecording);
+    recordBtn.addEventListener("mouseleave", stopRecording); // Stop if mouse slides off button
 
-    // 📱 Mobile
+    // 📱 Mobile Events
     recordBtn.addEventListener("touchstart", e => {
-      e.preventDefault();
+      e.preventDefault(); // Prevents mouse emulation
       startRecording();
     });
-    recordBtn.addEventListener("touchend", stopRecording);
+    recordBtn.addEventListener("touchend", e => {
+      e.preventDefault();
+      stopRecording();
+    });
   </script>
-
-
-
 
 </body>
 </html>
