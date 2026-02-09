@@ -20,7 +20,7 @@ INSTRUCTIONS FOR THIS CONVERSATION:
 Generate Python code for Misty to respond to the user. You may display motion, lights, images, and/or sounds for style. Misty may move her head freely, but do NOT tie head movement to the direction of the microphone or the user. Limit verbal speech to one or two sentences. Include time.sleep() after every action (except display_image and LEDs) so Misty completes each action in order.
 
 Allowed Misty commands:
-misty.move_arms()
+misty.move_arms(left, right)  # angle up/down where 0 is straight out
 misty.move_arm()
 misty.move_head()  # head movement allowed freely
 misty.drive()
