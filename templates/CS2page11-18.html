@@ -1,180 +1,139 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>F&M Computer Science | Complete</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://unpkg.com/feather-icons"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            primary: '#002D72',
-            secondary: '#C8102E'
-          }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Computer Science | Franklin & Marshall</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/feather-icons"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#002F6C', // F&M Blue
+                        secondary: '#C8102E', // F&M Red
+                    }
+                }
+            }
         }
-      }
-    }
-  </script>
+    </script>
 </head>
-<body class="bg-gray-50 font-sans min-h-screen flex flex-col">
-  <header class="w-full bg-primary text-white p-4 flex justify-between items-center shadow-md">
-    <h1 class="text-xl md:text-2xl font-bold">Computer Science at F&M</h1>
-    <div class="flex items-center gap-4">
-      <button onclick="stopAndGoHome()" class="bg-secondary hover:bg-secondary/90 px-4 py-2 rounded-full text-xs md:text-sm font-medium transition-colors">← Back to Home</button>
-      <span class="bg-secondary/90 px-3 py-1 rounded-full text-xs md:text-sm font-medium">Admitted Students Day</span>
+<body class="bg-slate-50 text-slate-900 font-sans leading-relaxed">
+
+    <div class="fixed top-4 left-4 z-[60]">
+        <button onclick="speakText('Welcome to the Computer Science department! We are so excited to meet our future innovators today.')" 
+                class="bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2 rounded-full text-sm font-bold shadow-lg flex items-center gap-2 transition-transform active:scale-95">
+            <i data-feather="award" class="w-4 h-4"></i> Admitted Students Day
+        </button>
     </div>
-  </header>
 
-  <main class="flex-1 grid grid-cols-1 lg:grid-cols-3 gap-6 p-6 max-w-7xl mx-auto w-full">
-    
-    <section class="bg-white p-6 rounded-xl shadow-sm flex flex-col" id="card-overview">
-      <h2 class="text-xl font-bold text-primary mb-2 flex items-center"><i data-feather="info" class="mr-2"></i> What is Computer Science at F&M?</h2>
-       <p id="CScontent" class="mb-4 text-gray-700">
-                At F&M, computer science is one of the most versatile fields of study, connecting technology with real-world impact. 
-                The program emphasizes both the mathematical foundations of computer science and strong programming skills.
-        </p>
-
-      <div class="flex flex-wrap gap-3">
-        <button id="highlights" class="toggle-btn px-4 py-2 rounded-full border border-gray-200 hover:border-primary transition" data-target="#ovr-highlights" onclick="speakOnClick('ovr-highlights','Here are the ')">Program Highlights</button>
-        <button class="toggle-btn px-4 py-2 rounded-full border border-gray-200 hover:border-primary transition" data-target="#ovr-contact" onclick="speakOnClick('ovr-contact', 'The department contact info is ')">Department Contact</button>
-      </div>
-
-      <div id="ovr-highlights" class="hidden mt-4 space-y-2 text-gray-700">
-        <ul class="space-y-2 text-sm">
-          <li>• Strong foundations in theory and programming.</li>
-          <li>• Understand how computers process information.</li>
-          <li>• Explore AI and machine learning.</li>
-        </ul>
-      </div>
-
-      <div id="ovr-contact" class="hidden mt-4 text-gray-700 text-sm">
-        <p><span class="font-semibold">Head of Department:</span> Professor Novak</p>
-        <p><span class="font-semibold">Email:</span> novak@fandm.edu</p>
-      </div>
-    </section>
-
-    <section class="bg-white p-6 rounded-xl shadow-sm flex flex-col" id="card-required">
-      <h2 class="text-xl font-bold text-primary mb-2 flex items-center"><i data-feather="book" class="mr-2"></i> Required Classes</h2>
-      <div id="glance-counts" class="mb-4 grid grid-cols-3 gap-3">
-        <div class="bg-primary/10 p-3 rounded-lg text-center"><div class="text-3xl font-bold text-primary">11</div><div class="text-xs text-gray-600">Courses</div></div>
-        <div class="bg-secondary/10 p-3 rounded-lg text-center"><div class="text-3xl font-bold text-secondary">7</div><div class="text-xs text-gray-600">Core</div></div>
-        <div class="bg-primary/10 p-3 rounded-lg text-center"><div class="text-3xl font-bold text-primary">4</div><div class="text-xs text-gray-600">Electives</div></div>
-      </div>
-
-      <div class="flex flex-wrap gap-3">
-        <button class="toggle-btn px-4 py-2 rounded-full border border-gray-200 hover:border-primary transition" data-target="#req-core" onclick="speakOnClick('req-core', 'The core courses are ')">Core</button>
-        <button class="toggle-btn px-4 py-2 rounded-full border border-gray-200 hover:border-primary transition" data-target="#req-math" onclick="speakOnClick('req-math', 'The math requirements are ')">Math</button>
-      </div>
-
-      <div id="req-core" class="hidden mt-4 text-sm text-gray-700">CPS 111, 112, 222, 237, 242, 261, and 337.</div>
-      <div id="req-math" class="hidden mt-4 text-sm text-gray-700">Calculus 1, Calculus 2, and MAT 216 or 229.</div>
-    </section>
-
-    <section class="bg-white p-6 rounded-xl shadow-sm flex flex-col" id="card-faq">
-      <h2 class="text-xl font-bold text-primary mb-2 flex items-center"><i data-feather="help-circle" class="mr-2"></i> FAQ</h2>
-      <div class="space-y-3">
-        
-        <div class="faq-item border border-gray-200 rounded-lg overflow-hidden">
-          <button class="faq-question w-full px-4 py-3 text-left flex justify-between items-center hover:bg-gray-50 transition" data-target="#faq-answer-1" onclick="speakOnClick('faq-answer-1', 'The answer is ')">
-            <span class="font-medium text-gray-800 text-sm">What programming languages?</span>
-            <i data-feather="chevron-down" class="faq-icon text-gray-400 transition-transform"></i>
-          </button>
-          <div id="faq-answer-1" class="faq-answer hidden px-4 py-3 bg-gray-50 text-sm text-gray-700">
-            You'll primarily work with Python and Java, plus C++ in advanced courses.
-          </div>
+    <nav class="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-200">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-primary rounded-xl flex items-center justify-center shadow-lg">
+                    <i data-feather="cpu" class="text-white w-6 h-6"></i>
+                </div>
+                <span class="text-xl font-bold tracking-tight text-primary">Computer Science</span>
+            </div>
+            
+            <div class="flex items-center gap-4">
+                <a href="/" onclick="stopSpeech()" class="text-sm font-semibold text-slate-600 hover:text-primary transition-colors">Home</a>
+                <a href="/gemini_misty" onclick="stopSpeech()" class="bg-primary hover:bg-blue-900 text-white px-5 py-2.5 rounded-full text-sm font-bold transition-all shadow-md flex items-center gap-2">
+                    <i data-feather="sparkles" class="w-4 h-4 text-yellow-300"></i> Ask Gemini
+                </a>
+            </div>
         </div>
+    </nav>
 
-        <div class="faq-item border border-gray-200 rounded-lg overflow-hidden">
-          <button class="faq-question w-full px-4 py-3 text-left flex justify-between items-center hover:bg-gray-50 transition" data-target="#faq-answer-2" onclick="speakOnClick('faq-answer-2', '')">
-            <span class="font-medium text-gray-800 text-sm">Are there research opportunities?</span>
-            <i data-feather="chevron-down" class="faq-icon text-gray-400 transition-transform"></i>
-          </button>
-          <div id="faq-answer-2" class="faq-answer hidden px-4 py-3 bg-gray-50 text-sm text-gray-700">
-            Yes! F&M CS faculty actively involve undergraduates in research projects like machine learning and bioinformatics.
-          </div>
+    <main class="max-w-5xl mx-auto px-6 py-12">
+        <header class="mb-16 text-center md:text-left">
+            <h1 class="text-5xl md:text-6xl font-black text-slate-900 mb-6 tracking-tight">
+                Innovating the <span class="text-primary">Future.</span>
+            </h1>
+            <p class="text-xl text-slate-600 max-w-2xl leading-relaxed">
+                Explore the intersection of logic, technology, and creativity. F&M Computer Science prepares you to solve the world's most complex problems through code and computational thinking.
+            </p>
+        </header>
+
+        <div class="grid md:grid-cols-3 gap-8">
+            <div class="md:col-span-2 space-y-8">
+                <section class="bg-white rounded-3xl p-8 shadow-sm border border-slate-100 hover:shadow-md transition-shadow">
+                    <h2 class="text-2xl font-bold text-primary mb-4 flex items-center gap-2">
+                        <i data-feather="book-open" class="w-6 h-6"></i> The Curriculum
+                    </h2>
+                    <p class="text-slate-600 mb-6">
+                        Our program balances theoretical foundations with hands-on applications. From low-level systems to high-level artificial intelligence, you'll master the tools of the modern age.
+                    </p>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="p-4 bg-slate-50 rounded-2xl border border-slate-100">
+                            <span class="block font-bold text-primary text-lg">AI & Robotics</span>
+                            <span class="text-sm text-slate-500">Intelligent Systems</span>
+                        </div>
+                        <div class="p-4 bg-slate-50 rounded-2xl border border-slate-100">
+                            <span class="block font-bold text-primary text-lg">Cybersecurity</span>
+                            <span class="text-sm text-slate-500">Data Protection</span>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="bg-white rounded-3xl p-8 shadow-sm border border-slate-100">
+                    <h2 class="text-2xl font-bold text-primary mb-4 flex items-center gap-2">
+                        <i data-feather="terminal" class="w-6 h-6"></i> Research Opportunities
+                    </h2>
+                    <p class="text-slate-600">
+                        Students collaborate with faculty on cutting-edge research in distributed systems, human-computer interaction, and computational biology, often presenting at national conferences.
+                    </p>
+                </section>
+            </div>
+
+            <div class="space-y-6">
+                <div class="bg-primary text-white rounded-3xl p-8 shadow-xl">
+                    <h3 class="text-xl font-bold mb-4">Quick Stats</h3>
+                    <ul class="space-y-4">
+                        <li class="flex justify-between items-center border-b border-white/10 pb-2">
+                            <span class="text-blue-100">Class Size</span>
+                            <span class="font-bold">12-18</span>
+                        </li>
+                        <li class="flex justify-between items-center border-b border-white/10 pb-2">
+                            <span class="text-blue-100">Student Research</span>
+                            <span class="font-bold">65%</span>
+                        </li>
+                        <li class="flex justify-between items-center pb-2">
+                            <span class="text-blue-100">Grad Rate</span>
+                            <span class="font-bold">100%</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="bg-white rounded-3xl p-8 shadow-sm border border-slate-100">
+                    <h3 class="text-xl font-bold text-slate-900 mb-4">Misty's Note</h3>
+                    <p class="text-slate-600 text-sm italic mb-4">
+                        "I was programmed right here in the CS labs! Ask me anything about the coding languages we learn here."
+                    </p>
+                    <button onclick="speakText('Most students start with Python before moving into Java and C plus plus.')" 
+                            class="text-primary font-bold text-sm flex items-center gap-2 hover:underline">
+                        <i data-feather="play-circle" class="w-4 h-4"></i> Learn about languages
+                    </button>
+                </div>
+            </div>
         </div>
+    </main>
 
-        <div class="faq-item border border-gray-200 rounded-lg overflow-hidden">
-          <button class="faq-question w-full px-4 py-3 text-left flex justify-between items-center hover:bg-gray-50 transition" data-target="#faq-answer-3" onclick="speakOnClick('faq-answer-3', 'Graduates often work as ')">
-            <span class="font-medium text-gray-800 text-sm">What are the career paths?</span>
-            <i data-feather="chevron-down" class="faq-icon text-gray-400 transition-transform"></i>
-          </button>
-          <div id="faq-answer-3" class="faq-answer hidden px-4 py-3 bg-gray-50 text-sm text-gray-700">
-            Graduates work as software engineers, data scientists, and tech consultants at major firms.
-          </div>
-        </div>
+    <script>
+        feather.replace();
 
-        <div class="faq-item border border-gray-200 rounded-lg overflow-hidden">
-          <button class="faq-question w-full px-4 py-3 text-left flex justify-between items-center hover:bg-gray-50 transition" data-target="#faq-answer-4" onclick="speakOnClick('faq-answer-4', 'Absolutely, ')">
-            <span class="font-medium text-gray-800 text-sm">Can I double major?</span>
-            <i data-feather="chevron-down" class="faq-icon text-gray-400 transition-transform"></i>
-          </button>
-          <div id="faq-answer-4" class="faq-answer hidden px-4 py-3 bg-gray-50 text-sm text-gray-700">
-            Absolutely! CS pairs well with mathematics, physics, economics, and psychology.
-          </div>
-        </div>
+        function stopSpeech() {
+            fetch("/stop", { method: "POST" }).catch(e => console.log("Stop failed"));
+        }
 
-      </div>
-    </section>
-  </main>
-
-  <script>
-    // --- THE MAGIC FILTER ---
-    function cleanForMisty(text) {
-        // This replaces & with "and" so Misty says it correctly
-        return text.replace(/&/g, " and ");
-    }
-
-    function speakOnClick(sectionId, extra="") {
-      const el = document.getElementById(sectionId);
-      const rawText = el.textContent || el.innerText;
-      
-      // Filter the text before sending it
-      const filteredText = cleanForMisty(extra + rawText);
-
-      fetch("/speakOnClick", {
-          method: "POST",
-          headers: {"Content-Type": "application/json"},
-          body: JSON.stringify({ 'text': filteredText })
-      });
-    }
-
-    function speakWithMisty() {
-        const rawText = document.getElementById("CScontent").textContent;
-        const filteredText = cleanForMisty(rawText);
-        
-        fetch("/speak", {
-            method: "POST",
-            headers: {"Content-Type": "application/json"},
-            body: JSON.stringify({ 'text': filteredText })
-        });
-    }
-
-    function stopAndGoHome() {
-        fetch("/stop", { method: "POST" }).then(() => { window.location.href = "/"; });
-    }
-
-    // UI Logic
-    document.querySelectorAll('.toggle-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const target = document.querySelector(btn.getAttribute('data-target'));
-        target.classList.toggle('hidden');
-      });
-    });
-
-    document.querySelectorAll('.faq-question').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const target = document.querySelector(btn.getAttribute('data-target'));
-        const icon = btn.querySelector('.faq-icon');
-        target.classList.toggle('hidden');
-        if (icon) icon.style.transform = target.classList.contains('hidden') ? 'rotate(0deg)' : 'rotate(180deg)';
-      });
-    });
-
-    window.onload = () => { feather.replace(); speakWithMisty(); };
-  </script>
+        function speakText(text) {
+            fetch("/speak", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ text: text })
+            });
+        }
+    </script>
 </body>
 </html>

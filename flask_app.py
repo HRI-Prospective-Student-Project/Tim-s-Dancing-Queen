@@ -5,7 +5,7 @@ from threading import Thread
 from STT_google import transcribe_wav_bytes
 
 app = Flask(__name__)
-MISTY_IP = "192.168.1.3"
+MISTY_IP = "192.168.1.5"
 
 # Initialize Misty
 misty = Robot(MISTY_IP)
@@ -43,6 +43,11 @@ def neuro_page(): return render_template('neuropage11-18.html')
 @app.route('/datascience')
 def data_page(): return render_template('dataSci.html')
 
+@app.route('/RockPaperScissors')
+def rps_page():
+    """Serves the Rock Paper Scissors game."""
+    return render_template('RockPaperScissors.html')
+
 # --- SPEAKING ROUTES ---
 
 @app.route('/speak', methods=["POST"])
@@ -54,6 +59,22 @@ def handle_speak():
         Thread(target=speak_async, args=(text,)).start()
         return jsonify({"status": "success"})
     return jsonify({"status": "error"}), 400
+
+@app.route('/directSpeak', methods=["POST"])
+def direct_speak():
+    """Specific route used by the RPS game logic."""
+    data = request.json
+    text = data.get('text', '')
+    if text:
+        Thread(target=speak_async, args=(text,)).start()
+        return jsonify({"status": "success"})
+    return jsonify({"status": "error"}), 400
+
+@app.route('/mistyStart', methods=["POST"])
+def misty_start():
+    """Triggers Misty's reaction when a game round starts."""
+    # Add misty movement logic here if desired
+    return jsonify({"status": "success"})
 
 # --- GEMINI MISTY MIC LOGIC ---
 

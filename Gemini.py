@@ -8,7 +8,7 @@ from mistyPy.Robot import Robot
 from mistyPy.Events import Events
 from STT_Modified import record_and_transcribe
 
-client = genai.Client(api_key="AIzaSyA8nHFtOhb5BM_0P2s1EBlS3bGxcv-CKww")
+client = genai.Client(api_key="AIzaSyDN2vQTA9KUJwYG9wmT8qzg1YNXeMheehk")
 chat = client.chats.create(model="gemini-2.5-flash")
 
 # Updated system prompt: allow head movement but remove dependency on speaker direction
@@ -74,15 +74,17 @@ def strip_code(code):
         code = "\n".join(lines)
     return code.strip()
 
-misty = Robot('192.168.1.2')  # Misty robot IP
-exec(strip_code(response.text))
+# misty = Robot('192.168.1.2')  # Misty robot IP
+# exec(strip_code(response.text))
+print(strip_code(response.text))
 
 while True:
-    sentence = record_and_transcribe()
-    misty.transition_led(50, 50, 50)
+    # sentence = record_and_transcribe()
+    # misty.transition_led(50, 50, 50)
+    sentence = input("Ask gemini a quetion: ")
     response = chat.send_message(f'"{sentence}"')
     code = strip_code(response.text)
     print("Executing code:\n", code)
-    exec(code)
-    time.sleep(7)
-    misty.stop()
+    # exec(code)
+    # time.sleep(7)
+    # misty.stop()
