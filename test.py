@@ -9,50 +9,47 @@ import requests
 import os
 import re
 import html
+from threading import Thread
 
 app = Flask(__name__)
 
-misty = Robot("192.168.1.3") #misty IP
-
-# to change the volume at which misty speaks
+# misty = Robot("192.168.1.3") #misty IP
 # misty.set_default_volume(20) 
 
 @app.route('/')
 def index():
     """Home page - renders the index template"""
-    # misty.stop_speaking()
-    return render_template('index11-192.html')
+    return render_template('index_misty.html')
 
 @app.route('/cs')
 def cs_page():
     """Computer Science major page"""
     return render_template('CS2page11-18.html')
 
-@app.route('/neuro')
-def neuro_page():
-    """Neuroscience major page"""
-    return render_template('neuropage11-18.html')
-
+@app.route('/background')
+def dev_log_page():
+    """How the Robot was Coded - Replaced Neuroscience page"""
+    # This points to the new HTML file you created with the 6-picture tile
+    return render_template('background.html')
 
 @app.route('/datascience')
 def data_page():
-    """Neuroscience major page"""
+    """Data Science major page"""
     return render_template('dataSci.html')
 
 @app.route('/cognitivescience')
 def cog_page():
-    """Neuroscience major page"""
-    return  render_template('cogSci.html')
+    """Cognitive Science major page"""
+    return render_template('cogSci.html')
 
 @app.route('/RockPaperScissors')
 def academics_page():
-    """Academics page"""
+    """Rock Paper Scissors Game page"""
     return render_template('RPSgame11-18.html')
 
 @app.route('/more')
 def additionalinfo_page():
     """Additional info page"""
-    
     return render_template('additional_info.html')
 
 @app.route("/gemini")
@@ -79,7 +76,7 @@ def extract_text():
 def misty_speak():
     text = extract_text()
     print("Speaking:", text)
-    misty.speak(text)
+    # misty.speak(text)
     return jsonify({"message": f"Misty speaking: {text}"})
 
 
@@ -87,28 +84,24 @@ def misty_speak():
 def misty_speakOnClick():
     text = extract_text()
     print("Speaking:", text)
-    misty.speak(text)
+    # misty.speak(text)
     return jsonify({"message": f"Misty speaking: {text}"})
 
 @app.route('/mistyStart', methods = ["POST"])
 def misty_start():
-    misty.speak("Rock")
-    misty.speak("Paper")
-    misty.speak("Scissor")
-    misty.speak("Shoot")
-
+    # misty.speak("Ready?")
     return jsonify({"message": "Misty is starting"})
 
 @app.route('/directSpeak', methods = ["GET","POST"])
 def misty_direct():
-
-    return jsonify({"message": "text"})
+    text = extract_text()
+    if text:
+        # misty.speak(text)
+        return jsonify({"message": f"Misty speaking: {text}"})
+    return jsonify({"message": "No text provided"})
 
 @app.route('/exit')
 def misty_goodbye():
-
-    misty.speak("Goodbye")
-
     return render_template('index11-192.html')
 
 @app.errorhandler(404)

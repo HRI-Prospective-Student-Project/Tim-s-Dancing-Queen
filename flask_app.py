@@ -6,7 +6,7 @@ from STT_google import transcribe_wav_bytes
 
 app = Flask(__name__)
 MISTY_IP = "192.168.1.5"
-
+ 
 # Initialize Misty
 misty = Robot(MISTY_IP)
 misty.set_default_volume(80) 
@@ -37,8 +37,8 @@ def stop_misty_route():
 @app.route('/cs')
 def cs_page(): return render_template('CS2page11-18.html')
 
-@app.route('/neuro')
-def neuro_page(): return render_template('neuropage11-18.html')
+@app.route('/background')
+def neuro_page(): return render_template('background.html')
 
 @app.route('/datascience')
 def data_page(): return render_template('dataSci.html')
