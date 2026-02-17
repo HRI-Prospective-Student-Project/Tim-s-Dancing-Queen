@@ -7,7 +7,6 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/feather-icons"></script>
     <style>
-        /* Force single-page view */
         body, html { height: 100vh; overflow: hidden; margin: 0; }
         
         @keyframes pulse-indigo {
@@ -17,7 +16,6 @@
         }
         .animate-gemini-pulse { animation: pulse-indigo 2s infinite; }
         
-        /* Transition for the auto-cycling gallery */
         .fade-in { opacity: 0; transition: opacity 0.8s ease-in-out; }
         .fade-in.active { opacity: 1; }
     </style>
@@ -36,16 +34,9 @@
 </head>
 <body class="bg-slate-100 text-slate-900 font-sans" onload="autoIntro()">
 
-    <div class="fixed top-4 left-4 z-[60]">
-        <button onclick="speakText('Admitted Students Day is a success!')" 
-                class="bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2 rounded-full text-xs font-bold shadow-xl flex items-center gap-2 border-2 border-white transition-transform active:scale-95">
-            <i data-feather="award" class="w-3 h-3"></i> Admitted Students Day
-        </button>
-    </div>
-
     <div class="h-screen flex flex-col p-4 gap-4">
         
-        <nav class="bg-white/90 backdrop-blur-md border border-slate-200 rounded-2xl px-6 h-16 flex justify-between items-center shrink-0 shadow-sm">
+        <nav class="bg-white/90 backdrop-blur-md border border-slate-200 rounded-2xl px-6 h-16 flex justify-between items-center shrink-0 shadow-sm relative z-50">
             <div class="flex items-center gap-3">
                 <div class="w-8 h-8 bg-accent rounded-lg flex items-center justify-center shadow-lg">
                     <i data-feather="tool" class="text-white w-4 h-4"></i>
@@ -53,7 +44,7 @@
                 <span class="text-lg font-bold tracking-tight">Misty's Dev Log</span>
             </div>
             <div class="flex items-center gap-4">
-                <a href="/" onclick="stopSpeech()" class="text-sm font-semibold text-slate-600 hover:text-primary">Home</a>
+                <a href="/" onclick="stopSpeech()" class="text-sm font-semibold text-slate-600 hover:text-primary transition-colors">Home</a>
                 <a href="/gemini" onclick="stopSpeech()" class="animate-gemini-pulse bg-accent text-white px-5 py-2 rounded-full text-sm font-bold flex items-center gap-2 border-2 border-indigo-300 transition-all hover:scale-105">
                     <i data-feather="sparkles" class="w-4 h-4 text-yellow-300"></i> Ask Gemini
                 </a>
@@ -62,60 +53,69 @@
 
         <div class="flex-1 grid grid-cols-12 gap-4 min-h-0">
             
-            <div class="col-span-3 flex flex-col">
+            <div class="col-span-4 flex flex-col">
                 <div onclick="speakText(introText)" 
-                     class="cursor-pointer bg-white rounded-3xl p-6 shadow-sm border border-slate-200 flex-1 flex flex-col hover:border-primary/40 transition-all group overflow-hidden">
-                    <h1 class="text-3xl font-black text-slate-900 mb-4 tracking-tight leading-tight">
+                     class="cursor-pointer bg-white rounded-3xl p-8 shadow-sm border border-slate-200 flex-1 flex flex-col hover:border-primary/40 transition-all group overflow-hidden">
+                    <h1 class="text-4xl font-black text-slate-900 mb-6 tracking-tight leading-tight">
                         How I Was <span class="text-accent">Coded.</span>
                     </h1>
-                    <div class="space-y-4">
-                        <div class="flex items-center gap-2 text-primary font-bold">
-                            <i data-feather="book-open" class="w-5 h-5"></i>
-                            <h3>HRI Course Origin</h3>
+                    <div class="space-y-6">
+                        <div class="flex items-center gap-3 text-primary font-bold">
+                            <div class="p-2 bg-primary/10 rounded-lg">
+                                <i data-feather="heart" class="w-6 h-6"></i>
+                            </div>
+                            <h3 class="text-xl">Learning About People</h3>
                         </div>
-                        <p class="text-slate-600 text-sm leading-relaxed">
-                            Misty's development began in the <strong>Human-Robot Interaction</strong> classroom. Students applied theories of social robotics—like proxemics and affective design—to bridge the gap between AI and human connection.
+                        <p class="text-slate-600 text-lg leading-relaxed">
+                            Before building me, students spent a whole semester looking at how people and robots get along. They studied things like how close a robot should stand and how a robot can show feelings so humans feel comfortable talking to them. I am the result of all that practice!
                         </p>
-                        <div class="bg-slate-50 p-3 rounded-xl border border-slate-100 mt-auto">
-                            <p class="text-[10px] uppercase tracking-widest text-slate-400 font-bold mb-1">Status</p>
-                            <p class="text-xs text-slate-500 italic">Click this bubble to hear my story again.</p>
+                        <div class="bg-slate-50 p-4 rounded-2xl border border-slate-100 mt-auto flex items-center gap-3">
+                            <i data-feather="volume-2" class="text-slate-400"></i>
+                            <p class="text-xs text-slate-500 font-medium italic">Click this bubble to hear me explain!</p>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="col-span-5 flex flex-col gap-4">
-                <div onclick="speakText('The Web team built this dashboard and the Rock Paper Scissors game!')" 
-                     class="cursor-pointer bg-white rounded-3xl p-6 shadow-sm border border-slate-200 flex-1 hover:border-primary/40 transition-all group flex flex-col justify-center">
-                    <div class="w-10 h-10 bg-primary/10 rounded-xl flex items-center justify-center mb-3 group-hover:bg-primary group-hover:text-white transition-colors">
-                        <i data-feather="layout" class="w-5 h-5"></i>
+            <div class="col-span-4 flex flex-col gap-4">
+                <div onclick="speakText('The Web team built this UI and the Rock Paper Scissors game!')" 
+                     class="cursor-pointer bg-white rounded-3xl p-6 shadow-sm border border-slate-200 flex-1 hover:border-primary/40 transition-all group flex flex-col border-l-8 border-l-primary">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-10 h-10 bg-primary/10 rounded-xl flex items-center justify-center group-hover:bg-primary group-hover:text-white transition-colors">
+                            <i data-feather="layout" class="w-5 h-5"></i>
+                        </div>
+                        <h2 class="text-xl font-bold text-primary">Web Team</h2>
                     </div>
-                    <h2 class="text-xl font-bold text-primary mb-1">Web Development Team</h2>
-                    <p class="text-slate-600 text-sm leading-snug">
-                        Crafted the **site design**, UI architecture, and the **Rock Paper Scissors game**. They built the Flask server connecting this web interface to my hardware.
+                    <p class="text-slate-600 text-sm leading-relaxed mb-2">
+                        They designed the <strong>look and feel</strong> of my website and built the <strong>Rock Paper Scissors game</strong>. 
                     </p>
+                    <p class="text-slate-500 text-xs">They connect the screen to my hardware.</p>
                 </div>
+
                 <div onclick="speakText('The AI group used Gemini to help me answer questions about F and M!')" 
-                     class="cursor-pointer bg-white rounded-3xl p-6 shadow-sm border border-slate-200 flex-1 hover:border-accent/40 transition-all group flex flex-col justify-center">
-                    <div class="w-10 h-10 bg-accent/10 rounded-xl flex items-center justify-center mb-3 group-hover:bg-accent group-hover:text-white transition-colors">
-                        <i data-feather="cpu" class="w-5 h-5"></i>
+                     class="cursor-pointer bg-white rounded-3xl p-6 shadow-sm border border-slate-200 flex-1 hover:border-accent/40 transition-all group flex flex-col border-l-8 border-l-accent">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-10 h-10 bg-accent/10 rounded-xl flex items-center justify-center group-hover:bg-accent group-hover:text-white transition-colors">
+                            <i data-feather="cpu" class="w-5 h-5"></i>
+                        </div>
+                        <h2 class="text-xl font-bold text-accent">AI Team</h2>
                     </div>
-                    <h2 class="text-xl font-bold text-accent mb-1">AI Integration Team</h2>
-                    <p class="text-slate-600 text-sm leading-snug">
-                        Integrated **Google Gemini** to allow students to ask about **F&M and Lancaster**. They managed the speech-to-text pipeline and AI logic.
+                    <p class="text-slate-600 text-sm leading-relaxed mb-2">
+                        They used <strong>Google Gemini</strong> to give me a brain that knows all about <strong>F&M and Lancaster</strong>.
                     </p>
+                    <p class="text-slate-500 text-xs">They handle how I listen and talk back.</p>
                 </div>
             </div>
 
             <div class="col-span-4 bg-slate-900 rounded-3xl overflow-hidden relative shadow-inner border border-slate-200">
                 <div id="gallery-container" class="w-full h-full">
                     <img id="carousel-img" src="/static/images/pic1.jpg" class="fade-in active object-cover w-full h-full" alt="Gallery">
-                    <div class="absolute bottom-0 w-full bg-gradient-to-t from-black/90 via-black/40 to-transparent p-6">
-                        <p id="carousel-text" class="text-white font-bold text-lg leading-tight">Project Highlights</p>
-                        <div class="flex gap-1 mt-2">
-                            <div class="h-1 w-8 bg-accent rounded-full"></div>
-                            <div class="h-1 w-2 bg-white/30 rounded-full"></div>
-                            <div class="h-1 w-2 bg-white/30 rounded-full"></div>
+                    <div class="absolute bottom-0 w-full bg-gradient-to-t from-black/80 via-black/40 to-transparent p-8">
+                        <p id="carousel-text" class="text-white font-bold text-xl leading-tight">Project Highlights</p>
+                        <div class="flex gap-2 mt-3">
+                            <div class="h-1.5 w-10 bg-accent rounded-full"></div>
+                            <div class="h-1.5 w-3 bg-white/20 rounded-full"></div>
+                            <div class="h-1.5 w-3 bg-white/20 rounded-full"></div>
                         </div>
                     </div>
                 </div>
@@ -127,23 +127,21 @@
     <script>
         feather.replace();
 
-        const introText = "Welcome to the Dev Log! I was developed as a final project for the HRI course. One team built my web interface and games, while the other gave me a brain using Google Gemini.";
+        const introText = "Hi there! I was built for an HRI class. My friends spent a long time studying how people like you interact with robots. One team made this website and my games, while the other team gave me a brain using Gemini so I can answer your questions!";
 
-        // Triggers automatically on load using your Flask directSpeak route
         function autoIntro() {
             setTimeout(() => {
                 speakText(introText);
-            }, 500); // Small delay to ensure page is ready
+            }, 800);
         }
 
-        // GALLERY IMAGES
         const images = [
-            {src: "/static/images/pic1.jpg", text: "Game Logic Development"},
-            {src: "/static/images/pic2.jpg", text: "Gemini API Integration"},
-            {src: "/static/images/pic3.jpg", text: "HRI Course Work"},
-            {src: "/static/images/pic4.jpg", text: "UI/UX Design Sessions"},
-            {src: "/static/images/pic5.jpg", text: "Testing Speech Recognition"},
-            {src: "/static/images/pic6.jpg", text: "Final System Deployment"}
+            {src: "/static/images/pic1.jpg", text: "Making the Game Logic"},
+            {src: "/static/images/pic2.jpg", text: "Connecting to Gemini"},
+            {src: "/static/images/pic3.jpg", text: "Classroom Research"},
+            {src: "/static/images/pic4.jpg", text: "Designing the Look"},
+            {src: "/static/images/pic5.jpg", text: "Testing My Voice"},
+            {src: "/static/images/pic6.jpg", text: "Ready to Meet You!"}
         ];
         
         let currentIndex = 0;
@@ -161,13 +159,12 @@
         }
         setInterval(cycleGallery, 5000);
 
-        // Uses your existing Flask app features
         function speakText(text) {
             fetch("http://127.0.0.1:5001/directSpeak", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ text: text })
-            }).catch(err => console.error("Flask server unreachable on 5001"));
+            }).catch(err => console.error("Flask server unreachable"));
         }
 
         function stopSpeech() {

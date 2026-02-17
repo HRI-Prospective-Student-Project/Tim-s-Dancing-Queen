@@ -5,7 +5,7 @@ from threading import Thread
 from STT_google import transcribe_wav_bytes
 
 app = Flask(__name__)
-MISTY_IP = "192.168.1.5"
+MISTY_IP = "192.168.1.3"
  
 # Initialize Misty
 misty = Robot(MISTY_IP)

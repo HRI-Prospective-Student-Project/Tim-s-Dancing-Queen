@@ -112,5 +112,11 @@ def not_found(error):
 def internal_error(error):
     return '<h1>500 - Internal Server Error</h1><p>Something went wrong on our end.</p>', 500
 
+@app.route('/stop', methods=['POST'])
+def stop_misty():
+    print("Stopping Misty's speech")
+    # misty.stop_speaking()  # Uncomment this when the robot is connected
+    return jsonify({"status": "stopped"})
+
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=5001)

@@ -1,123 +1,126 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>CS Pathways · F&M (Misty Mic)</title>
-  <style>
-    /* --- Reset & Base --- */
-    * { box-sizing: border-box; margin: 0; padding: 0; font-family: sans-serif; }
-    body { min-height: 100vh; background: linear-gradient(135deg, #e0e7ff, #e0f7fa, #d1fae5); color: #1e293b; display: flex; justify-content: center; align-items: center; padding: 1rem; position: relative; overflow-x: hidden; }
-    a { text-decoration: none; color: inherit; }
-
-    /* --- Blobs --- */
-    .blob { position: absolute; border-radius: 50%; filter: blur(40px); opacity: 0.35; animation: float 16s ease-in-out infinite; z-index: 0; }
-    .blob.delay { animation-delay: -8s; }
-    @keyframes float {
-      0%, 100% { transform: translateY(0) translateX(0) scale(1); }
-      50% { transform: translateY(-24px) translateX(16px) scale(1.05); }
-    }
-
-    /* --- Card Container --- */
-    .card-shell { position: relative; z-index: 1; width: 100%; max-width: 960px; background: rgba(255,255,255,0.7); border-radius: 2rem; border: 1px solid rgba(255,255,255,0.6); backdrop-filter: blur(12px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); padding: 2rem; }
-
-    /* --- Header --- */
-    header { text-align: center; margin-bottom: 1.5rem; }
-    header h1 { font-size: 2rem; font-weight: 800; }
-    header h1 span { background: linear-gradient(90deg, #4f46e5, #14b8a6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-    header p { color: #475569; margin-top: 0.5rem; font-size: 0.9rem; }
-
-    /* --- Grid --- */
-    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1rem; }
-    .choice { position: relative; background: rgba(255,255,255,0.8); border: 1px solid #e2e8f0; border-radius: 1rem; padding: 1.5rem; box-shadow: 0 4px 8px rgba(0,0,0,0.05); transition: transform 0.3s, box-shadow 0.3s; }
-    .choice:hover { transform: translateY(-3px); box-shadow: 0 8px 16px rgba(0,0,0,0.1); }
-    .choice .icon { font-size: 2rem; display: block; margin-bottom: 0.5rem; }
-    .choice h3 { font-size: 1.2rem; font-weight: 600; margin-bottom: 0.25rem; }
-    .choice p { font-size: 0.85rem; color: #475569; margin-bottom: 0.5rem; }
-    .choice span { font-size: 0.85rem; font-weight: 500; color: #4f46e5; display: inline-flex; align-items: center; gap: 0.25rem; }
-   
-    /* Centered full-width choice (Gemini) - Specifically styled for Robot Interaction */
-    .choice.full {
-      grid-column: 1 / -1;
-      width: 100%;
-      text-align: center;
-      border: 2px solid #4f46e5;
-    }
-    .choice.full:hover { border-color: #14b8a6; }
-
-    /* --- Floating Exit --- */
-    .cta { position: fixed; bottom: 1rem; left: 50%; transform: translateX(-50%); width: 3.5rem; height: 3.5rem; background: #4f46e5; color: white; border-radius: 50%; display: flex; justify-content: center; align-items: center; box-shadow: 0 5px 15px rgba(0,0,0,0.2); transition: transform 0.3s; z-index: 10; }
-    .cta:hover { transform: translateX(-50%) translateY(-3px); background: #ef4444; }
-
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CS Department | F&M Robotics</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/feather-icons"></script>
+    <style>
+        body, html { height: 100vh; overflow: hidden; margin: 0; }
+        
+        .menu-card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .menu-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 50px -12px rgba(0, 47, 108, 0.15);
+        }
+    </style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#002F6C',
+                        accent: '#6366f1',
+                    }
+                }
+            }
+        }
+    </script>
 </head>
-<body>
+<body class="bg-slate-50 text-slate-900 font-sans" onload="autoIntro()">
 
-  <div class="blob" style="top:-80px; left:-60px; width:288px; height:288px; background:#c7d2fe;"></div>
-  <div class="blob delay" style="bottom:-96px; right:-40px; width:320px; height:320px; background:#5eead4;"></div>
+    <div class="h-screen flex flex-col p-8 gap-8">
+        
+        <header class="text-center shrink-0">
+            <h1 class="text-5xl font-black text-primary tracking-tighter mb-2">Franklin & Marshall College</h1>
+            <p class="text-slate-500 font-bold uppercase tracking-[0.2em] text-sm">Computer Science & Social Robotics Lab</p>
+        </header>
 
-  <main class="card-shell">
-    <header>
-      <h1>Explore <span>F&amp;M</span> with Misty</h1>
-      <p>Select a major or play a game. Talk directly to Misty for AI help!</p>
-    </header>
+        <div class="flex-1 grid grid-cols-1 md:grid-cols-3 grid-rows-2 gap-8 max-w-7xl mx-auto w-full">
+            
+            <a href="/cs" onclick="stopSpeech()" class="menu-card bg-white rounded-[2.5rem] p-8 border border-slate-200 flex flex-col items-center justify-center text-center group border-b-4 border-b-primary">
+                <div class="w-20 h-20 bg-blue-50 text-primary rounded-3xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                    <i data-feather="code" class="w-10 h-10"></i>
+                </div>
+                <h2 class="text-2xl font-black text-slate-800">Computer Science</h2>
+                <p class="text-slate-500 text-sm mt-3 leading-relaxed">Meet the department and see what you'll learn here.</p>
+            </a>
 
-    <section>
-      <div class="grid">
-        <a href="/cs" class="choice">
-          <div class="icon">💻</div>
-          <h3>Computer Science</h3>
-          <p>Curriculum, tracks, and research.</p>
-          <span>Explore →</span>
-        </a>
+            <a href="/gemini_misty" onclick="stopSpeech()" class="menu-card bg-white rounded-[2.5rem] p-8 border border-slate-200 flex flex-col items-center justify-center text-center group border-b-4 border-b-accent">
+                <div class="w-20 h-20 bg-indigo-50 text-accent rounded-3xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                    <i data-feather="sparkles" class="w-10 h-10"></i>
+                </div>
+                <h2 class="text-2xl font-black text-slate-800">Gemini Misty</h2>
+                <p class="text-slate-500 text-sm mt-3 leading-relaxed">Chat with Misty about life at F&M and in Lancaster.</p>
+            </a>
 
-        <a href="/background" class="choice">
-          <div class="icon">🐣</div>
-          <h3>Misty's Origin</h3>
-          <p>Who What When Where and Why of Misty</p>
-          <span>Discover →</span>
-        </a>
+            <a href="/background" onclick="stopSpeech()" class="menu-card bg-white rounded-[2.5rem] p-8 border border-slate-200 flex flex-col items-center justify-center text-center group border-b-4 border-b-emerald-500">
+                <div class="w-20 h-20 bg-emerald-50 text-emerald-600 rounded-3xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                    <i data-feather="tool" class="w-10 h-10"></i>
+                </div>
+                <h2 class="text-2xl font-black text-slate-800">Misty's Origins</h2>
+                <p class="text-slate-500 text-sm mt-3 leading-relaxed">Behind the scenes of building a social robot.</p>
+            </a>
 
-        <a href="/RockPaperScissors" class="choice">
-          <div class="icon">🗿📃✂️</div>
-          <h3>Rock Paper Scissors</h3>
-          <p>Challenge Misty to a match!</p>
-          <span>Play Now →</span>
-        </a>
+            <a href="/RockPaperScissors" onclick="stopSpeech()" class="menu-card bg-white rounded-[2.5rem] p-8 border border-slate-200 flex flex-col items-center justify-center text-center group border-b-4 border-b-orange-500">
+                <div class="w-20 h-20 bg-orange-50 text-orange-600 rounded-3xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                    <i data-feather="scissors" class="w-10 h-10"></i>
+                </div>
+                <h2 class="text-2xl font-black text-slate-800">Play a Game</h2>
+                <p class="text-slate-500 text-sm mt-3 leading-relaxed">Think you can beat Misty? Challenge her here.</p>
+            </a>
 
-        <a href="/datascience" class="choice">
-          <div class="icon">📊</div>
-          <h3>Data Science</h3>
-          <p>Stats and Machine Learning.</p>
-          <span>Explore →</span>
-        </a>
+            <a href="/datascience" onclick="stopSpeech()" class="menu-card bg-white rounded-[2.5rem] p-8 border border-slate-200 flex flex-col items-center justify-center text-center group border-b-4 border-b-purple-500">
+                <div class="w-20 h-20 bg-purple-50 text-purple-600 rounded-3xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                    <i data-feather="users" class="w-10 h-10"></i>
+                </div>
+                <h2 class="text-2xl font-black text-slate-800">Meet the Team</h2>
+                <p class="text-slate-500 text-sm mt-3 leading-relaxed">Meet the students behind the hardware and software.</p>
+            </a>
 
-        <a href="/cognitivescience" class="choice">
-          <div class="icon">🤖</div>
-          <h3>Cognitive Science</h3>
-          <p>Mind and Artificial Intelligence.</p>
-          <span>Learn →</span>
-        </a>
+            <a href="https://www.fandm.edu" target="_blank" onclick="stopSpeech()" class="menu-card bg-white rounded-[2.5rem] p-8 border border-slate-200 flex flex-col items-center justify-center text-center group border-b-4 border-b-red-600">
+                <div class="w-20 h-20 bg-red-50 text-red-600 rounded-3xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                    <i data-feather="map-pin" class="w-10 h-10"></i>
+                </div>
+                <h2 class="text-2xl font-black text-slate-800">Visit F&M</h2>
+                <p class="text-slate-500 text-sm mt-3 leading-relaxed">Check out our official campus website.</p>
+            </a>
 
-        <a href="/more" class="choice">
-          <div class="icon">ℹ️</div>
-          <h3>More Info</h3>
-          <p>Campus life and admissions.</p>
-          <span>See More →</span>
-        </a>
-      
-        <a href="/gemini_misty" class="choice full">
-          <div class="icon">🎙️</div>
-          <h3>Talk to Gemini</h3>
-          <p>Ask questions using Misty's built-in microphone!</p>
-          <span>Start Conversation →</span>
-        </a>
+        </div>
 
-      </div>
-    </section>
-  </main>
+        <footer class="text-center py-2 shrink-0">
+            <a href="/" onclick="stopSpeech()" class="inline-flex items-center gap-3 px-6 py-3 bg-white rounded-full shadow-sm border border-slate-200 hover:bg-slate-50 transition-colors">
+                <i data-feather="home" class="w-4 h-4 text-primary"></i>
+                <span class="text-xs font-black text-slate-600 uppercase tracking-widest">Back to Main Menu</span>
+            </a>
+        </footer>
+    </div>
 
-  <a href="/exit" class="cta" title="Exit">✖</a>
+    <script>
+        feather.replace();
 
+        const introText = "Welcome to the Computer Science department. Explore our curriculum or chat with me.";
+
+        function autoIntro() {
+            setTimeout(() => {
+                speakText(introText);
+            }, 800);
+        }
+
+        function speakText(text) {
+            fetch("/speak", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ text: text })
+            }).catch(err => console.error("Speech server disconnected"));
+        }
+
+        function stopSpeech() {
+            navigator.sendBeacon("/stop");
+        }
+    </script>
 </body>
 </html>

@@ -3,137 +3,87 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Computer Science | Franklin & Marshall</title>
+    <title>Computer Science | F&M Robotics</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/feather-icons"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        primary: '#002F6C', // F&M Blue
-                        secondary: '#C8102E', // F&M Red
-                    }
-                }
-            }
-        }
-    </script>
+    <style>
+        .content-card { transition: transform 0.2s ease; }
+        .content-card:hover { transform: scale(1.02); }
+    </style>
 </head>
-<body class="bg-slate-50 text-slate-900 font-sans leading-relaxed">
+<body class="bg-slate-50 text-slate-900 font-sans" onload="autoIntro()">
 
-    <div class="fixed top-4 left-4 z-[60]">
-        <button onclick="speakText('Welcome to the Computer Science department! We are so excited to meet our future innovators today.')" 
-                class="bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2 rounded-full text-sm font-bold shadow-lg flex items-center gap-2 transition-transform active:scale-95">
-            <i data-feather="award" class="w-4 h-4"></i> Admitted Students Day
-        </button>
-    </div>
-
-    <nav class="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-200">
-        <div class="max-w-7xl mx-auto px-6 h-20 flex justify-between items-center">
-            <div class="flex items-center gap-3">
-                <div class="w-10 h-10 bg-primary rounded-xl flex items-center justify-center shadow-lg">
-                    <i data-feather="cpu" class="text-white w-6 h-6"></i>
-                </div>
-                <span class="text-xl font-bold tracking-tight text-primary">Computer Science</span>
+    <div class="min-h-screen flex flex-col md:flex-row">
+        <aside class="w-full md:w-64 bg-[#002F6C] text-white p-8 flex flex-col shrink-0">
+            <div class="mb-12">
+                <h2 class="text-2xl font-black tracking-tighter">F&M</h2>
+                <p class="text-blue-300 text-[10px] font-bold uppercase tracking-widest">Robotics Lab</p>
             </div>
             
-            <div class="flex items-center gap-4">
-                <a href="/" onclick="stopSpeech()" class="text-sm font-semibold text-slate-600 hover:text-primary transition-colors">Home</a>
-                <a href="/gemini_misty" onclick="stopSpeech()" class="bg-primary hover:bg-blue-900 text-white px-5 py-2.5 rounded-full text-sm font-bold transition-all shadow-md flex items-center gap-2">
-                    <i data-feather="sparkles" class="w-4 h-4 text-yellow-300"></i> Ask Gemini
+            <nav class="flex-1 space-y-4">
+                <a href="/" class="flex items-center gap-3 text-blue-100 hover:text-white transition-colors">
+                    <i data-feather="grid" class="w-5 h-5"></i>
+                    <span class="font-bold text-sm">Dashboard</span>
                 </a>
-            </div>
-        </div>
-    </nav>
+                <div class="h-px bg-blue-800 my-4"></div>
+                <p class="text-blue-400 text-[10px] font-bold uppercase">Department</p>
+                <a href="/cs" class="flex items-center gap-3 text-white">
+                    <i data-feather="code" class="w-5 h-5"></i>
+                    <span class="font-bold text-sm">Curriculum</span>
+                </a>
+                <a href="/datascience" class="flex items-center gap-3 text-blue-100 hover:text-white">
+                    <i data-feather="database" class="w-5 h-5"></i>
+                    <span class="font-bold text-sm">Data Science</span>
+                </a>
+            </nav>
 
-    <main class="max-w-5xl mx-auto px-6 py-12">
-        <header class="mb-16 text-center md:text-left">
-            <h1 class="text-5xl md:text-6xl font-black text-slate-900 mb-6 tracking-tight">
-                Innovating the <span class="text-primary">Future.</span>
-            </h1>
-            <p class="text-xl text-slate-600 max-w-2xl leading-relaxed">
-                Explore the intersection of logic, technology, and creativity. F&M Computer Science prepares you to solve the world's most complex problems through code and computational thinking.
-            </p>
-        </header>
+            <button onclick="window.location.href='/'" class="mt-auto bg-blue-600 hover:bg-blue-500 p-3 rounded-xl flex items-center justify-center gap-2 transition-all">
+                <i data-feather="arrow-left" class="w-4 h-4"></i>
+                <span class="text-xs font-bold uppercase">Back</span>
+            </button>
+        </aside>
 
-        <div class="grid md:grid-cols-3 gap-8">
-            <div class="md:col-span-2 space-y-8">
-                <section class="bg-white rounded-3xl p-8 shadow-sm border border-slate-100 hover:shadow-md transition-shadow">
-                    <h2 class="text-2xl font-bold text-primary mb-4 flex items-center gap-2">
-                        <i data-feather="book-open" class="w-6 h-6"></i> The Curriculum
-                    </h2>
-                    <p class="text-slate-600 mb-6">
-                        Our program balances theoretical foundations with hands-on applications. From low-level systems to high-level artificial intelligence, you'll master the tools of the modern age.
-                    </p>
-                    <div class="grid grid-cols-2 gap-4">
-                        <div class="p-4 bg-slate-50 rounded-2xl border border-slate-100">
-                            <span class="block font-bold text-primary text-lg">AI & Robotics</span>
-                            <span class="text-sm text-slate-500">Intelligent Systems</span>
-                        </div>
-                        <div class="p-4 bg-slate-50 rounded-2xl border border-slate-100">
-                            <span class="block font-bold text-primary text-lg">Cybersecurity</span>
-                            <span class="text-sm text-slate-500">Data Protection</span>
-                        </div>
+        <main class="flex-1 p-8 md:p-16 overflow-y-auto">
+            <header class="mb-12">
+                <span class="bg-blue-100 text-[#002F6C] px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest">Department Overview</span>
+                <h1 class="text-5xl font-black text-slate-800 mt-4 tracking-tight">Computer Science</h1>
+                <p class="text-xl text-slate-500 mt-4 max-w-2xl leading-relaxed">
+                    At F&M, Computer Science is about more than just code. It's about problem-solving, ethics, and building the future of HRI.
+                </p>
+            </header>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div class="content-card bg-white p-8 rounded-[2rem] shadow-sm border border-slate-100">
+                    <div class="w-12 h-12 bg-indigo-50 text-indigo-600 rounded-2xl flex items-center justify-center mb-6">
+                        <i data-feather="cpu" class="w-6 h-6"></i>
                     </div>
-                </section>
-
-                <section class="bg-white rounded-3xl p-8 shadow-sm border border-slate-100">
-                    <h2 class="text-2xl font-bold text-primary mb-4 flex items-center gap-2">
-                        <i data-feather="terminal" class="w-6 h-6"></i> Research Opportunities
-                    </h2>
-                    <p class="text-slate-600">
-                        Students collaborate with faculty on cutting-edge research in distributed systems, human-computer interaction, and computational biology, often presenting at national conferences.
-                    </p>
-                </section>
-            </div>
-
-            <div class="space-y-6">
-                <div class="bg-primary text-white rounded-3xl p-8 shadow-xl">
-                    <h3 class="text-xl font-bold mb-4">Quick Stats</h3>
-                    <ul class="space-y-4">
-                        <li class="flex justify-between items-center border-b border-white/10 pb-2">
-                            <span class="text-blue-100">Class Size</span>
-                            <span class="font-bold">12-18</span>
-                        </li>
-                        <li class="flex justify-between items-center border-b border-white/10 pb-2">
-                            <span class="text-blue-100">Student Research</span>
-                            <span class="font-bold">65%</span>
-                        </li>
-                        <li class="flex justify-between items-center pb-2">
-                            <span class="text-blue-100">Grad Rate</span>
-                            <span class="font-bold">100%</span>
-                        </li>
-                    </ul>
+                    <h3 class="text-xl font-bold mb-2">Systems & Architecture</h3>
+                    <p class="text-slate-500 text-sm leading-relaxed">Explore how hardware and software communicate, from low-level assembly to high-level operating systems.</p>
                 </div>
 
-                <div class="bg-white rounded-3xl p-8 shadow-sm border border-slate-100">
-                    <h3 class="text-xl font-bold text-slate-900 mb-4">Misty's Note</h3>
-                    <p class="text-slate-600 text-sm italic mb-4">
-                        "I was programmed right here in the CS labs! Ask me anything about the coding languages we learn here."
-                    </p>
-                    <button onclick="speakText('Most students start with Python before moving into Java and C plus plus.')" 
-                            class="text-primary font-bold text-sm flex items-center gap-2 hover:underline">
-                        <i data-feather="play-circle" class="w-4 h-4"></i> Learn about languages
-                    </button>
+                <div class="content-card bg-white p-8 rounded-[2rem] shadow-sm border border-slate-100">
+                    <div class="w-12 h-12 bg-emerald-50 text-emerald-600 rounded-2xl flex items-center justify-center mb-6">
+                        <i data-feather="terminal" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Algorithm Design</h3>
+                    <p class="text-slate-500 text-sm leading-relaxed">Master the logic behind efficient computing and data structures used in modern robotics.</p>
                 </div>
             </div>
-        </div>
-    </main>
+        </main>
+    </div>
 
     <script>
         feather.replace();
-
-        function stopSpeech() {
-            fetch("/stop", { method: "POST" }).catch(e => console.log("Stop failed"));
-        }
-
-        function speakText(text) {
+        function autoIntro() {
             fetch("/speak", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ text: text })
+                body: JSON.stringify({ text: "This is the Computer Science curriculum. Use the sidebar to go back to the dashboard." })
             });
         }
+        function stopSpeech() { fetch("/stop", { method: "POST" }); }
     </script>
 </body>
 </html>
+
+
