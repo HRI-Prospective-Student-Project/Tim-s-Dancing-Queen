@@ -3,36 +3,38 @@ from mistyPy.Robot import Robot
 import time, io, base64, threading
 from threading import Thread
 from STT_google import transcribe_wav_bytes
+from misty_robot import MistyActions
+import json
 
 app = Flask(__name__)
 MISTY_IP = "192.168.1.3"
- 
-# Initialize Misty
+
+# Initialize Robot interfaces
 misty = Robot(MISTY_IP)
+misty_actions = MistyActions(MISTY_IP)
 misty.set_default_volume(80) 
 processing_lock = threading.Lock()
 
+# Auto-start skill at launch
+try:
+    misty_actions.startSkill()
+except:
+    pass
+
 def speak_async(text):
-    """Clears the buffer and makes Misty speak."""
     misty.stop_speaking()
     time.sleep(0.1) 
     misty.speak(text)
 
-# --- NAVIGATION & STOP LOGIC ---
-
 @app.route('/')
 def index():
-    """Stops all speech when returning home."""
     misty.stop_speaking()
     return render_template('index_misty.html')
 
 @app.route('/stop', methods=["POST"])
 def stop_misty_route():
-    """Dedicated route to kill speech immediately."""
     misty.stop_speaking()
     return jsonify({"status": "stopped"})
-
-# --- MAJOR PAGES ---
 
 @app.route('/cs')
 def cs_page(): return render_template('CS2page11-18.html')
@@ -44,11 +46,7 @@ def neuro_page(): return render_template('background.html')
 def data_page(): return render_template('dataSci.html')
 
 @app.route('/RockPaperScissors')
-def rps_page():
-    """Serves the Rock Paper Scissors game."""
-    return render_template('RockPaperScissors.html')
-
-# --- SPEAKING ROUTES ---
+def rps_page(): return render_template('RockPaperScissors.html')
 
 @app.route('/speak', methods=["POST"])
 @app.route('/speakOnClick', methods=["POST"])
@@ -62,7 +60,6 @@ def handle_speak():
 
 @app.route('/directSpeak', methods=["POST"])
 def direct_speak():
-    """Specific route used by the RPS game logic."""
     data = request.json
     text = data.get('text', '')
     if text:
@@ -70,17 +67,8 @@ def direct_speak():
         return jsonify({"status": "success"})
     return jsonify({"status": "error"}), 400
 
-@app.route('/mistyStart', methods=["POST"])
-def misty_start():
-    """Triggers Misty's reaction when a game round starts."""
-    # Add misty movement logic here if desired
-    return jsonify({"status": "success"})
-
-# --- GEMINI MISTY MIC LOGIC ---
-
 @app.route("/gemini_misty")
-def gemini_page():
-    return render_template('gemini_misty_mic.html')
+def gemini_page(): return render_template('gemini_misty_mic.html')
 
 @app.route('/misty/start_listening', methods=["POST"])
 def start_listening():
@@ -93,7 +81,7 @@ def stop_and_process():
         return jsonify({"status": "busy"}), 200
     try:
         misty.stop_recording_audio()
-        time.sleep(2.5) 
+        time.sleep(2.0) 
         audio_response = misty.get_audio_file("capture.wav")
         raw_audio_data = None
         
@@ -106,20 +94,31 @@ def stop_and_process():
         
         if raw_audio_data:
             text = transcribe_wav_bytes(io.BytesIO(raw_audio_data))
-            
-            # --- PYTHON JUNK FILTER (Prevents Speaking) ---
             junk = ["silence", "motor noise", "noise", "static", "background"]
-            if text and any(j in text.lower() for j in junk):
-                text = "" # Wipes the text if it's just noise
+            if text and any(j in text.lower() for j in junk): text = "" 
             
             if text and text.strip():
-                print(f"Misty heard: {text}")
-                Thread(target=speak_async, args=(text,)).start()
-                return jsonify({"text": text})
+                # Visual thinking cue
+                misty_actions.executeActionScript([{'name': 'SetEyes', 'args': ['thinking']}])
+                
+                # Get Gemini JSON
+                gemini_script = misty_actions.get_gemini_actions(text)
+                
+                # Prepend the Repeat Behavior
+                repeat_speech = f"I heard you say: {text}."
+                full_script = [
+                    {'name': 'SayText', 'args': [repeat_speech]},
+                    {'name': 'Pause', 'args': [800]},
+                    {'name': 'SetEyes', 'args': ['default']}
+                ] + gemini_script
+                
+                misty_actions.executeActionScript(full_script)
+                
+                reply_text = next((a['args'][0] for a in gemini_script if a['name'] == 'SayText'), "")
+                return jsonify({"user_text": text, "misty_reply": reply_text})
         
-        # Fallback if noise or silence
         misty.speak("I didn't hear anything.") 
-        return jsonify({"text": "I didn't hear anything."})
+        return jsonify({"user_text": "...", "misty_reply": "I didn't hear anything."})
     finally:
         processing_lock.release()
 

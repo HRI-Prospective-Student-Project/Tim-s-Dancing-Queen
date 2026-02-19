@@ -7,83 +7,169 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/feather-icons"></script>
     <style>
-        .content-card { transition: transform 0.2s ease; }
-        .content-card:hover { transform: scale(1.02); }
+        body, html { height: 100vh; overflow: hidden; margin: 0; }
+        
+        @keyframes pulse-indigo {
+            0% { box-shadow: 0 0 0 0 rgba(99, 102, 241, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(99, 102, 241, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(99, 102, 241, 0); }
+        }
+        .animate-gemini-pulse { animation: pulse-indigo 2s infinite; }
+
+        details summary::-webkit-details-marker { display: none; }
+        details[open] summary i { transform: rotate(180deg); }
+        summary { list-style: none; }
+        
+        .faq-scroll::-webkit-scrollbar { width: 4px; }
+        .faq-scroll::-webkit-scrollbar-thumb { background: #e2e8f0; border-radius: 10px; }
     </style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#002F6C',
+                        accent: '#6366f1',
+                    }
+                }
+            }
+        }
+    </script>
 </head>
-<body class="bg-slate-50 text-slate-900 font-sans" onload="autoIntro()">
+<body class="bg-slate-100 text-slate-900 font-sans" onload="autoIntro()">
 
-    <div class="min-h-screen flex flex-col md:flex-row">
-        <aside class="w-full md:w-64 bg-[#002F6C] text-white p-8 flex flex-col shrink-0">
-            <div class="mb-12">
-                <h2 class="text-2xl font-black tracking-tighter">F&M</h2>
-                <p class="text-blue-300 text-[10px] font-bold uppercase tracking-widest">Robotics Lab</p>
+    <div class="h-screen flex flex-col p-4 gap-4">
+        
+        <nav class="bg-white/90 backdrop-blur-md border border-slate-200 rounded-2xl px-6 h-16 flex justify-between items-center shrink-0 shadow-sm relative z-50">
+            <div class="flex items-center gap-3">
+                <div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center shadow-lg">
+                    <i data-feather="code" class="text-white w-4 h-4"></i>
+                </div>
+                <span class="text-lg font-bold tracking-tight">F&M Computer Science</span>
             </div>
+            <div class="flex items-center gap-4">
+                <a href="/" onclick="stopSpeech()" class="text-sm font-semibold text-slate-600 hover:text-primary transition-colors">Home</a>
+                <a href="/gemini_misty" onclick="stopSpeech()" class="animate-gemini-pulse bg-accent text-white px-5 py-2 rounded-full text-sm font-bold flex items-center gap-2 border-2 border-indigo-300 transition-all hover:scale-105">
+                    <i data-feather="sparkles" class="w-4 h-4 text-yellow-300"></i> Ask Gemini
+                </a>
+            </div>
+        </nav>
+
+        <div class="flex-1 grid grid-cols-12 gap-4 min-h-0">
             
-            <nav class="flex-1 space-y-4">
-                <a href="/" class="flex items-center gap-3 text-blue-100 hover:text-white transition-colors">
-                    <i data-feather="grid" class="w-5 h-5"></i>
-                    <span class="font-bold text-sm">Dashboard</span>
-                </a>
-                <div class="h-px bg-blue-800 my-4"></div>
-                <p class="text-blue-400 text-[10px] font-bold uppercase">Department</p>
-                <a href="/cs" class="flex items-center gap-3 text-white">
-                    <i data-feather="code" class="w-5 h-5"></i>
-                    <span class="font-bold text-sm">Curriculum</span>
-                </a>
-                <a href="/datascience" class="flex items-center gap-3 text-blue-100 hover:text-white">
-                    <i data-feather="database" class="w-5 h-5"></i>
-                    <span class="font-bold text-sm">Data Science</span>
-                </a>
-            </nav>
-
-            <button onclick="window.location.href='/'" class="mt-auto bg-blue-600 hover:bg-blue-500 p-3 rounded-xl flex items-center justify-center gap-2 transition-all">
-                <i data-feather="arrow-left" class="w-4 h-4"></i>
-                <span class="text-xs font-bold uppercase">Back</span>
-            </button>
-        </aside>
-
-        <main class="flex-1 p-8 md:p-16 overflow-y-auto">
-            <header class="mb-12">
-                <span class="bg-blue-100 text-[#002F6C] px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest">Department Overview</span>
-                <h1 class="text-5xl font-black text-slate-800 mt-4 tracking-tight">Computer Science</h1>
-                <p class="text-xl text-slate-500 mt-4 max-w-2xl leading-relaxed">
-                    At F&M, Computer Science is about more than just code. It's about problem-solving, ethics, and building the future of HRI.
-                </p>
-            </header>
-
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                <div class="content-card bg-white p-8 rounded-[2rem] shadow-sm border border-slate-100">
-                    <div class="w-12 h-12 bg-indigo-50 text-indigo-600 rounded-2xl flex items-center justify-center mb-6">
-                        <i data-feather="cpu" class="w-6 h-6"></i>
+            <div class="col-span-4 flex flex-col">
+                <div onclick="speakText(introText)" 
+                     class="cursor-pointer bg-white rounded-3xl p-8 shadow-sm border border-slate-200 flex-1 flex flex-col hover:border-primary/40 transition-all group overflow-hidden">
+                    <h1 class="text-4xl font-black text-slate-900 mb-6 tracking-tight leading-tight">
+                        Why Choose <span class="text-primary">F&M CS?</span>
+                    </h1>
+                    <div class="space-y-6">
+                        <div class="flex items-center gap-3 text-primary font-bold">
+                            <div class="p-2 bg-primary/10 rounded-lg">
+                                <i data-feather="book-open" class="w-6 h-6"></i>
+                            </div>
+                            <h3 class="text-xl tracking-tight">Liberal Arts Foundation</h3>
+                        </div>
+                        <p class="text-slate-600 text-xl leading-relaxed">
+                            Our department teaches you to think critically. You'll tackle ethics, design, and complex problem-solving alongside core computing.
+                        </p>
                     </div>
-                    <h3 class="text-xl font-bold mb-2">Systems & Architecture</h3>
-                    <p class="text-slate-500 text-sm leading-relaxed">Explore how hardware and software communicate, from low-level assembly to high-level operating systems.</p>
-                </div>
-
-                <div class="content-card bg-white p-8 rounded-[2rem] shadow-sm border border-slate-100">
-                    <div class="w-12 h-12 bg-emerald-50 text-emerald-600 rounded-2xl flex items-center justify-center mb-6">
-                        <i data-feather="terminal" class="w-6 h-6"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-2">Algorithm Design</h3>
-                    <p class="text-slate-500 text-sm leading-relaxed">Master the logic behind efficient computing and data structures used in modern robotics.</p>
                 </div>
             </div>
-        </main>
+
+            <div class="col-span-4 flex flex-col gap-4">
+                <div onclick="speakText('Work with our robots including Misty and Nao in the social robotics lab.')" 
+                     class="cursor-pointer bg-white rounded-3xl p-6 shadow-sm border border-slate-200 flex-1 hover:border-primary/40 transition-all group flex flex-col border-l-8 border-l-primary">
+                    <h2 class="text-2xl font-bold text-primary mb-2">Robotics & HRI</h2>
+                    <p class="text-slate-700 text-lg font-medium leading-relaxed">
+                        Work with <strong>Misty II</strong> and <strong>Nao</strong> robots. Students conduct research on how robots interact with people.
+                    </p>
+                </div>
+
+                <div onclick="speakText('Our core courses include Data Structures, Algorithms, and Software Engineering to build a strong technical foundation.')" 
+                     class="cursor-pointer bg-white rounded-3xl p-6 shadow-sm border border-slate-200 flex-1 hover:border-accent/40 transition-all group flex flex-col border-l-8 border-l-accent">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-10 h-10 bg-accent/10 rounded-xl flex items-center justify-center group-hover:bg-accent group-hover:text-white transition-colors">
+                            <i data-feather="book" class="w-5 h-5"></i>
+                        </div>
+                        <h2 class="text-2xl font-bold text-accent tracking-tight">Core Courses</h2>
+                    </div>
+                    <p class="text-slate-700 text-lg font-medium leading-relaxed">
+                        Master the essentials through <strong>Data Structures</strong>, <strong>Algorithms</strong>, and <strong>Software Engineering</strong> labs.
+                    </p>
+                </div>
+            </div>
+
+            <div class="col-span-4 bg-white rounded-3xl p-8 shadow-sm border border-slate-200 flex flex-col overflow-hidden">
+                <h2 class="text-2xl font-black text-slate-900 mb-6 flex items-center gap-3 shrink-0">
+                    <i data-feather="help-circle" class="text-primary"></i> FAQs
+                </h2>
+                
+                <div class="space-y-4 overflow-y-auto faq-scroll pr-2">
+                    <details class="group border-b border-slate-100 pb-4">
+                        <summary class="flex justify-between items-center font-bold text-primary cursor-pointer" 
+                                 onclick="speakText('No prior experience is needed! Our intro courses are designed for everyone.')">
+                            Do I need prior experience?
+                            <i data-feather="chevron-down" class="w-4 h-4 transition-transform text-slate-400"></i>
+                        </summary>
+                        <p class="text-slate-600 text-sm mt-2 leading-relaxed">
+                            No! Our intro courses are designed for everyone, regardless of background.
+                        </p>
+                    </details>
+
+                    <details class="group border-b border-slate-100 pb-4">
+                        <summary class="flex justify-between items-center font-bold text-primary cursor-pointer" 
+                                 onclick="speakText('Our curriculum prepares you for industry research. Many of our students aim for roles at companies like Microsoft.')">
+                            Does the curriculum focus on industry?
+                            <i data-feather="chevron-down" class="w-4 h-4 transition-transform text-slate-400"></i>
+                        </summary>
+                        <p class="text-slate-600 text-sm mt-2 leading-relaxed">
+                            Yes! We focus on research applications relevant to major tech leaders like <strong>Microsoft</strong>.
+                        </p>
+                    </details>
+
+                    <details class="group border-b border-slate-100 pb-4">
+                        <summary class="flex justify-between items-center font-bold text-primary cursor-pointer" 
+                                 onclick="speakText('Our alumni work at top-tier technology firms and pursue PhDs at prestigious research universities.')">
+                            Where do graduates work?
+                            <i data-feather="chevron-down" class="w-4 h-4 transition-transform text-slate-400"></i>
+                        </summary>
+                        <p class="text-slate-600 text-sm mt-2 leading-relaxed">
+                            Alumni work at top-tier technology firms or pursue PhDs at prestigious research universities.
+                        </p>
+                    </details>
+                </div>
+
+                <div class="mt-auto pt-6 border-t border-slate-50 shrink-0">
+                    <p class="text-[10px] text-slate-400 font-bold uppercase tracking-widest text-center">Tap a question to hear me answer!</p>
+                </div>
+            </div>
+
+        </div>
     </div>
 
     <script>
         feather.replace();
+
+        const introText = "Welcome to the Computer Science department! Tap the boxes to learn about our lab and core courses, or click a question on the right.";
+
         function autoIntro() {
+            setTimeout(() => {
+                speakText(introText);
+            }, 800);
+        }
+
+        function speakText(text) {
             fetch("/speak", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ text: "This is the Computer Science curriculum. Use the sidebar to go back to the dashboard." })
-            });
+                body: JSON.stringify({ text: text })
+            }).catch(err => console.error("Flask server unreachable"));
         }
-        function stopSpeech() { fetch("/stop", { method: "POST" }); }
+
+        function stopSpeech() {
+            navigator.sendBeacon("/stop");
+        }
     </script>
 </body>
 </html>
-
-

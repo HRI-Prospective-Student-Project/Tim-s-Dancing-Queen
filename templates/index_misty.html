@@ -8,23 +8,14 @@
     <script src="https://unpkg.com/feather-icons"></script>
     <style>
         body, html { height: 100vh; overflow: hidden; margin: 0; }
-        
-        .menu-card {
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        .menu-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 25px 50px -12px rgba(0, 47, 108, 0.15);
-        }
+        .menu-card { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+        .menu-card:hover { transform: translateY(-8px); box-shadow: 0 25px 50px -12px rgba(0, 47, 108, 0.15); }
     </style>
     <script>
         tailwind.config = {
             theme: {
                 extend: {
-                    colors: {
-                        primary: '#002F6C',
-                        accent: '#6366f1',
-                    }
+                    colors: { primary: '#002F6C', accent: '#6366f1' }
                 }
             }
         }
@@ -51,7 +42,7 @@
 
             <a href="/gemini_misty" onclick="stopSpeech()" class="menu-card bg-white rounded-[2.5rem] p-8 border border-slate-200 flex flex-col items-center justify-center text-center group border-b-4 border-b-accent">
                 <div class="w-20 h-20 bg-indigo-50 text-accent rounded-3xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-                    <i data-feather="sparkles" class="w-10 h-10"></i>
+                    <i data-feather="cpu" class="w-10 h-10"></i>
                 </div>
                 <h2 class="text-2xl font-black text-slate-800">Gemini Misty</h2>
                 <p class="text-slate-500 text-sm mt-3 leading-relaxed">Chat with Misty about life at F&M and in Lancaster.</p>
@@ -78,7 +69,7 @@
                     <i data-feather="users" class="w-10 h-10"></i>
                 </div>
                 <h2 class="text-2xl font-black text-slate-800">Meet the Team</h2>
-                <p class="text-slate-500 text-sm mt-3 leading-relaxed">Meet the students behind the hardware and software.</p>
+                <p class="text-slate-500 text-sm mt-3 leading-relaxed">Meet the Professor & students behind the hardware and software.</p>
             </a>
 
             <a href="https://www.fandm.edu" target="_blank" onclick="stopSpeech()" class="menu-card bg-white rounded-[2.5rem] p-8 border border-slate-200 flex flex-col items-center justify-center text-center group border-b-4 border-b-red-600">
@@ -100,6 +91,7 @@
     </div>
 
     <script>
+        // Critical: This renders the icons
         feather.replace();
 
         const introText = "Welcome to the Computer Science department. Explore our curriculum or chat with me.";

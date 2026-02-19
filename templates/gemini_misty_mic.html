@@ -1,93 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Chat with Misty</title>
-    <style>
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f0f2f5; display: flex; flex-direction: column; height: 100vh; margin: 0; }
-        
-        /* --- Chat Container --- */
-        #chat-window { flex: 1; overflow-y: auto; padding: 20px; display: flex; flex-direction: column; gap: 10px; }
-        
-        /* --- Bubbles --- */
-        .bubble { max-width: 70%; padding: 12px 16px; border-radius: 18px; font-size: 0.95rem; line-height: 1.4; position: relative; }
-        .user { align-self: flex-end; background: #4f46e5; color: white; border-bottom-right-radius: 4px; }
-        .misty { align-self: flex-start; background: white; color: #1e293b; border-bottom-left-radius: 4px; border: 1px solid #e2e8f0; }
-
-        /* --- Footer Controls --- */
-        .controls { background: white; padding: 20px; border-top: 1px solid #e2e8f0; text-align: center; }
-        .mic-btn { width: 70px; height: 70px; border-radius: 50%; border: none; background: #4f46e5; color: white; font-size: 30px; cursor: pointer; transition: 0.3s; }
-        .mic-btn.active { background: #ef4444; transform: scale(1.1); box-shadow: 0 0 15px rgba(239, 68, 68, 0.4); }
-        .status-text { margin-top: 8px; font-size: 0.8rem; color: #64748b; }
-        
-        .back-link { position: absolute; top: 20px; left: 20px; color: #4f46e5; font-weight: 600; cursor: pointer; }
-    </style>
+    <title>Misty | Gemini Mic</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/feather-icons"></script>
 </head>
-<body>
-
-    <div onclick="stopAndGoHome()" class="back-link">← Back</div>
-
-    <div id="chat-window">
-        <div class="bubble misty">Hi! I'm listening through my head sensors. Press the microphone to talk to me.</div>
+<body class="bg-slate-900 text-white font-sans h-screen flex flex-col items-center justify-center p-6">
+    <div class="w-full max-w-2xl bg-slate-800 rounded-3xl shadow-2xl flex flex-col h-[80vh]">
+        <div class="p-6 border-b border-slate-700 flex justify-between">
+            <h1 class="text-xl font-bold flex gap-2"><i data-feather="mic"></i> Talk to Misty</h1>
+            <span id="status" class="text-xs font-bold text-slate-400">IDLE</span>
+        </div>
+        <div id="chat-container" class="flex-1 p-6 overflow-y-auto space-y-4"></div>
+        <div class="p-8 flex flex-col items-center gap-4 bg-slate-900/50">
+            <button id="mic-btn" class="w-20 h-20 bg-indigo-600 rounded-full flex items-center justify-center hover:bg-indigo-500 transition-all active:scale-95">
+                <i data-feather="mic" class="w-8 h-8"></i>
+            </button>
+            <p class="text-xs text-slate-500 font-bold uppercase">Hold to Speak</p>
+        </div>
     </div>
-
-    <div class="controls">
-        <button id="micBtn" class="mic-btn" onclick="toggleMic()">🎤</button>
-        <div id="status" class="status-text">Tap to speak</div>
-    </div>
-
     <script>
-        let isRecording = false;
+        feather.replace();
+        const micBtn = document.getElementById('mic-btn');
+        const status = document.getElementById('status');
+        const chat = document.getElementById('chat-container');
 
-        function addMessage(text, sender) {
-            const chatWindow = document.getElementById("chat-window");
-            const bubble = document.createElement("div");
-            bubble.className = `bubble ${sender}`;
-            bubble.innerText = text;
-            chatWindow.appendChild(bubble);
-            chatWindow.scrollTop = chatWindow.scrollHeight; // Scroll to bottom
-        }
-
-        async function toggleMic() {
-            const btn = document.getElementById("micBtn");
-            const status = document.getElementById("status");
-            
-            if (!isRecording) {
-                isRecording = true;
-                btn.classList.add("active");
-                status.innerText = "Misty is listening...";
-                await fetch('/misty/start_listening', { method: 'POST' });
-            } else {
-                isRecording = false;
-                btn.classList.remove("active");
-                status.innerText = "Misty is processing...";
-                
-                const response = await fetch('/misty/stop_and_process', { method: 'POST' });
-                const data = await response.json();
-
-                // --- THE FILTERS ---
-                const junk = ["silence", "motor noise", "noise", "static", "background", "I didn't hear anything"];
-                let text = data.text || "";
-                let isJunk = junk.some(phrase => text.toLowerCase().includes(phrase));
-
-                if (text && !isJunk) {
-                    // Add User bubble (what you said)
-                    addMessage(text, "user");
-                    
-                    // Simulate Misty responding/acknowledging (or just showing the transcript)
-                    // If you connect actual Gemini AI later, the response would go here.
-                    status.innerText = "Tap to speak again";
-                } else {
-                    status.innerText = "I didn't catch that. Try again!";
-                }
-            }
-        }
-
-        function stopAndGoHome() {
-            fetch("/stop", { method: "POST" }).then(() => {
-                window.location.href = "/";
-            });
-        }
+        micBtn.onmousedown = () => {
+            status.innerText = "LISTENING...";
+            fetch('/misty/start_listening', { method: 'POST' });
+        };
+        micBtn.onmouseup = () => {
+            status.innerText = "PROCESSING...";
+            fetch('/misty/stop_and_process', { method: 'POST' })
+                .then(res => res.json())
+                .then(data => {
+                    status.innerText = "IDLE";
+                    chat.innerHTML += `
+                        <div class="flex flex-col items-end"><div class="bg-indigo-600 p-3 rounded-2xl rounded-tr-none text-sm">${data.user_text}</div></div>
+                        <div class="flex flex-col items-start"><div class="bg-slate-700 p-3 rounded-2xl rounded-tl-none text-sm"><p class="font-bold text-indigo-300">Misty</p>${data.misty_reply}</div></div>
+                    `;
+                    chat.scrollTop = chat.scrollHeight;
+                });
+        };
     </script>
 </body>
 </html>
