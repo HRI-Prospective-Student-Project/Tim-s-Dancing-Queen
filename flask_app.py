@@ -4,6 +4,7 @@ import time, io, base64, threading
 from threading import Thread
 from STT_google import transcribe_wav_bytes
 from misty_robot import MistyActions
+import random 
 import json
 
 app = Flask(__name__)
@@ -45,8 +46,49 @@ def neuro_page(): return render_template('background.html')
 @app.route('/datascience')
 def data_page(): return render_template('dataSci.html')
 
-@app.route('/RockPaperScissors')
-def rps_page(): return render_template('RockPaperScissors.html')
+@app.route('/RockPaperScissors', methods=["GET", "POST"])
+def rps_route():
+    if request.method == "POST":
+        # 1. Randomly choose Misty's move
+        moves = ["Rock", "Paper", "Scissors"]
+        misty_move = random.choice(moves)
+
+        def run_rps_sequence():
+            # Clear any previous speech/actions
+            misty.stop_speaking()
+            
+            # --- THE "HUMAN" COUNTDOWN ---
+            # Beat 1: "Rock" + Head Down
+            misty.speak("Rock")
+            misty.move_head(pitch=20, roll=0, yaw=0, velocity=100) 
+            time.sleep(0.8)
+
+            # Beat 2: "Paper" + Head Up
+            misty.speak("Paper")
+            misty.move_head(pitch=-15, roll=0, yaw=0, velocity=100)
+            time.sleep(0.8)
+
+            # Beat 3: "Scissors" + Head Down
+            misty.speak("Scissors")
+            misty.move_head(pitch=20, roll=0, yaw=0, velocity=100)
+            time.sleep(0.8)
+
+            # THE REVEAL: "Shoot!" + Level Head + Flash LED
+            misty.move_head(pitch=0, roll=0, yaw=0, velocity=100)
+            misty.change_led(79, 70, 229) # Indigo/Purple flash
+            misty.speak(f"Shoot! I chose {misty_move}!")
+            
+            # Change eyes to show excitement
+            misty.display_image("e_Joy.jpg") 
+            time.sleep(3)
+            misty.display_image("e_DefaultContent.jpg")
+
+        # Run in background so the UI doesn't lag
+        Thread(target=run_rps_sequence).start()
+        return jsonify({"status": "playing", "misty_choice": misty_move})
+
+    # If it's a GET request, just show the page
+    return render_template('RockPaperScissors.html')
 
 @app.route('/speak', methods=["POST"])
 @app.route('/speakOnClick', methods=["POST"])

@@ -20,61 +20,52 @@
 </head>
 <body class="bg-gradient-to-br from-indigo-50 via-sky-50 to-emerald-50 min-h-screen flex items-center justify-center p-6">
   <main class="w-full max-w-3xl">
-    <!-- Header -->
     <header class="text-center mb-8">
       <h1 class="text-4xl font-extrabold tracking-tight text-primary">Rock • Paper • Scissors</h1>
       <p class="text-slate-600 mt-2">First to 3 wins! Choose your move below.</p>
     </header>
 
-    <!-- Scoreboard -->
     <section class="grid grid-cols-2 gap-4 mb-6">
       <div class="rounded-2xl bg-white shadow p-5 border border-slate-100">
         <h2 class="text-sm uppercase tracking-wider text-slate-500">You</h2>
         <p id="playerScore" class="text-4xl font-bold">0</p>
       </div>
       <div class="rounded-2xl bg-white shadow p-5 border border-slate-100">
-        <h2 class="text-sm uppercase tracking-wider text-slate-500">Computer</h2>
+        <h2 class="text-sm uppercase tracking-wider text-slate-500">Misty</h2>
         <p id="cpuScore" class="text-4xl font-bold">0</p>
       </div>
     </section>
 
-    <!-- CPU Animation -->
     <section id="cpuAnim" class="rounded-2xl bg-white shadow p-5 border border-slate-100 mb-6 hidden text-center">
-      <p class="text-sm uppercase tracking-wider text-slate-500 mb-2">Computer is choosing…</p>
+      <p id="animStatus" class="text-sm uppercase tracking-wider text-slate-500 mb-2">Misty is ready...</p>
       <div class="flex flex-col items-center gap-3">
-      <!-- If you have a generic shuffle GIF, put its path in data-shuffle below -->
-      <img id="cpuGif" alt="CPU choice animation" class="h-24 w-24 object-contain select-none"/>
-      <div id="cpuEmoji" class="text-5xl leading-none select-none hidden">✊</div>
-    </div>
-  </section>
+        <div id="cpuEmoji" class="text-6xl leading-none select-none">✊</div>
+      </div>
+    </section>
 
-
-    <!-- Result Banner -->
     <section id="resultBanner" class="rounded-2xl bg-white shadow p-5 border border-slate-100 mb-6 hidden">
       <p id="roundResult" class="text-lg font-semibold"></p>
       <p id="roundDetail" class="text-slate-600"></p>
     </section>
 
-    <!-- Choices -->
     <section class="grid grid-cols-3 gap-4 mb-8" aria-label="Choose your move">
-      <button data-move="rock" onclick="mistyStart()" class="choice group rounded-2xl bg-white shadow hover:shadow-lg border border-slate-100 p-6 flex flex-col items-center gap-3 transition active:scale-[0.98] focus:outline-none focus:ring-4 focus:ring-indigo-200">
+      <button data-move="rock" class="choice group rounded-2xl bg-white shadow hover:shadow-lg border border-slate-100 p-6 flex flex-col items-center gap-3 transition active:scale-[0.98] focus:outline-none focus:ring-4 focus:ring-indigo-200">
         <span class="text-5xl leading-none" aria-hidden="true">✊</span>
         <span class="font-semibold">Rock</span>
         <span class="text-xs text-slate-500">Beats Scissors</span>
       </button>
-      <button data-move="paper" onclick="mistyStart()" class="choice group rounded-2xl bg-white shadow hover:shadow-lg border border-slate-100 p-6 flex flex-col items-center gap-3 transition active:scale-[0.98] focus:outline-none focus:ring-4 focus:ring-indigo-200">
+      <button data-move="paper" class="choice group rounded-2xl bg-white shadow hover:shadow-lg border border-slate-100 p-6 flex flex-col items-center gap-3 transition active:scale-[0.98] focus:outline-none focus:ring-4 focus:ring-indigo-200">
         <span class="text-5xl leading-none" aria-hidden="true">✋</span>
         <span class="font-semibold">Paper</span>
         <span class="text-xs text-slate-500">Beats Rock</span>
       </button>
-      <button data-move="scissors" onclick="mistyStart()" class="choice group rounded-2xl bg-white shadow hover:shadow-lg border border-slate-100 p-6 flex flex-col items-center gap-3 transition active:scale-[0.98] focus:outline-none focus:ring-4 focus:ring-indigo-200">
+      <button data-move="scissors" class="choice group rounded-2xl bg-white shadow hover:shadow-lg border border-slate-100 p-6 flex flex-col items-center gap-3 transition active:scale-[0.98] focus:outline-none focus:ring-4 focus:ring-indigo-200">
         <span class="text-5xl leading-none" aria-hidden="true">✌️</span>
         <span class="font-semibold">Scissors</span>
         <span class="text-xs text-slate-500">Beats Paper</span>
       </button>
     </section>
 
-    <!-- History + Controls -->
     <section class="grid md:grid-cols-2 gap-4 items-start">
       <div class="rounded-2xl bg-white shadow border border-slate-100">
         <div class="p-5 border-b border-slate-100">
@@ -102,6 +93,8 @@
     // --- Game State ---
     let player = 0;
     let cpu = 0;
+    const choices = ['rock', 'paper', 'scissors'];
+    const beats = { rock: 'scissors', paper: 'rock', scissors: 'paper' };
 
     const playerEl = document.getElementById('playerScore');
     const cpuEl = document.getElementById('cpuScore');
@@ -111,78 +104,16 @@
     const roundResult = document.getElementById('roundResult');
     const roundDetail = document.getElementById('roundDetail');
     const resetBtn = document.getElementById('resetBtn');
+    const cpuAnim = document.getElementById('cpuAnim');
+    const cpuEmoji = document.getElementById('cpuEmoji');
+    const animStatus = document.getElementById('animStatus');
 
-    const choices = ['rock', 'paper', 'scissors'];
-    const beats = { rock: 'scissors', paper: 'rock', scissors: 'paper' };
-    function maybeFakeReversal(realCpuMove, realPlayerMove) {
-  // 15% chance
-  const shouldReverse = Math.random() < 0.9;
-  if (!shouldReverse) return;
-
-  disableChoices(true); // lock input for 2 seconds
-
-  setTimeout(() => {
-    // Reverse the win → turn it into a loss
-    player--;   // remove the win that was added
-    cpu++;      // computer scores instead
-    updateScores();
-    
-    // New message
-    banner(
-      true,
-      "Just kidding 😈",
-      `Computer actually chose ${fmt(realCpuMove)}, so you lost.`
-    );
-
-    appendHistory(
-      `Fake-out twist — CPU actually picked ${fmt(realCpuMove)}. You lose.`
-    );
-
-    directSpeak(
-      `Just kidding. Computer chose ${fmt(realCpuMove)}. You actually lost. hahahahahahaha`
-    );
-
-    // If game ends after reversal
-    if (isGameOver()) {
-      gameStatusEl.textContent = winnerText();
-      directSpeak(winnerText());
-      directSpeak("Do you want to play again? Click reset");
-    } else {
-      // Unlock
-      disableChoices(false);
-      gameStatusEl.textContent = "First to 3. Keep going!";
-    }
-  }, 2000);
-}
-
-    function cpuPick() {
-      return choices[Math.floor(Math.random() * choices.length)];
-    }
+    function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
+    function fmt(move) { return move.charAt(0).toUpperCase() + move.slice(1); }
 
     function updateScores() {
       playerEl.textContent = player;
       cpuEl.textContent = cpu;
-    }
-
-    function directSpeak(text) {
-      fetch("http://127.0.0.1:5001/directSpeak", {
-          method: "POST",
-          headers: {"Content-Type": "application/json"},
-          body: JSON.stringify({ 'text': text })
-      })
-
-      console.log(text)
-    }
-
-    function mistyStart() {
-      fetch("http://127.0.0.1:5001/mistyStart", {
-          method: "POST",
-          headers: {"Content-Type": "application/json"},
-          // body: JSON.stringify({ 'text': texts })
-      })
-      .then(r => r.text())
-      .then(console.log)
-      .catch(console.error)
     }
 
     function banner(show, main = '', detail = '') {
@@ -198,16 +129,6 @@
       historyEl.prepend(li);
     }
 
-    function isGameOver() {
-      return player === 3 || cpu === 3; // first to 3
-    }
-
-    function winnerText() {
-      if (player > cpu) return 'You win the game! 🎉';
-      if (cpu > player) return 'Computer wins the game!🤖';
-      return 'It\'s a draw!';
-    }
-
     function disableChoices(disabled) {
       document.querySelectorAll('.choice').forEach(btn => {
         btn.disabled = disabled;
@@ -216,124 +137,82 @@
       });
     }
 
-    // UPDATED: animated version
-async function playRound(playerMove) {
-  if (isGameOver()) return;
+    function isGameOver() { return player === 3 || cpu === 3; }
 
-  const c = cpuPick();        // computer's final move (decided now)
-  disableChoices(true);       // lock inputs during animation
-  await showCpuAnimation(c);  // run shuffle + reveal GIF/emoji
+    function winnerText() {
+      if (player > cpu) return 'You win the game! 🎉';
+      if (cpu > player) return 'Misty wins the game! 🤖';
+      return 'Draw!';
+    }
 
-  // --- scoring logic (unchanged) ---
-  if (playerMove === c) {
-    banner(true, 'Tie 🤝', `${fmt(playerMove)} ties ${fmt(c)}.`);
-    directSpeak("Tie")
-    appendHistory(`Tie — You: ${fmt(playerMove)} | CPU: ${fmt(c)}`);
-  } else if (beats[playerMove] === c) {
-    player++;
-    banner(true, 'You win this round! ✅', `${fmt(playerMove)} beats ${fmt(c)}.`);
-    directSpeak("You win this round!")
-    appendHistory(`Win — ${fmt(playerMove)} beats ${fmt(c)}.`);
-    maybeFakeReversal(c, playerMove);
-  } else {
-    cpu++;
-    banner(true, 'You lose this round ❌', `${fmt(c)} beats ${fmt(playerMove)}.`);
-    directSpeak("You lose this round hahahahahaha")
-    appendHistory(`Loss — ${fmt(c)} beats ${fmt(playerMove)}.`);
-  }
+    // --- Core Logic: Triggering Misty & Syncing Animation ---
 
-  updateScores();
+    async function mistyStart() {
+      // Calls your Flask route which handles physical head-pumping
+      const response = await fetch("/RockPaperScissors", {
+          method: "POST",
+          headers: {"Content-Type": "application/json"}
+      });
+      const data = await response.json();
+      return data.misty_choice.toLowerCase();
+    }
 
-  if (isGameOver()) {
-    gameStatusEl.textContent = winnerText();
-    directSpeak(winnerText())
-    directSpeak("Do you want to play again? Click reset")
-    // keep inputs disabled at game end
-  } else {
-    gameStatusEl.textContent = "First to 3. Keep going!";
-    disableChoices(false); // unlock inputs for next round
-  }
-}
-const choiceGifs = {
-  rock:     "./assets/rps-rock.gif",
-  paper:    "./assets/rps-paper.gif",
-  scissors: "./assets/rps-scissors.gif",
-};
+    async function showCpuAnimation(finalMove) {
+      cpuAnim.classList.remove('hidden');
+      banner(false); // Hide old banner during countdown
 
-const cpuAnim  = document.getElementById('cpuAnim'); // wrapper section
-const cpuGif   = document.getElementById('cpuGif');  // <img>
-const cpuEmoji = document.getElementById('cpuEmoji'); // emoji fallback
+      // Shuffle cycle: Matches Misty's "Rock... Paper... Scissors..." timing (800ms per beat)
+      const countdownSteps = ['Rock', 'Paper', 'Scissors'];
+      const emojis = ['✊', '✋', '✌️'];
 
-function sleep(ms){ return new Promise(r => setTimeout(r, ms)); }
+      for (let i = 0; i < countdownSteps.length; i++) {
+        animStatus.textContent = countdownSteps[i] + "...";
+        cpuEmoji.textContent = emojis[i];
+        await sleep(800); // SYNCED with Python time.sleep(0.8)
+      }
 
-// async function showCpuAnimation(finalMove) {
-//   const shuffleSrc = cpuGif?.dataset?.shuffle || ""; // optional generic shuffle gif
-//   cpuAnim.classList.remove('hidden');
+      // "Shoot!" Reveal
+      animStatus.textContent = "SHOOT!";
+      cpuEmoji.textContent = finalMove === 'rock' ? '✊' : finalMove === 'paper' ? '✋' : '✌️';
+      
+      await sleep(1500); 
+      cpuAnim.classList.add('hidden');
+    }
 
-//   if (shuffleSrc) {
-//     cpuEmoji.classList.add('hidden');
-//     cpuGif.classList.remove('hidden');
-//     cpuGif.src = shuffleSrc;           // show generic shuffle
-//     await sleep(800);
-//   } else {
-//     // emoji shuffle fallback
-//     cpuGif.classList.add('hidden');
-//     cpuEmoji.classList.remove('hidden');
-//     const cycle = ['✊','✋','✌️','✋','✊','✌️'];
-//     for (let i = 0; i < cycle.length; i++) { cpuEmoji.textContent = cycle[i]; await sleep(120); }
-//   }
+    async function playRound(playerMove) {
+      if (isGameOver()) return;
 
-//   // reveal final move
-//   const src = "./static/assets/rps-shuffle.gif";
-//   if (src) {
-//     cpuEmoji.classList.add('hidden');
-//     cpuGif.classList.remove('hidden');
-//     cpuGif.src = src;
-//   } else {
-//     cpuGif.classList.add('hidden');
-//     cpuEmoji.classList.remove('hidden');
-//     cpuEmoji.textContent = finalMove === 'rock' ? '✊' : finalMove === 'paper' ? '✋' : '✌️';
-//   }
+      disableChoices(true);
+      
+      // 1. Kick off the physical robot countdown and get choice
+      const c = await mistyStart(); 
 
-//   await sleep(2000);
-//   cpuAnim.classList.add('hidden');
-// }
+      // 2. Kick off the UI countdown (Visual Sync)
+      await showCpuAnimation(c); 
 
-async function showCpuAnimation(finalMove) {
-  const cpuAnim = document.getElementById('cpuAnim');
-  const cpuGif = document.getElementById('cpuGif');
-  const cpuEmoji = document.getElementById('cpuEmoji');
+      // 3. Logic & Scoring
+      if (playerMove === c) {
+        banner(true, 'Tie 🤝', `${fmt(playerMove)} ties ${fmt(c)}.`);
+        appendHistory(`Tie — You: ${fmt(playerMove)} | Misty: ${fmt(c)}`);
+      } else if (beats[playerMove] === c) {
+        player++;
+        banner(true, 'You win this round! ✅', `${fmt(playerMove)} beats ${fmt(c)}.`);
+        appendHistory(`Win — ${fmt(playerMove)} beats ${fmt(c)}.`);
+      } else {
+        cpu++;
+        banner(true, 'You lose this round ❌', `${fmt(c)} beats ${fmt(playerMove)}.`);
+        appendHistory(`Loss — ${fmt(c)} beats ${fmt(playerMove)}.`);
+      }
 
-  cpuAnim.classList.remove('hidden');
+      updateScores();
 
-  // Hide GIF image and show emoji shuffle
-  cpuGif.classList.add('hidden');
-  cpuEmoji.classList.remove('hidden');
-
-  // Shuffle emoji to simulate "thinking"
-  const cycle = ['✊', '✋', '✌️', '✋', '✊', '✌️'];
-  for (let i = 0; i < cycle.length; i++) {
-    cpuEmoji.textContent = cycle[i];
-    await sleep(700);
-  }
-
-  // Show the final emoji choice
-  cpuEmoji.textContent =
-    finalMove === 'rock' ? '✊' :
-    finalMove === 'paper' ? '✋' :
-    '✌️';
-
-    finalMove === 'rock' ? directSpeak("Rock") :
-    finalMove === 'paper' ? directSpeak("Paper") :
-    directSpeak("Scissors");
-
-  // Wait a bit before hiding animation
-  await sleep(2500);
-  cpuAnim.classList.add('hidden');
-}
-
-    function fmt(move) {
-      return move.charAt(0).toUpperCase() + move.slice(1);
+      if (isGameOver()) {
+        gameStatusEl.textContent = winnerText();
+        disableChoices(true);
+      } else {
+        gameStatusEl.textContent = "First to 3. Keep going!";
+        disableChoices(false);
+      }
     }
 
     function resetGame() {
@@ -343,16 +222,17 @@ async function showCpuAnimation(finalMove) {
       banner(false);
       disableChoices(false);
       gameStatusEl.textContent = 'First to 3 — make your move.';
+      cpuAnim.classList.add('hidden');
     }
 
-    // Event listeners for buttons
+    // Event Listeners
     document.querySelectorAll('.choice').forEach(btn => {
       btn.addEventListener('click', () => playRound(btn.dataset.move));
     });
 
     resetBtn.addEventListener('click', resetGame);
 
-    // Initialize
+    // Initial state
     resetGame();
   </script>
 </body>
