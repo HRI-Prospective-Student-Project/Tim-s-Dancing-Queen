@@ -22,218 +22,176 @@
   <main class="w-full max-w-3xl">
     <header class="text-center mb-8">
       <h1 class="text-4xl font-extrabold tracking-tight text-primary">Rock • Paper • Scissors</h1>
-      <p class="text-slate-600 mt-2">First to 3 wins! Choose your move below.</p>
+      <p class="text-slate-600 mt-2">First to 3 wins! Watch Misty for the countdown.</p>
     </header>
 
     <section class="grid grid-cols-2 gap-4 mb-6">
-      <div class="rounded-2xl bg-white shadow p-5 border border-slate-100">
+      <div class="rounded-2xl bg-white shadow p-5 border border-slate-100 text-center">
         <h2 class="text-sm uppercase tracking-wider text-slate-500">You</h2>
         <p id="playerScore" class="text-4xl font-bold">0</p>
       </div>
-      <div class="rounded-2xl bg-white shadow p-5 border border-slate-100">
+      <div class="rounded-2xl bg-white shadow p-5 border border-slate-100 text-center">
         <h2 class="text-sm uppercase tracking-wider text-slate-500">Misty</h2>
         <p id="cpuScore" class="text-4xl font-bold">0</p>
       </div>
     </section>
 
-    <section id="cpuAnim" class="rounded-2xl bg-white shadow p-5 border border-slate-100 mb-6 hidden text-center">
-      <p id="animStatus" class="text-sm uppercase tracking-wider text-slate-500 mb-2">Misty is ready...</p>
-      <div class="flex flex-col items-center gap-3">
-        <div id="cpuEmoji" class="text-6xl leading-none select-none">✊</div>
+    <section id="cpuAnim" class="rounded-2xl bg-white shadow p-8 border border-slate-100 mb-6 hidden text-center">
+      <p id="animStatus" class="text-xl font-bold text-accent uppercase tracking-widest mb-4">Ready...</p>
+      <div class="flex justify-center">
+        <div id="cpuEmoji" class="text-8xl transition-all duration-200 transform scale-110">✊</div>
       </div>
     </section>
 
     <section id="resultBanner" class="rounded-2xl bg-white shadow p-5 border border-slate-100 mb-6 hidden">
-      <p id="roundResult" class="text-lg font-semibold"></p>
+      <p id="roundResult" class="text-lg font-bold text-primary"></p>
       <p id="roundDetail" class="text-slate-600"></p>
     </section>
 
-    <section class="grid grid-cols-3 gap-4 mb-8" aria-label="Choose your move">
-      <button data-move="rock" class="choice group rounded-2xl bg-white shadow hover:shadow-lg border border-slate-100 p-6 flex flex-col items-center gap-3 transition active:scale-[0.98] focus:outline-none focus:ring-4 focus:ring-indigo-200">
-        <span class="text-5xl leading-none" aria-hidden="true">✊</span>
-        <span class="font-semibold">Rock</span>
-        <span class="text-xs text-slate-500">Beats Scissors</span>
+    <section class="grid grid-cols-3 gap-4 mb-8">
+      <button data-move="rock" class="choice group rounded-2xl bg-white shadow hover:shadow-lg border border-slate-100 p-6 flex flex-col items-center gap-3 transition active:scale-95">
+        <span class="text-5xl">✊</span>
+        <span class="font-bold">Rock</span>
       </button>
-      <button data-move="paper" class="choice group rounded-2xl bg-white shadow hover:shadow-lg border border-slate-100 p-6 flex flex-col items-center gap-3 transition active:scale-[0.98] focus:outline-none focus:ring-4 focus:ring-indigo-200">
-        <span class="text-5xl leading-none" aria-hidden="true">✋</span>
-        <span class="font-semibold">Paper</span>
-        <span class="text-xs text-slate-500">Beats Rock</span>
+      <button data-move="paper" class="choice group rounded-2xl bg-white shadow hover:shadow-lg border border-slate-100 p-6 flex flex-col items-center gap-3 transition active:scale-95">
+        <span class="text-5xl">✋</span>
+        <span class="font-bold">Paper</span>
       </button>
-      <button data-move="scissors" class="choice group rounded-2xl bg-white shadow hover:shadow-lg border border-slate-100 p-6 flex flex-col items-center gap-3 transition active:scale-[0.98] focus:outline-none focus:ring-4 focus:ring-indigo-200">
-        <span class="text-5xl leading-none" aria-hidden="true">✌️</span>
-        <span class="font-semibold">Scissors</span>
-        <span class="text-xs text-slate-500">Beats Paper</span>
+      <button data-move="scissors" class="choice group rounded-2xl bg-white shadow hover:shadow-lg border border-slate-100 p-6 flex flex-col items-center gap-3 transition active:scale-95">
+        <span class="text-5xl">✌️</span>
+        <span class="font-bold">Scissors</span>
       </button>
     </section>
 
-    <section class="grid md:grid-cols-2 gap-4 items-start">
-      <div class="rounded-2xl bg-white shadow border border-slate-100">
-        <div class="p-5 border-b border-slate-100">
-          <h3 class="font-semibold">Round History</h3>
-          <p class="text-xs text-slate-500">Newest on top</p>
+    <section class="grid md:grid-cols-2 gap-4">
+      <div class="rounded-2xl bg-white shadow border border-slate-100 overflow-hidden">
+        <div class="p-4 bg-slate-50 border-b border-slate-100">
+          <h3 class="font-bold text-sm text-slate-700">Round History</h3>
         </div>
-        <ol id="history" class="max-h-64 overflow-auto p-4 space-y-2" aria-live="polite"></ol>
+        <ol id="history" class="max-h-48 overflow-auto p-4 space-y-2 text-sm"></ol>
       </div>
-      <div class="rounded-2xl bg-white shadow p-5 border border-slate-100 flex flex-col gap-4">
-        <div>
-          <h3 class="font-semibold">Game Status</h3>
-          <p id="gameStatus" class="text-slate-600">First to 3 — make your move.</p>
+      <div class="flex flex-col gap-4">
+        <div class="p-5 rounded-2xl bg-white shadow border border-slate-100">
+          <h3 class="font-bold">Game Status</h3>
+          <p id="gameStatus" class="text-slate-600">First player to 3 wins!</p>
         </div>
-        <div class="flex flex-col gap-2">
-          <button id="resetBtn" class="px-4 py-2 rounded-xl bg-accent text-white font-semibold shadow hover:shadow-lg transition active:scale-[0.98]">Reset</button>
-          <a href="/" class="px-4 py-2 rounded-xl bg-slate-200 text-slate-700 font-semibold shadow hover:shadow-lg transition text-center">
-            ← Go Home
-          </a>
-        </div>
+        <button id="resetBtn" class="w-full py-3 rounded-xl bg-accent text-white font-bold shadow hover:opacity-90 transition">Reset Game</button>
       </div>
     </section>
   </main>
 
   <script>
-    // --- Game State ---
-    let player = 0;
-    let cpu = 0;
-    const choices = ['rock', 'paper', 'scissors'];
+    let player = 0, cpu = 0;
     const beats = { rock: 'scissors', paper: 'rock', scissors: 'paper' };
+    const emojis = { rock: '✊', paper: '✋', scissors: '✌️' };
 
     const playerEl = document.getElementById('playerScore');
     const cpuEl = document.getElementById('cpuScore');
     const historyEl = document.getElementById('history');
     const gameStatusEl = document.getElementById('gameStatus');
     const resultBanner = document.getElementById('resultBanner');
-    const roundResult = document.getElementById('roundResult');
-    const roundDetail = document.getElementById('roundDetail');
-    const resetBtn = document.getElementById('resetBtn');
     const cpuAnim = document.getElementById('cpuAnim');
     const cpuEmoji = document.getElementById('cpuEmoji');
     const animStatus = document.getElementById('animStatus');
 
     function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
-    function fmt(move) { return move.charAt(0).toUpperCase() + move.slice(1); }
-
-    function updateScores() {
-      playerEl.textContent = player;
-      cpuEl.textContent = cpu;
-    }
-
-    function banner(show, main = '', detail = '') {
-      resultBanner.classList.toggle('hidden', !show);
-      roundResult.textContent = main;
-      roundDetail.textContent = detail;
-    }
-
-    function appendHistory(text) {
-      const li = document.createElement('li');
-      li.className = 'text-sm text-slate-700 bg-slate-50 border border-slate-200 rounded-lg p-2';
-      li.textContent = text;
-      historyEl.prepend(li);
-    }
-
-    function disableChoices(disabled) {
-      document.querySelectorAll('.choice').forEach(btn => {
-        btn.disabled = disabled;
-        btn.classList.toggle('opacity-50', disabled);
-        btn.classList.toggle('cursor-not-allowed', disabled);
-      });
-    }
-
-    function isGameOver() { return player === 3 || cpu === 3; }
-
-    function winnerText() {
-      if (player > cpu) return 'You win the game! 🎉';
-      if (cpu > player) return 'Misty wins the game! 🤖';
-      return 'Draw!';
-    }
-
-    // --- Core Logic: Triggering Misty & Syncing Animation ---
 
     async function mistyStart() {
-      // Calls your Flask route which handles physical head-pumping
-      const response = await fetch("/RockPaperScissors", {
-          method: "POST",
-          headers: {"Content-Type": "application/json"}
-      });
-      const data = await response.json();
-      return data.misty_choice.toLowerCase();
+      // Calls the POST route in your Flask app
+      const r = await fetch("/RockPaperScissors", { method: "POST" });
+      const d = await r.json();
+      return d.misty_choice.toLowerCase();
     }
 
-    async function showCpuAnimation(finalMove) {
+    async function runSyncAnimation(mistyChoice) {
       cpuAnim.classList.remove('hidden');
-      banner(false); // Hide old banner during countdown
+      resultBanner.classList.add('hidden');
 
-      // Shuffle cycle: Matches Misty's "Rock... Paper... Scissors..." timing (800ms per beat)
-      const countdownSteps = ['Rock', 'Paper', 'Scissors'];
-      const emojis = ['✊', '✋', '✌️'];
+      const steps = ['Rock', 'Paper', 'Scissors'];
+      const cycleEmojis = ['✊', '✋', '✌️'];
 
-      for (let i = 0; i < countdownSteps.length; i++) {
-        animStatus.textContent = countdownSteps[i] + "...";
-        cpuEmoji.textContent = emojis[i];
-        await sleep(800); // SYNCED with Python time.sleep(0.8)
+      // LOOP: Sycned with the 0.8s time.sleep in Python
+      for (let i = 0; i < steps.length; i++) {
+        animStatus.textContent = steps[i] + "...";
+        cpuEmoji.textContent = cycleEmojis[i];
+        // Visual "pump" effect
+        cpuEmoji.style.transform = "scale(1.3)";
+        setTimeout(() => cpuEmoji.style.transform = "scale(1)", 200);
+        
+        await sleep(800); 
       }
 
-      // "Shoot!" Reveal
+      // REVEAL: Matches Misty's "Shoot!"
       animStatus.textContent = "SHOOT!";
-      cpuEmoji.textContent = finalMove === 'rock' ? '✊' : finalMove === 'paper' ? '✋' : '✌️';
+      cpuEmoji.textContent = emojis[mistyChoice];
+      cpuEmoji.style.transform = "scale(1.5)";
       
-      await sleep(1500); 
+      await sleep(2000);
       cpuAnim.classList.add('hidden');
     }
 
     async function playRound(playerMove) {
-      if (isGameOver()) return;
-
+      if (player >= 3 || cpu >= 3) return;
+      
       disableChoices(true);
       
-      // 1. Kick off the physical robot countdown and get choice
+      // 1. Get Misty's choice (starts robot sequence in background)
       const c = await mistyStart(); 
 
-      // 2. Kick off the UI countdown (Visual Sync)
-      await showCpuAnimation(c); 
+      // 2. Run the UI countdown synced with robot's physical movements
+      await runSyncAnimation(c); 
 
-      // 3. Logic & Scoring
+      // 3. Process Scoring
       if (playerMove === c) {
-        banner(true, 'Tie 🤝', `${fmt(playerMove)} ties ${fmt(c)}.`);
-        appendHistory(`Tie — You: ${fmt(playerMove)} | Misty: ${fmt(c)}`);
+        showResult('Tie 🤝', `Both picked ${c}.`);
       } else if (beats[playerMove] === c) {
         player++;
-        banner(true, 'You win this round! ✅', `${fmt(playerMove)} beats ${fmt(c)}.`);
-        appendHistory(`Win — ${fmt(playerMove)} beats ${fmt(c)}.`);
+        showResult('You Win! ✅', `${playerMove} beats ${c}.`);
       } else {
         cpu++;
-        banner(true, 'You lose this round ❌', `${fmt(c)} beats ${fmt(playerMove)}.`);
-        appendHistory(`Loss — ${fmt(c)} beats ${fmt(playerMove)}.`);
+        showResult('Misty Wins! ❌', `${c} beats ${playerMove}.`);
       }
 
-      updateScores();
-
-      if (isGameOver()) {
-        gameStatusEl.textContent = winnerText();
-        disableChoices(true);
-      } else {
-        gameStatusEl.textContent = "First to 3. Keep going!";
-        disableChoices(false);
-      }
+      updateUI();
+      disableChoices(player < 3 && cpu < 3 ? false : true);
     }
 
-    function resetGame() {
-      player = 0; cpu = 0;
-      updateScores();
-      historyEl.innerHTML = '';
-      banner(false);
-      disableChoices(false);
-      gameStatusEl.textContent = 'First to 3 — make your move.';
-      cpuAnim.classList.add('hidden');
+    function showResult(title, detail) {
+      resultBanner.classList.remove('hidden');
+      document.getElementById('roundResult').textContent = title;
+      document.getElementById('roundDetail').textContent = detail;
+      const li = document.createElement('li');
+      li.className = "p-2 bg-slate-50 border rounded";
+      li.textContent = `${title}: ${detail}`;
+      historyEl.prepend(li);
     }
 
-    // Event Listeners
-    document.querySelectorAll('.choice').forEach(btn => {
-      btn.addEventListener('click', () => playRound(btn.dataset.move));
+    function updateUI() {
+      playerEl.textContent = player;
+      cpuEl.textContent = cpu;
+      if (player >= 3) gameStatusEl.textContent = "Victory! You beat Misty! 🎉";
+      else if (cpu >= 3) gameStatusEl.textContent = "Misty wins the match! 🤖";
+    }
+
+    function disableChoices(val) {
+      document.querySelectorAll('.choice').forEach(b => {
+        b.disabled = val;
+        b.style.opacity = val ? "0.5" : "1";
+      });
+    }
+
+    document.querySelectorAll('.choice').forEach(b => {
+      b.addEventListener('click', () => playRound(b.dataset.move));
     });
 
-    resetBtn.addEventListener('click', resetGame);
-
-    // Initial state
-    resetGame();
+    document.getElementById('resetBtn').addEventListener('click', () => {
+      player = 0; cpu = 0;
+      updateUI();
+      historyEl.innerHTML = '';
+      resultBanner.classList.add('hidden');
+      gameStatusEl.textContent = "First player to 3 wins!";
+      disableChoices(false);
+    });
   </script>
 </body>
 </html>

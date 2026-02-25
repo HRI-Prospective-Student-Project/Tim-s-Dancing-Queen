@@ -8,7 +8,7 @@ import random
 import json
 
 app = Flask(__name__)
-MISTY_IP = "192.168.1.2"
+MISTY_IP = "192.168.1.3"
 
 # Initialize Robot interfaces
 misty = Robot(MISTY_IP)
@@ -54,40 +54,67 @@ def rps_route():
         misty_move = random.choice(moves)
 
         def run_rps_sequence():
-            # Clear any previous speech/actions
             misty.stop_speaking()
             
-            # --- THE "HUMAN" COUNTDOWN ---
-            # Beat 1: "Rock" + Head Down
+            # --- THE SHOW BEGINS ---
+            # Beat 1: "Rock" + Red Light + System Beep
+            misty.change_led(255, 0, 0) # Red
+            misty.play_audio("s_SystemSuccess.wav") 
             misty.speak("Rock")
-            misty.move_head(pitch=20, roll=0, yaw=0, velocity=100) 
+            misty.move_head(pitch=20, velocity=100) 
+            misty.move_arms(leftArmPosition=-40, rightArmPosition=-40, leftArmVelocity=100, rightArmVelocity=100)
             time.sleep(0.8)
 
-            # Beat 2: "Paper" + Head Up
+            # Beat 2: "Paper" + Yellow Light + System Beep
+            misty.change_led(255, 255, 0) # Yellow
+            misty.play_audio("s_SystemSuccess.wav")
             misty.speak("Paper")
-            misty.move_head(pitch=-15, roll=0, yaw=0, velocity=100)
+            misty.move_head(pitch=-15, velocity=100)
+            misty.move_arms(leftArmPosition=40, rightArmPosition=40, leftArmVelocity=100, rightArmVelocity=100)
             time.sleep(0.8)
 
-            # Beat 3: "Scissors" + Head Down
+            # Beat 3: "Scissors" + Orange Light + System Beep
+            misty.change_led(255, 165, 0) # Orange
+            misty.play_audio("s_SystemSuccess.wav")
             misty.speak("Scissors")
-            misty.move_head(pitch=20, roll=0, yaw=0, velocity=100)
+            misty.move_head(pitch=20, velocity=100)
+            misty.move_arms(leftArmPosition=-40, rightArmPosition=-40, leftArmVelocity=100, rightArmVelocity=100)
             time.sleep(0.8)
 
-            # THE REVEAL: "Shoot!" + Level Head + Flash LED
-            misty.move_head(pitch=0, roll=0, yaw=0, velocity=100)
-            misty.change_led(79, 70, 229) # Indigo/Purple flash
+            # THE REVEAL: "Shoot!" + Rainbow Flash + Happy Eyes
+            misty.change_led(0, 255, 0) # Bright Green
+            misty.display_image("e_Joy.jpg")
+            misty.play_audio("s_Joy.wav")
+            
+            misty.move_head(pitch=0, velocity=100)
+            misty.move_arms(leftArmPosition=0, rightArmPosition=0, leftArmVelocity=100, rightArmVelocity=100)
+            
             misty.speak(f"Shoot! I chose {misty_move}!")
             
-            # Change eyes to show excitement
-            misty.display_image("e_Joy.jpg") 
+            # Wait 3 seconds then go back to neutral
             time.sleep(3)
             misty.display_image("e_DefaultContent.jpg")
+            misty.change_led(0, 0, 0) # LED Off
 
-        # Run in background so the UI doesn't lag
+        # Run in background
         Thread(target=run_rps_sequence).start()
         return jsonify({"status": "playing", "misty_choice": misty_move})
 
-    # If it's a GET request, just show the page
+    # --- GET REQUEST (Page Load) ---
+    def game_intro():
+        # Small delay so the user sees the page load before she starts talking
+        time.sleep(1.5) 
+        misty.stop_speaking()
+        misty.change_led(100, 100, 255) # Soft Purple/Blue
+        misty.display_image("e_ContentLeft.jpg")
+        misty.speak("Welcome to Rock Paper Scissors! I am first to three wins. Watch me closely as I count down, and click your move on the screen when you are ready. Good luck!")
+        time.sleep(5)
+        misty.display_image("e_DefaultContent.jpg")
+        misty.change_led(0, 0, 0)
+
+    # Start intro in background so it doesn't block the page from rendering
+    Thread(target=game_intro).start()
+
     return render_template('RockPaperScissors.html')
 
 @app.route('/speak', methods=["POST"])
