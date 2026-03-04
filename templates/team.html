@@ -6,6 +6,8 @@
     <title>Meet the Team | F&M Robotics</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/feather-icons"></script>
+    <script src="{{ url_for('static', filename='global.js') }}"></script>
+    
     <style>
         body, html { height: 100vh; overflow: hidden; margin: 0; }
         
@@ -16,9 +18,22 @@
         }
         .animate-gemini-pulse { animation: pulse-indigo 2s infinite; }
         
-        /* Smooth hover effect for rectangular images */
-        .team-card:hover .image-container img { 
-            transform: scale(1.05);
+        /* Smooth hover effect for thumbnails */
+        .image-container img {
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .image-container:hover img { 
+            transform: scale(1.08);
+        }
+
+        /* Fullscreen Modal Anim */
+        #lightbox.active {
+            display: flex;
+            animation: fadeIn 0.3s ease-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
     </style>
     <script>
@@ -34,7 +49,14 @@
         }
     </script>
 </head>
-<body class="bg-slate-100 text-slate-900 font-sans">
+<body class="bg-slate-100 text-slate-900 font-sans" onload="initTeamPage()">
+
+    <div id="lightbox" onclick="closeImage()" class="fixed inset-0 bg-slate-900/95 z-[100] hidden items-center justify-center p-4 cursor-zoom-out">
+        <button class="absolute top-6 right-6 text-white hover:text-accent transition-colors">
+            <i data-feather="x" class="w-8 h-8"></i>
+        </button>
+        <img id="lightboxImg" src="" class="max-w-full max-h-full rounded-xl shadow-2xl border-2 border-white/10 object-contain">
+    </div>
 
     <div class="h-screen flex flex-col p-4 gap-4">
         
@@ -46,63 +68,69 @@
                 <span class="text-lg font-bold tracking-tight">F&M Social Robotics Lab</span>
             </div>
             <div class="flex items-center gap-4">
-                <a href="/" onclick="stopSpeech()" class="text-sm font-semibold text-slate-600 hover:text-primary transition-colors">Home</a>
-                <a href="/gemini_misty" onclick="stopSpeech()" class="animate-gemini-pulse bg-accent text-white px-5 py-2 rounded-full text-sm font-bold flex items-center gap-2 border-2 border-indigo-300 transition-all hover:scale-105 shadow-md">
+                <a href="/" onclick="handleNav('Team: Exit to Home')" class="text-sm font-semibold text-slate-600 hover:text-primary transition-colors">Home</a>
+                <a href="/gemini_misty" onclick="handleNav('Team: Exit to Gemini')" class="animate-gemini-pulse bg-accent text-white px-5 py-2 rounded-full text-sm font-bold flex items-center gap-2 border-2 border-indigo-300 transition-all hover:scale-105 shadow-md">
                     <i data-feather="sparkles" class="w-4 h-4 text-yellow-300"></i> Ask Gemini
                 </a>
             </div>
         </nav>
 
         <div class="flex-1 flex flex-col items-center justify-center min-h-0">
-            
             <div class="mb-8 text-center">
                 <h1 class="text-5xl font-black text-slate-900 tracking-tight leading-tight">
                     The Minds Behind the <span class="text-primary">Research</span>
                 </h1>
-                <p class="text-slate-500 font-bold mt-3 uppercase tracking-widest text-xs">Tap a panel to have Misty introduce us</p>
+                <p class="text-slate-500 font-bold mt-3 uppercase tracking-widest text-xs flex items-center justify-center gap-2">
+                    <i data-feather="info" class="w-3 h-3 text-slate-400"></i>
+                    Tap text for intro | Tap photo to expand
+                </p>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6 w-full max-w-7xl px-4">
                 
-                <div onclick="speakText('Meet Professor Willie Wilson. He is the lead investigator for the robotics lab and focuses on Human Robot Interaction and Computer Science education at Franklin and Marshall.')"
-                     class="team-card cursor-pointer bg-white rounded-[2rem] p-6 shadow-sm border border-slate-200 hover:border-primary/40 transition-all group flex flex-col relative overflow-hidden">
+                <div class="team-card bg-white rounded-[2rem] p-6 shadow-sm border border-slate-200 hover:border-primary/40 transition-all group flex flex-col relative overflow-hidden">
                     <div class="absolute top-0 left-0 w-full h-2 bg-primary"></div>
                     
-                    <div class="image-container w-full aspect-video rounded-2xl bg-slate-100 mb-6 overflow-hidden border border-slate-200">
-                        <img src="static/wilson.jpg" alt="Prof. Wilson" class="w-full h-full object-cover transition-transform duration-500">
+                    <div onclick="openImage('static/assets/CPS_willie_wilson_CAREER_article.jpg', 'Prof Wilson')" class="image-container relative w-full aspect-video rounded-2xl bg-slate-100 mb-6 overflow-hidden border border-slate-200 cursor-zoom-in group">
+                        
+                        <div class="absolute top-3 right-3 p-2 bg-black/60 rounded-lg text-white z-10 opacity-0 group-hover:opacity-100 transition-opacity">
+                            <i data-feather="maximize" class="w-4 h-4"></i>
+                        </div>
+                        
+                        <img src="static/assets/CPS_willie_wilson_CAREER_article.jpg" alt="Prof. Wilson" class="w-full h-full object-cover">
                     </div>
-
-                    <div class="text-center">
+                    
+                    <div onclick="logInteraction('TEAM_CARD_CLICK', 'Prof Wilson'); speakText('Meet Professor Willie Wilson...')" class="text-center cursor-pointer">
                         <h2 class="text-2xl font-black text-slate-900 tracking-tight mb-1">Prof. Willie Wilson</h2>
                         <p class="text-primary font-bold text-[10px] uppercase tracking-widest mb-4 px-3 py-1 bg-primary/5 rounded-full inline-block">Lead Investigator</p>
                         <p class="text-slate-600 text-sm leading-relaxed">Expert in Human-Robot Interaction and CS education.</p>
                     </div>
                 </div>
 
-                <div onclick="speakText('This is Oluwatimilehin Adefioye. He is a student researcher responsible for the development of this dashboard and integrating my systems with Gemini.')"
-                     class="team-card cursor-pointer bg-white rounded-[2rem] p-6 shadow-sm border border-slate-200 hover:border-accent/40 transition-all group flex flex-col relative overflow-hidden">
+                <div class="team-card bg-white rounded-[2rem] p-6 shadow-sm border border-slate-200 hover:border-accent/40 transition-all group flex flex-col relative overflow-hidden">
                     <div class="absolute top-0 left-0 w-full h-2 bg-accent"></div>
-                    
-                    <div class="image-container w-full aspect-video rounded-2xl bg-slate-100 mb-6 overflow-hidden border border-slate-200">
-                        <img src="static/tim.jpg" alt="Timilehin" class="w-full h-full object-cover transition-transform duration-500">
+                    <div onclick="openImage('static/tim.jpg', 'Tim')" class="image-container relative w-full aspect-video rounded-2xl bg-slate-100 mb-6 overflow-hidden border border-slate-200 cursor-zoom-in group">
+                        <div class="absolute top-3 right-3 p-2 bg-black/60 rounded-lg text-white z-10 opacity-0 group-hover:opacity-100 transition-opacity">
+                            <i data-feather="maximize" class="w-4 h-4"></i>
+                        </div>
+                        <img src="static/tim.jpg" alt="Timilehin" class="w-full h-full object-cover">
                     </div>
-
-                    <div class="text-center">
+                    <div onclick="logInteraction('TEAM_CARD_CLICK', 'O. Adefioye'); speakText('This is Oluwatimilehin Adefioye...')" class="text-center cursor-pointer">
                         <h2 class="text-2xl font-black text-slate-900 tracking-tight mb-1">O. Adefioye</h2>
                         <p class="text-accent font-bold text-[10px] uppercase tracking-widest mb-4 px-3 py-1 bg-accent/5 rounded-full inline-block">Student Researcher • '26</p>
                         <p class="text-slate-600 text-sm leading-relaxed">Specializing in LLM integration and system design.</p>
                     </div>
                 </div>
 
-                <div onclick="speakText('This is the Human Robot Interaction class! These students are exploring the future of how humans and machines coexist through hands on labs with me and other robots.')"
-                     class="team-card cursor-pointer bg-white rounded-[2rem] p-6 shadow-sm border border-slate-200 hover:border-indigo-400/40 transition-all group flex flex-col relative overflow-hidden">
+                <div class="team-card bg-white rounded-[2rem] p-6 shadow-sm border border-slate-200 hover:border-indigo-400/40 transition-all group flex flex-col relative overflow-hidden">
                     <div class="absolute top-0 left-0 w-full h-2 bg-indigo-400"></div>
-                    
-                    <div class="image-container w-full aspect-video rounded-2xl bg-slate-100 mb-6 overflow-hidden border border-slate-200">
-                        <img src="C:\Users\oadefstatic\assets\Full_HRI_Picture.jpg" alt="HRI Class" class="w-full h-full object-cover transition-transform duration-500">
+                    <div onclick="openImage('static/assets/Full_HRI_Picture.jpg', 'HRI Class')" class="image-container relative w-full aspect-video rounded-2xl bg-slate-100 mb-6 overflow-hidden border border-slate-200 cursor-zoom-in group">
+                        <div class="absolute top-3 right-3 p-2 bg-black/60 rounded-lg text-white z-10 opacity-0 group-hover:opacity-100 transition-opacity">
+                            <i data-feather="maximize" class="w-4 h-4"></i>
+                        </div>
+                        <img src="static/assets/Full_HRI_Picture.jpg" alt="HRI Class" class="w-full h-full object-cover">
                     </div>
-
-                    <div class="text-center">
+                    <div onclick="logInteraction('TEAM_CARD_CLICK', 'HRI Class'); speakText('This is the Human Robot Interaction class...')" class="text-center cursor-pointer">
                         <h2 class="text-2xl font-black text-slate-900 tracking-tight mb-1">HRI Class</h2>
                         <p class="text-indigo-500 font-bold text-[10px] uppercase tracking-widest mb-4 px-3 py-1 bg-indigo-50 rounded-full inline-block">Spring 2026 Cohort</p>
                         <p class="text-slate-600 text-sm leading-relaxed">Investigating the social impact of robotic agents.</p>
@@ -123,16 +151,25 @@
     <script>
         feather.replace();
 
-        function speakText(text) {
-            fetch("/speak", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ text: text })
-            }).catch(err => console.error("Flask server unreachable"));
+        function initTeamPage() {
+            if (typeof logInteraction === 'function') {
+                logInteraction("PAGE_ENTER", "User viewing Meet the Team");
+            }
         }
 
-        function stopSpeech() {
-            fetch("/stop", { method: "POST" });
+        // Modified Open function that also receives the click event for the icon
+        function openImage(src, name) {
+            const lb = document.getElementById('lightbox');
+            const img = document.getElementById('lightboxImg');
+            img.src = src;
+            lb.classList.add('active');
+            
+            // This will now use your fancy new global logger!
+            logInteraction("PHOTO_ENLARGE", `Fullscreen view: ${name}`);
+        }
+        
+        function closeImage() {
+            document.getElementById('lightbox').classList.remove('active');
         }
     </script>
 </body>

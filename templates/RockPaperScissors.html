@@ -1,210 +1,230 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Rock • Paper • Scissors</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            primary: '#0f172a',
-            accent: '#6366f1'
-          }
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rock • Paper • Scissors | F&M Robotics</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/feather-icons"></script>
+    <script src="{{ url_for('static', filename='global.js') }}"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#002F6C',
+                        accent: '#6366f1'
+                    }
+                }
+            }
         }
-      }
-    }
-  </script>
+    </script>
 </head>
-<body class="bg-gradient-to-br from-indigo-50 via-sky-50 to-emerald-50 min-h-screen flex items-center justify-center p-6">
-  <main class="w-full max-w-3xl">
-    <header class="text-center mb-8">
-      <h1 class="text-4xl font-extrabold tracking-tight text-primary">Rock • Paper • Scissors</h1>
-      <p class="text-slate-600 mt-2">First to 3 wins! Watch Misty for the countdown.</p>
-    </header>
+<body class="bg-gradient-to-br from-indigo-50 via-sky-50 to-emerald-50 min-h-screen flex flex-col p-6" onload="initRPS()">
 
-    <section class="grid grid-cols-2 gap-4 mb-6">
-      <div class="rounded-2xl bg-white shadow p-5 border border-slate-100 text-center">
-        <h2 class="text-sm uppercase tracking-wider text-slate-500">You</h2>
-        <p id="playerScore" class="text-4xl font-bold">0</p>
-      </div>
-      <div class="rounded-2xl bg-white shadow p-5 border border-slate-100 text-center">
-        <h2 class="text-sm uppercase tracking-wider text-slate-500">Misty</h2>
-        <p id="cpuScore" class="text-4xl font-bold">0</p>
-      </div>
-    </section>
-
-    <section id="cpuAnim" class="rounded-2xl bg-white shadow p-8 border border-slate-100 mb-6 hidden text-center">
-      <p id="animStatus" class="text-xl font-bold text-accent uppercase tracking-widest mb-4">Ready...</p>
-      <div class="flex justify-center">
-        <div id="cpuEmoji" class="text-8xl transition-all duration-200 transform scale-110">✊</div>
-      </div>
-    </section>
-
-    <section id="resultBanner" class="rounded-2xl bg-white shadow p-5 border border-slate-100 mb-6 hidden">
-      <p id="roundResult" class="text-lg font-bold text-primary"></p>
-      <p id="roundDetail" class="text-slate-600"></p>
-    </section>
-
-    <section class="grid grid-cols-3 gap-4 mb-8">
-      <button data-move="rock" class="choice group rounded-2xl bg-white shadow hover:shadow-lg border border-slate-100 p-6 flex flex-col items-center gap-3 transition active:scale-95">
-        <span class="text-5xl">✊</span>
-        <span class="font-bold">Rock</span>
-      </button>
-      <button data-move="paper" class="choice group rounded-2xl bg-white shadow hover:shadow-lg border border-slate-100 p-6 flex flex-col items-center gap-3 transition active:scale-95">
-        <span class="text-5xl">✋</span>
-        <span class="font-bold">Paper</span>
-      </button>
-      <button data-move="scissors" class="choice group rounded-2xl bg-white shadow hover:shadow-lg border border-slate-100 p-6 flex flex-col items-center gap-3 transition active:scale-95">
-        <span class="text-5xl">✌️</span>
-        <span class="font-bold">Scissors</span>
-      </button>
-    </section>
-
-    <section class="grid md:grid-cols-2 gap-4">
-      <div class="rounded-2xl bg-white shadow border border-slate-100 overflow-hidden">
-        <div class="p-4 bg-slate-50 border-b border-slate-100">
-          <h3 class="font-bold text-sm text-slate-700">Round History</h3>
+    <nav class="bg-white/90 backdrop-blur-md border border-slate-200 rounded-2xl px-6 h-16 flex justify-between items-center shrink-0 shadow-sm relative z-50 mb-8 max-w-5xl mx-auto w-full">
+        <div class="flex items-center gap-3">
+            <div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center shadow-lg">
+                <i data-feather="target" class="text-white w-4 h-4"></i>
+            </div>
+            <span class="text-lg font-bold tracking-tight">F&M Game Lab</span>
         </div>
-        <ol id="history" class="max-h-48 overflow-auto p-4 space-y-2 text-sm"></ol>
-      </div>
-      <div class="flex flex-col gap-4">
-        <div class="p-5 rounded-2xl bg-white shadow border border-slate-100">
-          <h3 class="font-bold">Game Status</h3>
-          <p id="gameStatus" class="text-slate-600">First player to 3 wins!</p>
+        <div class="flex items-center gap-4">
+            <a href="/" onclick="handleNav('RPS: Return Home')" class="text-sm font-semibold text-slate-600 hover:text-primary transition-colors flex items-center gap-1">
+                <i data-feather="home" class="w-4 h-4"></i> Home
+            </a>
+            <a href="/gemini_misty" onclick="handleNav('RPS: Exit to Gemini')" class="bg-accent text-white px-5 py-2 rounded-full text-sm font-bold flex items-center gap-2 transition-all hover:scale-105 shadow-md">
+                <i data-feather="sparkles" class="w-4 h-4 text-yellow-300"></i> Ask Gemini
+            </a>
         </div>
-        <button id="resetBtn" class="w-full py-3 rounded-xl bg-accent text-white font-bold shadow hover:opacity-90 transition">Reset Game</button>
-      </div>
-    </section>
-  </main>
+    </nav>
 
-  <script>
-    let player = 0, cpu = 0;
-    const beats = { rock: 'scissors', paper: 'rock', scissors: 'paper' };
-    const emojis = { rock: '✊', paper: '✋', scissors: '✌️' };
+    <main class="w-full max-w-3xl mx-auto flex-1">
+        <header class="text-center mb-8">
+            <h1 class="text-4xl font-extrabold tracking-tight text-slate-900">Rock • Paper • Scissors</h1>
+            <p class="text-slate-600 mt-2 font-medium">First to 3 wins! Watch Misty for the countdown.</p>
+        </header>
 
-    const playerEl = document.getElementById('playerScore');
-    const cpuEl = document.getElementById('cpuScore');
-    const historyEl = document.getElementById('history');
-    const gameStatusEl = document.getElementById('gameStatus');
-    const resultBanner = document.getElementById('resultBanner');
-    const cpuAnim = document.getElementById('cpuAnim');
-    const cpuEmoji = document.getElementById('cpuEmoji');
-    const animStatus = document.getElementById('animStatus');
+        <section class="grid grid-cols-2 gap-4 mb-6">
+            <div class="rounded-2xl bg-white shadow-sm p-5 border border-slate-200 text-center">
+                <h2 class="text-xs uppercase tracking-widest text-slate-500 font-black">Player</h2>
+                <p id="playerScore" class="text-5xl font-black text-slate-900">0</p>
+            </div>
+            <div class="rounded-2xl bg-white shadow-sm p-5 border border-slate-200 text-center">
+                <h2 class="text-xs uppercase tracking-widest text-slate-500 font-black">Misty</h2>
+                <p id="cpuScore" class="text-5xl font-black text-slate-900">0</p>
+            </div>
+        </section>
 
-    function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
+        <section id="cpuAnim" class="rounded-3xl bg-white shadow-xl p-8 border border-slate-200 mb-6 hidden text-center transition-all">
+            <p id="animStatus" class="text-2xl font-black text-accent uppercase tracking-tighter mb-4">Ready...</p>
+            <div class="flex justify-center">
+                <div id="cpuEmoji" class="text-9xl transition-all duration-200 transform">✊</div>
+            </div>
+        </section>
 
-    async function mistyStart() {
-      // Calls the POST route in your Flask app
-      const r = await fetch("/RockPaperScissors", { method: "POST" });
-      const d = await r.json();
-      return d.misty_choice.toLowerCase();
-    }
+        <section id="resultBanner" class="rounded-2xl bg-white shadow-md p-5 border border-indigo-100 mb-6 hidden animate-bounce-short">
+            <p id="roundResult" class="text-xl font-black text-primary"></p>
+            <p id="roundDetail" class="text-slate-600 font-medium"></p>
+        </section>
 
-    async function runSyncAnimation(mistyChoice) {
-      cpuAnim.classList.remove('hidden');
-      resultBanner.classList.add('hidden');
+        <section class="grid grid-cols-3 gap-4 mb-8">
+            <button data-move="rock" class="choice group rounded-3xl bg-white shadow-sm hover:shadow-indigo-200 hover:shadow-lg border border-slate-200 p-8 flex flex-col items-center gap-3 transition-all active:scale-90">
+                <span class="text-6xl group-hover:scale-110 transition-transform">✊</span>
+                <span class="font-black uppercase tracking-widest text-xs">Rock</span>
+            </button>
+            <button data-move="paper" class="choice group rounded-3xl bg-white shadow-sm hover:shadow-indigo-200 hover:shadow-lg border border-slate-200 p-8 flex flex-col items-center gap-3 transition-all active:scale-90">
+                <span class="text-6xl group-hover:scale-110 transition-transform">✋</span>
+                <span class="font-black uppercase tracking-widest text-xs">Paper</span>
+            </button>
+            <button data-move="scissors" class="choice group rounded-3xl bg-white shadow-sm hover:shadow-indigo-200 hover:shadow-lg border border-slate-200 p-8 flex flex-col items-center gap-3 transition-all active:scale-90">
+                <span class="text-6xl group-hover:scale-110 transition-transform">✌️</span>
+                <span class="font-black uppercase tracking-widest text-xs">Scissors</span>
+            </button>
+        </section>
 
-      const steps = ['Rock', 'Paper', 'Scissors'];
-      const cycleEmojis = ['✊', '✋', '✌️'];
+        <section class="grid md:grid-cols-2 gap-6">
+            <div class="rounded-2xl bg-white shadow-sm border border-slate-200 overflow-hidden">
+                <div class="p-3 bg-slate-50 border-b border-slate-200 flex items-center gap-2">
+                    <i data-feather="clock" class="w-3 h-3 text-slate-400"></i>
+                    <h3 class="font-black text-[10px] uppercase tracking-widest text-slate-500">Match Log</h3>
+                </div>
+                <ol id="history" class="max-h-40 overflow-auto p-4 space-y-2 text-xs font-medium"></ol>
+            </div>
+            <div class="flex flex-col gap-4">
+                <div class="p-5 rounded-2xl bg-white shadow-sm border border-slate-200">
+                    <h3 class="font-black text-[10px] uppercase tracking-widest text-slate-500 mb-1">Status</h3>
+                    <p id="gameStatus" class="text-slate-700 font-bold">First player to 3 wins!</p>
+                </div>
+                <button id="resetBtn" class="w-full py-4 rounded-2xl bg-slate-900 text-white font-black uppercase tracking-widest text-xs shadow-lg hover:bg-primary transition-colors flex items-center justify-center gap-2">
+                    <i data-feather="refresh-cw" class="w-4 h-4"></i> Reset Game
+                </button>
+            </div>
+        </section>
+    </main>
 
-      // LOOP: Sycned with the 0.8s time.sleep in Python
-      for (let i = 0; i < steps.length; i++) {
-        animStatus.textContent = steps[i] + "...";
-        cpuEmoji.textContent = cycleEmojis[i];
-        // Visual "pump" effect
-        cpuEmoji.style.transform = "scale(1.3)";
-        setTimeout(() => cpuEmoji.style.transform = "scale(1)", 200);
-        
-        await sleep(1200); 
-      }
+    <script>
+        feather.replace();
 
-      // REVEAL: Matches Misty's "Shoot!"
-      animStatus.textContent = "SHOOT!";
-      cpuEmoji.textContent = emojis[mistyChoice];
-      cpuEmoji.style.transform = "scale(1.5)";
-      
-      await sleep(1000);
-      cpuAnim.classList.add('hidden');
-    }
+        let player = 0, cpu = 0;
+        const beats = { rock: 'scissors', paper: 'rock', scissors: 'paper' };
+        const emojis = { rock: '✊', paper: '✋', scissors: '✌️' };
 
-    async function playRound(playerMove) {
-      if (player >= 3 || cpu >= 3) return;
-      
-      disableChoices(true);
-      
-      // 1. Get Misty's choice (this triggers the Flask sequence/Misty's voice)
-      const c = await mistyStart(); 
+        const playerEl = document.getElementById('playerScore');
+        const cpuEl = document.getElementById('cpuScore');
+        const historyEl = document.getElementById('history');
+        const gameStatusEl = document.getElementById('gameStatus');
+        const resultBanner = document.getElementById('resultBanner');
+        const cpuAnim = document.getElementById('cpuAnim');
+        const cpuEmoji = document.getElementById('cpuEmoji');
+        const animStatus = document.getElementById('animStatus');
 
-      // 2. Run the UI countdown (This takes 2.4 seconds: 3 steps * 800ms)
-      await runSyncAnimation(c); 
+        function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
 
-      // --- THE DELAY HAPPENS HERE ---
-      // We pause for an extra 500ms so the user can look at Misty's hand 
-      // before the website reveals the text result.
-      await sleep(1200); 
+        function initRPS() {
+            logInteraction("PAGE_ENTER", "Entered Rock Paper Scissors");
+        }
 
-      // 3. Process Scoring
-      if (playerMove === c) {
-        showResult('Tie 🤝', `Both picked ${c}.`);
-      } else if (beats[playerMove] === c) {
-        player++;
-        showResult('You Win! ✅', `${playerMove} beats ${c}.`);
-      } else {
-        cpu++;
-        showResult('Misty Wins! ❌', `${c} beats ${playerMove}.`);
-      }
+        async function mistyStart() {
+            const r = await fetch("/RockPaperScissors", { method: "POST" });
+            const d = await r.json();
+            return d.misty_choice.toLowerCase();
+        }
 
-      updateUI();
-      
-      // Check if the game is over (First to 3)
-      if (player < 3 && cpu < 3) {
-        disableChoices(false);
-      } else {
-        // Keep choices disabled if someone reached 3
-        disableChoices(true);
-        gameStatusEl.textContent = player >= 3 ? "Game Over: You Won! 🎉" : "Game Over: Misty Won! 🤖";
-      }
-    }
+        async function runSyncAnimation(mistyChoice) {
+            cpuAnim.classList.remove('hidden');
+            resultBanner.classList.add('hidden');
 
-    function showResult(title, detail) {
-      resultBanner.classList.remove('hidden');
-      document.getElementById('roundResult').textContent = title;
-      document.getElementById('roundDetail').textContent = detail;
-      const li = document.createElement('li');
-      li.className = "p-2 bg-slate-50 border rounded";
-      li.textContent = `${title}: ${detail}`;
-      historyEl.prepend(li);
-    }
+            const steps = ['Rock', 'Paper', 'Scissors'];
+            const cycleEmojis = ['✊', '✋', '✌️'];
 
-    function updateUI() {
-      playerEl.textContent = player;
-      cpuEl.textContent = cpu;
-      if (player >= 3) gameStatusEl.textContent = "Victory! You beat Misty! 🎉";
-      else if (cpu >= 3) gameStatusEl.textContent = "Misty wins the match! 🤖";
-    }
+            for (let i = 0; i < steps.length; i++) {
+                animStatus.textContent = steps[i] + "...";
+                cpuEmoji.textContent = cycleEmojis[i];
+                cpuEmoji.style.transform = "scale(1.4)";
+                setTimeout(() => cpuEmoji.style.transform = "scale(1)", 200);
+                await sleep(1200); 
+            }
 
-    function disableChoices(val) {
-      document.querySelectorAll('.choice').forEach(b => {
-        b.disabled = val;
-        b.style.opacity = val ? "0.5" : "1";
-      });
-    }
+            animStatus.textContent = "SHOOT!";
+            cpuEmoji.textContent = emojis[mistyChoice];
+            cpuEmoji.style.transform = "scale(1.6)";
+            await sleep(1000);
+            cpuAnim.classList.add('hidden');
+        }
 
-    document.querySelectorAll('.choice').forEach(b => {
-      b.addEventListener('click', () => playRound(b.dataset.move));
-    });
+        async function playRound(playerMove) {
+            if (player >= 3 || cpu >= 3) return;
+            disableChoices(true);
+            
+            logInteraction("GAME_MOVE_PLAYER", `Player: ${playerMove}`);
+            const c = await mistyStart(); 
 
-    document.getElementById('resetBtn').addEventListener('click', () => {
-      player = 0; cpu = 0;
-      updateUI();
-      historyEl.innerHTML = '';
-      resultBanner.classList.add('hidden');
-      gameStatusEl.textContent = "First player to 3 wins!";
-      disableChoices(false);
-    });
-  </script>
+            await runSyncAnimation(c); 
+            await sleep(1200); 
+
+            let roundOutcome = "";
+            if (playerMove === c) {
+                roundOutcome = "TIE";
+                showResult('Tie 🤝', `Both picked ${c}.`);
+            } else if (beats[playerMove] === c) {
+                player++;
+                roundOutcome = "WIN";
+                showResult('You Win! ✅', `${playerMove} beats ${c}.`);
+            } else {
+                cpu++;
+                roundOutcome = "LOSS";
+                showResult('Misty Wins! ❌', `${c} beats ${playerMove}.`);
+            }
+
+            logInteraction("GAME_ROUND_RESULT", `Outcome: ${roundOutcome} | Score: ${player}-${cpu}`);
+            updateUI();
+            
+            if (player < 3 && cpu < 3) {
+                disableChoices(false);
+            } else {
+                const finalWinner = player >= 3 ? "PLAYER" : "MISTY";
+                gameStatusEl.textContent = player >= 3 ? "Victory! You beat Misty! 🎉" : "Misty wins the match! 🤖";
+                logInteraction("GAME_MATCH_OVER", `Winner: ${finalWinner}`);
+            }
+        }
+
+        function showResult(title, detail) {
+            resultBanner.classList.remove('hidden');
+            document.getElementById('roundResult').textContent = title;
+            document.getElementById('roundDetail').textContent = detail;
+            const li = document.createElement('li');
+            li.className = "p-2 bg-white border border-slate-100 rounded-lg shadow-sm";
+            li.innerHTML = `<span class="font-black text-primary">${title}:</span> ${detail}`;
+            historyEl.prepend(li);
+        }
+
+        function updateUI() {
+            playerEl.textContent = player;
+            cpuEl.textContent = cpu;
+        }
+
+        function disableChoices(val) {
+            document.querySelectorAll('.choice').forEach(b => {
+                b.disabled = val;
+                b.style.opacity = val ? "0.4" : "1";
+                b.style.pointerEvents = val ? "none" : "auto";
+            });
+        }
+
+        document.querySelectorAll('.choice').forEach(b => {
+            b.addEventListener('click', () => playRound(b.dataset.move));
+        });
+
+        document.getElementById('resetBtn').addEventListener('click', () => {
+            logInteraction("GAME_RESET", `Score was ${player}-${cpu}`);
+            player = 0; cpu = 0;
+            updateUI();
+            historyEl.innerHTML = '';
+            resultBanner.classList.add('hidden');
+            gameStatusEl.textContent = "First player to 3 wins!";
+            disableChoices(false);
+        });
+    </script>
 </body>
 </html>

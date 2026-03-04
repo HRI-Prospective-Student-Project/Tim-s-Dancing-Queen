@@ -6,6 +6,9 @@
     <title>Misty Dev Log | Dashboard</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/feather-icons"></script>
+    
+    <script src="{{ url_for('static', filename='global.js') }}"></script>
+    
     <style>
         body, html { height: 100vh; overflow: hidden; margin: 0; }
         
@@ -32,7 +35,7 @@
         }
     </script>
 </head>
-<body class="bg-slate-100 text-slate-900 font-sans" onload="autoIntro()">
+<body class="bg-slate-100 text-slate-900 font-sans" onload="initDevLog()">
 
     <div class="h-screen flex flex-col p-4 gap-4">
         
@@ -44,8 +47,8 @@
                 <span class="text-lg font-bold tracking-tight">Misty's Dev Log</span>
             </div>
             <div class="flex items-center gap-4">
-                <a href="/" onclick="stopSpeech()" class="text-sm font-semibold text-slate-600 hover:text-primary transition-colors">Home</a>
-                <a href="/gemini" onclick="stopSpeech()" class="animate-gemini-pulse bg-accent text-white px-5 py-2 rounded-full text-sm font-bold flex items-center gap-2 border-2 border-indigo-300 transition-all hover:scale-105">
+                <a href="/" onclick="handleNav('DevLog: Exit to Home')" class="text-sm font-semibold text-slate-600 hover:text-primary transition-colors">Home</a>
+                <a href="/gemini_misty" onclick="handleNav('DevLog: Exit to Gemini')" class="animate-gemini-pulse bg-accent text-white px-5 py-2 rounded-full text-sm font-bold flex items-center gap-2 border-2 border-indigo-300 transition-all hover:scale-105">
                     <i data-feather="sparkles" class="w-4 h-4 text-yellow-300"></i> Ask Gemini
                 </a>
             </div>
@@ -54,7 +57,7 @@
         <div class="flex-1 grid grid-cols-12 gap-4 min-h-0">
             
             <div class="col-span-4 flex flex-col">
-                <div onclick="speakText(introText)" 
+                <div onclick="logInteraction('INFO_CARD_CLICK', 'Coding Origins Card'); speakText(introText)" 
                      class="cursor-pointer bg-white rounded-3xl p-8 shadow-sm border border-slate-200 flex-1 flex flex-col hover:border-primary/40 transition-all group overflow-hidden">
                     <h1 class="text-4xl font-black text-slate-900 mb-6 tracking-tight leading-tight">
                         How I Was <span class="text-accent">Coded.</span>
@@ -78,7 +81,7 @@
             </div>
 
             <div class="col-span-4 flex flex-col gap-4">
-                <div onclick="speakText('The Web team built this UI and the Rock Paper Scissors game!')" 
+                <div onclick="logInteraction('INFO_CARD_CLICK', 'Web Team Detail'); speakText('The Web team built this UI and the Rock Paper Scissors game!')" 
                      class="cursor-pointer bg-white rounded-3xl p-6 shadow-sm border border-slate-200 flex-1 hover:border-primary/40 transition-all group flex flex-col border-l-8 border-l-primary">
                     <div class="flex items-center gap-3 mb-4">
                         <div class="w-10 h-10 bg-primary/10 rounded-xl flex items-center justify-center group-hover:bg-primary group-hover:text-white transition-colors">
@@ -92,7 +95,7 @@
                     <p class="text-slate-500 text-xs">They connect the screen to my hardware.</p>
                 </div>
 
-                <div onclick="speakText('The AI group used Gemini to help me answer questions about F and M!')" 
+                <div onclick="logInteraction('INFO_CARD_CLICK', 'AI Team Detail'); speakText('The AI group used Gemini to help me answer questions about F and M!')" 
                      class="cursor-pointer bg-white rounded-3xl p-6 shadow-sm border border-slate-200 flex-1 hover:border-accent/40 transition-all group flex flex-col border-l-8 border-l-accent">
                     <div class="flex items-center gap-3 mb-4">
                         <div class="w-10 h-10 bg-accent/10 rounded-xl flex items-center justify-center group-hover:bg-accent group-hover:text-white transition-colors">
@@ -129,19 +132,36 @@
 
         const introText = "Hi there! I was built for an HRI class. My friends spent a long time studying how people like you interact with robots. One team made this website and my games, while the other team gave me a brain using Gemini so I can answer your questions!";
 
+        /**
+         * INITIALIZATION
+         */
+        function initDevLog() {
+            // Logs entry for this specific research section
+            if (typeof logInteraction === 'function') {
+                logInteraction("PAGE_ENTER", "User entered Dev Log / Background page");
+            }
+            autoIntro();
+        }
+
         function autoIntro() {
             setTimeout(() => {
-                speakText(introText);
+                // Uses global speakText which also logs speech events
+                if (typeof speakText === 'function') {
+                    speakText(introText);
+                }
             }, 800);
         }
 
+        /**
+         * GALLERY LOGIC
+         */
         const images = [
             {src: "/static/assets/HRI_JPG/IMG_7334.jpg", text: "Brainstorming Robot Ideas"},
             {src: "/static/assets/HRI_JPG/IMG_7373.jpg", text: "Testing the Game logic"},
             {src: "/static/assets/HRI_JPG/IMG_7509.jpg", text: "Sharing Between groups"},
             {src: "/static/assets/HRI_JPG/IMG_7512.jpg", text: "Trying Different Users"},
             {src: "/static/assets/HRI_JPG/IMG_7513.jpg", text: "Running Misty + Gemini"},
-            {src: "/static/assets/HRI_JPG/IMG_7514.jpg", text: "Logging Robot Action and Respionse "}
+            {src: "/static/assets/HRI_JPG/IMG_7514.jpg", text: "Logging Robot Action and Response"}
         ];
         
         let currentIndex = 0;
@@ -155,21 +175,26 @@
                 imgElement.src = images[currentIndex].src;
                 textElement.innerText = images[currentIndex].text;
                 imgElement.classList.add('active');
+                
+                // Track visual engagement for the research log
+                if (typeof logInteraction === 'function') {
+                    logInteraction("GALLERY_AUTO_STEP", `Viewed Photo: ${images[currentIndex].text}`);
+                }
             }, 800);
         }
         setInterval(cycleGallery, 5000);
 
-        function speakText(text) {
-            fetch("http://127.0.0.1:5001/directSpeak", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ text: text })
-            }).catch(err => console.error("Flask server unreachable"));
-        }
-
-        function stopSpeech() {
-            fetch("http://127.0.0.1:5001/stop", { method: "POST" })
-                .catch(err => console.error("Stop route failed"));
+        /**
+         * GLOBAL WRAPPER
+         * handleNav is in global.js, but keeping this local hook for link transparency.
+         */
+        function handleNav(destination) {
+            if (typeof logInteraction === 'function') {
+                logInteraction("NAV_CLICK", destination);
+            }
+            if (typeof stopSpeech === 'function') {
+                stopSpeech();
+            }
         }
     </script>
 </body>

@@ -6,6 +6,9 @@
     <title>CS Department | F&M Robotics</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/feather-icons"></script>
+    
+    <script src="{{ url_for('static', filename='global.js') }}"></script>
+    
     <style>
         body, html { height: 100vh; overflow: hidden; margin: 0; }
         .menu-card { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
@@ -21,7 +24,7 @@
         }
     </script>
 </head>
-<body class="bg-slate-50 text-slate-900 font-sans" onload="autoIntro()">
+<body class="bg-slate-50 text-slate-900 font-sans" onload="initPage()">
 
     <div class="h-screen flex flex-col p-8 gap-8">
         
@@ -32,7 +35,7 @@
 
         <div class="flex-1 grid grid-cols-1 md:grid-cols-3 grid-rows-2 gap-8 max-w-7xl mx-auto w-full">
             
-            <a href="/cs" onclick="stopSpeech()" class="menu-card bg-white rounded-[2.5rem] p-8 border border-slate-200 flex flex-col items-center justify-center text-center group border-b-4 border-b-primary">
+            <a href="/cs" onclick="handleNav('Menu: Computer Science')" class="menu-card bg-white rounded-[2.5rem] p-8 border border-slate-200 flex flex-col items-center justify-center text-center group border-b-4 border-b-primary">
                 <div class="w-20 h-20 bg-blue-50 text-primary rounded-3xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
                     <i data-feather="code" class="w-10 h-10"></i>
                 </div>
@@ -40,7 +43,7 @@
                 <p class="text-slate-500 text-sm mt-3 leading-relaxed">Meet the department and see what you'll learn here.</p>
             </a>
 
-            <a href="/gemini_misty" onclick="stopSpeech()" class="menu-card bg-white rounded-[2.5rem] p-8 border border-slate-200 flex flex-col items-center justify-center text-center group border-b-4 border-b-accent">
+            <a href="/gemini_misty" onclick="handleNav('Menu: Gemini Misty')" class="menu-card bg-white rounded-[2.5rem] p-8 border border-slate-200 flex flex-col items-center justify-center text-center group border-b-4 border-b-accent">
                 <div class="w-20 h-20 bg-indigo-50 text-accent rounded-3xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
                     <i data-feather="cpu" class="w-10 h-10"></i>
                 </div>
@@ -48,7 +51,7 @@
                 <p class="text-slate-500 text-sm mt-3 leading-relaxed">Chat with Misty about life at F&M and in Lancaster.</p>
             </a>
 
-            <a href="/background" onclick="stopSpeech()" class="menu-card bg-white rounded-[2.5rem] p-8 border border-slate-200 flex flex-col items-center justify-center text-center group border-b-4 border-b-emerald-500">
+            <a href="/background" onclick="handleNav('Menu: Misty Origins')" class="menu-card bg-white rounded-[2.5rem] p-8 border border-slate-200 flex flex-col items-center justify-center text-center group border-b-4 border-b-emerald-500">
                 <div class="w-20 h-20 bg-emerald-50 text-emerald-600 rounded-3xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
                     <i data-feather="tool" class="w-10 h-10"></i>
                 </div>
@@ -56,7 +59,7 @@
                 <p class="text-slate-500 text-sm mt-3 leading-relaxed">Behind the scenes of building a social robot.</p>
             </a>
 
-            <a href="/RockPaperScissors" onclick="stopSpeech()" class="menu-card bg-white rounded-[2.5rem] p-8 border border-slate-200 flex flex-col items-center justify-center text-center group border-b-4 border-b-orange-500">
+            <a href="/RockPaperScissors" onclick="handleNav('Menu: RPS Game')" class="menu-card bg-white rounded-[2.5rem] p-8 border border-slate-200 flex flex-col items-center justify-center text-center group border-b-4 border-b-orange-500">
                 <div class="w-20 h-20 bg-orange-50 text-orange-600 rounded-3xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
                     <i data-feather="scissors" class="w-10 h-10"></i>
                 </div>
@@ -64,15 +67,15 @@
                 <p class="text-slate-500 text-sm mt-3 leading-relaxed">Think you can beat Misty? Challenge her here.</p>
             </a>
 
-            <a href="/team" onclick="stopSpeech()" class="menu-card bg-white rounded-[2.5rem] p-8 border border-slate-200 flex flex-col items-center justify-center text-center group border-b-4 border-b-purple-500">
+            <a href="/team" onclick="handleNav('Menu: Meet Team')" class="menu-card bg-white rounded-[2.5rem] p-8 border border-slate-200 flex flex-col items-center justify-center text-center group border-b-4 border-b-purple-500">
                 <div class="w-20 h-20 bg-purple-50 text-purple-600 rounded-3xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
                     <i data-feather="users" class="w-10 h-10"></i>
                 </div>
                 <h2 class="text-2xl font-black text-slate-800">Meet the Team</h2>
-                <p class="text-slate-500 text-sm mt-3 leading-relaxed">Meet the Professor & students behind the hardware and software.</p>
+                <p class="text-slate-500 text-sm mt-3 leading-relaxed">Meet the Professor & students behind the project.</p>
             </a>
 
-            <a href="https://www.fandm.edu" target="_blank" onclick="stopSpeech()" class="menu-card bg-white rounded-[2.5rem] p-8 border border-slate-200 flex flex-col items-center justify-center text-center group border-b-4 border-b-red-600">
+            <a href="https://www.fandm.edu" target="_blank" onclick="handleNav('Menu: External F&M Site')" class="menu-card bg-white rounded-[2.5rem] p-8 border border-slate-200 flex flex-col items-center justify-center text-center group border-b-4 border-b-red-600">
                 <div class="w-20 h-20 bg-red-50 text-red-600 rounded-3xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
                     <i data-feather="map-pin" class="w-10 h-10"></i>
                 </div>
@@ -83,35 +86,52 @@
         </div>
 
         <footer class="text-center py-2 shrink-0">
-            <a href="/" onclick="stopSpeech()" class="inline-flex items-center gap-3 px-6 py-3 bg-white rounded-full shadow-sm border border-slate-200 hover:bg-slate-50 transition-colors">
-                <i data-feather="home" class="w-4 h-4 text-primary"></i>
-                <span class="text-xs font-black text-slate-600 uppercase tracking-widest">Back to Main Menu</span>
-            </a>
+            <div class="inline-flex items-center gap-3 px-6 py-3 bg-white rounded-full shadow-sm border border-slate-200">
+                <i data-feather="info" class="w-4 h-4 text-primary"></i>
+                <span class="text-xs font-black text-slate-400 uppercase tracking-widest text-center">F&M HRI Lab 2026</span>
+            </div>
         </footer>
     </div>
 
     <script>
-        // Critical: This renders the icons
         feather.replace();
 
-        const introText = "Welcome to the Computer Science department. Explore our curriculum or chat with me.";
+        const introText = "Welcome to the F and M Human Robot Interaction Lab. Try out our latest project and chat with me.";
+
+        /**
+         * INITIALIZATION
+         * Runs when the page loads to start the session log and intro.
+         */
+        function initPage() {
+            // Logs a specific entry point for the session
+            if (typeof logInteraction === 'function') {
+                logInteraction("SESSION_START", "User entered Main Menu");
+            }
+            autoIntro();
+        }
 
         function autoIntro() {
             setTimeout(() => {
-                speakText(introText);
+                // global.js handles the logging for robot speech
+                if (typeof speakText === 'function') {
+                    speakText(introText);
+                }
             }, 800);
         }
 
-        function speakText(text) {
-            fetch("/speak", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ text: text })
-            }).catch(err => console.error("Speech server disconnected"));
-        }
-
-        function stopSpeech() {
-            navigator.sendBeacon("/stop");
+        /**
+         * COMPREHENSIVE NAV HANDLER
+         * Logs the specific button clicked and cleans up robot state.
+         */
+        function handleNav(destination) {
+            // Calls global.js function to log the click and path
+            if (typeof logInteraction === 'function') {
+                logInteraction("NAV_CLICK", destination);
+            }
+            // Calls global.js function to stop any existing speech
+            if (typeof stopSpeech === 'function') {
+                stopSpeech();
+            }
         }
     </script>
 </body>

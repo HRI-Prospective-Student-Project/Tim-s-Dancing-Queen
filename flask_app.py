@@ -6,6 +6,8 @@ from STT_google import transcribe_wav_bytes
 from misty_robot import MistyActions
 import random 
 import json
+import logging
+from datetime import datetime
 
 app = Flask(__name__)
 MISTY_IP = "192.168.1.2"
@@ -13,7 +15,7 @@ MISTY_IP = "192.168.1.2"
 # Initialize Robot interfaces
 misty = Robot(MISTY_IP)
 misty_actions = MistyActions(MISTY_IP)
-misty.set_default_volume(80) 
+misty.set_default_volume(10) 
 processing_lock = threading.Lock()
 
 # Auto-start skill at launch
@@ -26,6 +28,33 @@ def speak_async(text):
     misty.stop_speaking()
     time.sleep(0.1) 
     misty.speak(text)
+
+# Configure logging to save to a file
+# Configure logging
+logging.basicConfig(
+    filename='misty_interactions.log',
+    level=logging.INFO,
+    format='%(asctime)s - %(message)s',
+    datefmt='%Y-%m-%d %H:%M:%S'
+)
+
+@app.route('/log_event', methods=["POST"])
+def log_event():
+    data = request.get_json()
+    if not data:
+        return jsonify({"status": "error"}), 400
+
+    # Extracting for the human-readable log
+    event = data.get('event', 'UNKNOWN')
+    details = data.get('details', 'N/A')
+    page = data.get('page', 'N/A')
+    
+    # This format is much better for research analysis
+    log_entry = f"[{event}] | Page: {page} | Details: {details}"
+    logging.info(log_entry)
+    
+    print(f"RESEARCH LOG: {log_entry}")
+    return jsonify({"status": "logged"}), 200
 
 @app.route('/')
 def index():
