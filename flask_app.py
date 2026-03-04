@@ -8,7 +8,7 @@ import random
 import json
 
 app = Flask(__name__)
-MISTY_IP = "192.168.1.3"
+MISTY_IP = "192.168.1.2"
 
 # Initialize Robot interfaces
 misty = Robot(MISTY_IP)
@@ -34,8 +34,21 @@ def index():
 
 @app.route('/stop', methods=["POST"])
 def stop_misty_route():
-    misty.stop_speaking()
-    return jsonify({"status": "stopped"})
+    try:
+        # 1. Kill the current speech immediately
+        misty.stop_speaking()
+        
+        # 2. Change LED to Red (Matches your Gemini Mic UI "Listening" state)
+        misty.change_led(255, 0, 0) 
+        
+        # 3. Return a successful JSON response
+        return jsonify({"status": "success", "message": "Misty is now listening"}), 200
+        
+    except Exception as e:
+        # If the robot is disconnected, print the error to your console
+        print(f"Error communicating with Misty: {e}")
+        # Return a 500 error so your JavaScript console knows it failed
+        return jsonify({"status": "error", "message": str(e)}), 500
 
 @app.route('/cs')
 def cs_page(): return render_template('CS2page11-18.html')
@@ -43,8 +56,8 @@ def cs_page(): return render_template('CS2page11-18.html')
 @app.route('/background')
 def neuro_page(): return render_template('background.html')
 
-@app.route('/datascience')
-def data_page(): return render_template('dataSci.html')
+@app.route('/team')
+def data_page(): return render_template('team.html')
 
 @app.route('/RockPaperScissors', methods=["GET", "POST"])
 def rps_route():
@@ -107,7 +120,7 @@ def rps_route():
         misty.stop_speaking()
         misty.change_led(100, 100, 255) # Soft Purple/Blue
         misty.display_image("e_ContentLeft.jpg")
-        misty.speak("Welcome to Rock Paper Scissors! I am first to three wins. Watch me closely as I count down, and click your move on the screen when you are ready. Good luck!")
+        misty.speak("Let's play Rock Paper Scissors! First to three wins. Watch me closely as I count down, and click your move on the screen when you are ready. Good luck!")
         time.sleep(5)
         misty.display_image("e_DefaultContent.jpg")
         misty.change_led(0, 0, 0)
@@ -145,11 +158,19 @@ def start_listening():
     
     # Listening Actions
     listening_actions = [
-        {'name': 'SetEyes', 'args': ['wonder']},
-        {'name': 'TiltHead', 'args': ['forward', 'small']},
-        {'name': 'Pause', 'args': [1000]},
-        {'name': 'TiltHead', 'args': ['forward', 'none']},
-        {'name': 'Pause', 'args': [1000]}
+        {'name': 'LookInDirection', 'args': ['center']},
+        {'name': 'LookInDirection', 'args': ['up']},
+        {'name': 'Pause', 'args': [1500]},
+        {'name': 'LookInDirection', 'args': ['center']},
+        {'name': 'Pause', 'args': [1500]},
+        {'name': 'LookInDirection', 'args': ['up']},
+        {'name': 'Pause', 'args': [1500]},
+        {'name': 'LookInDirection', 'args': ['center']},
+        {'name': 'Pause', 'args': [1500]},
+        {'name': 'LookInDirection', 'args': ['up']},
+        {'name': 'Pause', 'args': [1500]},
+        {'name': 'LookInDirection', 'args': ['center']},
+        {'name': 'LookInDirection', 'args': ['up']}     
     ]
 
     misty_actions.executeActionScript(listening_actions)

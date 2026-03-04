@@ -51,7 +51,6 @@
         const chat = document.getElementById('chat-container');
         const instruction = document.getElementById('instruction');
 
-        // New function to make Misty speak the intro text on load
         function autoIntro() {
             const introText = document.getElementById('intro-message').innerText;
             setTimeout(() => {
@@ -63,8 +62,13 @@
             }, 1000);
         }
 
+        // --- UPDATED LISTENERS ---
         micBtn.onmousedown = micBtn.ontouchstart = (e) => {
             e.preventDefault(); 
+            
+            // NEW: Interrupt Misty immediately
+            fetch('/stop', { method: 'POST' });
+
             status.innerText = "LISTENING...";
             status.classList.replace('text-indigo-400', 'text-red-500');
             instruction.innerText = "Misty is listening...";

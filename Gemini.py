@@ -8,7 +8,7 @@ from mistyPy.Robot import Robot
 from mistyPy.Events import Events
 from STT_Modified import record_and_transcribe
 
-client = genai.Client(api_key="AIzaSyDN2vQTA9KUJwYG9wmT8qzg1YNXeMheehk")
+client = genai.Client()
 chat = client.chats.create(model="gemini-2.5-flash")
 
 # Updated system prompt: allow head movement but remove dependency on speaker direction
