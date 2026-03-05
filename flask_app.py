@@ -10,7 +10,7 @@ import logging
 from datetime import datetime
 
 app = Flask(__name__)
-MISTY_IP = "192.168.1.2"
+MISTY_IP = "192.168.1.3"
 
 # Initialize Robot interfaces
 misty = Robot(MISTY_IP)
@@ -31,12 +31,15 @@ def speak_async(text):
 
 # Configure logging to save to a file
 # Configure logging
-logging.basicConfig(
-    filename='misty_interactions.log',
-    level=logging.INFO,
-    format='%(asctime)s - %(message)s',
-    datefmt='%Y-%m-%d %H:%M:%S'
-)
+## 1. Update your logging setup to this:
+logger = logging.getLogger('misty_logger')
+if not logger.handlers:
+    logger.setLevel(logging.INFO)
+    # Use 'delay=True' so it only opens the file when the first log actually happens
+    file_handler = logging.FileHandler('misty_interactions.log', delay=True)
+    formatter = logging.Formatter('%(asctime)s - %(message)s', datefmt='%Y-%m-%d %H:%M:%S')
+    file_handler.setFormatter(formatter)
+    logger.addHandler(file_handler)
 
 @app.route('/log_event', methods=["POST"])
 def log_event():
@@ -44,14 +47,14 @@ def log_event():
     if not data:
         return jsonify({"status": "error"}), 400
 
-    # Extracting for the human-readable log
     event = data.get('event', 'UNKNOWN')
     details = data.get('details', 'N/A')
     page = data.get('page', 'N/A')
     
-    # This format is much better for research analysis
     log_entry = f"[{event}] | Page: {page} | Details: {details}"
-    logging.info(log_entry)
+    
+    # Use the specific logger we created
+    logger.info(log_entry)
     
     print(f"RESEARCH LOG: {log_entry}")
     return jsonify({"status": "logged"}), 200
@@ -294,4 +297,4 @@ def stop_and_process():
         processing_lock.release()
 
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0', port=5001)
+    app.run(debug=True, host='0.0.0.0', port=5001, threaded=True, use_reloader=False)
