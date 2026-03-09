@@ -3,18 +3,47 @@
  * Comprehensive Logging, Speech, and Session Lifecycle Management
  */
 
-// 1. SESSION INITIALIZATION
-const sessionStartTime = Date.now();
-console.log("[SYSTEM]: Global Logging Active. Session started at " + new Date().toISOString());
+// 1. SESSION ID LOGIC
+// We check localStorage so the ID persists as they move between pages.
+let sessionId = localStorage.getItem('robot_session_id');
+
+// ONLY generate a new ID if we are on the Home Page (/) OR if no ID exists yet
+if (window.location.pathname === "/" || !sessionId) {
+    sessionId = "sess-" + Math.random().toString(36).substr(2, 9);
+    localStorage.setItem('robot_session_id', sessionId);
+    console.log("[SYSTEM]: New Session ID Generated: " + sessionId);
+}
+
+// 2. INACTIVITY TIMER (5 Minutes)
+let idleTimer;
+const FIVE_MINUTES = 5 * 60 * 1000; 
+
+function resetIdleTimer() {
+    clearTimeout(idleTimer);
+    idleTimer = setTimeout(autoReset, FIVE_MINUTES);
+}
+
+function autoReset() {
+    // Log the timeout before we leave the page
+    logInteraction("SESSION_TIMEOUT", "User inactive for 5 minutes. Resetting to Home.");
+    
+    // Redirect to home (which will trigger a new Session ID)
+    window.location.href = "/";
+}
+
+// Listen for "Signs of Life" to reset the 5-minute clock
+window.onload = resetIdleTimer;
+document.onmousemove = resetIdleTimer;
+document.onmousedown = resetIdleTimer; 
+document.onkeydown = resetIdleTimer;
 
 /**
- * 2. THE COMPREHENSIVE LOGGER
- * Sends interaction data to the Flask backend /log_event route.
- * @param {string} event - The category of action (e.g., 'NAV_CLICK', 'FAQ_CLICK')
- * @param {string} details - Specific data (e.g., 'Why F&M CS')
+ * 3. THE COMPREHENSIVE LOGGER
+ * Sends interaction data to the Flask backend.
  */
 function logInteraction(event, details) {
     const payload = {
+        sessionId: localStorage.getItem('robot_session_id'), // Use the persistent ID
         timestamp: new Date().toISOString(),
         event: event,
         details: details,
@@ -29,83 +58,58 @@ function logInteraction(event, details) {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
     }).catch(err => {
-        // Fallback for when the server is unreachable during development
         console.warn("Logging failed. Flask server might be offline.", err);
     });
 }
 
 /**
- * 3. CENTRALIZED SPEECH CONTROLS
- * Handles sending text to Misty and logging the start/stop of speech.
+ * 4. CENTRALIZED SPEECH & NAV CONTROLS
  */
 function speakText(text) {
-    // Log the intent to speak (useful for HRI interaction analysis)
-    logInteraction("ROBOT_SPEECH_START", text.substring(0, 60) + (text.length > 60 ? "..." : ""));
+    logInteraction("ROBOT_SPEECH_START", text.substring(0, 60));
     
     fetch("/speak", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ text: text })
-    }).catch(err => {
-        logInteraction("ERROR", "Speech server (Flask) unreachable");
-        console.error("Speech request failed:", err);
-    });
+    }).catch(err => console.error("Speech failed:", err));
 }
 
 function stopSpeech() {
-    // Track if the user manually silenced the robot or "barged in" by navigating
-    logInteraction("ROBOT_SPEECH_STOP", "User requested silence or interrupted flow");
-    
-    // sendBeacon is used for reliability if this is called during page exit
+    logInteraction("ROBOT_SPEECH_STOP", "User requested silence");
     navigator.sendBeacon("/stop");
 }
 
-/**
- * 4. NAVIGATION WRAPPER
- * Standardizes how links are handled to ensure logs are captured before the page changes.
- */
 function handleNav(destination) {
     logInteraction("NAV_CLICK", `Destination: ${destination}`);
-    stopSpeech(); // Most HRI studies prefer the robot stops talking when the screen changes
+    stopSpeech(); 
 }
 
 /**
- * 5. AUTOMATIC EVENT LISTENERS (The "Comprehensive" Logic)
+ * 5. AUTOMATIC EVENT LISTENERS
  */
 
 // A. Log Page Duration on Exit
-// Uses 'beforeunload' to calculate exactly how long the user engaged with the current page.
 window.addEventListener('beforeunload', () => {
-    const durationSeconds = Math.round((Date.now() - sessionStartTime) / 1000);
     const exitData = JSON.stringify({
+        sessionId: localStorage.getItem('robot_session_id'),
         event: "PAGE_EXIT",
-        details: `Engagement Duration: ${durationSeconds}s`,
+        details: `User left or navigated away`,
         page: window.location.pathname,
         timestamp: new Date().toISOString()
     });
-    
-    // sendBeacon is the browser's way of ensuring the log hits the server even as the page closes
     navigator.sendBeacon('/log_event', exitData);
 });
 
-// B. Log Tab Switching / Focus
-// Detects if the user gets distracted or leaves the browser tab open in the background.
-document.addEventListener('visibilitychange', () => {
-    const state = document.hidden ? "BACKGROUND" : "FOREGROUND";
-    logInteraction("TAB_FOCUS_CHANGE", `User moved page to ${state}`);
-});
-
-// C. Capture All Link Clicks Automatically
-// A "safety net" listener that catches any links you might have forgotten to add handleNav to.
+// B. Capture All Link Clicks Automatically
 document.addEventListener('click', (e) => {
     const link = e.target.closest('a');
-    if (link && !link.onclick) { // Only logs if we haven't already logged it via handleNav
+    if (link && !link.onclick) { 
         logInteraction("LINK_CLICK_AUTO", `Link: ${link.href}`);
     }
 });
 
-// D. Error Tracking
-// Automatically logs any JavaScript errors that happen in the browser.
-window.onerror = function(message, source, lineno, colno, error) {
-    logInteraction("JS_ERROR", `${message} at ${source}:${lineno}`);
+// C. Error Tracking
+window.onerror = function(message, source, lineno) {
+    logInteraction("JS_ERROR", `${message} at ${lineno}`);
 };

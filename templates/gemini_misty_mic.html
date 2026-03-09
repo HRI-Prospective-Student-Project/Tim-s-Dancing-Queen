@@ -42,7 +42,7 @@
         </button>
         <p id="instruction" class="text-sm text-slate-400 font-bold uppercase tracking-tighter">Press and Hold to Speak</p>
     </div>
-
+    
     <script>
         feather.replace();
         const micBtn = document.getElementById('mic-btn');
@@ -58,19 +58,15 @@
         function autoIntro() {
             const introText = document.getElementById('intro-message').innerText;
             setTimeout(() => {
-                // Use global speakText to ensure logging
                 speakText(introText);
             }, 1000);
         }
 
-        // --- UPDATED LISTENERS WITH COMPREHENSIVE LOGGING ---
+        // --- UPDATED LISTENERS WITH SESSION LOGGING ---
         micBtn.onmousedown = micBtn.ontouchstart = (e) => {
             e.preventDefault(); 
             
-            // Log that the user is attempting to speak
             logInteraction("MIC_HOLD_START", "User opened microphone");
-            
-            // Interrupt Misty immediately
             stopSpeech(); 
 
             status.innerText = "LISTENING...";
@@ -78,6 +74,7 @@
             instruction.innerText = "Misty is listening...";
             micBtn.classList.add('ring-4', 'ring-red-500/50', 'bg-red-600');
             
+            // Basic start signal
             fetch('/misty/start_listening', { method: 'POST' });
         };
 
@@ -90,46 +87,53 @@
                 instruction.innerText = "Generating response...";
                 micBtn.classList.remove('ring-4', 'ring-red-500/50', 'bg-red-600');
 
-                fetch('/misty/stop_and_process', { method: 'POST' })
-                    .then(res => res.json())
-                    .then(data => {
-                        // LOG THE FULL CONVERSATION DATA
-                        logInteraction("GEMINI_EXCHANGE", `User: "${data.user_text}" | Misty: "${data.misty_reply}"`);
+                // --- CRITICAL UPDATE: Pass Session ID to Flask ---
+                fetch('/misty/stop_and_process', { 
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ 
+                        sessionId: localStorage.getItem('robot_session_id') 
+                    })
+                })
+                .then(res => res.json())
+                .then(data => {
+                    // Log the final exchange results
+                    logInteraction("GEMINI_EXCHANGE", `User: "${data.user_text}" | Misty: "${data.misty_reply}"`);
 
-                        status.innerText = "IDLE";
-                        status.classList.remove('text-amber-400');
-                        status.classList.add('text-indigo-400');
-                        instruction.innerText = "Press and Hold to Speak";
-                        
-                        // Update UI with User Text
+                    status.innerText = "IDLE";
+                    status.classList.remove('text-amber-400');
+                    status.classList.add('text-indigo-400');
+                    instruction.innerText = "Press and Hold to Speak";
+                    
+                    // Update UI with User Text
+                    chat.innerHTML += `
+                        <div class="flex flex-col items-end w-full animate-in fade-in slide-in-from-right-4 duration-300">
+                            <div class="bg-indigo-600 p-4 rounded-2xl rounded-tr-none max-w-[70%] shadow-lg">
+                                <p class="text-md">${data.user_text}</p>
+                            </div>
+                        </div>
+                    `;
+                    
+                    // Update UI with Misty Response
+                    setTimeout(() => {
                         chat.innerHTML += `
-                            <div class="flex flex-col items-end w-full animate-in fade-in slide-in-from-right-4 duration-300">
-                                <div class="bg-indigo-600 p-4 rounded-2xl rounded-tr-none max-w-[70%] shadow-lg">
-                                    <p class="text-md">${data.user_text}</p>
+                            <div class="flex flex-col items-start w-full animate-in fade-in slide-in-from-left-4 duration-300">
+                                <div class="bg-slate-800 p-4 rounded-2xl rounded-tl-none border border-slate-700 max-w-[70%] shadow-lg">
+                                    <p class="font-black text-indigo-400 text-xs mb-2 uppercase tracking-widest">Misty</p>
+                                    <p class="text-md leading-relaxed">${data.misty_reply}</p>
                                 </div>
                             </div>
                         `;
-                        
-                        // Update UI with Misty Response
-                        setTimeout(() => {
-                            chat.innerHTML += `
-                                <div class="flex flex-col items-start w-full animate-in fade-in slide-in-from-left-4 duration-300">
-                                    <div class="bg-slate-800 p-4 rounded-2xl rounded-tl-none border border-slate-700 max-w-[70%] shadow-lg">
-                                        <p class="font-black text-indigo-400 text-xs mb-2 uppercase tracking-widest">Misty</p>
-                                        <p class="text-md leading-relaxed">${data.misty_reply}</p>
-                                    </div>
-                                </div>
-                            `;
-                            chat.scrollTop = chat.scrollHeight;
-                        }, 500);
-                        
                         chat.scrollTop = chat.scrollHeight;
-                    })
-                    .catch(err => {
-                        logInteraction("GEMINI_ERROR", err.message);
-                        status.innerText = "ERROR";
-                        instruction.innerText = "Something went wrong. Try again.";
-                    });
+                    }, 500);
+                    
+                    chat.scrollTop = chat.scrollHeight;
+                })
+                .catch(err => {
+                    logInteraction("GEMINI_ERROR", err.message);
+                    status.innerText = "ERROR";
+                    instruction.innerText = "Something went wrong. Try again.";
+                });
             }
         };
     </script>
