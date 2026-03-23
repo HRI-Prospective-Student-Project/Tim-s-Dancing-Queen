@@ -10,12 +10,12 @@ import logging
 from datetime import datetime
 
 app = Flask(__name__)
-MISTY_IP = "192.168.1.3"
 
 # --- 1. INITIALIZE ROBOT INTERFACES ---
+MISTY_IP = "192.168.1.3"
 misty = Robot(MISTY_IP)
 misty_actions = MistyActions(MISTY_IP)
-misty.set_default_volume(10) 
+misty.set_default_volume(20) 
 processing_lock = threading.Lock()
 
 # Auto-start skill at launch
@@ -42,9 +42,10 @@ if not logger.handlers:
 # --- 3. LOGGING ROUTE (Used by global.js) ---
 @app.route('/log_event', methods=["POST"])
 def log_event():
-    data = request.get_json()
+    # .get_json(silent=True) prevents the 415 error if headers are messy
+    data = request.get_json(silent=True)
     if not data:
-        return jsonify({"status": "error"}), 400
+        return jsonify({"status": "ignored"}), 200
 
     sess_id = data.get('sessionId', 'NO_SESS')
     event = data.get('event', 'UNKNOWN')
@@ -56,14 +57,14 @@ def log_event():
     print(f"RESEARCH LOG: {log_entry}")
     return jsonify({"status": "logged"}), 200
 
-# --- 4. NAVIGATION ROUTES & SESSION RESET ---
+# --- 4. NAVIGATION ROUTES ---
 @app.route('/')
 def index():
     # Reset Misty to a neutral state when someone returns to the home page
     misty.stop_speaking()
     misty.move_head(pitch=0, roll=0, yaw=0)
     misty.move_arms(0, 0)
-    misty.change_led(255, 255, 255) # White light for "Ready"
+    misty.change_led(255, 255, 255) # White light for "Home/Ready"
     return render_template('index_misty.html')
 
 @app.route('/cs')
@@ -83,7 +84,7 @@ def gemini_page(): return render_template('gemini_misty_mic.html')
 def stop_misty_route():
     try:
         misty.stop_speaking()
-        misty.change_led(255, 0, 0) # Red for "Listening"
+        misty.change_led(200, 200, 200) 
         return jsonify({"status": "success"}), 200
     except Exception as e:
         return jsonify({"status": "error", "message": str(e)}), 500
@@ -91,33 +92,38 @@ def stop_misty_route():
 @app.route('/RockPaperScissors', methods=["GET", "POST"])
 def rps_route():
     if request.method == "POST":
-        data = request.get_json()
+        data = request.get_json(silent=True) or {}
         sess_id = data.get('sessionId', 'NO_SESS')
         
         moves = ["Rock", "Paper", "Scissors"]
         misty_move = random.choice(moves)
         
-        logger.info(f"ID: {sess_id} | [GAME_RPS] | Details: Misty chose {misty_move}")
+        logger.info(f"ID: {sess_id} | [GAME_RPS_START] | Details: Misty chose {misty_move}")
 
         def run_rps_sequence():
             misty.stop_speaking()
-            # Countdown Sequence
-            beats = [("Rock", 20, -40, [255,0,0]), ("Paper", -15, 40, [255,255,0]), ("Scissors", 20, -40, [255,165,0])]
+            # Countdown Sequence with Visuals
+            beats = [
+                ("Rock", 20, -40, [255,0,0]), 
+                ("Paper", -15, 40, [255,255,0]), 
+                ("Scissors", 20, -40, [255,165,0])
+            ]
             for word, pitch, arm, color in beats:
                 misty.change_led(*color)
                 misty.speak(word)
                 misty.move_head(pitch=pitch, velocity=100)
                 misty.move_arms(arm, arm, 100, 100)
-                time.sleep(0.8)
+                time.sleep(1.2) # Synced with JS animation
 
             # Reveal
-            misty.change_led(0, 255, 0)
+            misty.change_led(0, 255, 0) # Green for "Shoot"
             misty.display_image("e_Joy.jpg")
             misty.move_head(0, 100)
             misty.move_arms(0, 0, 100, 100)
             misty.speak(f"Shoot! I chose {misty_move}!")
             time.sleep(3)
             misty.display_image("e_DefaultContent.jpg")
+            misty.change_led(255, 255, 255)
 
         Thread(target=run_rps_sequence).start()
         return jsonify({"status": "playing", "misty_choice": misty_move})
@@ -127,21 +133,22 @@ def rps_route():
 # --- 6. GEMINI & SPEECH PROCESSING ---
 @app.route('/misty/start_listening', methods=["POST"])
 def start_listening():
+    misty.change_led(255, 0, 0) # Red for "I am recording you"
     misty.start_recording_audio("capture.wav")
-    # Immediate movement to signal attention
     misty_actions.executeActionScript([{'name': 'LookInDirection', 'args': ['up']}])
     return jsonify({"status": "recording"})
 
 @app.route('/misty/stop_and_process', methods=["POST"])
 def stop_and_process():
-    data = request.get_json()
+    data = request.get_json(silent=True) or {}
     sess_id = data.get('sessionId', 'NO_SESS')
 
     if not processing_lock.acquire(blocking=False):
         return jsonify({"status": "busy"}), 200
     try:
         misty.stop_recording_audio()
-        time.sleep(2.0) 
+        misty.change_led(0, 0, 255) # Blue for "Thinking/Processing"
+        time.sleep(1.5) 
         
         audio_response = misty.get_audio_file("capture.wav")
         raw_audio_data = None
@@ -154,27 +161,23 @@ def stop_and_process():
                 raw_audio_data = audio_response.content
         
         if raw_audio_data:
-            # Feedback: Thinking Movements
-            thinking_movements = [{'name': 'SetEyes', 'args': ['thinking']}, {'name': 'TiltHead', 'args': ['right', 'large']}]
-            misty_actions.executeActionScript(thinking_movements)
-            
             text = transcribe_wav_bytes(io.BytesIO(raw_audio_data))
             
             if text and text.strip():
                 logger.info(f"ID: {sess_id} | [GEMINI_QUERY] | Details: {text}")
-
                 gemini_script = misty_actions.get_gemini_actions(text)
                 
-                # Log full Gemini decision for research transparency
-                logger.info(f"ID: {sess_id} | [GEMINI_RESPONSE_SCRIPT] | Details: {json.dumps(gemini_script)}")
+                # Log full Gemini decision
+                logger.info(f"ID: {sess_id} | [GEMINI_RESPONSE] | Details: {json.dumps(gemini_script)}")
 
-                response_sequence = [{'name': 'SayText', 'args': [f"I heard you say: {text}."]}] + gemini_script
-                misty_actions.executeActionScript(response_sequence)
+                misty_actions.executeActionScript(gemini_script)
                 
                 reply_text = next((a['args'][0] for a in gemini_script if a['name'] == 'SayText'), "")
+                misty.change_led(255, 255, 255) # Back to neutral
                 return jsonify({"user_text": text, "misty_reply": reply_text})
 
         misty.speak("I didn't catch that.") 
+        misty.change_led(255, 255, 255)
         return jsonify({"user_text": "...", "misty_reply": "I didn't catch that."})
 
     except Exception as e:
@@ -193,5 +196,5 @@ def handle_speak():
     return jsonify({"status": "error"}), 400
 
 if __name__ == '__main__':
-    # use_reloader=False is vital to prevent the double-start file lock issue
+    # use_reloader=False prevents the double-log-entry bug
     app.run(debug=True, host='0.0.0.0', port=5001, threaded=True, use_reloader=False)

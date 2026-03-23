@@ -29,8 +29,8 @@
 
     <div id="chat-container" class="flex-1 w-full max-w-5xl mx-auto p-8 overflow-y-auto space-y-6">
         <div class="flex flex-col items-start">
-            <div class="bg-slate-800 p-4 rounded-2xl rounded-tl-none border border-slate-700 max-w-[70%]">
-                <p id="intro-message" class="text-slate-300">Hi! I'm Misty. Hold the microphone button below to ask me anything about Franklin & Marshall! Please do not include any personal information</p>
+            <div class="bg-slate-800 p-4 rounded-2xl rounded-tl-none border border-slate-700 max-w-[70%] shadow-lg">
+                <p id="intro-message" class="text-slate-300">Hi! I'm Misty. Tap the microphone to start talking. Tap it again when you're finished! Please do not share any idenfifiable personal informaion</p>
             </div>
         </div>
     </div>
@@ -40,7 +40,7 @@
             class="w-24 h-24 bg-indigo-600 rounded-full flex items-center justify-center shadow-[0_0_30px_rgba(79,70,229,0.4)] hover:bg-indigo-500 hover:scale-105 transition-all active:scale-90 select-none touch-none">
             <i data-feather="mic" class="w-10 h-10 text-white"></i>
         </button>
-        <p id="instruction" class="text-sm text-slate-400 font-bold uppercase tracking-tighter">Press and Hold to Speak</p>
+        <p id="instruction" class="text-sm text-slate-400 font-bold uppercase tracking-tighter">Tap to Speak</p>
     </div>
     
     <script>
@@ -50,92 +50,101 @@
         const chat = document.getElementById('chat-container');
         const instruction = document.getElementById('instruction');
 
+        // TRACKING STATE
+        let isListening = false;
+
         function initGeminiPage() {
-            logInteraction("PAGE_ENTER", "User entered Gemini Chat Interface");
+            if (typeof logInteraction === 'function') {
+                logInteraction("PAGE_ENTER", "User entered Gemini Toggle Interface");
+            }
             autoIntro();
         }
 
         function autoIntro() {
             const introText = document.getElementById('intro-message').innerText;
             setTimeout(() => {
-                speakText(introText);
+                if (typeof speakText === 'function') speakText(introText);
             }, 1000);
         }
 
-        // --- UPDATED LISTENERS WITH SESSION LOGGING ---
-        micBtn.onmousedown = micBtn.ontouchstart = (e) => {
-            e.preventDefault(); 
-            
-            logInteraction("MIC_HOLD_START", "User opened microphone");
-            stopSpeech(); 
+        // TOGGLE LOGIC
+        micBtn.onclick = () => {
+            if (!isListening) {
+                startListening();
+            } else {
+                stopAndProcess();
+            }
+        };
+
+        function startListening() {
+            isListening = true;
+            if (typeof logInteraction === 'function') logInteraction("MIC_TOGGLE_START", "User began speaking");
+            if (typeof stopSpeech === 'function') stopSpeech(); 
 
             status.innerText = "LISTENING...";
             status.classList.replace('text-indigo-400', 'text-red-500');
-            instruction.innerText = "Misty is listening...";
-            micBtn.classList.add('ring-4', 'ring-red-500/50', 'bg-red-600');
+            instruction.innerText = "Misty is listening... Tap to stop";
             
-            // Basic start signal
+            // Visual Feedback: Turn Red and Pulse
+            micBtn.classList.add('ring-4', 'ring-red-500/50', 'bg-red-600', 'animate-pulse');
+            
             fetch('/misty/start_listening', { method: 'POST' });
-        };
+        }
 
-        micBtn.onmouseup = micBtn.onmouseleave = micBtn.ontouchend = () => {
-            if (status.innerText === "LISTENING...") {
-                logInteraction("MIC_HOLD_END", "User released microphone");
+        function stopAndProcess() {
+            isListening = false;
+            if (typeof logInteraction === 'function') logInteraction("MIC_TOGGLE_STOP", "User finished speaking");
+
+            status.innerText = "THINKING...";
+            status.classList.replace('text-red-500', 'text-amber-400');
+            instruction.innerText = "Processing your request...";
+            micBtn.classList.remove('ring-4', 'ring-red-500/50', 'bg-red-600', 'animate-pulse');
+
+            fetch('/misty/stop_and_process', { 
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ 
+                    sessionId: localStorage.getItem('robot_session_id') 
+                })
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (typeof logInteraction === 'function') {
+                    logInteraction("GEMINI_EXCHANGE", `U: ${data.user_text} | M: ${data.misty_reply}`);
+                }
+
+                status.innerText = "IDLE";
+                status.classList.remove('text-amber-400');
+                status.classList.add('text-indigo-400');
+                instruction.innerText = "Tap to Speak";
                 
-                status.innerText = "THINKING...";
-                status.classList.replace('text-red-500', 'text-amber-400');
-                instruction.innerText = "Generating response...";
-                micBtn.classList.remove('ring-4', 'ring-red-500/50', 'bg-red-600');
+                // Add Messages to Chat
+                appendMessage('user', data.user_text);
+                setTimeout(() => appendMessage('misty', data.misty_reply), 600);
+            })
+            .catch(err => {
+                status.innerText = "ERROR";
+                instruction.innerText = "Try again.";
+            });
+        }
 
-                // --- CRITICAL UPDATE: Pass Session ID to Flask ---
-                fetch('/misty/stop_and_process', { 
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ 
-                        sessionId: localStorage.getItem('robot_session_id') 
-                    })
-                })
-                .then(res => res.json())
-                .then(data => {
-                    // Log the final exchange results
-                    logInteraction("GEMINI_EXCHANGE", `User: "${data.user_text}" | Misty: "${data.misty_reply}"`);
+        function appendMessage(sender, text) {
+            const isUser = sender === 'user';
+            const alignment = isUser ? 'items-end' : 'items-start';
+            const bgColor = isUser ? 'bg-indigo-600' : 'bg-slate-800 border border-slate-700';
+            const rounded = isUser ? 'rounded-tr-none' : 'rounded-tl-none';
+            const label = isUser ? '' : '<p class="font-black text-indigo-400 text-xs mb-2 uppercase tracking-widest">Misty</p>';
 
-                    status.innerText = "IDLE";
-                    status.classList.remove('text-amber-400');
-                    status.classList.add('text-indigo-400');
-                    instruction.innerText = "Press and Hold to Speak";
-                    
-                    // Update UI with User Text
-                    chat.innerHTML += `
-                        <div class="flex flex-col items-end w-full animate-in fade-in slide-in-from-right-4 duration-300">
-                            <div class="bg-indigo-600 p-4 rounded-2xl rounded-tr-none max-w-[70%] shadow-lg">
-                                <p class="text-md">${data.user_text}</p>
-                            </div>
-                        </div>
-                    `;
-                    
-                    // Update UI with Misty Response
-                    setTimeout(() => {
-                        chat.innerHTML += `
-                            <div class="flex flex-col items-start w-full animate-in fade-in slide-in-from-left-4 duration-300">
-                                <div class="bg-slate-800 p-4 rounded-2xl rounded-tl-none border border-slate-700 max-w-[70%] shadow-lg">
-                                    <p class="font-black text-indigo-400 text-xs mb-2 uppercase tracking-widest">Misty</p>
-                                    <p class="text-md leading-relaxed">${data.misty_reply}</p>
-                                </div>
-                            </div>
-                        `;
-                        chat.scrollTop = chat.scrollHeight;
-                    }, 500);
-                    
-                    chat.scrollTop = chat.scrollHeight;
-                })
-                .catch(err => {
-                    logInteraction("GEMINI_ERROR", err.message);
-                    status.innerText = "ERROR";
-                    instruction.innerText = "Something went wrong. Try again.";
-                });
-            }
-        };
+            chat.innerHTML += `
+                <div class="flex flex-col ${alignment} w-full animate-in fade-in slide-in-from-bottom-2 duration-300">
+                    <div class="${bgColor} p-4 rounded-2xl ${rounded} max-w-[70%] shadow-lg">
+                        ${label}
+                        <p class="text-md leading-relaxed">${text}</p>
+                    </div>
+                </div>
+            `;
+            chat.scrollTop = chat.scrollHeight;
+        }
     </script>
 </body>
 </html>

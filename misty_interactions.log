@@ -53,3 +53,259 @@
 2026-03-23 12:25:52 - ID: sess-3i920jwpf | [SESSION_START] | Page: / | Details: User entered Main Menu
 2026-03-23 12:25:53 - ID: sess-3i920jwpf | [ROBOT_SPEECH_START] | Page: / | Details: Welcome to F and M. My name is misty. Try out our latest Rob...
 2026-03-23 12:25:54 - ID: sess-3i920jwpf | [PAGE_EXIT] | Page: / | Details: User left page
+2026-03-23 12:35:46 - ID: sess-v3fiqkcg2 | [PAGE_EXIT] | Page: / | Details: User left page
+2026-03-23 12:35:48 - ID: sess-o25wacuz1 | [SESSION_START] | Page: / | Details: User entered Main Menu
+2026-03-23 12:35:49 - ID: sess-o25wacuz1 | [ROBOT_SPEECH_START] | Page: / | Details: Welcome to F and M. My name is misty. Try out our latest Rob...
+2026-03-23 12:35:55 - ID: sess-o25wacuz1 | [NAV_CLICK] | Page: / | Details: Menu: Meet Team
+2026-03-23 12:35:55 - ID: sess-o25wacuz1 | [ROBOT_STOP] | Page: / | Details: Interrupt triggered
+2026-03-23 12:35:56 - ID: sess-o25wacuz1 | [PAGE_EXIT] | Page: / | Details: User left page
+2026-03-23 12:35:57 - ID: sess-o25wacuz1 | [PAGE_ENTER] | Page: /team | Details: User viewing Meet the Team
+2026-03-23 12:36:00 - ID: sess-o25wacuz1 | [PHOTO_ENLARGE] | Page: /team | Details: Fullscreen view: Tim
+2026-03-23 12:36:04 - ID: sess-o25wacuz1 | [PHOTO_ENLARGE] | Page: /team | Details: Fullscreen view: Prof Wilson
+2026-03-23 12:36:09 - ID: sess-o25wacuz1 | [PHOTO_ENLARGE] | Page: /team | Details: Fullscreen view: HRI Class
+2026-03-23 12:36:13 - ID: sess-o25wacuz1 | [NAV_CLICK] | Page: /team | Details: To: Team: Exit to Home
+2026-03-23 12:36:13 - ID: sess-o25wacuz1 | [ROBOT_STOP] | Page: /team | Details: Interrupt triggered
+2026-03-23 12:36:13 - ID: sess-o25wacuz1 | [NAV_CLICK] | Page: /team | Details: To: Team: Exit to Home
+2026-03-23 12:36:13 - ID: sess-o25wacuz1 | [ROBOT_STOP] | Page: /team | Details: Interrupt triggered
+2026-03-23 12:36:14 - ID: sess-o25wacuz1 | [PAGE_EXIT] | Page: /team | Details: User left page
+2026-03-23 12:36:14 - ID: sess-gmgfzpjk7 | [SESSION_START] | Page: / | Details: User entered Main Menu
+2026-03-23 12:36:15 - ID: sess-gmgfzpjk7 | [ROBOT_SPEECH_START] | Page: / | Details: Welcome to F and M. My name is misty. Try out our latest Rob...
+2026-03-23 12:36:16 - ID: sess-gmgfzpjk7 | [NAV_CLICK] | Page: / | Details: Menu: Gemini Misty
+2026-03-23 12:36:16 - ID: sess-gmgfzpjk7 | [ROBOT_STOP] | Page: / | Details: Interrupt triggered
+2026-03-23 12:36:16 - ID: sess-gmgfzpjk7 | [PAGE_EXIT] | Page: / | Details: User left page
+2026-03-23 12:36:17 - ID: sess-gmgfzpjk7 | [PAGE_ENTER] | Page: /gemini_misty | Details: User entered Gemini Chat Interface
+2026-03-23 12:36:18 - ID: sess-gmgfzpjk7 | [ROBOT_SPEECH_START] | Page: /gemini_misty | Details: Hi! I'm Misty. Hold the microphone button below to ask me an...
+2026-03-23 12:36:38 - ID: sess-gmgfzpjk7 | [MIC_HOLD_START] | Page: /gemini_misty | Details: User opened microphone
+2026-03-23 12:36:38 - ID: sess-gmgfzpjk7 | [ROBOT_STOP] | Page: /gemini_misty | Details: Interrupt triggered
+2026-03-23 12:36:38 - ID: sess-gmgfzpjk7 | [MIC_HOLD_END] | Page: /gemini_misty | Details: User released microphone
+2026-03-23 12:36:54 - ID: sess-gmgfzpjk7 | [GEMINI_EXCHANGE] | Page: /gemini_misty | Details: User: "..." | Misty: "I didn't catch that."
+2026-03-23 12:37:00 - ID: sess-gmgfzpjk7 | [MIC_HOLD_START] | Page: /gemini_misty | Details: User opened microphone
+2026-03-23 12:37:00 - ID: sess-gmgfzpjk7 | [ROBOT_STOP] | Page: /gemini_misty | Details: Interrupt triggered
+2026-03-23 12:37:00 - ID: sess-gmgfzpjk7 | [MIC_HOLD_END] | Page: /gemini_misty | Details: User released microphone
+2026-03-23 12:37:02 - ID: sess-gmgfzpjk7 | [MIC_HOLD_START] | Page: /gemini_misty | Details: User opened microphone
+2026-03-23 12:37:02 - ID: sess-gmgfzpjk7 | [ROBOT_STOP] | Page: /gemini_misty | Details: Interrupt triggered
+2026-03-23 12:37:02 - ID: sess-gmgfzpjk7 | [MIC_HOLD_END] | Page: /gemini_misty | Details: User released microphone
+2026-03-23 12:37:02 - ID: sess-gmgfzpjk7 | [GEMINI_EXCHANGE] | Page: /gemini_misty | Details: User: "undefined" | Misty: "undefined"
+2026-03-23 12:37:02 - ID: sess-gmgfzpjk7 | [GEMINI_QUERY] | Details: Error processing audio
+2026-03-23 12:37:14 - ID: sess-gmgfzpjk7 | [GEMINI_RESPONSE_SCRIPT] | Details: [{"name": "SayText", "args": ["I'm sorry, I'm having trouble thinking right now."]}]
+2026-03-23 12:37:14 - ID: sess-gmgfzpjk7 | [GEMINI_EXCHANGE] | Page: /gemini_misty | Details: User: "Error processing audio" | Misty: "I'm sorry, I'm having trouble thinking right now."
+2026-03-23 12:40:08 - ID: sess-gmgfzpjk7 | [NAV_CLICK] | Page: /gemini_misty | Details: To: Gemini: Exit to Home
+2026-03-23 12:40:08 - ID: sess-gmgfzpjk7 | [ROBOT_STOP] | Page: /gemini_misty | Details: Interrupt triggered
+2026-03-23 12:40:09 - ID: sess-gmgfzpjk7 | [PAGE_EXIT] | Page: /gemini_misty | Details: User left page
+2026-03-23 12:40:10 - ID: sess-9hjn3xy6t | [SESSION_START] | Page: / | Details: User entered Main Menu
+2026-03-23 12:40:10 - ID: sess-9hjn3xy6t | [ROBOT_SPEECH_START] | Page: / | Details: Welcome to F and M. My name is misty. Try out our latest Rob...
+2026-03-23 12:40:18 - ID: sess-9hjn3xy6t | [NAV_CLICK] | Page: / | Details: Menu: Gemini Misty
+2026-03-23 12:40:18 - ID: sess-9hjn3xy6t | [ROBOT_STOP] | Page: / | Details: Interrupt triggered
+2026-03-23 12:40:18 - ID: sess-9hjn3xy6t | [PAGE_EXIT] | Page: / | Details: User left page
+2026-03-23 12:40:19 - ID: sess-9hjn3xy6t | [PAGE_ENTER] | Page: /gemini_misty | Details: User entered Gemini Toggle Interface
+2026-03-23 12:40:20 - ID: sess-9hjn3xy6t | [ROBOT_SPEECH_START] | Page: /gemini_misty | Details: Hi! I'm Misty. Tap the microphone to start talking. Tap it a...
+2026-03-23 12:40:20 - ID: sess-9hjn3xy6t | [MIC_TOGGLE_START] | Page: /gemini_misty | Details: User began speaking
+2026-03-23 12:40:20 - ID: sess-9hjn3xy6t | [ROBOT_STOP] | Page: /gemini_misty | Details: Interrupt triggered
+2026-03-23 12:40:25 - ID: sess-9hjn3xy6t | [MIC_TOGGLE_STOP] | Page: /gemini_misty | Details: User finished speaking
+2026-03-23 12:40:29 - ID: sess-9hjn3xy6t | [GEMINI_EXCHANGE] | Page: /gemini_misty | Details: U: ... | M: I didn't catch that.
+2026-03-23 12:40:32 - ID: sess-9hjn3xy6t | [MIC_TOGGLE_START] | Page: /gemini_misty | Details: User began speaking
+2026-03-23 12:40:32 - ID: sess-9hjn3xy6t | [ROBOT_STOP] | Page: /gemini_misty | Details: Interrupt triggered
+2026-03-23 12:40:38 - ID: sess-9hjn3xy6t | [MIC_TOGGLE_STOP] | Page: /gemini_misty | Details: User finished speaking
+2026-03-23 12:40:43 - ID: sess-9hjn3xy6t | [GEMINI_EXCHANGE] | Page: /gemini_misty | Details: U: ... | M: I didn't catch that.
+2026-03-23 12:40:45 - ID: sess-9hjn3xy6t | [MIC_TOGGLE_START] | Page: /gemini_misty | Details: User began speaking
+2026-03-23 12:40:45 - ID: sess-9hjn3xy6t | [ROBOT_STOP] | Page: /gemini_misty | Details: Interrupt triggered
+2026-03-23 12:40:53 - ID: sess-9hjn3xy6t | [MIC_TOGGLE_STOP] | Page: /gemini_misty | Details: User finished speaking
+2026-03-23 12:40:57 - ID: sess-9hjn3xy6t | [GEMINI_QUERY] | Details: hello hello can you is this hello can you hear me
+2026-03-23 12:40:57 - ID: sess-9hjn3xy6t | [GEMINI_RESPONSE_SCRIPT] | Details: [{"name": "SayText", "args": ["I'm sorry, I'm having trouble thinking right now."]}]
+2026-03-23 12:40:58 - ID: sess-9hjn3xy6t | [GEMINI_EXCHANGE] | Page: /gemini_misty | Details: U: hello hello can you is this hello can you hear me | M: I'm sorry, I'm having trouble thinking right now.
+2026-03-23 15:16:23 - ID: sess-9hjn3xy6t | [SESSION_TIMEOUT] | Page: / | Details: Resetting due to inactivity
+2026-03-23 15:16:46 - ID: sess-1ob9khrix | [SESSION_START] | Page: / | Details: User entered Main Menu
+2026-03-23 15:16:47 - ID: sess-1ob9khrix | [ROBOT_SPEECH_START] | Page: / | Details: Welcome to F and M. My name is misty. Try out our latest Rob...
+2026-03-23 15:16:58 - ID: sess-1ob9khrix | [NAV_CLICK] | Page: / | Details: Menu: Misty Origins
+2026-03-23 15:16:58 - ID: sess-1ob9khrix | [ROBOT_STOP] | Page: / | Details: Interrupt triggered
+2026-03-23 15:16:58 - ID: sess-1ob9khrix | [PAGE_EXIT] | Page: / | Details: User left page
+2026-03-23 15:16:59 - ID: sess-1ob9khrix | [PAGE_ENTER] | Page: /background | Details: User entered Dev Log / Background page
+2026-03-23 15:17:00 - ID: sess-1ob9khrix | [ROBOT_SPEECH_START] | Page: /background | Details: Hi there! I was built for an HRI class. My friends spent a l...
+2026-03-23 15:17:04 - ID: sess-1ob9khrix | [GALLERY_AUTO_STEP] | Page: /background | Details: Viewed Photo: Testing the Game logic
+2026-03-23 15:17:09 - ID: sess-1ob9khrix | [GALLERY_AUTO_STEP] | Page: /background | Details: Viewed Photo: Sharing Between groups
+2026-03-23 15:17:14 - ID: sess-1ob9khrix | [GALLERY_AUTO_STEP] | Page: /background | Details: Viewed Photo: Trying Different Users
+2026-03-23 15:17:17 - ID: sess-1ob9khrix | [NAV_CLICK] | Page: /background | Details: DevLog: Exit to Home
+2026-03-23 15:17:17 - ID: sess-1ob9khrix | [ROBOT_STOP] | Page: /background | Details: Interrupt triggered
+2026-03-23 15:17:18 - ID: sess-1ob9khrix | [PAGE_EXIT] | Page: /background | Details: User left page
+2026-03-23 15:17:18 - ID: sess-0zharrosi | [SESSION_START] | Page: / | Details: User entered Main Menu
+2026-03-23 15:17:19 - ID: sess-0zharrosi | [ROBOT_SPEECH_START] | Page: / | Details: Welcome to F and M. My name is misty. Try out our latest Rob...
+2026-03-23 15:17:22 - ID: sess-0zharrosi | [NAV_CLICK] | Page: / | Details: Menu: RPS Game
+2026-03-23 15:17:22 - ID: sess-0zharrosi | [ROBOT_STOP] | Page: / | Details: Interrupt triggered
+2026-03-23 15:17:22 - ID: sess-0zharrosi | [PAGE_EXIT] | Page: / | Details: User left page
+2026-03-23 15:17:23 - ID: sess-0zharrosi | [PAGE_ENTER] | Page: /RockPaperScissors | Details: Entered Rock Paper Scissors
+2026-03-23 15:17:29 - ID: sess-0zharrosi | [GAME_MOVE_PLAYER] | Page: /RockPaperScissors | Details: Player: paper
+2026-03-23 15:19:08 - ID: sess-0zharrosi | [GAME_RESET] | Page: /RockPaperScissors | Details: Score was 0-0
+2026-03-23 15:19:10 - ID: sess-0zharrosi | [GAME_MOVE_PLAYER] | Page: /RockPaperScissors | Details: Player: scissors
+2026-03-23 15:19:13 - ID: sess-0zharrosi | [GAME_RESET] | Page: /RockPaperScissors | Details: Score was 0-0
+2026-03-23 15:20:26 - ID: sess-0zharrosi | [NAV_CLICK] | Page: /RockPaperScissors | Details: To: RPS: Return Home
+2026-03-23 15:20:26 - ID: sess-0zharrosi | [ROBOT_STOP] | Page: /RockPaperScissors | Details: Interrupt triggered
+2026-03-23 15:20:27 - ID: sess-0zharrosi | [PAGE_EXIT] | Page: /RockPaperScissors | Details: User left page
+2026-03-23 15:20:28 - ID: sess-12zjppx06 | [SESSION_START] | Page: / | Details: User entered Main Menu
+2026-03-23 15:20:28 - ID: sess-12zjppx06 | [ROBOT_SPEECH_START] | Page: / | Details: Welcome to F and M. My name is misty. Try out our latest Rob...
+2026-03-23 15:20:33 - ID: sess-12zjppx06 | [NAV_CLICK] | Page: / | Details: Menu: RPS Game
+2026-03-23 15:20:33 - ID: sess-12zjppx06 | [ROBOT_STOP] | Page: / | Details: Interrupt triggered
+2026-03-23 15:20:33 - ID: sess-12zjppx06 | [PAGE_EXIT] | Page: / | Details: User left page
+2026-03-23 15:20:33 - ID: sess-12zjppx06 | [PAGE_ENTER] | Page: /RockPaperScissors | Details: User started RPS Game
+2026-03-23 15:20:40 - ID: sess-12zjppx06 | [GAME_MOVE_PLAYER] | Page: /RockPaperScissors | Details: Player chose: paper
+2026-03-23 15:24:40 - ID: sess-12zjppx06 | [NAV_CLICK] | Page: /RockPaperScissors | Details: To: RPS: Return Home
+2026-03-23 15:24:40 - ID: sess-12zjppx06 | [ROBOT_STOP] | Page: /RockPaperScissors | Details: Interrupt triggered
+2026-03-23 15:24:41 - ID: sess-12zjppx06 | [PAGE_EXIT] | Page: /RockPaperScissors | Details: User left page
+2026-03-23 15:24:42 - ID: sess-cofg9ztlr | [SESSION_START] | Page: / | Details: User entered Main Menu
+2026-03-23 15:24:43 - ID: sess-cofg9ztlr | [ROBOT_SPEECH_START] | Page: / | Details: Welcome to F and M. My name is misty. Try out our latest Rob...
+2026-03-23 15:24:45 - ID: sess-cofg9ztlr | [NAV_CLICK] | Page: / | Details: Menu: RPS Game
+2026-03-23 15:24:45 - ID: sess-cofg9ztlr | [ROBOT_STOP] | Page: / | Details: Interrupt triggered
+2026-03-23 15:24:46 - ID: sess-cofg9ztlr | [PAGE_EXIT] | Page: / | Details: User left page
+2026-03-23 15:24:46 - ID: sess-cofg9ztlr | [PAGE_ENTER] | Page: /RockPaperScissors | Details: User started RPS Game
+2026-03-23 15:24:49 - ID: sess-cofg9ztlr | [GAME_MOVE_PLAYER] | Page: /RockPaperScissors | Details: Player chose: paper
+2026-03-23 15:24:49 - ID: NO_SESS | [GAME_RPS_START] | Details: Misty chose Rock
+2026-03-23 15:24:53 - ID: sess-cofg9ztlr | [GAME_REVEAL] | Page: /RockPaperScissors | Details: Misty revealed: rock
+2026-03-23 15:24:55 - ID: sess-cofg9ztlr | [GAME_ROUND_RESULT] | Page: /RockPaperScissors | Details: Result: WIN | Current: P1-M0
+2026-03-23 15:25:06 - ID: sess-cofg9ztlr | [GAME_MOVE_PLAYER] | Page: /RockPaperScissors | Details: Player chose: scissors
+2026-03-23 15:25:06 - ID: NO_SESS | [GAME_RPS_START] | Details: Misty chose Paper
+2026-03-23 15:25:09 - ID: sess-cofg9ztlr | [GAME_REVEAL] | Page: /RockPaperScissors | Details: Misty revealed: paper
+2026-03-23 15:25:12 - ID: sess-cofg9ztlr | [GAME_ROUND_RESULT] | Page: /RockPaperScissors | Details: Result: WIN | Current: P2-M0
+2026-03-23 15:25:17 - ID: sess-cofg9ztlr | [GAME_MOVE_PLAYER] | Page: /RockPaperScissors | Details: Player chose: rock
+2026-03-23 15:25:17 - ID: NO_SESS | [GAME_RPS_START] | Details: Misty chose Paper
+2026-03-23 15:25:20 - ID: sess-cofg9ztlr | [GAME_REVEAL] | Page: /RockPaperScissors | Details: Misty revealed: paper
+2026-03-23 15:25:23 - ID: sess-cofg9ztlr | [GAME_ROUND_RESULT] | Page: /RockPaperScissors | Details: Result: LOSS | Current: P2-M1
+2026-03-23 15:25:34 - ID: sess-cofg9ztlr | [GAME_MOVE_PLAYER] | Page: /RockPaperScissors | Details: Player chose: paper
+2026-03-23 15:25:34 - ID: NO_SESS | [GAME_RPS_START] | Details: Misty chose Rock
+2026-03-23 15:25:37 - ID: sess-cofg9ztlr | [GAME_REVEAL] | Page: /RockPaperScissors | Details: Misty revealed: rock
+2026-03-23 15:25:40 - ID: sess-cofg9ztlr | [GAME_ROUND_RESULT] | Page: /RockPaperScissors | Details: Result: WIN | Current: P3-M1
+2026-03-23 15:25:40 - ID: sess-cofg9ztlr | [GAME_MATCH_OVER] | Page: /RockPaperScissors | Details: Match Winner: PLAYER
+2026-03-23 15:25:46 - ID: sess-cofg9ztlr | [NAV_CLICK] | Page: /RockPaperScissors | Details: To: RPS: Return Home
+2026-03-23 15:25:46 - ID: sess-cofg9ztlr | [ROBOT_STOP] | Page: /RockPaperScissors | Details: Interrupt triggered
+2026-03-23 15:25:47 - ID: sess-cofg9ztlr | [PAGE_EXIT] | Page: /RockPaperScissors | Details: User left page
+2026-03-23 15:25:48 - ID: sess-qxyspegem | [SESSION_START] | Page: / | Details: User entered Main Menu
+2026-03-23 15:25:49 - ID: sess-qxyspegem | [ROBOT_SPEECH_START] | Page: / | Details: Welcome to F and M. My name is misty. Try out our latest Rob...
+2026-03-23 15:25:49 - ID: sess-qxyspegem | [NAV_CLICK] | Page: / | Details: Menu: RPS Game
+2026-03-23 15:25:49 - ID: sess-qxyspegem | [ROBOT_STOP] | Page: / | Details: Interrupt triggered
+2026-03-23 15:25:49 - ID: sess-qxyspegem | [PAGE_EXIT] | Page: / | Details: User left page
+2026-03-23 15:25:50 - ID: sess-qxyspegem | [PAGE_ENTER] | Page: /RockPaperScissors | Details: User started RPS Game
+2026-03-23 15:25:57 - ID: sess-qxyspegem | [NAV_CLICK] | Page: /RockPaperScissors | Details: To: RPS: Return Home
+2026-03-23 15:25:57 - ID: sess-qxyspegem | [ROBOT_STOP] | Page: /RockPaperScissors | Details: Interrupt triggered
+2026-03-23 15:25:58 - ID: sess-qxyspegem | [PAGE_EXIT] | Page: /RockPaperScissors | Details: User left page
+2026-03-23 15:25:59 - ID: sess-nseexhe88 | [SESSION_START] | Page: / | Details: User entered Main Menu
+2026-03-23 15:25:59 - ID: sess-nseexhe88 | [ROBOT_SPEECH_START] | Page: / | Details: Welcome to F and M. My name is misty. Try out our latest Rob...
+2026-03-23 15:26:00 - ID: sess-nseexhe88 | [NAV_CLICK] | Page: / | Details: Menu: RPS Game
+2026-03-23 15:26:00 - ID: sess-nseexhe88 | [ROBOT_STOP] | Page: / | Details: Interrupt triggered
+2026-03-23 15:26:00 - ID: sess-nseexhe88 | [PAGE_EXIT] | Page: / | Details: User left page
+2026-03-23 15:26:00 - ID: sess-nseexhe88 | [PAGE_ENTER] | Page: /RockPaperScissors | Details: User started RPS Game
+2026-03-23 15:33:11 - ID: sess-nseexhe88 | [NAV_CLICK] | Page: /RockPaperScissors | Details: To: RPS: Return Home
+2026-03-23 15:33:11 - ID: sess-nseexhe88 | [ROBOT_STOP] | Page: /RockPaperScissors | Details: Interrupt triggered
+2026-03-23 15:33:12 - ID: sess-nseexhe88 | [PAGE_EXIT] | Page: /RockPaperScissors | Details: User left page
+2026-03-23 15:33:13 - ID: sess-fh903k8wq | [SESSION_START] | Page: / | Details: User entered Main Menu
+2026-03-23 15:33:14 - ID: sess-fh903k8wq | [ROBOT_SPEECH_START] | Page: / | Details: Welcome to F and M. My name is misty. Try out our latest Rob...
+2026-03-23 15:33:20 - ID: sess-fh903k8wq | [NAV_CLICK] | Page: / | Details: Menu: Computer Science
+2026-03-23 15:33:20 - ID: sess-fh903k8wq | [ROBOT_STOP] | Page: / | Details: Interrupt triggered
+2026-03-23 15:33:20 - ID: sess-fh903k8wq | [PAGE_EXIT] | Page: / | Details: User left page
+2026-03-23 15:33:21 - ID: sess-fh903k8wq | [PAGE_ENTER] | Page: /cs | Details: User entered CS Department page
+2026-03-23 15:33:22 - ID: sess-fh903k8wq | [ROBOT_SPEECH_START] | Page: /cs | Details: Welcome to the Computer Science department! Tap the boxes to...
+2026-03-23 15:33:31 - ID: sess-fh903k8wq | [NAV_CLICK] | Page: /cs | Details: CS: Home
+2026-03-23 15:33:31 - ID: sess-fh903k8wq | [ROBOT_STOP] | Page: /cs | Details: Interrupt triggered
+2026-03-23 15:33:32 - ID: sess-fh903k8wq | [PAGE_EXIT] | Page: /cs | Details: User left page
+2026-03-23 15:33:33 - ID: sess-l6jlemtif | [SESSION_START] | Page: / | Details: User entered Main Menu
+2026-03-23 15:33:33 - ID: sess-l6jlemtif | [ROBOT_SPEECH_START] | Page: / | Details: Welcome to F and M. My name is misty. Try out our latest Rob...
+2026-03-23 15:33:35 - ID: sess-l6jlemtif | [NAV_CLICK] | Page: / | Details: Menu: Misty Origins
+2026-03-23 15:33:35 - ID: sess-l6jlemtif | [ROBOT_STOP] | Page: / | Details: Interrupt triggered
+2026-03-23 15:33:35 - ID: sess-l6jlemtif | [PAGE_EXIT] | Page: / | Details: User left page
+2026-03-23 15:33:36 - ID: sess-l6jlemtif | [PAGE_ENTER] | Page: /background | Details: User entered Dev Log / Background page
+2026-03-23 15:33:36 - ID: sess-l6jlemtif | [ROBOT_SPEECH_START] | Page: /background | Details: Hi there! I was built for an HRI class. My friends spent a l...
+2026-03-23 15:33:41 - ID: sess-l6jlemtif | [GALLERY_AUTO_STEP] | Page: /background | Details: Viewed Photo: Testing the Game logic
+2026-03-23 15:33:46 - ID: sess-l6jlemtif | [GALLERY_AUTO_STEP] | Page: /background | Details: Viewed Photo: Sharing Between groups
+2026-03-23 15:33:51 - ID: sess-l6jlemtif | [GALLERY_AUTO_STEP] | Page: /background | Details: Viewed Photo: Trying Different Users
+2026-03-23 15:33:53 - ID: sess-l6jlemtif | [NAV_CLICK] | Page: /background | Details: DevLog: Exit to Home
+2026-03-23 15:33:53 - ID: sess-l6jlemtif | [ROBOT_STOP] | Page: /background | Details: Interrupt triggered
+2026-03-23 15:33:54 - ID: sess-l6jlemtif | [PAGE_EXIT] | Page: /background | Details: User left page
+2026-03-23 15:33:54 - ID: sess-v1w89qo93 | [SESSION_START] | Page: / | Details: User entered Main Menu
+2026-03-23 15:33:55 - ID: sess-v1w89qo93 | [ROBOT_SPEECH_START] | Page: / | Details: Welcome to F and M. My name is misty. Try out our latest Rob...
+2026-03-23 15:33:58 - ID: sess-v1w89qo93 | [NAV_CLICK] | Page: / | Details: Menu: Meet Team
+2026-03-23 15:33:58 - ID: sess-v1w89qo93 | [ROBOT_STOP] | Page: / | Details: Interrupt triggered
+2026-03-23 15:33:58 - ID: sess-v1w89qo93 | [PAGE_EXIT] | Page: / | Details: User left page
+2026-03-23 15:33:59 - ID: sess-v1w89qo93 | [PAGE_ENTER] | Page: /team | Details: User viewing Meet the Team
+2026-03-23 15:34:06 - ID: sess-v1w89qo93 | [PHOTO_ENLARGE] | Page: /team | Details: Fullscreen view: HRI Class
+2026-03-23 15:34:09 - ID: sess-v1w89qo93 | [PHOTO_ENLARGE] | Page: /team | Details: Fullscreen view: Tim
+2026-03-23 15:34:12 - ID: sess-v1w89qo93 | [PHOTO_ENLARGE] | Page: /team | Details: Fullscreen view: Prof Wilson
+2026-03-23 15:34:20 - ID: sess-v1w89qo93 | [PHOTO_ENLARGE] | Page: /team | Details: Fullscreen view: Tim
+2026-03-23 15:34:23 - ID: sess-v1w89qo93 | [PHOTO_ENLARGE] | Page: /team | Details: Fullscreen view: Prof Wilson
+2026-03-23 15:34:25 - ID: sess-v1w89qo93 | [PHOTO_ENLARGE] | Page: /team | Details: Fullscreen view: HRI Class
+2026-03-23 15:34:27 - ID: sess-v1w89qo93 | [NAV_CLICK] | Page: /team | Details: To: Team: Exit to Home
+2026-03-23 15:34:27 - ID: sess-v1w89qo93 | [ROBOT_STOP] | Page: /team | Details: Interrupt triggered
+2026-03-23 15:34:28 - ID: sess-v1w89qo93 | [PAGE_EXIT] | Page: /team | Details: User left page
+2026-03-23 15:34:29 - ID: sess-upbw135x4 | [SESSION_START] | Page: / | Details: User entered Main Menu
+2026-03-23 15:34:29 - ID: sess-upbw135x4 | [ROBOT_SPEECH_START] | Page: / | Details: Welcome to F and M. My name is misty. Try out our latest Rob...
+2026-03-23 15:34:30 - ID: sess-upbw135x4 | [NAV_CLICK] | Page: / | Details: Menu: Gemini Misty
+2026-03-23 15:34:30 - ID: sess-upbw135x4 | [ROBOT_STOP] | Page: / | Details: Interrupt triggered
+2026-03-23 15:34:30 - ID: sess-upbw135x4 | [PAGE_EXIT] | Page: / | Details: User left page
+2026-03-23 15:34:31 - ID: sess-upbw135x4 | [PAGE_ENTER] | Page: /gemini_misty | Details: User entered Gemini Toggle Interface
+2026-03-23 15:34:32 - ID: sess-upbw135x4 | [ROBOT_SPEECH_START] | Page: /gemini_misty | Details: Hi! I'm Misty. Tap the microphone to start talking. Tap it a...
+2026-03-23 15:34:33 - ID: sess-upbw135x4 | [MIC_TOGGLE_START] | Page: /gemini_misty | Details: User began speaking
+2026-03-23 15:34:33 - ID: sess-upbw135x4 | [ROBOT_STOP] | Page: /gemini_misty | Details: Interrupt triggered
+2026-03-23 15:34:34 - ID: sess-upbw135x4 | [MIC_TOGGLE_STOP] | Page: /gemini_misty | Details: User finished speaking
+2026-03-23 15:34:39 - ID: sess-upbw135x4 | [GEMINI_EXCHANGE] | Page: /gemini_misty | Details: U: ... | M: I didn't catch that.
+2026-03-23 15:35:37 - ID: sess-upbw135x4 | [NAV_CLICK] | Page: /gemini_misty | Details: To: Gemini: Exit to Home
+2026-03-23 15:35:37 - ID: sess-upbw135x4 | [ROBOT_STOP] | Page: /gemini_misty | Details: Interrupt triggered
+2026-03-23 15:35:38 - ID: sess-upbw135x4 | [PAGE_EXIT] | Page: /gemini_misty | Details: User left page
+2026-03-23 15:35:39 - ID: sess-9gzg7zuvl | [SESSION_START] | Page: / | Details: User entered Main Menu
+2026-03-23 15:35:40 - ID: sess-9gzg7zuvl | [ROBOT_SPEECH_START] | Page: / | Details: Welcome to F and M. My name is misty. Try out our latest Rob...
+2026-03-23 15:36:20 - ID: sess-9gzg7zuvl | [NAV_CLICK] | Page: / | Details: Menu: RPS Game
+2026-03-23 15:36:20 - ID: sess-9gzg7zuvl | [ROBOT_STOP] | Page: / | Details: Interrupt triggered
+2026-03-23 15:36:20 - ID: sess-9gzg7zuvl | [PAGE_EXIT] | Page: / | Details: User left page
+2026-03-23 15:36:21 - ID: sess-9gzg7zuvl | [PAGE_ENTER] | Page: /RockPaperScissors | Details: User started RPS Game
+2026-03-23 15:36:29 - ID: sess-9gzg7zuvl | [NAV_CLICK] | Page: /RockPaperScissors | Details: To: RPS: Return Home
+2026-03-23 15:36:29 - ID: sess-9gzg7zuvl | [ROBOT_STOP] | Page: /RockPaperScissors | Details: Interrupt triggered
+2026-03-23 15:36:30 - ID: sess-9gzg7zuvl | [PAGE_EXIT] | Page: /RockPaperScissors | Details: User left page
+2026-03-23 15:36:31 - ID: sess-rz1hl7v7c | [SESSION_START] | Page: / | Details: User entered Main Menu
+2026-03-23 15:36:32 - ID: sess-rz1hl7v7c | [ROBOT_SPEECH_START] | Page: / | Details: Welcome to F and M. My name is misty. Try out our latest Rob...
+2026-03-23 15:36:36 - ID: sess-rz1hl7v7c | [NAV_CLICK] | Page: / | Details: Menu: Computer Science
+2026-03-23 15:36:36 - ID: sess-rz1hl7v7c | [ROBOT_STOP] | Page: / | Details: Interrupt triggered
+2026-03-23 15:36:36 - ID: sess-rz1hl7v7c | [PAGE_EXIT] | Page: / | Details: User left page
+2026-03-23 15:36:37 - ID: sess-rz1hl7v7c | [PAGE_ENTER] | Page: /cs | Details: User entered CS Department page
+2026-03-23 15:36:38 - ID: sess-rz1hl7v7c | [ROBOT_SPEECH_START] | Page: /cs | Details: Welcome to the Computer Science department! Tap the boxes to...
+2026-03-23 15:36:48 - ID: sess-rz1hl7v7c | [INFO_CARD_CLICK] | Page: /cs | Details: Why F&M CS
+2026-03-23 15:36:48 - ID: sess-rz1hl7v7c | [ROBOT_SPEECH_START] | Page: /cs | Details: Welcome to the Computer Science department! Tap the boxes to...
+2026-03-23 15:38:06 - ID: sess-rz1hl7v7c | [NAV_CLICK] | Page: /cs | Details: CS: Home
+2026-03-23 15:38:06 - ID: sess-rz1hl7v7c | [ROBOT_STOP] | Page: /cs | Details: Interrupt triggered
+2026-03-23 15:38:07 - ID: sess-rz1hl7v7c | [NAV_CLICK] | Page: /cs | Details: CS: Home
+2026-03-23 15:38:07 - ID: sess-rz1hl7v7c | [ROBOT_STOP] | Page: /cs | Details: Interrupt triggered
+2026-03-23 15:38:08 - ID: sess-rz1hl7v7c | [PAGE_EXIT] | Page: /cs | Details: User left page
+2026-03-23 15:38:08 - ID: sess-jeykgviib | [SESSION_START] | Page: / | Details: User entered Main Menu
+2026-03-23 15:38:09 - ID: sess-jeykgviib | [ROBOT_SPEECH_START] | Page: / | Details: Welcome to F and M. My name is misty. Try out our latest Rob...
+2026-03-23 15:38:11 - ID: sess-jeykgviib | [NAV_CLICK] | Page: / | Details: Menu: Misty Origins
+2026-03-23 15:38:11 - ID: sess-jeykgviib | [ROBOT_STOP] | Page: / | Details: Interrupt triggered
+2026-03-23 15:38:12 - ID: sess-jeykgviib | [PAGE_EXIT] | Page: / | Details: User left page
+2026-03-23 15:38:12 - ID: sess-jeykgviib | [PAGE_ENTER] | Page: /background | Details: User entered Dev Log / Background page
+2026-03-23 15:38:13 - ID: sess-jeykgviib | [ROBOT_SPEECH_START] | Page: /background | Details: Hi there! I was built for an HRI class. My friends spent a l...
+2026-03-23 15:38:15 - ID: sess-jeykgviib | [NAV_CLICK] | Page: /background | Details: DevLog: Exit to Home
+2026-03-23 15:38:15 - ID: sess-jeykgviib | [ROBOT_STOP] | Page: /background | Details: Interrupt triggered
+2026-03-23 15:38:16 - ID: sess-jeykgviib | [PAGE_EXIT] | Page: /background | Details: User left page
+2026-03-23 15:38:17 - ID: sess-qzcet4nbr | [SESSION_START] | Page: / | Details: User entered Main Menu
+2026-03-23 15:38:18 - ID: sess-qzcet4nbr | [ROBOT_SPEECH_START] | Page: / | Details: Welcome to F and M. My name is misty. Try out our latest Rob...
+2026-03-23 15:38:19 - ID: sess-qzcet4nbr | [NAV_CLICK] | Page: / | Details: Menu: Meet Team
+2026-03-23 15:38:19 - ID: sess-qzcet4nbr | [ROBOT_STOP] | Page: / | Details: Interrupt triggered
+2026-03-23 15:38:19 - ID: sess-qzcet4nbr | [PAGE_EXIT] | Page: / | Details: User left page
+2026-03-23 15:38:20 - ID: sess-qzcet4nbr | [PAGE_ENTER] | Page: /team | Details: User viewing Meet the Team
+2026-03-23 15:38:26 - ID: sess-qzcet4nbr | [NAV_CLICK] | Page: /team | Details: To: Team: Exit to Home
+2026-03-23 15:38:26 - ID: sess-qzcet4nbr | [ROBOT_STOP] | Page: /team | Details: Interrupt triggered
+2026-03-23 15:38:27 - ID: sess-qzcet4nbr | [PAGE_EXIT] | Page: /team | Details: User left page
+2026-03-23 15:38:28 - ID: sess-xr2gssspg | [SESSION_START] | Page: / | Details: User entered Main Menu
+2026-03-23 15:38:28 - ID: sess-xr2gssspg | [ROBOT_SPEECH_START] | Page: / | Details: Welcome to F and M. My name is misty. Try out our latest Rob...
+2026-03-23 15:38:32 - ID: sess-xr2gssspg | [NAV_CLICK] | Page: / | Details: Menu: Meet Team
+2026-03-23 15:38:32 - ID: sess-xr2gssspg | [ROBOT_STOP] | Page: / | Details: Interrupt triggered
+2026-03-23 15:38:32 - ID: sess-xr2gssspg | [PAGE_EXIT] | Page: / | Details: User left page
+2026-03-23 15:38:33 - ID: sess-xr2gssspg | [PAGE_ENTER] | Page: /team | Details: User viewing Meet the Team
+2026-03-23 15:39:07 - ID: sess-xr2gssspg | [PHOTO_ENLARGE] | Page: /team | Details: Fullscreen view: HRI Class
+2026-03-23 15:39:09 - ID: sess-xr2gssspg | [PAGE_EXIT] | Page: /team | Details: User left page
+2026-03-23 15:39:09 - ID: sess-g01spl53a | [SESSION_START] | Page: / | Details: User entered Main Menu
+2026-03-23 15:39:10 - ID: sess-g01spl53a | [ROBOT_SPEECH_START] | Page: / | Details: Welcome to F and M. My name is misty. Try out our latest Rob...
+2026-03-23 15:39:12 - ID: sess-g01spl53a | [NAV_CLICK] | Page: / | Details: Menu: Meet Team
+2026-03-23 15:39:12 - ID: sess-g01spl53a | [ROBOT_STOP] | Page: / | Details: Interrupt triggered
+2026-03-23 15:39:12 - ID: sess-g01spl53a | [PAGE_EXIT] | Page: / | Details: User left page
+2026-03-23 15:39:13 - ID: sess-g01spl53a | [PAGE_ENTER] | Page: /team | Details: User viewing Meet the Team
+2026-03-23 15:39:15 - ID: sess-g01spl53a | [PHOTO_ENLARGE] | Page: /team | Details: Fullscreen view: Tim
+2026-03-23 15:39:17 - ID: sess-g01spl53a | [PHOTO_ENLARGE] | Page: /team | Details: Fullscreen view: Prof Wilson
+2026-03-23 15:39:20 - ID: sess-g01spl53a | [NAV_CLICK] | Page: /team | Details: To: Team: Exit to Home
+2026-03-23 15:39:20 - ID: sess-g01spl53a | [ROBOT_STOP] | Page: /team | Details: Interrupt triggered
+2026-03-23 15:39:21 - ID: sess-g01spl53a | [PAGE_EXIT] | Page: /team | Details: User left page
+2026-03-23 15:39:22 - ID: sess-njdbc9j5j | [SESSION_START] | Page: / | Details: User entered Main Menu
+2026-03-23 15:39:23 - ID: sess-njdbc9j5j | [ROBOT_SPEECH_START] | Page: / | Details: Welcome to F and M. My name is misty. Try out our latest Rob...

@@ -4,16 +4,21 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Rock • Paper • Scissors | F&M Robotics</title>
+    
     <script src="{{ url_for('static', filename='tailwind.min.js') }}"></script>
     <script src="{{ url_for('static', filename='feather.min.js') }}"></script>
     <script src="{{ url_for('static', filename='global.js') }}"></script>
+
     <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        primary: '#002F6C',
-                        accent: '#6366f1'
+        // Ensure Tailwind config is ready before the body renders
+        if (window.tailwind) {
+            tailwind.config = {
+                theme: {
+                    extend: {
+                        colors: {
+                            primary: '#002F6C',
+                            accent: '#6366f1'
+                        }
                     }
                 }
             }
@@ -27,7 +32,7 @@
             <div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center shadow-lg">
                 <i data-feather="target" class="text-white w-4 h-4"></i>
             </div>
-            <span class="text-lg font-bold tracking-tight">F&M Game Lab</span>
+            <span class="text-lg font-bold tracking-tight text-primary">F&M Game Lab</span>
         </div>
         <div class="flex items-center gap-4">
             <a href="/" onclick="handleNav('RPS: Return Home')" class="text-sm font-semibold text-slate-600 hover:text-primary transition-colors flex items-center gap-1">
@@ -63,7 +68,7 @@
             </div>
         </section>
 
-        <section id="resultBanner" class="rounded-2xl bg-white shadow-md p-5 border border-indigo-100 mb-6 hidden animate-bounce-short">
+        <section id="resultBanner" class="rounded-2xl bg-white shadow-md p-5 border border-indigo-100 mb-6 hidden">
             <p id="roundResult" class="text-xl font-black text-primary"></p>
             <p id="roundDetail" class="text-slate-600 font-medium"></p>
         </section>
@@ -104,7 +109,13 @@
     </main>
 
     <script>
-        feather.replace();
+        // Initialization
+        function initRPS() {
+            if (typeof feather !== 'undefined') feather.replace();
+            if (typeof logInteraction === 'function') {
+                logInteraction("PAGE_ENTER", "User started RPS Game");
+            }
+        }
 
         let player = 0, cpu = 0;
         const beats = { rock: 'scissors', paper: 'rock', scissors: 'paper' };
@@ -120,10 +131,6 @@
         const animStatus = document.getElementById('animStatus');
 
         function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
-
-        function initRPS() {
-            logInteraction("PAGE_ENTER", "Entered Rock Paper Scissors");
-        }
 
         async function mistyStart() {
             const r = await fetch("/RockPaperScissors", { method: "POST" });
@@ -148,18 +155,25 @@
 
             animStatus.textContent = "SHOOT!";
             cpuEmoji.textContent = emojis[mistyChoice];
+            
+            // Research Log: Track exactly when Misty revealed her hand
+            if (typeof logInteraction === 'function') {
+                logInteraction("GAME_REVEAL", `Misty revealed: ${mistyChoice}`);
+            }
+
             cpuEmoji.style.transform = "scale(1.6)";
             await sleep(1000);
             cpuAnim.classList.add('hidden');
         }
 
         async function playRound(playerMove) {
+            // 1. Safety check: don't allow moves if someone already won
             if (player >= 3 || cpu >= 3) return;
-            disableChoices(true);
             
-            logInteraction("GAME_MOVE_PLAYER", `Player: ${playerMove}`);
+            disableChoices(true);
+            logInteraction("GAME_MOVE_PLAYER", `Player chose: ${playerMove}`);
+            
             const c = await mistyStart(); 
-
             await runSyncAnimation(c); 
             await sleep(1200); 
 
@@ -177,15 +191,27 @@
                 showResult('Misty Wins! ❌', `${c} beats ${playerMove}.`);
             }
 
-            logInteraction("GAME_ROUND_RESULT", `Outcome: ${roundOutcome} | Score: ${player}-${cpu}`);
+            logInteraction("GAME_ROUND_RESULT", `Result: ${roundOutcome} | Current: P${player}-M${cpu}`);
             updateUI();
             
+            // 2. CHECK FOR MATCH OVER
             if (player < 3 && cpu < 3) {
+                // Continue match
                 disableChoices(false);
             } else {
+                // MATCH FINISHED
                 const finalWinner = player >= 3 ? "PLAYER" : "MISTY";
-                gameStatusEl.textContent = player >= 3 ? "Victory! You beat Misty! 🎉" : "Misty wins the match! 🤖";
-                logInteraction("GAME_MATCH_OVER", `Winner: ${finalWinner}`);
+                
+                // Update Status with colors
+                gameStatusEl.innerHTML = player >= 3 
+                    ? "<span class='text-emerald-600 font-black animate-bounce'>MATCH OVER: YOU WON! 🎉</span>" 
+                    : "<span class='text-red-600 font-black animate-pulse'>MATCH OVER: MISTY WON! 🤖</span>";
+                
+                logInteraction("GAME_MATCH_FINISHED", `Winner: ${finalWinner} | Final Score: ${player}-${cpu}`);
+                
+                // IMPORTANT: We do NOT re-enable choices here. 
+                // The user MUST click the Reset Button to play again.
+                document.getElementById('resetBtn').classList.add('ring-4', 'ring-indigo-500', 'scale-105');
             }
         }
 
@@ -194,7 +220,7 @@
             document.getElementById('roundResult').textContent = title;
             document.getElementById('roundDetail').textContent = detail;
             const li = document.createElement('li');
-            li.className = "p-2 bg-white border border-slate-100 rounded-lg shadow-sm";
+            li.className = "p-2 bg-white border border-slate-100 rounded-lg shadow-sm animate-in slide-in-from-top-2";
             li.innerHTML = `<span class="font-black text-primary">${title}:</span> ${detail}`;
             historyEl.prepend(li);
         }
@@ -217,12 +243,23 @@
         });
 
         document.getElementById('resetBtn').addEventListener('click', () => {
-            logInteraction("GAME_RESET", `Score was ${player}-${cpu}`);
-            player = 0; cpu = 0;
+            // Log the reset for your data analysis
+            logInteraction("GAME_MANUAL_RESET", `Board cleared. Previous score: ${player}-${cpu}`);
+            
+            // Reset variables
+            player = 0; 
+            cpu = 0;
+            
+            // Reset UI
             updateUI();
             historyEl.innerHTML = '';
             resultBanner.classList.add('hidden');
             gameStatusEl.textContent = "First player to 3 wins!";
+            
+            // Remove the highlight from the reset button
+            document.getElementById('resetBtn').classList.remove('ring-4', 'ring-indigo-500', 'scale-105');
+            
+            // Re-enable the move buttons for a new game
             disableChoices(false);
         });
     </script>

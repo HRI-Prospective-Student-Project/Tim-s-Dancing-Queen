@@ -14,7 +14,7 @@ class MistyActions:
         self.action_url = f"http://{self.IP}/api/skills/event"
         self.skill_start_url = f"http://{self.IP}/api/skills/start"
         # REPLACE WITH YOUR ACTUAL API KEY
-        self.client = genai.Client(api_key="AIzaSyAuActkOiuDyohK8UKn7voJGIkY3kTM9Xw")
+        self.client = genai.Client(api_key="AIzaSyAjohRnGSXfydkxiZbfN-qZHWQceMEXhBg")
 
     def startSkill(self):
         """Starts the ActionScript skill on Misty hardware."""
