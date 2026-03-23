@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CS Department | F&M Robotics</title>
+    
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/feather-icons"></script>
     
@@ -14,27 +15,29 @@
         .menu-card { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
         .menu-card:hover { transform: translateY(-8px); box-shadow: 0 25px 50px -12px rgba(0, 47, 108, 0.15); }
     </style>
+
     <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: { primary: '#002F6C', accent: '#6366f1' }
+    // This waits until the tailwind script is actually ready
+        if (window.tailwind) {
+            tailwind.config = {
+                theme: {
+                    extend: {
+                        colors: { primary: '#002F6C', accent: '#6366f1' }
+                    }
                 }
             }
         }
     </script>
 </head>
-<body class="bg-slate-50 text-slate-900 font-sans" onload="initPage()">
+<body class="bg-slate-50 text-slate-900 font-sans">
 
     <div class="h-screen flex flex-col p-8 gap-8">
-        
         <header class="text-center shrink-0">
             <h1 class="text-5xl font-black text-primary tracking-tighter mb-2">Franklin & Marshall College</h1>
-            <p class="text-slate-500 font-bold uppercase tracking-[0.2em] text-sm">Computer Science & Social Robotics Lab</p>
+            <p class="text-slate-500 font-bold uppercase tracking-[0.2em] text-sm">Robotics Lab</p>
         </header>
 
         <div class="flex-1 grid grid-cols-1 md:grid-cols-3 grid-rows-2 gap-8 max-w-7xl mx-auto w-full">
-            
             <a href="/cs" onclick="handleNav('Menu: Computer Science')" class="menu-card bg-white rounded-[2.5rem] p-8 border border-slate-200 flex flex-col items-center justify-center text-center group border-b-4 border-b-primary">
                 <div class="w-20 h-20 bg-blue-50 text-primary rounded-3xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
                     <i data-feather="code" class="w-10 h-10"></i>
@@ -82,7 +85,6 @@
                 <h2 class="text-2xl font-black text-slate-800">Visit F&M</h2>
                 <p class="text-slate-500 text-sm mt-3 leading-relaxed">Check out our official campus website.</p>
             </a>
-
         </div>
 
         <footer class="text-center py-2 shrink-0">
@@ -94,45 +96,43 @@
     </div>
 
     <script>
-        feather.replace();
+        // Define everything first
+        const introText = "Welcome to F and M. My name is misty. Try out our latest Robotics project and chat with me.";
 
-        const introText = "Welcome to the F and M Human Robotics Lab. Try out our latest project and chat with me.";
-
-        /**
-         * INITIALIZATION
-         * Runs when the page loads to start the session log and intro.
-         */
         function initPage() {
-            // Logs a specific entry point for the session
+            // 1. Render Icons
+            if (typeof feather !== 'undefined') {
+                feather.replace();
+            }
+
+            // 2. Log Session Start
             if (typeof logInteraction === 'function') {
                 logInteraction("SESSION_START", "User entered Main Menu");
             }
+
+            // 3. Trigger Intro
             autoIntro();
         }
 
         function autoIntro() {
             setTimeout(() => {
-                // global.js handles the logging for robot speech
                 if (typeof speakText === 'function') {
                     speakText(introText);
                 }
             }, 800);
         }
 
-        /**
-         * COMPREHENSIVE NAV HANDLER
-         * Logs the specific button clicked and cleans up robot state.
-         */
         function handleNav(destination) {
-            // Calls global.js function to log the click and path
             if (typeof logInteraction === 'function') {
                 logInteraction("NAV_CLICK", destination);
             }
-            // Calls global.js function to stop any existing speech
             if (typeof stopSpeech === 'function') {
                 stopSpeech();
             }
         }
+
+        // Use window.onload to ensure EVERYTHING (CDNs included) is ready
+        window.onload = initPage;
     </script>
 </body>
 </html>

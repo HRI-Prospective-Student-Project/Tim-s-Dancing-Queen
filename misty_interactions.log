@@ -1,0 +1,55 @@
+2026-03-23 11:17:51 - ID: sess-mc1wh1qjb | [SESSION_START] | Page: / | Details: User entered Main Menu
+2026-03-23 11:17:52 - ID: sess-mc1wh1qjb | [ROBOT_SPEECH_START] | Page: / | Details: Welcome to the F and M Human Robotics Lab. Try out our lates
+2026-03-23 11:18:49 - ID: sess-mc1wh1qjb | [NAV_CLICK] | Page: / | Details: Menu: Meet Team
+2026-03-23 11:18:49 - ID: sess-mc1wh1qjb | [ROBOT_SPEECH_STOP] | Page: / | Details: User requested silence
+2026-03-23 11:18:49 - ID: sess-mc1wh1qjb | [PAGE_ENTER] | Page: /team | Details: User viewing Meet the Team
+2026-03-23 11:19:00 - ID: sess-mc1wh1qjb | [PHOTO_ENLARGE] | Page: /team | Details: Fullscreen view: HRI Class
+2026-03-23 11:19:11 - ID: sess-mc1wh1qjb | [PHOTO_ENLARGE] | Page: /team | Details: Fullscreen view: Tim
+2026-03-23 11:19:15 - ID: sess-mc1wh1qjb | [PHOTO_ENLARGE] | Page: /team | Details: Fullscreen view: Tim
+2026-03-23 11:19:19 - ID: sess-mc1wh1qjb | [PHOTO_ENLARGE] | Page: /team | Details: Fullscreen view: Prof Wilson
+2026-03-23 11:19:23 - ID: sess-mc1wh1qjb | [PHOTO_ENLARGE] | Page: /team | Details: Fullscreen view: Tim
+2026-03-23 11:21:05 - ID: sess-rms6naspo | [SESSION_START] | Page: / | Details: User entered Main Menu
+2026-03-23 11:21:05 - ID: sess-rms6naspo | [ROBOT_SPEECH_START] | Page: / | Details: Welcome to the F and M Human Robotics Lab. Try out our lates
+2026-03-23 11:21:06 - ID: sess-rms6naspo | [NAV_CLICK] | Page: / | Details: Menu: Meet Team
+2026-03-23 11:21:06 - ID: sess-rms6naspo | [ROBOT_SPEECH_STOP] | Page: / | Details: User requested silence
+2026-03-23 11:21:06 - ID: sess-rms6naspo | [PAGE_ENTER] | Page: /team | Details: User viewing Meet the Team
+2026-03-23 11:21:08 - ID: sess-rms6naspo | [PHOTO_ENLARGE] | Page: /team | Details: Fullscreen view: Prof Wilson
+2026-03-23 11:21:11 - ID: sess-rms6naspo | [PHOTO_ENLARGE] | Page: /team | Details: Fullscreen view: Tim
+2026-03-23 11:21:16 - ID: sess-rms6naspo | [PHOTO_ENLARGE] | Page: /team | Details: Fullscreen view: Prof Wilson
+2026-03-23 11:21:20 - ID: sess-rms6naspo | [PHOTO_ENLARGE] | Page: /team | Details: Fullscreen view: HRI Class
+2026-03-23 11:21:25 - ID: sess-rms6naspo | [NAV_CLICK] | Page: /team | Details: Destination: Team: Exit to Home
+2026-03-23 11:21:25 - ID: sess-rms6naspo | [ROBOT_SPEECH_STOP] | Page: /team | Details: User requested silence
+2026-03-23 11:21:26 - ID: sess-pquw7uyg6 | [SESSION_START] | Page: / | Details: User entered Main Menu
+2026-03-23 11:21:26 - ID: sess-pquw7uyg6 | [ROBOT_SPEECH_START] | Page: / | Details: Welcome to the F and M Human Robotics Lab. Try out our lates
+2026-03-23 11:41:29 - ID: sess-pquw7uyg6 | [SESSION_TIMEOUT] | Page: / | Details: User inactive for 5 minutes. Resetting to Home.
+2026-03-23 11:41:41 - ID: sess-yloj277gj | [SESSION_START] | Page: / | Details: User entered Main Menu
+2026-03-23 11:41:41 - ID: sess-yloj277gj | [ROBOT_SPEECH_START] | Page: / | Details: Welcome to the F and M Human Robotics Lab. Try out our lates
+2026-03-23 11:48:30 - ID: sess-yloj277gj | [SESSION_TIMEOUT] | Page: / | Details: User inactive for 5 minutes. Resetting to Home.
+2026-03-23 11:48:37 - ID: sess-0u8u1ksig | [SESSION_START] | Page: / | Details: User entered Main Menu
+2026-03-23 11:48:38 - ID: sess-0u8u1ksig | [ROBOT_SPEECH_START] | Page: / | Details: Welcome to the F and M. My name is misty. Try out our latest
+2026-03-23 11:49:17 - ID: sess-x4gvr8h0r | [SESSION_START] | Page: / | Details: User entered Main Menu
+2026-03-23 11:49:18 - ID: sess-x4gvr8h0r | [ROBOT_SPEECH_START] | Page: / | Details: Welcome to F and M. My name is misty. Try out our latest Rob
+2026-03-23 12:09:38 - ID: sess-nua1mfiwr | [JS_ERROR] | Page: / | Details: Uncaught ReferenceError: tailwind is not defined at 18
+2026-03-23 12:09:38 - ID: sess-nua1mfiwr | [JS_ERROR] | Page: / | Details: Uncaught ReferenceError: feather is not defined at 97
+2026-03-23 12:09:38 - ID: sess-nua1mfiwr | [SESSION_START] | Page: / | Details: User entered Main Menu
+2026-03-23 12:09:38 - ID: sess-nua1mfiwr | [JS_ERROR] | Page: / | Details: Uncaught ReferenceError: Cannot access 'introText' before initialization at 117
+2026-03-23 12:10:17 - ID: sess-1adgtq86y | [JS_ERROR] | Page: / | Details: Uncaught ReferenceError: tailwind is not defined at 18
+2026-03-23 12:10:17 - ID: sess-1adgtq86y | [JS_ERROR] | Page: / | Details: Uncaught ReferenceError: feather is not defined at 97
+2026-03-23 12:10:17 - ID: sess-1adgtq86y | [SESSION_START] | Page: / | Details: User entered Main Menu
+2026-03-23 12:10:18 - ID: sess-1adgtq86y | [JS_ERROR] | Page: / | Details: Uncaught ReferenceError: Cannot access 'introText' before initialization at 117
+2026-03-23 12:13:07 - ID: sess-4kcjiccj5 | [JS_ERROR] | Page: / | Details: Uncaught ReferenceError: tailwind is not defined at 21
+2026-03-23 12:13:07 - ID: sess-4kcjiccj5 | [SESSION_START] | Page: / | Details: User entered Main Menu
+2026-03-23 12:13:08 - ID: sess-4kcjiccj5 | [ROBOT_SPEECH_START] | Page: / | Details: Welcome to F and M. My name is misty. Try out our latest Rob
+2026-03-23 12:13:52 - ID: sess-zrrz6oh4i | [JS_ERROR] | Page: / | Details: Uncaught ReferenceError: tailwind is not defined at 21
+2026-03-23 12:13:53 - ID: sess-zrrz6oh4i | [SESSION_START] | Page: / | Details: User entered Main Menu
+2026-03-23 12:13:53 - ID: sess-zrrz6oh4i | [ROBOT_SPEECH_START] | Page: / | Details: Welcome to F and M. My name is misty. Try out our latest Rob
+2026-03-23 12:18:27 - ID: sess-it0lvnwqz | [SESSION_START] | Page: / | Details: User entered Main Menu
+2026-03-23 12:18:28 - ID: sess-it0lvnwqz | [ROBOT_SPEECH_START] | Page: / | Details: Welcome to F and M. My name is misty. Try out our latest Rob
+2026-03-23 12:22:29 - ID: sess-53lwzsl7a | [SESSION_START] | Page: / | Details: User entered Main Menu
+2026-03-23 12:22:30 - ID: sess-53lwzsl7a | [ROBOT_SPEECH_START] | Page: / | Details: Welcome to F and M. My name is misty. Try out our latest Rob...
+2026-03-23 12:24:45 - ID: sess-53lwzsl7a | [PAGE_EXIT] | Page: / | Details: User navigated away or closed tab
+2026-03-23 12:25:07 - ID: sess-v3fiqkcg2 | [SESSION_START] | Page: / | Details: User entered Main Menu
+2026-03-23 12:25:08 - ID: sess-v3fiqkcg2 | [ROBOT_SPEECH_START] | Page: / | Details: Welcome to F and M. My name is misty. Try out our latest Rob...
+2026-03-23 12:25:52 - ID: sess-3i920jwpf | [SESSION_START] | Page: / | Details: User entered Main Menu
+2026-03-23 12:25:53 - ID: sess-3i920jwpf | [ROBOT_SPEECH_START] | Page: / | Details: Welcome to F and M. My name is misty. Try out our latest Rob...
+2026-03-23 12:25:54 - ID: sess-3i920jwpf | [PAGE_EXIT] | Page: / | Details: User left page
