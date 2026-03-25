@@ -1,18 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Misty | Gemini Mic</title>
     <script src="{{ url_for('static', filename='tailwind.min.js') }}"></script>
     <script src="{{ url_for('static', filename='feather.min.js') }}"></script>
     <script src="{{ url_for('static', filename='global.js') }}"></script>
     <style>
+        /* Hidden scrollbar but functional scrolling */
         #chat-container::-webkit-scrollbar { display: none; }
-        #chat-container { -ms-overflow-style: none; scrollbar-width: none; }
+        #chat-container { 
+            -ms-overflow-style: none; 
+            scrollbar-width: none; 
+            scroll-behavior: smooth;
+        }
+        /* Fix for long words/files breaking layout */
+        .message-text {
+            overflow-wrap: break-word;
+            word-wrap: break-word;
+            white-space: pre-wrap; /* CRITICAL: Maintains line breaks from test files */
+        }
     </style>
 </head>
 <body class="bg-slate-900 text-white font-sans h-screen flex flex-col overflow-hidden" onload="initGeminiPage()">
 
-    <div class="w-full p-6 border-b border-slate-700 bg-slate-800 flex justify-between items-center shadow-lg">
+    <div class="w-full p-6 border-b border-slate-700 bg-slate-800 flex justify-between items-center shadow-lg relative z-10">
         <div class="flex items-center gap-4">
             <a href="/" onclick="handleNav('Gemini: Exit to Home')" class="p-2 hover:bg-slate-700 rounded-full transition-colors">
                 <i data-feather="arrow-left"></i>
@@ -23,34 +36,40 @@
         </div>
         <div class="flex flex-col items-end">
             <span id="status" class="text-sm font-black tracking-widest text-indigo-400">IDLE</span>
-            <p class="text-[10px] text-slate-500 uppercase">Gemini 1.5 Flash System</p>
+            <p class="text-[10px] text-slate-500 uppercase tracking-tighter">Gemini 2.5 Flash System</p>
         </div>
     </div>
 
-    <div id="chat-container" class="flex-1 w-full max-w-5xl mx-auto p-8 overflow-y-auto space-y-6">
-        <div class="flex flex-col items-start">
-            <div class="bg-slate-800 p-4 rounded-2xl rounded-tl-none border border-slate-700 max-w-[70%] shadow-lg">
-                <p id="intro-message" class="text-slate-300">Hi! I'm Misty powered by Gemini. Tap the microphone to start talking. Tap it again when you're finished! Please do not share any identifiable personal information</p>
+    <div id="chat-container" class="flex-1 w-full max-w-5xl mx-auto p-8 overflow-y-auto space-y-8">
+        <div class="flex flex-col items-start w-full animate-in fade-in duration-500">
+            <div class="bg-slate-800 p-6 rounded-2xl rounded-tl-none border border-slate-700 max-w-[85%] shadow-xl">
+                <p class="font-black text-indigo-400 text-xs mb-2 uppercase tracking-widest">Misty</p>
+                <p id="intro-message" class="text-slate-300 text-md leading-relaxed message-text">Hi! I'm Misty powered by Gemini. Tap the microphone to start talking. Tap it again when you're finished! Please do not share any identifiable personal information.</p>
             </div>
         </div>
     </div>
 
-    <div class="w-full p-10 bg-gradient-to-t from-slate-900 via-slate-900 to-transparent flex flex-col items-center gap-4">
+    <div class="w-full p-10 bg-gradient-to-t from-slate-900 via-slate-900 to-transparent flex flex-col items-center gap-4 relative z-10">
         <button id="mic-btn" 
-            class="w-24 h-24 bg-indigo-600 rounded-full flex items-center justify-center shadow-[0_0_30px_rgba(79,70,229,0.4)] hover:bg-indigo-500 hover:scale-105 transition-all active:scale-90 select-none touch-none">
-            <i data-feather="mic" class="w-10 h-10 text-white"></i>
+            class="w-24 h-24 bg-indigo-600 rounded-full flex items-center justify-center shadow-[0_0_40px_rgba(79,70,229,0.3)] hover:bg-indigo-500 hover:scale-105 transition-all active:scale-95 select-none touch-none border-4 border-transparent">
+            <i data-feather="mic" id="mic-icon" class="w-10 h-10 text-white"></i>
         </button>
-        <p id="instruction" class="text-sm text-slate-400 font-bold uppercase tracking-tighter">Tap to Speak</p>
+        <div class="text-center">
+            <p id="instruction" class="text-sm text-slate-400 font-bold uppercase tracking-widest">Tap to Speak</p>
+            <p class="text-[10px] text-slate-600 mt-1 uppercase">Misty will listen until you tap again</p>
+        </div>
     </div>
     
     <script>
+        // Global feather icons init
         feather.replace();
+
         const micBtn = document.getElementById('mic-btn');
+        const micIcon = document.getElementById('mic-icon');
         const status = document.getElementById('status');
         const chat = document.getElementById('chat-container');
         const instruction = document.getElementById('instruction');
 
-        // TRACKING STATE
         let isListening = false;
 
         function initGeminiPage() {
@@ -64,10 +83,9 @@
             const introText = document.getElementById('intro-message').innerText;
             setTimeout(() => {
                 if (typeof speakText === 'function') speakText(introText);
-            }, 1000);
+            }, 800);
         }
 
-        // TOGGLE LOGIC
         micBtn.onclick = () => {
             if (!isListening) {
                 startListening();
@@ -85,8 +103,10 @@
             status.classList.replace('text-indigo-400', 'text-red-500');
             instruction.innerText = "Misty is listening... Tap to stop";
             
-            // Visual Feedback: Turn Red and Pulse
-            micBtn.classList.add('ring-4', 'ring-red-500/50', 'bg-red-600', 'animate-pulse');
+            // Visual Active State
+            micBtn.classList.replace('bg-indigo-600', 'bg-red-600');
+            micBtn.classList.add('ring-4', 'ring-red-500/40', 'animate-pulse');
+            micIcon.style.transform = "scale(1.2)";
             
             fetch('/misty/start_listening', { method: 'POST' });
         }
@@ -97,14 +117,18 @@
 
             status.innerText = "THINKING...";
             status.classList.replace('text-red-500', 'text-amber-400');
-            instruction.innerText = "Processing your request...";
-            micBtn.classList.remove('ring-4', 'ring-red-500/50', 'bg-red-600', 'animate-pulse');
+            instruction.innerText = "Misty is processing...";
+            
+            // Revert Mic Button
+            micBtn.classList.remove('ring-4', 'ring-red-500/40', 'animate-pulse');
+            micBtn.classList.replace('bg-red-600', 'bg-indigo-600');
+            micIcon.style.transform = "scale(1.0)";
 
             fetch('/misty/stop_and_process', { 
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ 
-                    sessionId: localStorage.getItem('robot_session_id') 
+                    sessionId: localStorage.getItem('robot_session_id') || 'GUEST'
                 })
             })
             .then(res => res.json())
@@ -114,17 +138,22 @@
                 }
 
                 status.innerText = "IDLE";
-                status.classList.remove('text-amber-400');
-                status.classList.add('text-indigo-400');
+                status.classList.replace('text-amber-400', 'text-indigo-400');
                 instruction.innerText = "Tap to Speak";
                 
-                // Add Messages to Chat
+                // 1. Show User Message
                 appendMessage('user', data.user_text);
-                setTimeout(() => appendMessage('misty', data.misty_reply), 600);
+                
+                // 2. Show Misty Message after slight delay for realism
+                setTimeout(() => {
+                    appendMessage('misty', data.misty_reply);
+                }, 400);
             })
             .catch(err => {
+                console.error(err);
                 status.innerText = "ERROR";
-                instruction.innerText = "Try again.";
+                status.classList.replace('text-amber-400', 'text-red-400');
+                instruction.innerText = "Connection lost. Try again.";
             });
         }
 
@@ -134,15 +163,23 @@
             const bgColor = isUser ? 'bg-indigo-600' : 'bg-slate-800 border border-slate-700';
             const rounded = isUser ? 'rounded-tr-none' : 'rounded-tl-none';
             const label = isUser ? '' : '<p class="font-black text-indigo-400 text-xs mb-2 uppercase tracking-widest">Misty</p>';
+            
+            // Expanded width for Misty's long text responses
+            const maxWidth = isUser ? 'max-w-[80%]' : 'max-w-[95%] w-full';
 
-            chat.innerHTML += `
-                <div class="flex flex-col ${alignment} w-full animate-in fade-in slide-in-from-bottom-2 duration-300">
-                    <div class="${bgColor} p-4 rounded-2xl ${rounded} max-w-[70%] shadow-lg">
-                        ${label}
-                        <p class="text-md leading-relaxed">${text}</p>
-                    </div>
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `flex flex-col ${alignment} w-full animate-in fade-in slide-in-from-bottom-4 duration-500`;
+            
+            messageDiv.innerHTML = `
+                <div class="${bgColor} p-6 rounded-3xl ${rounded} ${maxWidth} shadow-2xl">
+                    ${label}
+                    <p class="text-md leading-relaxed message-text">${text}</p>
                 </div>
             `;
+
+            chat.appendChild(messageDiv);
+            
+            // Scroll to bottom immediately
             chat.scrollTop = chat.scrollHeight;
         }
     </script>

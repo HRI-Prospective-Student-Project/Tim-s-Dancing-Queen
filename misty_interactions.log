@@ -557,3 +557,173 @@
 2026-03-25 12:52:13 - ID: sess-hxguotzu6 | [ROBOT_SPEECH_START] | Page: / | Details: Welcome to F and M. My name is misty. Try out our latest Rob...
 2026-03-25 12:55:17 - ID: sess-hxguotzu6 | [PAGE_EXIT] | Page: / | Details: User left page
 2026-03-25 12:55:20 - ID: sess-hxguotzu6 | [PAGE_EXIT] | Page: / | Details: User left page
+2026-03-25 14:33:54 - ID: sess-nik3jaw0c | [SESSION_START] | Page: / | Details: User entered Main Menu
+2026-03-25 14:33:55 - ID: sess-nik3jaw0c | [ROBOT_SPEECH_START] | Page: / | Details: Welcome to F and M. My name is misty. Try out our latest Rob...
+2026-03-25 14:35:20 - ID: sess-nik3jaw0c | [PAGE_EXIT] | Page: / | Details: User left page
+2026-03-25 14:35:21 - ID: sess-yknvhgq46 | [SESSION_START] | Page: / | Details: User entered Main Menu
+2026-03-25 14:35:21 - ID: sess-yknvhgq46 | [ROBOT_SPEECH_START] | Page: / | Details: Welcome to F and M. My name is misty. Try out our latest Rob...
+2026-03-25 14:35:39 - ID: sess-yknvhgq46 | [NAV_CLICK] | Page: / | Details: Menu: Computer Science
+2026-03-25 14:35:39 - ID: sess-yknvhgq46 | [ROBOT_STOP] | Page: / | Details: Interrupt triggered
+2026-03-25 14:35:39 - ID: sess-yknvhgq46 | [PAGE_EXIT] | Page: / | Details: User left page
+2026-03-25 14:35:40 - ID: sess-yknvhgq46 | [PAGE_ENTER] | Page: /cs | Details: User entered CS Department page
+2026-03-25 14:35:41 - ID: sess-yknvhgq46 | [ROBOT_SPEECH_START] | Page: /cs | Details: Welcome to the Computer Science department! Tap the boxes to...
+2026-03-25 14:35:56 - ID: sess-yknvhgq46 | [FAQ_CLICK] | Page: /cs | Details: Industry Focus
+2026-03-25 14:35:56 - ID: sess-yknvhgq46 | [ROBOT_SPEECH_START] | Page: /cs | Details: Our curriculum prepares you for industry research. Many of o...
+2026-03-25 14:36:15 - ID: sess-yknvhgq46 | [FAQ_CLICK] | Page: /cs | Details: Graduate Careers
+2026-03-25 14:36:15 - ID: sess-yknvhgq46 | [ROBOT_SPEECH_START] | Page: /cs | Details: Our alumni work at top-tier technology firms and pursue PhDs...
+2026-03-25 14:36:24 - ID: sess-yknvhgq46 | [INFO_CARD_CLICK] | Page: /cs | Details: Robotics Lab
+2026-03-25 14:36:24 - ID: sess-yknvhgq46 | [ROBOT_SPEECH_START] | Page: /cs | Details: Work with our robots including Misty and Nao in the social r...
+2026-03-25 14:36:33 - ID: sess-yknvhgq46 | [FAQ_CLICK] | Page: /cs | Details: Industry Focus
+2026-03-25 14:36:33 - ID: sess-yknvhgq46 | [ROBOT_SPEECH_START] | Page: /cs | Details: Our curriculum prepares you for industry research. Many of o...
+2026-03-25 14:36:34 - ID: sess-yknvhgq46 | [FAQ_CLICK] | Page: /cs | Details: Experience Needed
+2026-03-25 14:36:34 - ID: sess-yknvhgq46 | [ROBOT_SPEECH_START] | Page: /cs | Details: No prior experience is needed! Our intro courses are designe...
+2026-03-25 14:36:35 - ID: sess-yknvhgq46 | [FAQ_CLICK] | Page: /cs | Details: Experience Needed
+2026-03-25 14:36:35 - ID: sess-yknvhgq46 | [ROBOT_SPEECH_START] | Page: /cs | Details: No prior experience is needed! Our intro courses are designe...
+2026-03-25 14:36:51 - ID: sess-yknvhgq46 | [NAV_CLICK] | Page: /cs | Details: CS: Ask Gemini
+2026-03-25 14:36:51 - ID: sess-yknvhgq46 | [ROBOT_STOP] | Page: /cs | Details: Interrupt triggered
+2026-03-25 14:36:51 - ID: sess-yknvhgq46 | [PAGE_EXIT] | Page: /cs | Details: User left page
+2026-03-25 14:36:52 - ID: sess-yknvhgq46 | [PAGE_ENTER] | Page: /gemini_misty | Details: User entered Gemini Toggle Interface
+2026-03-25 14:36:53 - ID: sess-yknvhgq46 | [ROBOT_SPEECH_START] | Page: /gemini_misty | Details: Hi! I'm Misty powered by Gemini. Tap the microphone to start...
+2026-03-25 14:36:54 - ID: sess-yknvhgq46 | [NAV_CLICK] | Page: /gemini_misty | Details: To: Gemini: Exit to Home
+2026-03-25 14:36:54 - ID: sess-yknvhgq46 | [ROBOT_STOP] | Page: /gemini_misty | Details: Interrupt triggered
+2026-03-25 14:36:54 - ID: sess-yknvhgq46 | [PAGE_EXIT] | Page: /gemini_misty | Details: User left page
+2026-03-25 14:36:55 - ID: sess-qt696eein | [SESSION_START] | Page: / | Details: User entered Main Menu
+2026-03-25 14:36:56 - ID: sess-qt696eein | [ROBOT_SPEECH_START] | Page: / | Details: Welcome to F and M. My name is misty. Try out our latest Rob...
+2026-03-25 14:36:59 - ID: sess-qt696eein | [NAV_CLICK] | Page: / | Details: Menu: RPS Game
+2026-03-25 14:36:59 - ID: sess-qt696eein | [ROBOT_STOP] | Page: / | Details: Interrupt triggered
+2026-03-25 14:36:59 - ID: sess-qt696eein | [PAGE_EXIT] | Page: / | Details: User left page
+2026-03-25 14:38:41 - ID: sess-qt696eein | [NAV_CLICK] | Page: /RockPaperScissors | Details: To: RPS: Return Home
+2026-03-25 14:38:41 - ID: sess-qt696eein | [ROBOT_STOP] | Page: /RockPaperScissors | Details: Interrupt triggered
+2026-03-25 14:38:42 - ID: sess-qt696eein | [PAGE_EXIT] | Page: /RockPaperScissors | Details: User left page
+2026-03-25 14:38:43 - ID: sess-cxrireuiq | [SESSION_START] | Page: / | Details: User entered Main Menu
+2026-03-25 14:38:44 - ID: sess-cxrireuiq | [ROBOT_SPEECH_START] | Page: / | Details: Welcome to F and M. My name is misty. Try out our latest Rob...
+2026-03-25 14:38:59 - ID: sess-cxrireuiq | [NAV_CLICK] | Page: / | Details: Menu: Gemini Misty
+2026-03-25 14:38:59 - ID: sess-cxrireuiq | [ROBOT_STOP] | Page: / | Details: Interrupt triggered
+2026-03-25 14:38:59 - ID: sess-cxrireuiq | [PAGE_EXIT] | Page: / | Details: User left page
+2026-03-25 14:39:00 - ID: sess-cxrireuiq | [PAGE_ENTER] | Page: /gemini_misty | Details: User entered Gemini Toggle Interface
+2026-03-25 14:39:01 - ID: sess-cxrireuiq | [ROBOT_SPEECH_START] | Page: /gemini_misty | Details: Hi! I'm Misty powered by Gemini. Tap the microphone to start...
+2026-03-25 14:39:06 - ID: sess-cxrireuiq | [MIC_TOGGLE_START] | Page: /gemini_misty | Details: User began speaking
+2026-03-25 14:39:06 - ID: sess-cxrireuiq | [ROBOT_STOP] | Page: /gemini_misty | Details: Interrupt triggered
+2026-03-25 14:39:30 - ID: sess-cxrireuiq | [MIC_TOGGLE_STOP] | Page: /gemini_misty | Details: User finished speaking
+2026-03-25 14:39:50 - ID: sess-cxrireuiq | [GEMINI_EXCHANGE] | Page: /gemini_misty | Details: U: ... | M: I didn't catch that.
+2026-03-25 14:40:29 - ID: sess-cxrireuiq | [NAV_CLICK] | Page: /gemini_misty | Details: To: Gemini: Exit to Home
+2026-03-25 14:40:29 - ID: sess-cxrireuiq | [ROBOT_STOP] | Page: /gemini_misty | Details: Interrupt triggered
+2026-03-25 14:40:29 - ID: sess-cxrireuiq | [PAGE_EXIT] | Page: /gemini_misty | Details: User left page
+2026-03-25 14:40:30 - ID: sess-q6mdc7igr | [SESSION_START] | Page: / | Details: User entered Main Menu
+2026-03-25 14:40:31 - ID: sess-q6mdc7igr | [ROBOT_SPEECH_START] | Page: / | Details: Welcome to F and M. My name is misty. Try out our latest Rob...
+2026-03-25 14:43:51 - ID: sess-q6mdc7igr | [NAV_CLICK] | Page: / | Details: Menu: Computer Science
+2026-03-25 14:43:51 - ID: sess-q6mdc7igr | [ROBOT_STOP] | Page: / | Details: Interrupt triggered
+2026-03-25 14:43:51 - ID: sess-q6mdc7igr | [PAGE_EXIT] | Page: / | Details: User left page
+2026-03-25 14:43:52 - ID: sess-q6mdc7igr | [PAGE_ENTER] | Page: /cs | Details: User entered CS Department page
+2026-03-25 14:43:52 - ID: sess-q6mdc7igr | [ROBOT_SPEECH_START] | Page: /cs | Details: Welcome to the Computer Science department! Tap the boxes to...
+2026-03-25 14:43:59 - ID: sess-q6mdc7igr | [FAQ_CLICK] | Page: /cs | Details: Graduate Careers
+2026-03-25 14:43:59 - ID: sess-q6mdc7igr | [ROBOT_SPEECH_START] | Page: /cs | Details: Our alumni work at top-tier technology firms and pursue PhDs...
+2026-03-25 14:44:01 - ID: sess-q6mdc7igr | [FAQ_CLICK] | Page: /cs | Details: Industry Focus
+2026-03-25 14:44:01 - ID: sess-q6mdc7igr | [ROBOT_SPEECH_START] | Page: /cs | Details: Our curriculum prepares you for industry research. Many of o...
+2026-03-25 14:44:06 - ID: sess-q6mdc7igr | [FAQ_CLICK] | Page: /cs | Details: Experience Needed
+2026-03-25 14:44:06 - ID: sess-q6mdc7igr | [ROBOT_SPEECH_START] | Page: /cs | Details: No prior experience is needed! Our intro courses are designe...
+2026-03-25 14:44:15 - ID: sess-q6mdc7igr | [INFO_CARD_CLICK] | Page: /cs | Details: Core Courses
+2026-03-25 14:44:15 - ID: sess-q6mdc7igr | [ROBOT_SPEECH_START] | Page: /cs | Details: Our core courses include Data Structures, Algorithms, and So...
+2026-03-25 14:44:21 - ID: sess-q6mdc7igr | [INFO_CARD_CLICK] | Page: /cs | Details: Robotics Lab
+2026-03-25 14:44:21 - ID: sess-q6mdc7igr | [ROBOT_SPEECH_START] | Page: /cs | Details: Work with our robots including Misty and Nao in the social r...
+2026-03-25 14:44:31 - ID: sess-q6mdc7igr | [NAV_CLICK] | Page: /cs | Details: CS: Home
+2026-03-25 14:44:31 - ID: sess-q6mdc7igr | [ROBOT_STOP] | Page: /cs | Details: Interrupt triggered
+2026-03-25 14:44:32 - ID: sess-q6mdc7igr | [PAGE_EXIT] | Page: /cs | Details: User left page
+2026-03-25 14:44:32 - ID: sess-j630c1ugn | [SESSION_START] | Page: / | Details: User entered Main Menu
+2026-03-25 14:44:33 - ID: sess-j630c1ugn | [ROBOT_SPEECH_START] | Page: / | Details: Welcome to F and M. My name is misty. Try out our latest Rob...
+2026-03-25 14:44:34 - ID: sess-j630c1ugn | [NAV_CLICK] | Page: / | Details: Menu: Misty Origins
+2026-03-25 14:44:34 - ID: sess-j630c1ugn | [ROBOT_STOP] | Page: / | Details: Interrupt triggered
+2026-03-25 14:44:34 - ID: sess-j630c1ugn | [PAGE_EXIT] | Page: / | Details: User left page
+2026-03-25 14:44:35 - ID: sess-j630c1ugn | [PAGE_ENTER] | Page: /background | Details: User entered Dev Log / Background page
+2026-03-25 14:44:36 - ID: sess-j630c1ugn | [ROBOT_SPEECH_START] | Page: /background | Details: Hi there! I was built for an HRI class. My friends spent a l...
+2026-03-25 14:44:40 - ID: sess-j630c1ugn | [GALLERY_AUTO_STEP] | Page: /background | Details: Viewed Photo: Testing the Game logic
+2026-03-25 14:44:45 - ID: sess-j630c1ugn | [GALLERY_AUTO_STEP] | Page: /background | Details: Viewed Photo: Sharing Between groups
+2026-03-25 14:44:48 - ID: sess-j630c1ugn | [NAV_CLICK] | Page: /background | Details: DevLog: Exit to Home
+2026-03-25 14:44:48 - ID: sess-j630c1ugn | [ROBOT_STOP] | Page: /background | Details: Interrupt triggered
+2026-03-25 14:44:49 - ID: sess-j630c1ugn | [PAGE_EXIT] | Page: /background | Details: User left page
+2026-03-25 14:44:49 - ID: sess-arb28lsfr | [SESSION_START] | Page: / | Details: User entered Main Menu
+2026-03-25 14:44:50 - ID: sess-arb28lsfr | [ROBOT_SPEECH_START] | Page: / | Details: Welcome to F and M. My name is misty. Try out our latest Rob...
+2026-03-25 14:44:53 - ID: sess-arb28lsfr | [NAV_CLICK] | Page: / | Details: Menu: Gemini Misty
+2026-03-25 14:44:53 - ID: sess-arb28lsfr | [ROBOT_STOP] | Page: / | Details: Interrupt triggered
+2026-03-25 14:44:53 - ID: sess-arb28lsfr | [PAGE_EXIT] | Page: / | Details: User left page
+2026-03-25 14:44:54 - ID: sess-arb28lsfr | [PAGE_ENTER] | Page: /gemini_misty | Details: User entered Gemini Toggle Interface
+2026-03-25 14:44:55 - ID: sess-arb28lsfr | [ROBOT_SPEECH_START] | Page: /gemini_misty | Details: Hi! I'm Misty powered by Gemini. Tap the microphone to start...
+2026-03-25 14:45:09 - ID: sess-arb28lsfr | [MIC_TOGGLE_START] | Page: /gemini_misty | Details: User began speaking
+2026-03-25 14:45:09 - ID: sess-arb28lsfr | [ROBOT_STOP] | Page: /gemini_misty | Details: Interrupt triggered
+2026-03-25 14:45:13 - ID: sess-arb28lsfr | [MIC_TOGGLE_STOP] | Page: /gemini_misty | Details: User finished speaking
+2026-03-25 14:45:16 - ID: sess-arb28lsfr | [GEMINI_QUERY] | Details: should I go to F&M
+2026-03-25 14:45:16 - ID: sess-arb28lsfr | [GEMINI_RESPONSE] | Details: [{"name": "SayText", "args": ["I'm sorry, I'm having trouble thinking right now."]}]
+2026-03-25 14:45:17 - ID: sess-arb28lsfr | [GEMINI_EXCHANGE] | Page: /gemini_misty | Details: U: should I go to F&M | M: I'm sorry, I'm having trouble thinking right now.
+2026-03-25 14:47:17 - ID: sess-arb28lsfr | [NAV_CLICK] | Page: /gemini_misty | Details: To: Gemini: Exit to Home
+2026-03-25 14:47:17 - ID: sess-arb28lsfr | [ROBOT_STOP] | Page: /gemini_misty | Details: Interrupt triggered
+2026-03-25 14:47:18 - ID: sess-arb28lsfr | [PAGE_EXIT] | Page: /gemini_misty | Details: User left page
+2026-03-25 14:47:18 - ID: sess-kbwykrz40 | [SESSION_START] | Page: / | Details: User entered Main Menu
+2026-03-25 14:47:19 - ID: sess-kbwykrz40 | [ROBOT_SPEECH_START] | Page: / | Details: Welcome to F and M. My name is misty. Try out our latest Rob...
+2026-03-25 14:48:17 - ID: sess-kbwykrz40 | [PAGE_EXIT] | Page: / | Details: User left page
+2026-03-25 14:48:17 - ID: sess-igwetl54r | [SESSION_START] | Page: / | Details: User entered Main Menu
+2026-03-25 14:48:18 - ID: sess-igwetl54r | [ROBOT_SPEECH_START] | Page: / | Details: Welcome to F and M. My name is misty. Try out our latest Rob...
+2026-03-25 14:48:23 - ID: sess-igwetl54r | [NAV_CLICK] | Page: / | Details: Menu: Gemini Misty
+2026-03-25 14:48:23 - ID: sess-igwetl54r | [ROBOT_STOP] | Page: / | Details: Interrupt triggered
+2026-03-25 14:48:23 - ID: sess-igwetl54r | [PAGE_EXIT] | Page: / | Details: User left page
+2026-03-25 14:48:23 - ID: sess-igwetl54r | [PAGE_ENTER] | Page: /gemini_misty | Details: User entered Gemini Toggle Interface
+2026-03-25 14:48:24 - ID: sess-igwetl54r | [ROBOT_SPEECH_START] | Page: /gemini_misty | Details: Hi! I'm Misty powered by Gemini. Tap the microphone to start...
+2026-03-25 14:48:38 - ID: sess-igwetl54r | [MIC_TOGGLE_START] | Page: /gemini_misty | Details: User began speaking
+2026-03-25 14:48:38 - ID: sess-igwetl54r | [ROBOT_STOP] | Page: /gemini_misty | Details: Interrupt triggered
+2026-03-25 14:48:41 - ID: sess-igwetl54r | [MIC_TOGGLE_STOP] | Page: /gemini_misty | Details: User finished speaking
+2026-03-25 14:48:45 - ID: sess-igwetl54r | [GEMINI_QUERY] | Details: should I go to F&M
+2026-03-25 14:48:49 - ID: sess-igwetl54r | [GEMINI_RESPONSE] | Details: [{"name": "SetEyes", "args": ["thinking"]}, {"name": "Pause", "args": [500]}, {"name": "TiltHead", "args": ["left", "small"]}, {"name": "Pause", "args": [500]}, {"name": "SayText", "args": ["Franklin & Marshall College is a great choice for students seeking a rigorous liberal arts education in a close-knit community."]}, {"name": "PointAt", "args": ["upwards", "both"]}, {"name": "Pause", "args": [750]}, {"name": "SayText", "args": ["It's known for strong academics, especially in sciences and pre-professional programs, and offers a 9:1 student-faculty ratio."]}, {"name": "PointAt", "args": ["straightOut", "both"]}, {"name": "Pause", "args": [750]}, {"name": "SayText", "args": ["Many students appreciate the hands-on research opportunities and the supportive environment."]}, {"name": "SetEyes", "args": ["default"]}, {"name": "Pause", "args": [500]}, {"name": "TiltHead", "args": ["right", "small"]}, {"name": "Pause", "args": [500]}, {"name": "SayText", "args": ["Ultimately, the best way to decide is to consider if its academic focus, campus culture, and opportunities align with your personal goals and preferences."]}, {"name": "Pause", "args": [500]}, {"name": "TiltHead", "args": ["left", "small"]}, {"name": "Pause", "args": [500]}]
+2026-03-25 14:48:50 - ID: sess-igwetl54r | [GEMINI_EXCHANGE] | Page: /gemini_misty | Details: U: should I go to F&M | M: Franklin & Marshall College is a great choice for students seeking a rigorous liberal arts education in a close-knit community.
+2026-03-25 14:49:22 - ID: sess-igwetl54r | [MIC_TOGGLE_START] | Page: /gemini_misty | Details: User began speaking
+2026-03-25 14:49:22 - ID: sess-igwetl54r | [ROBOT_STOP] | Page: /gemini_misty | Details: Interrupt triggered
+2026-03-25 14:49:25 - ID: sess-igwetl54r | [MIC_TOGGLE_STOP] | Page: /gemini_misty | Details: User finished speaking
+2026-03-25 14:49:28 - ID: sess-igwetl54r | [GEMINI_QUERY] | Details: is it too hard though
+2026-03-25 14:49:31 - ID: sess-igwetl54r | [GEMINI_RESPONSE] | Details: [{"name": "SetEyes", "args": ["thinking"]}, {"name": "Pause", "args": [500]}, {"name": "SayText", "args": ["Franklin & Marshall offers a rigorous academic experience designed to challenge you, but not overwhelm you. "]}, {"name": "TiltHead", "args": ["left", "small"]}, {"name": "Pause", "args": [300]}, {"name": "SayText", "args": ["There are extensive support systems, like academic advising and tutoring, to help you succeed and thrive."]}, {"name": "TiltHead", "args": ["right", "small"]}, {"name": "Pause", "args": [300]}, {"name": "SetEyes", "args": ["default"]}, {"name": "Pause", "args": [300]}]
+2026-03-25 14:49:32 - ID: sess-igwetl54r | [GEMINI_EXCHANGE] | Page: /gemini_misty | Details: U: is it too hard though | M: Franklin & Marshall offers a rigorous academic experience designed to challenge you, but not overwhelm you. 
+2026-03-25 14:54:25 - ID: sess-igwetl54r | [SESSION_TIMEOUT] | Page: /gemini_misty | Details: Resetting due to inactivity
+2026-03-25 14:54:26 - ID: sess-igwetl54r | [PAGE_EXIT] | Page: /gemini_misty | Details: User left page
+2026-03-25 14:54:27 - ID: sess-koswr38ny | [SESSION_START] | Page: / | Details: User entered Main Menu
+2026-03-25 14:54:28 - ID: sess-koswr38ny | [ROBOT_SPEECH_START] | Page: / | Details: Welcome to F and M. My name is misty. Try out our latest Rob...
+2026-03-25 15:35:43 - ID: sess-koswr38ny | [PAGE_EXIT] | Page: / | Details: User left page
+2026-03-25 15:35:44 - ID: sess-d241o0bnh | [SESSION_START] | Page: / | Details: User entered Main Menu
+2026-03-25 15:35:45 - ID: sess-d241o0bnh | [ROBOT_SPEECH_START] | Page: / | Details: Welcome to F and M. My name is misty. Try out our latest Rob...
+2026-03-25 15:35:47 - ID: sess-d241o0bnh | [NAV_CLICK] | Page: / | Details: Menu: Gemini Misty
+2026-03-25 15:35:47 - ID: sess-d241o0bnh | [ROBOT_STOP] | Page: / | Details: Interrupt triggered
+2026-03-25 15:35:47 - ID: sess-d241o0bnh | [PAGE_EXIT] | Page: / | Details: User left page
+2026-03-25 15:35:48 - ID: sess-d241o0bnh | [PAGE_ENTER] | Page: /gemini_misty | Details: User entered Gemini Toggle Interface
+2026-03-25 15:35:49 - ID: sess-d241o0bnh | [ROBOT_SPEECH_START] | Page: /gemini_misty | Details: Hi! I'm Misty powered by Gemini. Tap the microphone to start...
+2026-03-25 15:35:54 - ID: sess-d241o0bnh | [MIC_TOGGLE_START] | Page: /gemini_misty | Details: User began speaking
+2026-03-25 15:35:54 - ID: sess-d241o0bnh | [ROBOT_STOP] | Page: /gemini_misty | Details: Interrupt triggered
+2026-03-25 15:35:57 - ID: sess-d241o0bnh | [MIC_TOGGLE_STOP] | Page: /gemini_misty | Details: User finished speaking
+2026-03-25 15:36:12 - ID: sess-d241o0bnh | [GEMINI_QUERY] | Details: are you Misty or Gemini
+2026-03-25 15:36:19 - ID: sess-d241o0bnh | [GEMINI_RESPONSE] | Details: [{"name": "SetEyes", "args": ["default"]}, {"name": "SayText", "args": ["I am Misty, the social robot you see before you, ready to answer your questions about Franklin & Marshall College."]}, {"name": "Pause", "args": [750]}, {"name": "TiltHead", "args": ["right", "small"]}, {"name": "SayText", "args": ["Gemini is an AI model that assists me in processing information and generating my responses."]}, {"name": "Pause", "args": [750]}, {"name": "TiltHead", "args": ["left", "small"]}]
+2026-03-25 15:36:19 - ID: sess-d241o0bnh | [MIC_TOGGLE_START] | Page: /gemini_misty | Details: User began speaking
+2026-03-25 15:36:19 - ID: sess-d241o0bnh | [ROBOT_STOP] | Page: /gemini_misty | Details: Interrupt triggered
+2026-03-25 15:36:19 - ID: sess-d241o0bnh | [GEMINI_EXCHANGE] | Page: /gemini_misty | Details: U: are you Misty or Gemini | M: I am Misty, the social robot you see before you, ready to answer your questions about Franklin & Marshall College. Gemini is an AI model that assists me in processing information and generating my responses.
+2026-03-25 15:36:45 - ID: sess-d241o0bnh | [MIC_TOGGLE_STOP] | Page: /gemini_misty | Details: User finished speaking
+2026-03-25 15:36:49 - ID: sess-d241o0bnh | [MIC_TOGGLE_START] | Page: /gemini_misty | Details: User began speaking
+2026-03-25 15:36:49 - ID: sess-d241o0bnh | [ROBOT_STOP] | Page: /gemini_misty | Details: Interrupt triggered
+2026-03-25 15:36:53 - ID: sess-d241o0bnh | [GEMINI_EXCHANGE] | Page: /gemini_misty | Details: U: ... | M: I didn't catch that.
+2026-03-25 15:36:58 - ID: sess-d241o0bnh | [MIC_TOGGLE_STOP] | Page: /gemini_misty | Details: User finished speaking
+2026-03-25 15:37:03 - ID: sess-d241o0bnh | [GEMINI_QUERY] | Details: why are you using
+2026-03-25 15:37:03 - ID: sess-d241o0bnh | [MIC_TOGGLE_START] | Page: /gemini_misty | Details: User began speaking
+2026-03-25 15:37:03 - ID: sess-d241o0bnh | [ROBOT_STOP] | Page: /gemini_misty | Details: Interrupt triggered
+2026-03-25 15:37:05 - ID: sess-d241o0bnh | [GEMINI_RESPONSE] | Details: [{"name": "SetEyes", "args": ["confused"]}, {"name": "Pause", "args": [500]}, {"name": "SayText", "args": ["I think your question might be incomplete! Could you please finish it?"]}, {"name": "SetEyes", "args": ["default"]}, {"name": "Pause", "args": [500]}]
+2026-03-25 15:37:06 - ID: sess-d241o0bnh | [GEMINI_EXCHANGE] | Page: /gemini_misty | Details: U: why are you using | M: I think your question might be incomplete! Could you please finish it?
+2026-03-25 15:37:15 - ID: sess-d241o0bnh | [MIC_TOGGLE_STOP] | Page: /gemini_misty | Details: User finished speaking
+2026-03-25 15:37:17 - ID: sess-d241o0bnh | [MIC_TOGGLE_START] | Page: /gemini_misty | Details: User began speaking
+2026-03-25 15:37:17 - ID: sess-d241o0bnh | [ROBOT_STOP] | Page: /gemini_misty | Details: Interrupt triggered
+2026-03-25 15:37:17 - ID: sess-d241o0bnh | [GEMINI_QUERY] | Details: Error processing audio
+2026-03-25 15:37:19 - ID: sess-d241o0bnh | [GEMINI_RESPONSE] | Details: [{"name": "SetEyes", "args": ["confused"]}, {"name": "Pause", "args": [500]}, {"name": "SayText", "args": ["I apologize, I didn't catch that."]}, {"name": "SayText", "args": ["Could you please repeat your question?"]}, {"name": "SetEyes", "args": ["default"]}, {"name": "Pause", "args": [500]}]
+2026-03-25 15:37:20 - ID: sess-d241o0bnh | [GEMINI_EXCHANGE] | Page: /gemini_misty | Details: U: Error processing audio | M: I apologize, I didn't catch that. Could you please repeat your question?
+2026-03-25 15:37:30 - ID: sess-d241o0bnh | [MIC_TOGGLE_STOP] | Page: /gemini_misty | Details: User finished speaking
+2026-03-25 15:37:35 - ID: sess-d241o0bnh | [GEMINI_QUERY] | Details: why Gemini and not Chachi PTS
+2026-03-25 15:37:42 - ID: sess-d241o0bnh | [GEMINI_RESPONSE] | Details: [{"name": "SetEyes", "args": ["thinking"]}, {"name": "Pause", "args": [250]}, {"name": "SayText", "args": ["At Franklin & Marshall, our focus is on a comprehensive liberal arts education that emphasizes critical thinking and deep human understanding."]}, {"name": "TiltHead", "args": ["left", "small"]}, {"name": "Pause", "args": [250]}, {"name": "SayText", "args": ["While we acknowledge the importance of technology like AI, our curriculum focuses on how students can leverage these tools ethically and thoughtfully across disciplines, rather than directly comparing specific models."]}, {"name": "PointAt", "args": ["straightOut", "both"]}, {"name": "Pause", "args": [250]}, {"name": "SetEyes", "args": ["default"]}, {"name": "SayText", "args": ["We prepare you to engage with and lead in an evolving world, no matter the specific technological advancements."]}, {"name": "Pause", "args": [250]}]
+2026-03-25 15:37:42 - ID: sess-d241o0bnh | [GEMINI_EXCHANGE] | Page: /gemini_misty | Details: U: why Gemini and not Chachi PTS | M: At Franklin & Marshall, our focus is on a comprehensive liberal arts education that emphasizes critical thinking and deep human understanding. While we acknowledge the importance of technology like AI, our curriculum focuses on how students can leverage these tools ethically and thoughtfully across disciplines, rather than directly comparing specific models. We prepare you to engage with and lead in an evolving world, no matter the specific technological advancements.
+2026-03-25 15:38:44 - ID: sess-d241o0bnh | [NAV_CLICK] | Page: /gemini_misty | Details: To: Gemini: Exit to Home
+2026-03-25 15:38:44 - ID: sess-d241o0bnh | [ROBOT_STOP] | Page: /gemini_misty | Details: Interrupt triggered
+2026-03-25 15:38:45 - ID: sess-d241o0bnh | [PAGE_EXIT] | Page: /gemini_misty | Details: User left page
+2026-03-25 15:38:45 - ID: sess-4iw8r5o7c | [SESSION_START] | Page: / | Details: User entered Main Menu
+2026-03-25 15:38:46 - ID: sess-4iw8r5o7c | [ROBOT_SPEECH_START] | Page: / | Details: Welcome to F and M. My name is misty. Try out our latest Rob...
+2026-03-25 15:38:46 - ID: sess-4iw8r5o7c | [NAV_CLICK] | Page: / | Details: Menu: RPS Game
+2026-03-25 15:38:46 - ID: sess-4iw8r5o7c | [ROBOT_STOP] | Page: / | Details: Interrupt triggered
+2026-03-25 15:38:46 - ID: sess-4iw8r5o7c | [PAGE_EXIT] | Page: / | Details: User left page

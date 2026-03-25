@@ -6,6 +6,7 @@ from STT_google import transcribe_wav_bytes
 from misty_robot import MistyActions
 import random 
 import json
+import re
 import logging
 from datetime import datetime
 
@@ -15,7 +16,7 @@ app = Flask(__name__)
 MISTY_IP = "192.168.1.3"
 misty = Robot(MISTY_IP)
 misty_actions = MistyActions(MISTY_IP)
-misty.set_default_volume(20) 
+misty.set_default_volume(30) 
 processing_lock = threading.Lock()
 
 # Auto-start skill at launch
@@ -150,12 +151,14 @@ def start_listening():
 def stop_and_process():
     data = request.get_json(silent=True) or {}
     sess_id = data.get('sessionId', 'NO_SESS')
+    print(f"Processing request for session: {sess_id}")
 
     if not processing_lock.acquire(blocking=False):
         return jsonify({"status": "busy"}), 200
+    
     try:
         misty.stop_recording_audio()
-        misty.change_led(0, 0, 255) # Blue for "Thinking/Processing"
+        misty.change_led(0, 0, 255) # Blue for "Thinking"
         time.sleep(1.5) 
         
         audio_response = misty.get_audio_file("capture.wav")
@@ -173,26 +176,44 @@ def stop_and_process():
             
             if text and text.strip():
                 logger.info(f"ID: {sess_id} | [GEMINI_QUERY] | Details: {text}")
-                gemini_script = misty_actions.get_gemini_actions(text)
                 
-                # Log full Gemini decision
+                # Get the full script from Gemini
+                gemini_script = misty_actions.get_gemini_actions(text)
                 logger.info(f"ID: {sess_id} | [GEMINI_RESPONSE] | Details: {json.dumps(gemini_script)}")
 
+                # 1. Execute the actions (Misty starts moving/talking)
                 misty_actions.executeActionScript(gemini_script)
                 
-                reply_text = next((a['args'][0] for a in gemini_script if a['name'] == 'SayText'), "")
-                misty.change_led(255, 255, 255) # Back to neutral
-                return jsonify({"user_text": text, "misty_reply": reply_text})
+                # 2. UPDATED LOGIC: Gather ALL speech actions into one string
+                # This ensures the text box shows the WHOLE file, not just the first sentence
+                full_reply = " ".join([a['args'][0] for a in gemini_script if a['name'] == 'SayText'])
+                
+                # 3. Clean up the text for the UI (remove markdown)
+                clean_reply = clean_text_for_misty(full_reply)
 
+                misty.change_led(255, 255, 255) 
+                return jsonify({
+                    "user_text": text, 
+                    "misty_reply": clean_reply
+                })
+
+        # Fallback if no audio or transcription failed
         misty.speak("I didn't catch that.") 
         misty.change_led(255, 255, 255)
         return jsonify({"user_text": "...", "misty_reply": "I didn't catch that."})
 
     except Exception as e:
         print(f"Error: {e}")
+        misty.change_led(255, 0, 0) # Red for Error
         return jsonify({"error": str(e)}), 500
     finally:
-        processing_lock.release()
+        if processing_lock.locked():
+            processing_lock.release()
+
+def clean_text_for_misty(text):
+    # Removes markdown symbols so Misty doesn't 'speak' them
+    return re.sub(r'[\*\#\_>]', '', text)
+
 
 @app.route('/speak', methods=['POST'])
 def handle_speak():
