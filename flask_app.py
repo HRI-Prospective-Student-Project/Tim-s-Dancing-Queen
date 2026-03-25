@@ -94,39 +94,47 @@ def rps_route():
     if request.method == "POST":
         data = request.get_json(silent=True) or {}
         sess_id = data.get('sessionId', 'NO_SESS')
-        
         moves = ["Rock", "Paper", "Scissors"]
         misty_move = random.choice(moves)
-        
-        logger.info(f"ID: {sess_id} | [GAME_RPS_START] | Details: Misty chose {misty_move}")
 
-        def run_rps_sequence():
+        # We define the movement sequence here
+        def run_full_interaction():
             misty.stop_speaking()
-            # Countdown Sequence with Visuals
+            
+            # 1. COUNTDOWN WITH MOVEMENTS
             beats = [
-                ("Rock", 20, -40, [255,0,0]), 
-                ("Paper", -15, 40, [255,255,0]), 
-                ("Scissors", 20, -40, [255,165,0])
+                ("Rock", 20, -40, [255,0,0]),      # Red
+                ("Paper", -15, 40, [255,255,0]),    # Yellow
+                ("Scissors", 20, -40, [255,165,0])  # Orange
             ]
             for word, pitch, arm, color in beats:
                 misty.change_led(*color)
                 misty.speak(word)
                 misty.move_head(pitch=pitch, velocity=100)
                 misty.move_arms(arm, arm, 100, 100)
-                time.sleep(1.2) # Synced with JS animation
+                time.sleep(1.2) 
 
-            # Reveal
+            # 2. THE REVEAL
             misty.change_led(0, 255, 0) # Green for "Shoot"
             misty.display_image("e_Joy.jpg")
             misty.move_head(0, 100)
             misty.move_arms(0, 0, 100, 100)
+            
+            # SHE SAYS HER CHOICE HERE
             misty.speak(f"Shoot! I chose {misty_move}!")
-            time.sleep(3)
+            
+            # IMPORTANT: Wait for her to finish this sentence 
+            # before letting the JS code trigger the "Who Won" speech.
+            time.sleep(1.8) 
+            
             misty.display_image("e_DefaultContent.jpg")
             misty.change_led(255, 255, 255)
 
-        Thread(target=run_rps_sequence).start()
-        return jsonify({"status": "playing", "misty_choice": misty_move})
+        # We run the interaction in the main thread (blocking) 
+        # so the JS 'await' actually waits for the physical robot to finish.
+        run_full_interaction() 
+        
+        return jsonify({"status": "done", "misty_choice": misty_move})
 
     return render_template('RockPaperScissors.html')
 
@@ -186,14 +194,26 @@ def stop_and_process():
     finally:
         processing_lock.release()
 
-@app.route('/speak', methods=["POST"])
+@app.route('/speak', methods=['POST'])
 def handle_speak():
-    data = request.json
+    data = request.get_json()
     text = data.get('text', '')
-    if text:
-        Thread(target=speak_async, args=(text,)).start()
-        return jsonify({"status": "success"})
-    return jsonify({"status": "error"}), 400
+    
+    # Speak the text normally
+    misty.speak(text)
+    
+    # If Misty is saying "yayyy!", move her arms up and down
+    if "yayyy" in text.lower():
+        # Move arms up (around 40 degrees)
+        misty.move_arms(40, 40, 100, 100)
+        time.sleep(0.5)
+        # Move arms down (around -40 degrees)
+        misty.move_arms(-40, -40, 100, 100)
+        time.sleep(0.5)
+        # Return to neutral
+        misty.move_arms(0, 0, 100, 100)
+        
+    return jsonify({"status": "success"})
 
 if __name__ == '__main__':
     # use_reloader=False prevents the double-log-entry bug
