@@ -112,7 +112,7 @@
 
         function initRPS() {
             if (typeof feather !== 'undefined') feather.replace();
-            mistySpeak("Let's play rock paper scissors! First to three wins.");
+            mistySpeak("Let's play rock paper scissors! First to three wins. Choose your move to start the game!");
         }
 
         async function mistySpeak(text) {
@@ -162,8 +162,8 @@
             // 4. Final Commentary
             if (player >= 3 || cpu >= 3) {
                 const finalWinnerSpeech = (player >= 3) 
-                    ? "You win the game! Congratulations! yayyy!" 
-                    : "I win the game! Better luck next time! yayyy!";
+                    ? "You win the game! Congratulations! Yay!" 
+                    : "I win the game! Better luck next time! Muah-ha-ha!";
                 
                 gameStatusEl.innerHTML = player >= 3 
                     ? "<span class='text-emerald-600 font-black animate-bounce'>MATCH OVER: YOU WON! 🎉</span>" 

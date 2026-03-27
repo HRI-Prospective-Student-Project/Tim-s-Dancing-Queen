@@ -25,6 +25,12 @@ try:
 except:
     pass
 
+def misty_neutral(velocity=60):
+    """Helper function to reset Misty to a neutral state."""
+    misty.move_head(pitch=0, roll=0, yaw=0, velocity=velocity)
+    misty.move_arms(90, 90, velocity, velocity)
+    misty.change_led(255, 255, 255) # White light
+
 def speak_async(text):
     misty.stop_speaking()
     time.sleep(0.1) 
@@ -34,16 +40,14 @@ def speak_async(text):
 logger = logging.getLogger('misty_logger')
 if not logger.handlers:
     logger.setLevel(logging.INFO)
-    # delay=True prevents file lock issues during Flask startup
     file_handler = logging.FileHandler('misty_interactions.log', delay=True)
     formatter = logging.Formatter('%(asctime)s - %(message)s', datefmt='%Y-%m-%d %H:%M:%S')
     file_handler.setFormatter(formatter)
     logger.addHandler(file_handler)
 
-# --- 3. LOGGING ROUTE (Used by global.js) ---
+# --- 3. LOGGING ROUTE ---
 @app.route('/log_event', methods=["POST"])
 def log_event():
-    # .get_json(silent=True) prevents the 415 error if headers are messy
     data = request.get_json(silent=True)
     if not data:
         return jsonify({"status": "ignored"}), 200
@@ -61,31 +65,57 @@ def log_event():
 # --- 4. NAVIGATION ROUTES ---
 @app.route('/')
 def index():
-    # Reset Misty to a neutral state when someone returns to the home page
     misty.stop_speaking()
-    misty.move_head(pitch=0, roll=0, yaw=0)
-    misty.move_arms(0, 0)
-    misty.change_led(255, 255, 255) # White light for "Home/Ready"
+    misty_neutral()
     return render_template('index_misty.html')
 
 @app.route('/cs')
-def cs_page(): return render_template('CS2page11-18.html')
+def cs_page(): 
+    misty_neutral()
+    return render_template('CS2page11-18.html')
 
 @app.route('/background')
-def neuro_page(): return render_template('background.html')
+def neuro_page(): 
+    misty_neutral()
+    return render_template('background.html')
 
 @app.route('/team')
-def data_page(): return render_template('team.html')
+def data_page(): 
+    def turn_point():
+        # 1. TURN THE BASE (The Tracks)
+        # drive_time(linear_velocity, angular_velocity, time_ms)
+        # Angular 50 turns her left. 1500ms is roughly a 45-degree turn.
+        misty.drive_time(0, 50, 1500) 
+        time.sleep(1.6) # Wait for the physical turn to finish
+
+        # 2. POINT THE ARMS
+        misty.move_arms(90, 90, 60, 60)
+        misty.change_led(0, 255, 0) # Green for "Presenting"
+        
+        time.sleep(3.0) # Hold the pose
+        
+        # 3. RETURN TO CENTER
+        # Angular -50 turns her back to the right.
+        misty.drive_time(0, -50, 1500)
+        time.sleep(1.6)
+        
+        misty_neutral()
+
+    # Start the movement in the background so the page loads immediately
+    threading.Thread(target=turn_point).start()
+    return render_template('team.html')
 
 @app.route("/gemini_misty")
-def gemini_page(): return render_template('gemini_misty_mic.html')
+def gemini_page(): 
+    misty_neutral()
+    return render_template('gemini_misty_mic.html')
 
 # --- 5. ROBOT CONTROL ROUTES ---
 @app.route('/stop', methods=["POST"])
 def stop_misty_route():
     try:
         misty.stop_speaking()
-        misty.change_led(200, 200, 200) 
+        misty_neutral(velocity=100) # Fast reset on stop
         return jsonify({"status": "success"}), 200
     except Exception as e:
         return jsonify({"status": "error", "message": str(e)}), 500
@@ -98,15 +128,13 @@ def rps_route():
         moves = ["Rock", "Paper", "Scissors"]
         misty_move = random.choice(moves)
 
-        # We define the movement sequence here
         def run_full_interaction():
             misty.stop_speaking()
             
-            # 1. COUNTDOWN WITH MOVEMENTS
             beats = [
-                ("Rock", 20, -40, [255,0,0]),      # Red
-                ("Paper", -15, 40, [255,255,0]),    # Yellow
-                ("Scissors", 20, -40, [255,165,0])  # Orange
+                ("Rock", 20, -40, [255,0,0]),
+                ("Paper", -15, 40, [255,255,0]),
+                ("Scissors", 20, -40, [255,165,0])
             ]
             for word, pitch, arm, color in beats:
                 misty.change_led(*color)
@@ -115,26 +143,18 @@ def rps_route():
                 misty.move_arms(arm, arm, 100, 100)
                 time.sleep(1.2) 
 
-            # 2. THE REVEAL
-            misty.change_led(0, 255, 0) # Green for "Shoot"
+            misty.change_led(0, 255, 0)
             misty.display_image("e_Joy.jpg")
             misty.move_head(0, 100)
             misty.move_arms(0, 0, 100, 100)
             
-            # SHE SAYS HER CHOICE HERE
             misty.speak(f"Shoot! I chose {misty_move}!")
-            
-            # IMPORTANT: Wait for her to finish this sentence 
-            # before letting the JS code trigger the "Who Won" speech.
-            time.sleep(1.8) 
+            time.sleep(2.5) # Wait for speech to finish
             
             misty.display_image("e_DefaultContent.jpg")
-            misty.change_led(255, 255, 255)
+            misty_neutral() # Return to straight position
 
-        # We run the interaction in the main thread (blocking) 
-        # so the JS 'await' actually waits for the physical robot to finish.
         run_full_interaction() 
-        
         return jsonify({"status": "done", "misty_choice": misty_move})
 
     return render_template('RockPaperScissors.html')
@@ -142,7 +162,7 @@ def rps_route():
 # --- 6. GEMINI & SPEECH PROCESSING ---
 @app.route('/misty/start_listening', methods=["POST"])
 def start_listening():
-    misty.change_led(255, 0, 0) # Red for "I am recording you"
+    misty.change_led(255, 0, 0)
     misty.start_recording_audio("capture.wav")
     misty_actions.executeActionScript([{'name': 'LookInDirection', 'args': ['up']}])
     return jsonify({"status": "recording"})
@@ -158,8 +178,11 @@ def stop_and_process():
     
     try:
         misty.stop_recording_audio()
-        misty.change_led(0, 0, 255) # Blue for "Thinking"
-        time.sleep(1.5) 
+        # --- THINKING ANIMATION START ---
+        misty.change_led(0, 0, 255)
+        misty.move_head(pitch=-15, roll=20, yaw=0, velocity=40)
+        misty.move_arms(20, 20, 40, 40) 
+        time.sleep(1.0) 
         
         audio_response = misty.get_audio_file("capture.wav")
         raw_audio_data = None
@@ -176,66 +199,51 @@ def stop_and_process():
             
             if text and text.strip():
                 logger.info(f"ID: {sess_id} | [GEMINI_QUERY] | Details: {text}")
-                
-                # Get the full script from Gemini
                 gemini_script = misty_actions.get_gemini_actions(text)
                 logger.info(f"ID: {sess_id} | [GEMINI_RESPONSE] | Details: {json.dumps(gemini_script)}")
 
-                # 1. Execute the actions (Misty starts moving/talking)
                 misty_actions.executeActionScript(gemini_script)
                 
-                # 2. UPDATED LOGIC: Gather ALL speech actions into one string
-                # This ensures the text box shows the WHOLE file, not just the first sentence
                 full_reply = " ".join([a['args'][0] for a in gemini_script if a['name'] == 'SayText'])
-                
-                # 3. Clean up the text for the UI (remove markdown)
                 clean_reply = clean_text_for_misty(full_reply)
 
-                misty.change_led(255, 255, 255) 
-                return jsonify({
-                    "user_text": text, 
-                    "misty_reply": clean_reply
-                })
+                # Reset to neutral after speech (adjust delay if needed)
+                def reset_after_speaking():
+                    time.sleep(5.0) 
+                    misty_neutral()
+                threading.Thread(target=reset_after_speaking).start()
 
-        # Fallback if no audio or transcription failed
+                return jsonify({"user_text": text, "misty_reply": clean_reply})
+
         misty.speak("I didn't catch that.") 
-        misty.change_led(255, 255, 255)
+        misty_neutral()
         return jsonify({"user_text": "...", "misty_reply": "I didn't catch that."})
 
     except Exception as e:
         print(f"Error: {e}")
-        misty.change_led(255, 0, 0) # Red for Error
+        misty.change_led(255, 0, 0)
         return jsonify({"error": str(e)}), 500
     finally:
         if processing_lock.locked():
             processing_lock.release()
 
 def clean_text_for_misty(text):
-    # Removes markdown symbols so Misty doesn't 'speak' them
     return re.sub(r'[\*\#\_>]', '', text)
-
 
 @app.route('/speak', methods=['POST'])
 def handle_speak():
     data = request.get_json()
     text = data.get('text', '')
-    
-    # Speak the text normally
     misty.speak(text)
     
-    # If Misty is saying "yayyy!", move her arms up and down
-    if "yayyy" in text.lower():
-        # Move arms up (around 40 degrees)
+    if "yay!" in text.lower():
         misty.move_arms(40, 40, 100, 100)
         time.sleep(0.5)
-        # Move arms down (around -40 degrees)
         misty.move_arms(-40, -40, 100, 100)
         time.sleep(0.5)
-        # Return to neutral
-        misty.move_arms(0, 0, 100, 100)
+        misty_neutral() # Reset arms and head after "Yay!"
         
     return jsonify({"status": "success"})
 
 if __name__ == '__main__':
-    # use_reloader=False prevents the double-log-entry bug
     app.run(debug=True, host='0.0.0.0', port=5001, threaded=True, use_reloader=False)
