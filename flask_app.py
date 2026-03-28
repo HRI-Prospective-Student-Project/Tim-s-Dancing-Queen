@@ -159,6 +159,13 @@ def rps_route():
 
     return render_template('RockPaperScissors.html')
 
+#Robot page
+@app.route('/robots_at_fandm')
+def robots_page():
+    # Reset Misty when showing the department robots
+    misty_neutral()
+    return render_template('robots_at_fandm.html')
+
 # --- 6. GEMINI & SPEECH PROCESSING ---
 @app.route('/misty/start_listening', methods=["POST"])
 def start_listening():
