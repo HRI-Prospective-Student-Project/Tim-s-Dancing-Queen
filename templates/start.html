@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Start | F&M Robotics</title>
+    <script src="{{ url_for('static', filename='tailwind.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='global.js') }}"></script>
+    <style>
+        @keyframes slow-pulse {
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(0, 47, 108, 0.4); }
+            70% { transform: scale(1.08); box-shadow: 0 0 0 40px rgba(0, 47, 108, 0); }
+            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(0, 47, 108, 0); }
+        }
+        .animate-start { animation: slow-pulse 2.5s infinite ease-in-out; }
+    </style>
+</head>
+<body class="bg-slate-50 h-screen flex items-center justify-center overflow-hidden">
+    
+    <a onclick="handleNav('Start to Home', '/home')" class="cursor-pointer group flex flex-col items-center gap-12">
+        <div class="w-96 h-96 bg-white border-[12px] border-primary rounded-full flex flex-col items-center justify-center shadow-2xl animate-start group-hover:bg-primary transition-colors duration-500">
+            <span class="text-primary group-hover:text-white text-5xl font-black uppercase tracking-tighter transition-colors">Touch</span>
+            <span class="text-primary group-hover:text-white text-xl font-bold uppercase tracking-[0.3em] mt-2 transition-colors">To Start</span>
+        </div>
+        
+        <div class="text-center">
+            <h1 class="text-3xl font-black text-slate-900 tracking-tight">F&M Robotics Lab</h1>
+            <p class="text-slate-400 font-bold uppercase tracking-[0.3em] text-sm mt-3">Interaction Study 2026</p>
+        </div>
+    </a>
+
+    <script>
+        tailwind.config = {
+            theme: { 
+                extend: { 
+                    colors: { primary: '#002F6C' } 
+                } 
+            }
+        }
+    </script>
+</body>
+</html>

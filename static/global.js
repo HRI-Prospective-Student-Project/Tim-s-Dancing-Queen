@@ -13,21 +13,34 @@ if (window.location.pathname === "/" || !sessionId) {
 const CURRENT_SESSION = sessionId;
 
 // 2. INACTIVITY TIMER
-let idleTimer;
-const FIVE_MINUTES = 5 * 60 * 1000; 
+let idleTime = 0;
+const idleLimit = 5 * 60; // 5 minutes (in seconds)
 
-function resetIdleTimer() {
-    clearTimeout(idleTimer);
-    idleTimer = setTimeout(() => {
-        logInteraction("SESSION_TIMEOUT", "Resetting due to inactivity");
-        localStorage.removeItem('robot_session_id');
-        window.location.href = "/";
-    }, FIVE_MINUTES);
+function resetTimer() {
+    idleTime = 0;
 }
 
-window.onload = resetIdleTimer;
-document.onmousedown = resetIdleTimer; 
-document.onkeydown = resetIdleTimer;
+// Only start the timer if we are NOT already on the start page
+if (window.location.pathname !== "/") {
+    // Increment the timer every second
+    setInterval(() => {
+        idleTime++;
+        if (idleTime >= idleLimit) {
+            // Log that the session timed out for your research data
+            if (typeof logInteraction === 'function') {
+                logInteraction("SESSION_TIMEOUT", "Redirecting to Start Page due to inactivity");
+            }
+            window.location.href = "/"; 
+        }
+    }, 1000);
+
+    // Reset the timer whenever the user touches the screen
+    window.onload = resetTimer;
+    window.onmousemove = resetTimer;
+    window.onmousedown = resetTimer; 
+    window.ontouchstart = resetTimer;
+    window.onclick = resetTimer;
+}
 
 /**
  * 3. THE COMPREHENSIVE LOGGER
@@ -53,6 +66,9 @@ async function logInteraction(event, details) {
 /**
  * 4. ROBOT CONTROLS
  */
+/**
+ * 4. ROBOT CONTROLS
+ */
 function speakText(text) {
     logInteraction("ROBOT_SPEECH_START", text.substring(0, 60) + "...");
     fetch("/speak", {
@@ -67,9 +83,17 @@ function stopSpeech() {
     fetch("/stop", { method: "POST", headers: { "Content-Type": "application/json" } });
 }
 
-function handleNav(destination) {
+// FIX: Added 'url' parameter so it actually changes the page
+function handleNav(destination, url) {
     logInteraction("NAV_CLICK", `To: ${destination}`);
     stopSpeech(); 
+    
+    if (url) {
+        // Small delay to ensure the 'stop' signal is sent before the page unloads
+        setTimeout(() => {
+            window.location.href = url;
+        }, 100);
+    }
 }
 
 /**

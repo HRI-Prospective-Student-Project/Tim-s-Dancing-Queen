@@ -2,66 +2,166 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Robots at F&M</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>F&M Robots | Robotics Lab</title>
+    <script src="{{ url_for('static', filename='tailwind.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='feather.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='global.js') }}"></script>
+    
     <style>
-        .robot-container {
+        body, html { height: 100vh; overflow: hidden; margin: 0; }
+        
+        @keyframes pulse-teal {
+            0% { box-shadow: 0 0 0 0 rgba(20, 184, 166, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(20, 184, 166, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(20, 184, 166, 0); }
+        }
+        .animate-gemini-pulse { animation: pulse-teal 2s infinite; }
+        
+        .image-container img {
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .image-container:hover img { 
+            transform: scale(1.08);
+        }
+
+        #lightbox.active {
             display: flex;
-            justify-content: space-around;
-            padding: 20px;
-            gap: 20px;
+            animation: fadeIn 0.3s ease-out;
         }
-        .robot-card {
-            background: #f4f4f4;
-            border-radius: 10px;
-            padding: 15px;
-            width: 30%;
-            text-align: center;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-        }
-        .robot-card img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-            border-radius: 5px;
-            margin-bottom: 15px;
-        }
-        .home-btn {
-            display: block;
-            width: 100px;
-            margin: 20px auto;
-            padding: 10px;
-            background-color: #007bff;
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
-            text-align: center;
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
     </style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#0D9488', 
+                        accent: '#10B981',  
+                    }
+                }
+            }
+        }
+    </script>
 </head>
-<body>
-    <h1 style="text-align: center;">Meet the Robots of Franklin & Marshall</h1>
-    
-    <div class="robot-container">
-        <div class="robot-card">
-            <img src="{{ url_for('static', filename='images/robot1.jpg') }}" alt="Robot 1">
-            <h3>Misty II</h3>
-            <p>Our social robot used for human-robot interaction studies and emotional AI research.</p>
+<body class="bg-slate-100 text-slate-900 font-sans" onload="initRobotPage()">
+
+    <div id="lightbox" onclick="closeImage()" class="fixed inset-0 bg-slate-900/95 z-[100] hidden items-center justify-center p-4 cursor-zoom-out">
+        <button class="absolute top-6 right-6 text-white hover:text-accent transition-colors">
+            <i data-feather="x" class="w-8 h-8"></i>
+        </button>
+        <img id="lightboxImg" src="" class="max-w-full max-h-full rounded-xl shadow-2xl border-2 border-white/10 object-contain">
+    </div>
+
+    <div class="h-screen flex flex-col p-4 gap-4">
+        
+        <nav class="bg-white/90 backdrop-blur-md border border-slate-200 rounded-2xl px-6 h-16 flex justify-between items-center shrink-0 shadow-sm relative z-50">
+            <div class="flex items-center gap-3">
+                <div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center shadow-lg">
+                    <i data-feather="cpu" class="text-white w-4 h-4"></i>
+                </div>
+                <span class="text-lg font-bold tracking-tight">F&M Robotics Fleet 2026</span>
+            </div>
+            <div class="flex items-center gap-4">
+                <a href="javascript:void(0)" onclick="handleNav('Exit to Home', '/home')">Home</a>
+                <a href="/gemini_misty" onclick="handleNav('Robots: Exit to Gemini')" class="animate-gemini-pulse bg-primary text-white px-5 py-2 rounded-full text-sm font-bold flex items-center gap-2 border-2 border-teal-300 transition-all hover:scale-105 shadow-md">
+                    <i data-feather="sparkles" class="w-4 h-4 text-yellow-300"></i> Ask Gemini
+                </a>
+            </div>
+        </nav>
+
+        <div class="flex-1 flex flex-col items-center justify-center min-h-0">
+            <div class="mb-6 text-center">
+                <h1 class="text-4xl font-black text-slate-900 tracking-tight">
+                    The Robots of <span class="text-primary">F&M</span>
+                </h1>
+                <p class="text-slate-500 font-bold mt-2 uppercase tracking-widest text-[10px] flex items-center justify-center gap-2">
+                    <i data-feather="info" class="w-3 h-3 text-slate-400"></i>
+                    Tap name for facts | Tap image to enlarge
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 w-full max-w-[90vw] px-4">
+                
+                <div class="team-card bg-white rounded-[1.5rem] p-5 shadow-sm border border-slate-200 hover:border-primary/40 transition-all group flex flex-col relative overflow-hidden">
+                    <div class="absolute top-0 left-0 w-full h-2 bg-primary"></div>
+                    <div onclick="openImage('static/assets/misty.jpg', 'Misty II')" class="image-container relative w-full aspect-square rounded-xl bg-slate-100 mb-4 overflow-hidden border border-slate-200 cursor-zoom-in group">
+                        <img src="static/assets/misty.jpg" alt="Misty II" class="w-full h-full object-cover">
+                    </div>
+                    <div onclick="logInteraction('ROBOT_CARD_CLICK', 'Misty II'); speakText('Misty 2 is our social robot.')" class="text-center cursor-pointer">
+                        <h2 class="text-xl font-black text-slate-900 tracking-tight mb-1">Misty II</h2>
+                        <p class="text-primary font-bold text-[9px] uppercase tracking-widest mb-3 px-2 py-0.5 bg-primary/5 rounded-full inline-block">Social Agent</p>
+                        <p class="text-slate-600 text-xs leading-relaxed">Used for emotional AI research and facial recognition.</p>
+                    </div>
+                </div>
+
+                <div class="team-card bg-white rounded-[1.5rem] p-5 shadow-sm border border-slate-200 hover:border-accent/40 transition-all group flex flex-col relative overflow-hidden">
+                    <div class="absolute top-0 left-0 w-full h-2 bg-accent"></div>
+                    <div onclick="openImage('static/assets/peerbot.jpg', 'PeerBot')" class="image-container relative w-full aspect-square rounded-xl bg-slate-100 mb-4 overflow-hidden border border-slate-200 cursor-zoom-in group">
+                        <img src="static/assets/peerbot.jpg" alt="" class="w-full h-full object-cover">
+                    </div>
+                    <div onclick="logInteraction('ROBOT_CARD_CLICK', 'Peerbot'); speakText('The Peerbot allows anyone with access to a mobile device to access and control a robot.')" class="text-center cursor-pointer">
+                        <h2 class="text-xl font-black text-slate-900 tracking-tight mb-1">Peerbot</h2>
+                        <p class="text-accent font-bold text-[9px] uppercase tracking-widest mb-3 px-2 py-0.5 bg-accent/5 rounded-full inline-block">Learning</p>
+                        <p class="text-slate-600 text-xs leading-relaxed">Specializing in giving everyone access to robots.</p>
+                    </div>
+                </div>
+
+                <div class="team-card bg-white rounded-[1.5rem] p-5 shadow-sm border border-slate-200 hover:border-indigo-400/40 transition-all group flex flex-col relative overflow-hidden">
+                    <div class="absolute top-0 left-0 w-full h-2 bg-indigo-400"></div>
+                    <div onclick="openImage('static/assets/naomi.jpg', 'Nao')" class="image-container relative w-full aspect-square rounded-xl bg-slate-100 mb-4 overflow-hidden border border-slate-200 cursor-zoom-in group">
+                        <img src="static/assets/naomi.jpg" alt="Nao" class="w-full h-full object-cover">
+                    </div>
+                    <div onclick="logInteraction('ROBOT_CARD_CLICK', 'Nao'); speakText('Nao is a humanoid robot.')" class="text-center cursor-pointer">
+                        <h2 class="text-xl font-black text-slate-900 tracking-tight mb-1">Nao</h2>
+                        <p class="text-indigo-500 font-bold text-[9px] uppercase tracking-widest mb-3 px-2 py-0.5 bg-indigo-50 rounded-full inline-block">Humanoid</p>
+                        <p class="text-slate-600 text-xs leading-relaxed">A bipedal Robot capable of speech, movement, and other functions.</p>
+                    </div>
+                </div>
+
+                <div class="team-card bg-white rounded-[1.5rem] p-5 shadow-sm border border-slate-200 hover:border-orange-400/40 transition-all group flex flex-col relative overflow-hidden">
+                    <div class="absolute top-0 left-0 w-full h-2 bg-orange-400"></div>
+                    <div onclick="openImage('static/assets/cozmo.jpg', 'Cozmo')" class="image-container relative w-full aspect-square rounded-xl bg-slate-100 mb-4 overflow-hidden border border-slate-200 cursor-zoom-in group">
+                        <img src="static/assets/cozmo.jpg" alt="Cozmo" class="w-full h-full object-cover">
+                    </div>
+                    <div onclick="logInteraction('ROBOT_CARD_CLICK', ''); speakText('This is the Cozmo, used for moving objects and learning how to code.')" class="text-center cursor-pointer">
+                        <h2 class="text-xl font-black text-slate-900 tracking-tight mb-1">Cozmo</h2>
+                        <p class="text-orange-500 font-bold text-[9px] uppercase tracking-widest mb-3 px-2 py-0.5 bg-orange-50 rounded-full inline-block">Manipulation</p>
+                        <p class="text-slate-600 text-xs leading-relaxed">Features a robotic arm for grasping and moving objects.</p>
+                    </div>
+                </div>
+
+            </div>
         </div>
 
-        <div class="robot-card">
-            <img src="{{ url_for('static', filename='images/robot2.jpg') }}" alt="Robot 2">
-            <h3>The Turtlebot</h3>
-            <p>A mobile platform used by CS students to learn about mapping, navigation, and Lidar.</p>
-        </div>
-
-        <div class="robot-card">
-            <img src="{{ url_for('static', filename='images/robot3.jpg') }}" alt="Robot 3">
-            <h3>Nao</h3>
-            <p>A humanoid robot famous for its walking, dancing, and complex joint movements.</p>
+        <div class="mt-auto h-12 flex items-center justify-center shrink-0">
+             <div class="flex items-center gap-2 text-slate-400">
+                <i data-feather="cpu" class="w-3 h-3"></i>
+                <p class="text-[10px] font-bold uppercase tracking-widest">F&M Robotics 2026</p>
+             </div>
         </div>
     </div>
 
-    <a href="/" class="home-btn">Go Home</a>
+    <script>
+        feather.replace();
+        function initRobotPage() {
+            if (typeof logInteraction === 'function') {
+                logInteraction("PAGE_ENTER", "User viewing F&M Robots");
+            }
+        }
+        function openImage(src, name) {
+            const lb = document.getElementById('lightbox');
+            const img = document.getElementById('lightboxImg');
+            img.src = src;
+            lb.classList.add('active');
+            logInteraction("ROBOT_PHOTO_ENLARGE", `Fullscreen view: ${name}`);
+        }
+        function closeImage() {
+            document.getElementById('lightbox').classList.remove('active');
+        }
+    </script>
 </body>
 </html>

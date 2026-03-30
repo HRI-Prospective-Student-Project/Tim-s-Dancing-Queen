@@ -6,7 +6,6 @@
     <title>Misty Dev Log | Dashboard</title>
     <script src="{{ url_for('static', filename='tailwind.min.js') }}"></script>
     <script src="{{ url_for('static', filename='feather.min.js') }}"></script>
-    
     <script src="{{ url_for('static', filename='global.js') }}"></script>
     
     <style>
@@ -47,7 +46,7 @@
                 <span class="text-lg font-bold tracking-tight">Misty's Dev Log</span>
             </div>
             <div class="flex items-center gap-4">
-                <a href="/" onclick="handleNav('DevLog: Exit to Home')" class="text-sm font-semibold text-slate-600 hover:text-primary transition-colors">Home</a>
+                <a href="javascript:void(0)" onclick="handleNav('Exit to Home', '/home')">Home</a>
                 <a href="/gemini_misty" onclick="handleNav('DevLog: Exit to Gemini')" class="animate-gemini-pulse bg-accent text-white px-5 py-2 rounded-full text-sm font-bold flex items-center gap-2 border-2 border-indigo-300 transition-all hover:scale-105">
                     <i data-feather="sparkles" class="w-4 h-4 text-yellow-300"></i> Ask Gemini
                 </a>
@@ -183,19 +182,6 @@
             }, 800);
         }
         setInterval(cycleGallery, 5000);
-
-        /**
-         * GLOBAL WRAPPER
-         * handleNav is in global.js, but keeping this local hook for link transparency.
-         */
-        function handleNav(destination) {
-            if (typeof logInteraction === 'function') {
-                logInteraction("NAV_CLICK", destination);
-            }
-            if (typeof stopSpeech === 'function') {
-                stopSpeech();
-            }
-        }
     </script>
 </body>
 </html>

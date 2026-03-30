@@ -115,7 +115,7 @@
                         </div>
                         <img src="static/assets/IMG_7754.jpg" alt="Timilehin" class="w-full h-full object-cover">
                     </div>
-                    <div onclick="logInteraction('TEAM_CARD_CLICK', 'O. Adefioye'); speakText('This is Oluwatimilehin Adefioye...')" class="text-center cursor-pointer">
+                    <div onclick="logInteraction('TEAM_CARD_CLICK', 'O. Adefioye'); speakText('This is Tim...')" class="text-center cursor-pointer">
                         <h2 class="text-2xl font-black text-slate-900 tracking-tight mb-1">O. Adefioye</h2>
                         <p class="text-accent font-bold text-[10px] uppercase tracking-widest mb-4 px-3 py-1 bg-accent/5 rounded-full inline-block">Student Researcher • '26</p>
                         <p class="text-slate-600 text-sm leading-relaxed">Specializing in LLM integration and system design.</p>
@@ -124,16 +124,18 @@
 
                 <div class="team-card bg-white rounded-[2rem] p-6 shadow-sm border border-slate-200 hover:border-indigo-400/40 transition-all group flex flex-col relative overflow-hidden">
                     <div class="absolute top-0 left-0 w-full h-2 bg-indigo-400"></div>
+                    
                     <div onclick="openImage('static/assets/Full_HRI_Picture.jpg', 'HRI Class')" class="image-container relative w-full aspect-video rounded-2xl bg-slate-100 mb-6 overflow-hidden border border-slate-200 cursor-zoom-in group">
                         <div class="absolute top-3 right-3 p-2 bg-black/60 rounded-lg text-white z-10 opacity-0 group-hover:opacity-100 transition-opacity">
                             <i data-feather="maximize" class="w-4 h-4"></i>
                         </div>
                         <img src="static/assets/Full_HRI_Picture.jpg" alt="HRI Class" class="w-full h-full object-cover">
                     </div>
-                    <div onclick="logInteraction('TEAM_CARD_CLICK', 'HRI Class'); speakText('This is the Human Robot Interaction class...')" class="text-center cursor-pointer">
-                        <h2 class="text-2xl font-black text-slate-900 tracking-tight mb-1">HRI Class</h2>
-                        <p class="text-indigo-500 font-bold text-[10px] uppercase tracking-widest mb-4 px-3 py-1 bg-indigo-50 rounded-full inline-block">Spring 2026 Cohort</p>
-                        <p class="text-slate-600 text-sm leading-relaxed">Investigating the social impact of robotic agents.</p>
+                    
+                    <div onclick="logInteraction('TEAM_CARD_CLICK', 'HRI_TO_ORIGINS'); window.location.href='/background';" class="text-center cursor-pointer">
+                        <h2 class="text-2xl font-black text-slate-900 tracking-tight mb-1">Misty Origins</h2>
+                        <p class="text-indigo-500 font-bold text-[10px] uppercase tracking-widest mb-4 px-3 py-1 bg-indigo-50 rounded-full inline-block">Research History</p>
+                        <p class="text-slate-600 text-sm leading-relaxed">Click here to learn about how Misty came to F&M and the evolution of our lab.</p>
                     </div>
                 </div>
 

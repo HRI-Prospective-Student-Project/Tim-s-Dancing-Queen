@@ -64,6 +64,12 @@ def log_event():
 
 # --- 4. NAVIGATION ROUTES ---
 @app.route('/')
+def start():
+    misty.stop_speaking()
+    misty_neutral()
+    return render_template('start.html')
+
+@app.route('/home')
 def index():
     misty.stop_speaking()
     misty_neutral()
