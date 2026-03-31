@@ -147,11 +147,26 @@
 
     <script>
         feather.replace();
+
         function initRobotPage() {
+            // 1. Log the entry for research data
             if (typeof logInteraction === 'function') {
                 logInteraction("PAGE_ENTER", "User viewing F&M Robots");
             }
+            
+            // 2. Trigger the intro speech
+            autoIntro();
         }
+
+        function autoIntro() {
+            const introText = "Meet our other robots at F&M!";
+            setTimeout(() => {
+                if (typeof speakText === 'function') {
+                    speakText(introText);
+                }
+            }, 800);
+        }
+
         function openImage(src, name) {
             const lb = document.getElementById('lightbox');
             const img = document.getElementById('lightboxImg');
@@ -159,6 +174,7 @@
             lb.classList.add('active');
             logInteraction("ROBOT_PHOTO_ENLARGE", `Fullscreen view: ${name}`);
         }
+
         function closeImage() {
             document.getElementById('lightbox').classList.remove('active');
         }

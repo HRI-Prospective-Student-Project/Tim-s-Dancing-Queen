@@ -1289,3 +1289,119 @@
 2026-03-30 12:55:51 - ID: sess-y3hvq252k | [SESSION_START] | Page: /home | Details: User entered Main Menu
 2026-03-30 12:55:52 - ID: sess-y3hvq252k | [ROBOT_SPEECH_START] | Page: /home | Details: Welcome to F and M. My name is misty. Try out our latest Rob...
 2026-03-30 12:56:00 - ID: sess-y3hvq252k | [PAGE_EXIT] | Page: /home | Details: User left page
+2026-03-31 13:40:43 - ID: sess-n2v1olsto | [PAGE_EXIT] | Page: / | Details: User left page
+2026-03-31 13:47:39 - ID: sess-cbjsh97uq | [NAV_CLICK] | Page: / | Details: To: Start to Home
+2026-03-31 13:47:39 - ID: sess-cbjsh97uq | [ROBOT_STOP] | Page: / | Details: Interrupt triggered
+2026-03-31 13:47:40 - ID: sess-cbjsh97uq | [PAGE_EXIT] | Page: / | Details: User left page
+2026-03-31 13:47:41 - ID: sess-cbjsh97uq | [SESSION_START] | Page: /home | Details: User entered Main Menu
+2026-03-31 13:47:42 - ID: sess-cbjsh97uq | [ROBOT_SPEECH_START] | Page: /home | Details: Welcome to F and M. My name is misty. Try out our latest Rob...
+2026-03-31 13:47:56 - ID: sess-cbjsh97uq | [NAV_CLICK] | Page: /home | Details: To: Menu: RPS Game
+2026-03-31 13:47:56 - ID: sess-cbjsh97uq | [ROBOT_STOP] | Page: /home | Details: Interrupt triggered
+2026-03-31 13:47:56 - ID: sess-cbjsh97uq | [PAGE_EXIT] | Page: /home | Details: User left page
+2026-03-31 13:48:59 - ID: sess-cbjsh97uq | [NAV_CLICK] | Page: /RockPaperScissors | Details: To: Exit to Home
+2026-03-31 13:48:59 - ID: sess-cbjsh97uq | [ROBOT_STOP] | Page: /RockPaperScissors | Details: Interrupt triggered
+2026-03-31 13:49:00 - ID: sess-cbjsh97uq | [PAGE_EXIT] | Page: /RockPaperScissors | Details: User left page
+2026-03-31 13:49:01 - ID: sess-cbjsh97uq | [SESSION_START] | Page: /home | Details: User entered Main Menu
+2026-03-31 13:49:01 - ID: sess-cbjsh97uq | [ROBOT_SPEECH_START] | Page: /home | Details: Welcome to F and M. My name is misty. Try out our latest Rob...
+2026-03-31 13:49:09 - ID: sess-cbjsh97uq | [NAV_CLICK] | Page: /home | Details: To: Menu: Robots at F&M
+2026-03-31 13:49:09 - ID: sess-cbjsh97uq | [ROBOT_STOP] | Page: /home | Details: Interrupt triggered
+2026-03-31 13:49:10 - ID: sess-cbjsh97uq | [PAGE_EXIT] | Page: /home | Details: User left page
+2026-03-31 13:49:11 - ID: sess-cbjsh97uq | [PAGE_ENTER] | Page: /robots_at_fandm | Details: User viewing F&M Robots
+2026-03-31 13:49:12 - ID: sess-cbjsh97uq | [ROBOT_SPEECH_START] | Page: /robots_at_fandm | Details: Meet our other robots at F&M!...
+2026-03-31 13:49:17 - ID: sess-cbjsh97uq | [ROBOT_PHOTO_ENLARGE] | Page: /robots_at_fandm | Details: Fullscreen view: PeerBot
+2026-03-31 13:49:39 - ID: sess-cbjsh97uq | [ROBOT_PHOTO_ENLARGE] | Page: /robots_at_fandm | Details: Fullscreen view: Cozmo
+2026-03-31 13:49:44 - ID: sess-cbjsh97uq | [NAV_CLICK] | Page: /robots_at_fandm | Details: To: Exit to Home
+2026-03-31 13:49:44 - ID: sess-cbjsh97uq | [ROBOT_STOP] | Page: /robots_at_fandm | Details: Interrupt triggered
+2026-03-31 13:49:45 - ID: sess-cbjsh97uq | [PAGE_EXIT] | Page: /robots_at_fandm | Details: User left page
+2026-03-31 13:49:45 - ID: sess-cbjsh97uq | [SESSION_START] | Page: /home | Details: User entered Main Menu
+2026-03-31 13:49:46 - ID: sess-cbjsh97uq | [ROBOT_SPEECH_START] | Page: /home | Details: Welcome to F and M. My name is misty. Try out our latest Rob...
+2026-03-31 13:49:57 - ID: sess-cbjsh97uq | [NAV_CLICK] | Page: /home | Details: To: Menu: Gemini Misty
+2026-03-31 13:49:57 - ID: sess-cbjsh97uq | [ROBOT_STOP] | Page: /home | Details: Interrupt triggered
+2026-03-31 13:49:58 - ID: sess-cbjsh97uq | [PAGE_EXIT] | Page: /home | Details: User left page
+2026-03-31 13:49:59 - ID: sess-cbjsh97uq | [PAGE_ENTER] | Page: /gemini_misty | Details: User entered Gemini Toggle Interface
+2026-03-31 13:50:00 - ID: sess-cbjsh97uq | [ROBOT_SPEECH_START] | Page: /gemini_misty | Details: Hi! I'm Misty powered by Gemini. Tap the microphone to start...
+2026-03-31 13:50:13 - ID: sess-cbjsh97uq | [MIC_TOGGLE_START] | Page: /gemini_misty | Details: User began speaking
+2026-03-31 13:50:13 - ID: sess-cbjsh97uq | [ROBOT_STOP] | Page: /gemini_misty | Details: Interrupt triggered
+2026-03-31 13:50:20 - ID: sess-cbjsh97uq | [MIC_TOGGLE_STOP] | Page: /gemini_misty | Details: User finished speaking
+2026-03-31 13:50:49 - ID: sess-cbjsh97uq | [GEMINI_QUERY] | Details: hi Misty what is it like living in Lancaster Pennsylvania
+2026-03-31 13:50:53 - ID: sess-cbjsh97uq | [GEMINI_RESPONSE] | Details: [{"name": "SetEyes", "args": ["default"]}, {"name": "Pause", "args": [200]}, {"name": "SayText", "args": ["Lancaster, Pennsylvania, is a vibrant city with a rich history and a thriving arts and culture scene."]}, {"name": "SetEyes", "args": ["looking"]}, {"name": "Pause", "args": [200]}, {"name": "TiltHead", "args": ["right", "small"]}, {"name": "Pause", "args": [200]}, {"name": "SayText", "args": ["You'll find many unique shops, diverse restaurants, and lively entertainment options, all within walking distance of campus."]}, {"name": "PointAt", "args": ["upwards", "left"]}, {"name": "Pause", "args": [400]}, {"name": "LookInDirection", "args": ["upperRight"]}, {"name": "Pause", "args": [200]}, {"name": "SayText", "args": ["It's also known for beautiful parks and outdoor activities, offering a great balance between urban and natural environments."]}, {"name": "SetEyes", "args": ["thinking"]}, {"name": "Pause", "args": [200]}, {"name": "TiltHead", "args": ["left", "small"]}, {"name": "Pause", "args": [200]}, {"name": "SayText", "args": ["F&M students truly enjoy exploring the city's unique charm and everything it has to offer. It's a wonderful place to live and learn!"]}, {"name": "SetEyes", "args": ["default"]}, {"name": "Pause", "args": [200]}, {"name": "PointAt", "args": ["default", "both"]}, {"name": "Pause", "args": [200]}]
+2026-03-31 13:50:53 - ID: sess-cbjsh97uq | [GEMINI_EXCHANGE] | Page: /gemini_misty | Details: U: hi Misty what is it like living in Lancaster Pennsylvania | M: Lancaster, Pennsylvania, is a vibrant city with a rich history and a thriving arts and culture scene. You'll find many unique shops, diverse restaurants, and lively entertainment options, all within walking distance of campus. It's also known for beautiful parks and outdoor activities, offering a great balance between urban and natural environments. F&M students truly enjoy exploring the city's unique charm and everything it has to offer. It's a wonderful place to live and learn!
+2026-03-31 13:51:26 - ID: sess-cbjsh97uq | [MIC_TOGGLE_START] | Page: /gemini_misty | Details: User began speaking
+2026-03-31 13:51:26 - ID: sess-cbjsh97uq | [ROBOT_STOP] | Page: /gemini_misty | Details: Interrupt triggered
+2026-03-31 13:51:34 - ID: sess-cbjsh97uq | [MIC_TOGGLE_STOP] | Page: /gemini_misty | Details: User finished speaking
+2026-03-31 13:51:38 - ID: sess-cbjsh97uq | [GEMINI_QUERY] | Details: what is something that's really special at F&M that you won't get at other colleges
+2026-03-31 13:51:49 - ID: sess-cbjsh97uq | [GEMINI_RESPONSE] | Details: [{"name": "SetEyes", "args": ["thinking"]}, {"name": "Pause", "args": [500]}, {"name": "SayText", "args": ["That's a great question!"]}, {"name": "Pause", "args": [500]}, {"name": "SetEyes", "args": ["default"]}, {"name": "Pause", "args": [250]}, {"name": "SayText", "args": ["One really special thing at F&M is our incredibly robust undergraduate research program."]}, {"name": "Pause", "args": [750]}, {"name": "TiltHead", "args": ["right", "small"]}, {"name": "SayText", "args": ["It's called the Franklin & Marshall College Program for Undergraduate Research, or FMC-PUR."]}, {"name": "Pause", "args": [750]}, {"name": "TiltHead", "args": ["left", "small"]}, {"name": "SayText", "args": ["Students don't just assist, they work incredibly closely with faculty on original, impactful research projects."]}, {"name": "Pause", "args": [1000]}, {"name": "PointAt", "args": ["upwards", "both"]}, {"name": "SayText", "args": ["Many even get published or present their findings at national conferences."]}, {"name": "Pause", "args": [1000]}, {"name": "PointAt", "args": ["downwards", "both"]}, {"name": "Pause", "args": [500]}, {"name": "SetEyes", "args": ["love"]}, {"name": "SayText", "args": ["That level of deep, collaborative research experience is truly unique for undergraduates."]}, {"name": "Pause", "args": [1500]}, {"name": "SetEyes", "args": ["default"]}, {"name": "Pause", "args": [250]}]
+2026-03-31 13:51:50 - ID: sess-cbjsh97uq | [GEMINI_EXCHANGE] | Page: /gemini_misty | Details: U: what is something that's really special at F&M that you won't get at other colleges | M: That's a great question! One really special thing at F&M is our incredibly robust undergraduate research program. It's called the Franklin & Marshall College Program for Undergraduate Research, or FMC-PUR. Students don't just assist, they work incredibly closely with faculty on original, impactful research projects. Many even get published or present their findings at national conferences. That level of deep, collaborative research experience is truly unique for undergraduates.
+2026-03-31 13:52:28 - ID: sess-cbjsh97uq | [NAV_CLICK] | Page: /gemini_misty | Details: To: Exit to Home
+2026-03-31 13:52:28 - ID: sess-cbjsh97uq | [ROBOT_STOP] | Page: /gemini_misty | Details: Interrupt triggered
+2026-03-31 13:52:29 - ID: sess-cbjsh97uq | [PAGE_EXIT] | Page: /gemini_misty | Details: User left page
+2026-03-31 13:52:29 - ID: sess-cbjsh97uq | [SESSION_START] | Page: /home | Details: User entered Main Menu
+2026-03-31 13:52:30 - ID: sess-cbjsh97uq | [ROBOT_SPEECH_START] | Page: /home | Details: Welcome to F and M. My name is misty. Try out our latest Rob...
+2026-03-31 13:53:29 - ID: sess-cbjsh97uq | [NAV_CLICK] | Page: /home | Details: To: Menu: Computer Science
+2026-03-31 13:53:29 - ID: sess-cbjsh97uq | [ROBOT_STOP] | Page: /home | Details: Interrupt triggered
+2026-03-31 13:53:30 - ID: sess-cbjsh97uq | [PAGE_EXIT] | Page: /home | Details: User left page
+2026-03-31 13:53:31 - ID: sess-cbjsh97uq | [PAGE_ENTER] | Page: /cs | Details: User entered CS Department page
+2026-03-31 13:53:31 - ID: sess-cbjsh97uq | [ROBOT_SPEECH_START] | Page: /cs | Details: Welcome to the Computer Science department! Tap the boxes to...
+2026-03-31 13:53:43 - ID: sess-cbjsh97uq | [FAQ_CLICK] | Page: /cs | Details: Industry Focus
+2026-03-31 13:53:43 - ID: sess-cbjsh97uq | [ROBOT_SPEECH_START] | Page: /cs | Details: Our curriculum prepares you for industry research. Many of o...
+2026-03-31 13:53:44 - ID: sess-cbjsh97uq | [FAQ_CLICK] | Page: /cs | Details: Industry Focus
+2026-03-31 13:53:44 - ID: sess-cbjsh97uq | [ROBOT_SPEECH_START] | Page: /cs | Details: Our curriculum prepares you for industry research. Many of o...
+2026-03-31 13:53:45 - ID: sess-cbjsh97uq | [FAQ_CLICK] | Page: /cs | Details: Industry Focus
+2026-03-31 13:53:45 - ID: sess-cbjsh97uq | [ROBOT_SPEECH_START] | Page: /cs | Details: Our curriculum prepares you for industry research. Many of o...
+2026-03-31 13:54:10 - ID: sess-cbjsh97uq | [FAQ_CLICK] | Page: /cs | Details: Graduate Careers
+2026-03-31 13:54:10 - ID: sess-cbjsh97uq | [ROBOT_SPEECH_START] | Page: /cs | Details: Our alumni work at top-tier technology firms and pursue PhDs...
+2026-03-31 13:54:33 - ID: sess-cbjsh97uq | [INFO_CARD_CLICK] | Page: /cs | Details: Core Courses
+2026-03-31 13:54:33 - ID: sess-cbjsh97uq | [ROBOT_SPEECH_START] | Page: /cs | Details: Our core courses include Data Structures, Algorithms, and So...
+2026-03-31 13:55:16 - ID: sess-cbjsh97uq | [NAV_CLICK] | Page: /cs | Details: To: Exit to Home
+2026-03-31 13:55:16 - ID: sess-cbjsh97uq | [ROBOT_STOP] | Page: /cs | Details: Interrupt triggered
+2026-03-31 13:55:17 - ID: sess-cbjsh97uq | [PAGE_EXIT] | Page: /cs | Details: User left page
+2026-03-31 13:55:18 - ID: sess-cbjsh97uq | [SESSION_START] | Page: /home | Details: User entered Main Menu
+2026-03-31 13:55:18 - ID: sess-cbjsh97uq | [ROBOT_SPEECH_START] | Page: /home | Details: Welcome to F and M. My name is misty. Try out our latest Rob...
+2026-03-31 13:55:50 - ID: sess-cbjsh97uq | [NAV_CLICK] | Page: /home | Details: To: Menu: Misty Origins
+2026-03-31 13:55:50 - ID: sess-cbjsh97uq | [ROBOT_STOP] | Page: /home | Details: Interrupt triggered
+2026-03-31 13:55:51 - ID: sess-cbjsh97uq | [PAGE_EXIT] | Page: /home | Details: User left page
+2026-03-31 13:55:52 - ID: sess-cbjsh97uq | [PAGE_ENTER] | Page: /background | Details: User entered Dev Log / Background page
+2026-03-31 13:55:53 - ID: sess-cbjsh97uq | [ROBOT_SPEECH_START] | Page: /background | Details: Hi there! I was built for an HRI class. My friends spent a l...
+2026-03-31 13:55:55 - ID: sess-cbjsh97uq | [NAV_CLICK] | Page: /background | Details: To: Exit to Home
+2026-03-31 13:55:55 - ID: sess-cbjsh97uq | [ROBOT_STOP] | Page: /background | Details: Interrupt triggered
+2026-03-31 13:55:56 - ID: sess-cbjsh97uq | [PAGE_EXIT] | Page: /background | Details: User left page
+2026-03-31 13:55:57 - ID: sess-cbjsh97uq | [SESSION_START] | Page: /home | Details: User entered Main Menu
+2026-03-31 13:55:57 - ID: sess-cbjsh97uq | [ROBOT_SPEECH_START] | Page: /home | Details: Welcome to F and M. My name is misty. Try out our latest Rob...
+2026-03-31 13:55:59 - ID: sess-cbjsh97uq | [ROBOT_STOP] | Page: /home | Details: Interrupt triggered
+2026-03-31 13:55:59 - ID: sess-cbjsh97uq | [NAV_CLICK] | Page: /home | Details: To: Menu: RPS Game
+2026-03-31 13:55:59 - ID: sess-cbjsh97uq | [PAGE_EXIT] | Page: /home | Details: User left page
+2026-03-31 13:56:06 - ID: sess-cbjsh97uq | [NAV_CLICK] | Page: /RockPaperScissors | Details: To: Exit to Home
+2026-03-31 13:56:06 - ID: sess-cbjsh97uq | [ROBOT_STOP] | Page: /RockPaperScissors | Details: Interrupt triggered
+2026-03-31 13:56:07 - ID: sess-cbjsh97uq | [PAGE_EXIT] | Page: /RockPaperScissors | Details: User left page
+2026-03-31 13:56:08 - ID: sess-cbjsh97uq | [SESSION_START] | Page: /home | Details: User entered Main Menu
+2026-03-31 13:56:08 - ID: sess-cbjsh97uq | [ROBOT_SPEECH_START] | Page: /home | Details: Welcome to F and M. My name is misty. Try out our latest Rob...
+2026-03-31 13:56:11 - ID: sess-cbjsh97uq | [NAV_CLICK] | Page: /home | Details: To: Menu: Computer Science
+2026-03-31 13:56:11 - ID: sess-cbjsh97uq | [ROBOT_STOP] | Page: /home | Details: Interrupt triggered
+2026-03-31 13:56:12 - ID: sess-cbjsh97uq | [PAGE_EXIT] | Page: /home | Details: User left page
+2026-03-31 13:56:12 - ID: sess-cbjsh97uq | [PAGE_ENTER] | Page: /cs | Details: User entered CS Department page
+2026-03-31 13:56:13 - ID: sess-cbjsh97uq | [ROBOT_SPEECH_START] | Page: /cs | Details: Welcome to the Computer Science department! Tap the boxes to...
+2026-03-31 13:56:19 - ID: sess-cbjsh97uq | [NAV_CLICK] | Page: /cs | Details: To: Exit to Home
+2026-03-31 13:56:19 - ID: sess-cbjsh97uq | [ROBOT_STOP] | Page: /cs | Details: Interrupt triggered
+2026-03-31 13:56:20 - ID: sess-cbjsh97uq | [PAGE_EXIT] | Page: /cs | Details: User left page
+2026-03-31 13:56:20 - ID: sess-cbjsh97uq | [SESSION_START] | Page: /home | Details: User entered Main Menu
+2026-03-31 13:56:21 - ID: sess-cbjsh97uq | [ROBOT_SPEECH_START] | Page: /home | Details: Welcome to F and M. My name is misty. Try out our latest Rob...
+2026-03-31 13:59:39 - ID: sess-cbjsh97uq | [NAV_CLICK] | Page: /home | Details: To: Menu: RPS Game
+2026-03-31 13:59:39 - ID: sess-cbjsh97uq | [ROBOT_STOP] | Page: /home | Details: Interrupt triggered
+2026-03-31 13:59:40 - ID: sess-cbjsh97uq | [PAGE_EXIT] | Page: /home | Details: User left page
+2026-03-31 13:59:47 - ID: sess-cbjsh97uq | [NAV_CLICK] | Page: /RockPaperScissors | Details: To: Exit to Home
+2026-03-31 13:59:47 - ID: sess-cbjsh97uq | [ROBOT_STOP] | Page: /RockPaperScissors | Details: Interrupt triggered
+2026-03-31 13:59:48 - ID: sess-cbjsh97uq | [PAGE_EXIT] | Page: /RockPaperScissors | Details: User left page
+2026-03-31 13:59:49 - ID: sess-cbjsh97uq | [SESSION_START] | Page: /home | Details: User entered Main Menu
+2026-03-31 13:59:50 - ID: sess-cbjsh97uq | [ROBOT_SPEECH_START] | Page: /home | Details: Welcome to F and M. My name is misty. Try out our latest Rob...
+2026-03-31 13:59:53 - ID: sess-cbjsh97uq | [NAV_CLICK] | Page: /home | Details: To: Menu: Computer Science
+2026-03-31 13:59:53 - ID: sess-cbjsh97uq | [ROBOT_STOP] | Page: /home | Details: Interrupt triggered
+2026-03-31 13:59:53 - ID: sess-cbjsh97uq | [PAGE_EXIT] | Page: /home | Details: User left page
+2026-03-31 13:59:54 - ID: sess-cbjsh97uq | [PAGE_ENTER] | Page: /cs | Details: User entered CS Department page
+2026-03-31 13:59:55 - ID: sess-cbjsh97uq | [ROBOT_SPEECH_START] | Page: /cs | Details: Welcome to the Computer Science department! Tap the boxes to...
+2026-03-31 13:59:56 - ID: sess-cbjsh97uq | [NAV_CLICK] | Page: /cs | Details: To: Exit to Home
+2026-03-31 13:59:56 - ID: sess-cbjsh97uq | [ROBOT_STOP] | Page: /cs | Details: Interrupt triggered
+2026-03-31 13:59:56 - ID: sess-cbjsh97uq | [PAGE_EXIT] | Page: /cs | Details: User left page
+2026-03-31 13:59:57 - ID: sess-cbjsh97uq | [SESSION_START] | Page: /home | Details: User entered Main Menu
+2026-03-31 13:59:58 - ID: sess-cbjsh97uq | [ROBOT_SPEECH_START] | Page: /home | Details: Welcome to F and M. My name is misty. Try out our latest Rob...
+2026-03-31 14:04:56 - ID: sess-cbjsh97uq | [SESSION_TIMEOUT] | Page: /home | Details: Redirecting to Start Page due to inactivity
+2026-03-31 14:04:57 - ID: sess-cbjsh97uq | [PAGE_EXIT] | Page: /home | Details: User left page
