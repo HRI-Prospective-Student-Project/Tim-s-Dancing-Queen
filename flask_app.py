@@ -18,6 +18,7 @@ misty = Robot(MISTY_IP)
 misty_actions = MistyActions(MISTY_IP)
 misty.set_default_volume(30) 
 processing_lock = threading.Lock()
+is_recording = False
 
 # Auto-start skill at launch
 try:
@@ -35,6 +36,15 @@ def speak_async(text):
     misty.stop_speaking()
     time.sleep(0.1) 
     misty.speak(text)
+
+# Define Misty's LED Colors
+COLORS = {
+    "recording": {"red": 255, "green": 0, "blue": 0},      # Bright Red
+    "thinking": {"red": 255, "green": 255, "blue": 0},    # Yellow
+    "idle": {"red": 0, "green": 47, "blue": 108}          # F&M Blue (#002F6C)
+}
+
+
 
 # --- 2. CONFIGURE RESEARCH LOGGING ---
 logger = logging.getLogger('misty_logger')
@@ -72,6 +82,35 @@ def start():
 @app.route('/home')
 def index():
     misty.stop_speaking()
+    
+    # 1. Silently handle Bumper unregistration
+    # We use a broad try/except because if Misty isn't registered, 
+    # some SDK versions throw an error instead of just ignoring it.
+    try:
+        misty.unregister_event("BumperPress")
+    except Exception as e:
+        print(f"Bumper unregister skipped or not needed: {e}")
+
+    # 2. Try various Hazard System commands without crashing
+    # We try the three most common SDK naming variations for "Enable"
+    hazard_enabled = False
+    for cmd in ["hazard_system_enable", "enable_hazard_system", "revert_hazard_settings"]:
+        try:
+            func = getattr(misty, cmd)
+            # If the command is 'revert_hazard_settings', it might need an argument
+            if cmd == "revert_hazard_settings":
+                func(revert_to_default=True)
+            else:
+                func()
+            print(f"Success: Hazards enabled via {cmd}")
+            hazard_enabled = True
+            break
+        except (AttributeError, TypeError):
+            continue
+    
+    if not hazard_enabled:
+        print("Warning: Could not verify Hazard System status, but continuing...")
+
     misty_neutral()
     return render_template('index_misty.html')
 
@@ -113,8 +152,62 @@ def data_page():
 
 @app.route("/gemini_misty")
 def gemini_page(): 
+    # 1. Safely handle Hazards
+    try:
+        misty.hazard_system_disable()
+    except:
+        try: misty.disable_hazard_system()
+        except: pass
+
+    # 2. Register Bumper Event - THE FIXED PORTION
+    my_callback = "http://10.68.142.188:5001/misty/bumper_callback"
+    
+    try:
+        # We MUST tell Misty the event_type is "BumpSensor"
+        # We also try 'url' as the keyword first
+        misty.register_event(
+            event_name="BumperPress",
+            event_type="BumpSensor", 
+            url=my_callback,
+            keep_alive=True
+        )
+        print("Success: Registered Bumper via 'url'")
+    except Exception as e:
+        print(f"URL keyword failed: {e}. Trying positional...")
+        try:
+            # Fallback: Name, Type, Endpoint, KeepAlive
+            misty.register_event("BumperPress", "BumpSensor", my_callback, True)
+            print("Success: Registered Bumper via positional arguments")
+        except Exception as e2:
+            print(f"CRITICAL: Registration failed again: {e2}")
+
     misty_neutral()
     return render_template('gemini_misty_mic.html')
+
+
+@app.route('/misty/bumper_callback', methods=['POST'])
+def bumper_callback():
+    global is_recording
+    data = request.get_json(silent=True) or {}
+    
+    # Debug print so you can see the raw data in your terminal
+    print(f"DEBUG Callback Data: {json.dumps(data)}")
+
+    # Check for "isContacted" OR "IsContacted" (Misty is inconsistent)
+    msg = data.get("message", {})
+    pressed = msg.get("isContacted") or msg.get("IsContacted")
+
+    if pressed:
+        if not is_recording:
+            print(">>> BUMPER DETECTED: STARTING RECORDING <<<")
+            start_listening()
+            is_recording = True
+        else:
+            print(">>> BUMPER DETECTED: PROCESSING <<<")
+            threading.Thread(target=stop_and_process).start()
+            is_recording = False
+            
+    return jsonify({"status": "received"}), 200
 
 # --- 5. ROBOT CONTROL ROUTES ---
 @app.route('/stop', methods=["POST"])
@@ -175,13 +268,22 @@ def robots_page():
 # --- 6. GEMINI & SPEECH PROCESSING ---
 @app.route('/misty/start_listening', methods=["POST"])
 def start_listening():
-    misty.change_led(255, 0, 0)
+    misty.change_led(COLORS["recording"]["red"], 
+                     COLORS["recording"]["green"], 
+                     COLORS["recording"]["blue"])
+    
+    # 2. Start the actual recording process
     misty.start_recording_audio("capture.wav")
     misty_actions.executeActionScript([{'name': 'LookInDirection', 'args': ['up']}])
     return jsonify({"status": "recording"})
 
 @app.route('/misty/stop_and_process', methods=["POST"])
 def stop_and_process():
+    global is_recording
+    misty.change_led(COLORS["thinking"]["red"], 
+                     COLORS["thinking"]["green"], 
+                     COLORS["thinking"]["blue"])
+    
     data = request.get_json(silent=True) or {}
     sess_id = data.get('sessionId', 'NO_SESS')
     print(f"Processing request for session: {sess_id}")
@@ -190,9 +292,9 @@ def stop_and_process():
         return jsonify({"status": "busy"}), 200
     
     try:
+        is_recording = False
         misty.stop_recording_audio()
         # --- THINKING ANIMATION START ---
-        misty.change_led(0, 0, 255)
         misty.move_head(pitch=-15, roll=20, yaw=0, velocity=40)
         misty.move_arms(20, 20, 40, 40) 
         time.sleep(1.0) 
@@ -230,6 +332,10 @@ def stop_and_process():
 
         misty.speak("I didn't catch that.") 
         misty_neutral()
+
+        misty.change_led(COLORS["thinking"]["red"], 
+                     COLORS["thinking"]["green"], 
+                     COLORS["thinking"]["blue"])
         return jsonify({"user_text": "...", "misty_reply": "I didn't catch that."})
 
     except Exception as e:

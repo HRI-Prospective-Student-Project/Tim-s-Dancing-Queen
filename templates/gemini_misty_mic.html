@@ -43,39 +43,53 @@
         <div class="flex flex-col items-start w-full animate-in fade-in duration-500">
             <div class="bg-slate-800 p-6 rounded-2xl rounded-tl-none border border-slate-700 max-w-[85%] shadow-xl">
                 <p class="font-black text-indigo-400 text-xs mb-2 uppercase tracking-widest">Misty</p>
-                <p id="intro-message" class="text-slate-300 text-md leading-relaxed message-text">Hi! I'm Misty powered by Gemini. Tap the microphone to start talking. Tap it again when you're finished! Please do not share any identifiable personal information.</p>
+                <p id="intro-message" class="text-slate-300 text-md leading-relaxed message-text">Hi! I'm Misty powered by Gemini. Press one of my stickers and start talking. Press it again when you're finished! Please do not share any identifiable personal information.</p>
             </div>
         </div>
     </div>
 
-    <div class="w-full p-10 bg-gradient-to-t from-slate-900 via-slate-900 to-transparent flex flex-col items-center gap-4 relative z-10">
-        <button id="mic-btn" 
-            class="w-24 h-24 bg-indigo-600 rounded-full flex items-center justify-center shadow-[0_0_40px_rgba(79,70,229,0.3)] hover:bg-indigo-500 hover:scale-105 transition-all active:scale-95 select-none touch-none border-4 border-transparent">
-            <i data-feather="mic" id="mic-icon" class="w-10 h-10 text-white"></i>
-        </button>
+    <div class="w-full p-10 bg-gradient-to-t from-slate-900 via-slate-900 to-transparent flex flex-col items-center gap-6 relative z-10">
+        
+        <div id="status-orb" class="w-48 h-48 rounded-full border-8 border-slate-700 flex flex-col items-center justify-center transition-all duration-500 bg-slate-800 shadow-2xl">
+            <i data-feather="mic" id="status-icon" class="w-16 h-16 text-slate-600 transition-all duration-500"></i>
+            <span id="orb-label" class="text-[10px] font-black uppercase tracking-[0.3em] mt-2 text-slate-500">Standby</span>
+        </div>
+
         <div class="text-center">
-            <p id="instruction" class="text-sm text-slate-400 font-bold uppercase tracking-widest">Tap to Speak</p>
-            <p class="text-[10px] text-slate-600 mt-1 uppercase">Misty will listen until you tap again</p>
+            <p id="instruction-main" class="text-2xl text-white font-black uppercase tracking-widest">
+                Press Bumper to Talk
+            </p>
+            <div id="recording-wave" class="hidden flex gap-1 mt-4 justify-center">
+                <div class="w-1 h-8 bg-red-500 animate-bounce" style="animation-delay: 0.1s"></div>
+                <div class="w-1 h-12 bg-red-600 animate-bounce" style="animation-delay: 0.2s"></div>
+                <div class="w-1 h-10 bg-red-400 animate-bounce" style="animation-delay: 0.3s"></div>
+                <div class="w-1 h-14 bg-red-500 animate-bounce" style="animation-delay: 0.4s"></div>
+            </div>
         </div>
     </div>
     
     <script>
-        // Global feather icons init
         feather.replace();
 
-        const micBtn = document.getElementById('mic-btn');
-        const micIcon = document.getElementById('mic-icon');
-        const status = document.getElementById('status');
+        // New UI Elements
+        const orb = document.getElementById('status-orb');
+        const icon = document.getElementById('status-icon');
+        const label = document.getElementById('orb-label');
+        const instructionMain = document.getElementById('instruction-main');
+        const wave = document.getElementById('recording-wave');
         const chat = document.getElementById('chat-container');
-        const instruction = document.getElementById('instruction');
+        const statusHeader = document.getElementById('status');
 
         let isListening = false;
 
         function initGeminiPage() {
             if (typeof logInteraction === 'function') {
-                logInteraction("PAGE_ENTER", "User entered Gemini Toggle Interface");
+                logInteraction("PAGE_ENTER", "User entered Gemini Bumper Interface");
             }
             autoIntro();
+            
+            // IMPORTANT: Here you would normally start a "listener" for the bumper.
+            // For now, I will leave the functions ready to be called by your server.
         }
 
         function autoIntro() {
@@ -85,75 +99,50 @@
             }, 800);
         }
 
-        micBtn.onclick = () => {
-            if (!isListening) {
-                startListening();
-            } else {
-                stopAndProcess();
-            }
-        };
-
-        function startListening() {
+        // Call this function when the Bumper is first pressed
+        function startListeningUI() {
             isListening = true;
-            if (typeof logInteraction === 'function') logInteraction("MIC_TOGGLE_START", "User began speaking");
-            if (typeof stopSpeech === 'function') stopSpeech(); 
+            
+            // Header Status
+            statusHeader.innerText = "LISTENING...";
+            statusHeader.classList.replace('text-indigo-400', 'text-red-500');
 
-            status.innerText = "LISTENING...";
-            status.classList.replace('text-indigo-400', 'text-red-500');
-            instruction.innerText = "Misty is listening... Tap to stop";
+            // Orb Visuals (Red/Pulse)
+            orb.classList.replace('border-slate-700', 'border-red-600');
+            orb.classList.add('shadow-[0_0_60px_rgba(220,38,38,0.4)]', 'animate-pulse');
+            icon.classList.replace('text-slate-600', 'text-red-500');
             
-            // Visual Active State
-            micBtn.classList.replace('bg-indigo-600', 'bg-red-600');
-            micBtn.classList.add('ring-4', 'ring-red-500/40', 'animate-pulse');
-            micIcon.style.transform = "scale(1.2)";
-            
-            fetch('/misty/start_listening', { method: 'POST' });
+            // Text & Wave
+            label.innerText = "Recording";
+            label.classList.replace('text-slate-500', 'text-red-400');
+            instructionMain.innerText = "Misty is Listening...";
+            wave.classList.remove('hidden');
+
+            if (typeof stopSpeech === 'function') stopSpeech();
         }
 
-        function stopAndProcess() {
+        // Call this function when the Bumper is released or processing starts
+        function stopAndThinkUI() {
             isListening = false;
-            if (typeof logInteraction === 'function') logInteraction("MIC_TOGGLE_STOP", "User finished speaking");
 
-            status.innerText = "THINKING...";
-            status.classList.replace('text-red-500', 'text-amber-400');
-            instruction.innerText = "Misty is processing...";
+            // Header Status
+            statusHeader.innerText = "THINKING...";
+            statusHeader.classList.replace('text-red-500', 'text-amber-400');
+
+            // Orb Visuals (Yellow/Thinking)
+            orb.classList.remove('animate-pulse');
+            orb.classList.replace('border-red-600', 'border-amber-500');
+            orb.classList.replace('shadow-[0_0_60px_rgba(220,38,38,0.4)]', 'shadow-[0_0_60px_rgba(245,158,11,0.3)]');
             
-            // Revert Mic Button
-            micBtn.classList.remove('ring-4', 'ring-red-500/40', 'animate-pulse');
-            micBtn.classList.replace('bg-red-600', 'bg-indigo-600');
-            micIcon.style.transform = "scale(1.0)";
-
-            fetch('/misty/stop_and_process', { 
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ 
-                    sessionId: localStorage.getItem('robot_session_id') || 'GUEST'
-                })
-            })
-            .then(res => res.json())
-            .then(data => {
-                if (typeof logInteraction === 'function') {
-                    logInteraction("GEMINI_EXCHANGE", `U: ${data.user_text} | M: ${data.misty_reply}`);
-                }
-
-                status.innerText = "IDLE";
-                status.classList.replace('text-amber-400', 'text-indigo-400');
-                instruction.innerText = "Tap to Speak";
-                
-                // 1. Show User Message
-                appendMessage('user', data.user_text);
-                
-                // 2. Show Misty Message after slight delay for realism
-                setTimeout(() => {
-                    appendMessage('misty', data.misty_reply);
-                }, 400);
-            })
-            .catch(err => {
-                console.error(err);
-                status.innerText = "ERROR";
-                status.classList.replace('text-amber-400', 'text-red-400');
-                instruction.innerText = "Connection lost. Try again.";
-            });
+            icon.classList.replace('text-red-500', 'text-amber-400');
+            icon.setAttribute('data-feather', 'cpu'); 
+            feather.replace(); 
+            
+            label.innerText = "Thinking";
+            label.classList.replace('text-red-400', 'text-amber-400');
+            
+            instructionMain.innerText = "Processing Speech...";
+            wave.classList.add('hidden');
         }
 
         function appendMessage(sender, text) {
@@ -161,24 +150,18 @@
             const alignment = isUser ? 'items-end' : 'items-start';
             const bgColor = isUser ? 'bg-indigo-600' : 'bg-slate-800 border border-slate-700';
             const rounded = isUser ? 'rounded-tr-none' : 'rounded-tl-none';
-            const label = isUser ? '' : '<p class="font-black text-indigo-400 text-xs mb-2 uppercase tracking-widest">Misty</p>';
-            
-            // Expanded width for Misty's long text responses
+            const labelText = isUser ? '' : '<p class="font-black text-indigo-400 text-xs mb-2 uppercase tracking-widest">Misty</p>';
             const maxWidth = isUser ? 'max-w-[80%]' : 'max-w-[95%] w-full';
 
             const messageDiv = document.createElement('div');
             messageDiv.className = `flex flex-col ${alignment} w-full animate-in fade-in slide-in-from-bottom-4 duration-500`;
-            
             messageDiv.innerHTML = `
                 <div class="${bgColor} p-6 rounded-3xl ${rounded} ${maxWidth} shadow-2xl">
-                    ${label}
+                    ${labelText}
                     <p class="text-md leading-relaxed message-text">${text}</p>
                 </div>
             `;
-
             chat.appendChild(messageDiv);
-            
-            // Scroll to bottom immediately
             chat.scrollTop = chat.scrollHeight;
         }
     </script>
