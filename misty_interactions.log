@@ -1512,3 +1512,53 @@
 2026-04-01 12:49:50 - ID: sess-uslysntw8 | [ROBOT_SPEECH_START] | Page: /gemini_misty | Details: Hi! I'm Misty powered by Gemini. Press one of my stickers an...
 2026-04-01 12:49:59 - ID: sess-uslysntw8 | [PAGE_EXIT] | Page: /gemini_misty | Details: User left page
 2026-04-01 12:50:31 - ID: sess-uslysntw8 | [PAGE_EXIT] | Page: /gemini_misty | Details: User left page
+2026-04-01 14:36:45 - ID: sess-uslysntw8 | [NAV_CLICK] | Page: /gemini_misty | Details: To: Exit to Home
+2026-04-01 14:36:45 - ID: sess-uslysntw8 | [ROBOT_STOP] | Page: /gemini_misty | Details: Interrupt triggered
+2026-04-01 14:36:45 - ID: sess-uslysntw8 | [PAGE_EXIT] | Page: /gemini_misty | Details: User left page
+2026-04-01 14:36:46 - ID: sess-uslysntw8 | [SESSION_START] | Page: /home | Details: User entered Main Menu
+2026-04-01 14:36:47 - ID: sess-uslysntw8 | [ROBOT_SPEECH_START] | Page: /home | Details: Welcome to F and M. My name is misty. Try out our latest Rob...
+2026-04-01 14:36:48 - ID: sess-uslysntw8 | [NAV_CLICK] | Page: /home | Details: To: Menu: Gemini Misty
+2026-04-01 14:36:48 - ID: sess-uslysntw8 | [ROBOT_STOP] | Page: /home | Details: Interrupt triggered
+2026-04-01 14:36:49 - ID: sess-uslysntw8 | [PAGE_EXIT] | Page: /home | Details: User left page
+2026-04-01 14:36:49 - ID: sess-uslysntw8 | [PAGE_ENTER] | Page: /gemini_misty | Details: User entered Gemini Bumper Interface
+2026-04-01 14:36:50 - ID: sess-uslysntw8 | [ROBOT_SPEECH_START] | Page: /gemini_misty | Details: Hi! I'm Misty powered by Gemini. Press one of my stickers an...
+2026-04-01 14:37:07 - ID: sess-uslysntw8 | [PAGE_EXIT] | Page: /gemini_misty | Details: User left page
+2026-04-01 14:38:29 - ID: sess-uslysntw8 | [PAGE_EXIT] | Page: /gemini_misty | Details: User left page
+2026-04-01 14:39:25 - ID: sess-uslysntw8 | [PAGE_EXIT] | Page: /gemini_misty | Details: User left page
+2026-04-01 14:39:35 - ID: sess-uslysntw8 | [NAV_CLICK] | Page: /gemini_misty | Details: To: Exit to Home
+2026-04-01 14:39:35 - ID: sess-uslysntw8 | [ROBOT_STOP] | Page: /gemini_misty | Details: Interrupt triggered
+2026-04-01 14:39:36 - ID: sess-uslysntw8 | [PAGE_EXIT] | Page: /gemini_misty | Details: User left page
+2026-04-01 14:39:36 - ID: sess-uslysntw8 | [SESSION_START] | Page: /home | Details: User entered Main Menu
+2026-04-01 14:39:37 - ID: sess-uslysntw8 | [ROBOT_SPEECH_START] | Page: /home | Details: Welcome to F and M. My name is misty. Try out our latest Rob...
+2026-04-01 14:39:39 - ID: sess-uslysntw8 | [PAGE_EXIT] | Page: /home | Details: User left page
+2026-04-01 14:40:07 - ID: sess-uslysntw8 | [NAV_CLICK] | Page: /home | Details: To: Menu: Gemini Misty
+2026-04-01 14:40:07 - ID: sess-uslysntw8 | [ROBOT_STOP] | Page: /home | Details: Interrupt triggered
+2026-04-01 14:40:08 - ID: sess-uslysntw8 | [PAGE_EXIT] | Page: /home | Details: User left page
+2026-04-01 14:40:08 - ID: sess-uslysntw8 | [PAGE_ENTER] | Page: /gemini_misty | Details: User entered Gemini Bumper Interface
+2026-04-01 14:40:09 - ID: sess-uslysntw8 | [ROBOT_SPEECH_START] | Page: /gemini_misty | Details: Hi! I'm Misty powered by Gemini. Press one of my stickers an...
+2026-04-01 14:40:13 - ID: sess-uslysntw8 | [PAGE_EXIT] | Page: /gemini_misty | Details: User left page
+2026-04-01 14:42:33 - ID: sess-uslysntw8 | [PAGE_EXIT] | Page: /gemini_misty | Details: User left page
+2026-04-01 14:46:02 - ID: sess-uslysntw8 | [NAV_CLICK] | Page: /gemini_misty | Details: To: Exit to Home
+2026-04-01 14:46:02 - ID: sess-uslysntw8 | [ROBOT_STOP] | Page: /gemini_misty | Details: Interrupt triggered
+2026-04-01 14:46:02 - ID: sess-uslysntw8 | [PAGE_EXIT] | Page: /gemini_misty | Details: User left page
+2026-04-01 14:46:03 - ID: sess-uslysntw8 | [SESSION_START] | Page: /home | Details: User entered Main Menu
+2026-04-01 14:46:04 - ID: sess-uslysntw8 | [ROBOT_SPEECH_START] | Page: /home | Details: Welcome to F and M. My name is misty. Try out our latest Rob...
+2026-04-01 14:46:05 - ID: sess-uslysntw8 | [NAV_CLICK] | Page: /home | Details: To: Menu: Gemini Misty
+2026-04-01 14:46:05 - ID: sess-uslysntw8 | [ROBOT_STOP] | Page: /home | Details: Interrupt triggered
+2026-04-01 14:46:05 - ID: sess-uslysntw8 | [PAGE_EXIT] | Page: /home | Details: User left page
+2026-04-01 14:46:06 - ID: sess-uslysntw8 | [PAGE_ENTER] | Page: /gemini_misty | Details: User entered Gemini Bumper Interface
+2026-04-01 14:46:06 - ID: sess-uslysntw8 | [ROBOT_SPEECH_START] | Page: /gemini_misty | Details: Hi! I'm Misty powered by Gemini. Press one of my stickers an...
+2026-04-01 14:46:11 - ID: sess-uslysntw8 | [PAGE_EXIT] | Page: /gemini_misty | Details: User left page
+2026-04-01 14:48:32 - ID: sess-uslysntw8 | [NAV_CLICK] | Page: /gemini_misty | Details: To: Exit to Home
+2026-04-01 14:48:32 - ID: sess-uslysntw8 | [ROBOT_STOP] | Page: /gemini_misty | Details: Interrupt triggered
+2026-04-01 14:48:32 - ID: sess-uslysntw8 | [PAGE_EXIT] | Page: /gemini_misty | Details: User left page
+2026-04-01 14:48:33 - ID: sess-uslysntw8 | [SESSION_START] | Page: /home | Details: User entered Main Menu
+2026-04-01 14:48:34 - ID: sess-uslysntw8 | [ROBOT_SPEECH_START] | Page: /home | Details: Welcome to F and M. My name is misty. Try out our latest Rob...
+2026-04-01 14:48:34 - ID: sess-uslysntw8 | [NAV_CLICK] | Page: /home | Details: To: Menu: Gemini Misty
+2026-04-01 14:48:34 - ID: sess-uslysntw8 | [ROBOT_STOP] | Page: /home | Details: Interrupt triggered
+2026-04-01 14:48:34 - ID: sess-uslysntw8 | [PAGE_EXIT] | Page: /home | Details: User left page
+2026-04-01 14:48:34 - ID: sess-uslysntw8 | [PAGE_ENTER] | Page: /gemini_misty | Details: User entered Gemini Bumper Interface
+2026-04-01 14:48:35 - ID: sess-uslysntw8 | [ROBOT_SPEECH_START] | Page: /gemini_misty | Details: Hi! I'm Misty powered by Gemini. Press one of my stickers an...
+2026-04-01 14:48:37 - ID: sess-uslysntw8 | [PAGE_EXIT] | Page: /gemini_misty | Details: User left page
+2026-04-01 14:48:58 - ID: sess-uslysntw8 | [PAGE_EXIT] | Page: /gemini_misty | Details: User left page
+2026-04-01 14:49:50 - ID: sess-uslysntw8 | [PAGE_EXIT] | Page: /gemini_misty | Details: User left page

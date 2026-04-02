@@ -159,8 +159,6 @@ def gemini_page():
         try: misty.disable_hazard_system()
         except: pass
 
-    # 2. Register Bumper Event - THE FIXED PORTION
-    my_callback = "http://10.68.142.188:5001/misty/bumper_callback"
     
     try:
         # We MUST tell Misty the event_type is "BumpSensor"
@@ -168,15 +166,15 @@ def gemini_page():
         misty.register_event(
             event_name="BumperPress",
             event_type="BumpSensor", 
-            url=my_callback,
+            callback_function=bumper_callback,
             keep_alive=True
         )
-        print("Success: Registered Bumper via 'url'")
+        print("Success: Registered Bumper'")
     except Exception as e:
         print(f"URL keyword failed: {e}. Trying positional...")
         try:
             # Fallback: Name, Type, Endpoint, KeepAlive
-            misty.register_event("BumperPress", "BumpSensor", my_callback, True)
+            misty.register_event("BumperPress", "BumpSensor", bumper_callback, True)
             print("Success: Registered Bumper via positional arguments")
         except Exception as e2:
             print(f"CRITICAL: Registration failed again: {e2}")
