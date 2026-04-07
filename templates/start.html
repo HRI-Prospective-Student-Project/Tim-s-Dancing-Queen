@@ -6,6 +6,7 @@
     <title>Start | F&M Robotics</title>
     <script src="{{ url_for('static', filename='tailwind.min.js') }}"></script>
     <script src="{{ url_for('static', filename='global.js') }}"></script>
+    <script src="{{ url_for('static', filename='global.js') }}"></script>
     <style>
         @keyframes slow-pulse {
             0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(0, 47, 108, 0.4); }
@@ -29,7 +30,17 @@
         </div>
     </a>
 
-    <script>
+    <script>    
+        const introText = "Welcome to F and M. My name is misty. Try out our latest Robotics project and chat with me.";
+        
+        function autoIntro() {
+            setTimeout(() => {
+                if (typeof speakText === 'function') {
+                    speakText(introText);
+                }
+            }, 800);
+        }
+
         tailwind.config = {
             theme: { 
                 extend: { 
@@ -37,6 +48,11 @@
                 } 
             }
         }
+
+         if (typeof logInteraction === 'function') {
+                logInteraction("Session Start");
+            }
+        autoIntro()
     </script>
 </body>
 </html>

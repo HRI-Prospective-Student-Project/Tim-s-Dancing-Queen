@@ -19,51 +19,60 @@
         .message-text {
             overflow-wrap: break-word;
             word-wrap: break-word;
-            white-space: pre-wrap; /* CRITICAL: Maintains line breaks from test files */
+            white-space: pre-wrap;
+        }
+        /* Pulse effect for Recording */
+        .orb-recording {
+            box-shadow: 0 0 60px rgba(239, 68, 68, 0.7);
+            border-color: #ef4444 !important;
+        }
+        /* Glow effect for Thinking */
+        .orb-thinking {
+            box-shadow: 0 0 60px rgba(245, 158, 11, 0.6);
+            border-color: #f59e0b !important;
         }
     </style>
 </head>
 <body class="bg-slate-900 text-white font-sans h-screen flex flex-col overflow-hidden" onload="initGeminiPage()">
 
     <div class="w-full p-6 border-b border-slate-700 bg-slate-800 flex justify-between items-center shadow-lg relative z-10">
-        <div class="flex items-center gap-4">
-        <a href="javascript:void(0)" onclick="handleNav('Exit to Home', '/home')">Home</a>     
-            </a>
-            <h1 class="text-2xl font-bold flex gap-2 items-center">
-                <i data-feather="mic" class="text-indigo-400"></i> Talk to Misty
+        <div class="flex items-center gap-6">
+            <a href="javascript:void(0)" onclick="handleNav('Exit to Home', '/home')" class="text-sm font-bold uppercase tracking-widest text-slate-500 hover:text-white transition-colors">← Back</a>     
+            <h1 class="text-3xl font-bold flex gap-3 items-center">
+                <i data-feather="mic" class="w-8 h-8 text-indigo-400"></i> Gemini Misty
             </h1>
         </div>
         <div class="flex flex-col items-end">
-            <span id="status" class="text-sm font-black tracking-widest text-indigo-400">IDLE</span>
-            <p class="text-[10px] text-slate-500 uppercase tracking-tighter">Gemini 2.5 Flash System</p>
+            <span id="status-header" class="text-xl font-black tracking-widest text-indigo-400 transition-colors duration-300">IDLE</span>
+            <p class="text-[11px] text-slate-500 uppercase tracking-widest">HRI Research Interface</p>
         </div>
     </div>
 
-    <div id="chat-container" class="flex-1 w-full max-w-5xl mx-auto p-8 overflow-y-auto space-y-8">
+    <div id="chat-container" class="flex-1 w-full max-w-5xl mx-auto p-10 overflow-y-auto space-y-10">
         <div class="flex flex-col items-start w-full animate-in fade-in duration-500">
-            <div class="bg-slate-800 p-6 rounded-2xl rounded-tl-none border border-slate-700 max-w-[85%] shadow-xl">
+            <div class="bg-slate-800 p-8 rounded-3xl rounded-tl-none border border-slate-700 max-w-[85%] shadow-xl">
                 <p class="font-black text-indigo-400 text-xs mb-2 uppercase tracking-widest">Misty</p>
-                <p id="intro-message" class="text-slate-300 text-md leading-relaxed message-text">Hi! I'm Misty powered by Gemini. Press one of my stickers and start talking. Press it again when you're finished! Please do not share any identifiable personal information.</p>
+                <p id="intro-message" class="text-slate-300 text-xl leading-relaxed message-text">Hi! I'm Misty powered by gemini. Press one sticker to start talking. Press it again when you're finished! Please do not share any personally identifiable information</p>
             </div>
         </div>
     </div>
 
-    <div class="w-full p-10 bg-gradient-to-t from-slate-900 via-slate-900 to-transparent flex flex-col items-center gap-6 relative z-10">
+    <div class="w-full p-12 bg-slate-900 border-t border-slate-800 flex flex-col items-center gap-8 relative z-10">
         
-        <div id="status-orb" class="w-48 h-48 rounded-full border-8 border-slate-700 flex flex-col items-center justify-center transition-all duration-500 bg-slate-800 shadow-2xl">
-            <i data-feather="mic" id="status-icon" class="w-16 h-16 text-slate-600 transition-all duration-500"></i>
-            <span id="orb-label" class="text-[10px] font-black uppercase tracking-[0.3em] mt-2 text-slate-500">Standby</span>
+        <div id="status-orb" class="w-40 h-40 rounded-full border-8 border-slate-700 flex flex-col items-center justify-center transition-all duration-500 bg-slate-800 shadow-2xl">
+            <i data-feather="mic" id="status-icon" class="w-14 h-14 text-slate-600 transition-all duration-500"></i>
+            <span id="orb-label" class="text-xs font-black uppercase tracking-[0.3em] mt-3 text-slate-500 text-center">Standby</span>
         </div>
 
         <div class="text-center">
-            <p id="instruction-main" class="text-2xl text-white font-black uppercase tracking-widest">
+            <p id="instruction-main" class="text-xl text-slate-300 font-black uppercase tracking-[0.3em] transition-all duration-300">
                 Press Bumper to Talk
             </p>
-            <div id="recording-wave" class="hidden flex gap-1 mt-4 justify-center">
-                <div class="w-1 h-8 bg-red-500 animate-bounce" style="animation-delay: 0.1s"></div>
-                <div class="w-1 h-12 bg-red-600 animate-bounce" style="animation-delay: 0.2s"></div>
-                <div class="w-1 h-10 bg-red-400 animate-bounce" style="animation-delay: 0.3s"></div>
-                <div class="w-1 h-14 bg-red-500 animate-bounce" style="animation-delay: 0.4s"></div>
+            <div id="recording-wave" class="hidden flex gap-2 mt-5 justify-center h-12">
+                <div class="w-2 bg-red-500 animate-bounce" style="animation-delay: 0.1s"></div>
+                <div class="w-2 bg-red-600 animate-bounce" style="animation-delay: 0.2s"></div>
+                <div class="w-2 bg-red-400 animate-bounce" style="animation-delay: 0.3s"></div>
+                <div class="w-2 bg-red-500 animate-bounce" style="animation-delay: 0.4s"></div>
             </div>
         </div>
     </div>
@@ -71,78 +80,100 @@
     <script>
         feather.replace();
 
-        // New UI Elements
         const orb = document.getElementById('status-orb');
         const icon = document.getElementById('status-icon');
         const label = document.getElementById('orb-label');
         const instructionMain = document.getElementById('instruction-main');
         const wave = document.getElementById('recording-wave');
         const chat = document.getElementById('chat-container');
-        const statusHeader = document.getElementById('status');
+        const statusHeader = document.getElementById('status-header');
 
-        let isListening = false;
+        let currentUIState = "idle"; 
+        let lastProcessedUserText = "";
+        let lastProcessedMistyReply = ""; // Add this to track Misty separately
+
 
         function initGeminiPage() {
-            if (typeof logInteraction === 'function') {
-                logInteraction("PAGE_ENTER", "User entered Gemini Bumper Interface");
-            }
             autoIntro();
-            
-            // IMPORTANT: Here you would normally start a "listener" for the bumper.
-            // For now, I will leave the functions ready to be called by your server.
+            // Faster polling for better bumper response
+            setInterval(pollRobotStatus, 600); 
         }
 
         function autoIntro() {
             const introText = document.getElementById('intro-message').innerText;
-            setTimeout(() => {
-                if (typeof speakText === 'function') speakText(introText);
+            setTimeout(() => { 
+                if (typeof speakText === 'function') speakText(introText); 
             }, 800);
         }
 
-        // Call this function when the Bumper is first pressed
-        function startListeningUI() {
-            isListening = true;
-            
-            // Header Status
-            statusHeader.innerText = "LISTENING...";
-            statusHeader.classList.replace('text-indigo-400', 'text-red-500');
+        function pollRobotStatus() {
+            fetch('/misty/status')
+                .then(response => response.json())
+                .then(data => {
+                    // 1. State Sync (Idle/Recording/Thinking)
+                    if (data.status !== currentUIState) {
+                        updateUIState(data.status);
+                    }
 
-            // Orb Visuals (Red/Pulse)
-            orb.classList.replace('border-slate-700', 'border-red-600');
-            orb.classList.add('shadow-[0_0_60px_rgba(220,38,38,0.4)]', 'animate-pulse');
-            icon.classList.replace('text-slate-600', 'text-red-500');
-            
-            // Text & Wave
-            label.innerText = "Recording";
-            label.classList.replace('text-slate-500', 'text-red-400');
-            instructionMain.innerText = "Misty is Listening...";
-            wave.classList.remove('hidden');
+                    // 2. User Content Sync
+                    // If there is new user text, show it immediately
+                    if (data.user_text && data.user_text !== lastProcessedUserText) {
+                        appendMessage('user', data.user_text);
+                        lastProcessedUserText = data.user_text;
+                    }
 
-            if (typeof stopSpeech === 'function') stopSpeech();
+                    // 3. Misty Content Sync 
+                    // If there is a new Misty reply, show it immediately (don't wait for next user text!)
+                    if (data.misty_reply && data.misty_reply !== lastProcessedMistyReply) {
+                        appendMessage('misty', data.misty_reply);
+                        lastProcessedMistyReply = data.misty_reply;
+                    }
+                })
+                .catch(err => console.error("Poll Error:", err));
         }
 
-        // Call this function when the Bumper is released or processing starts
-        function stopAndThinkUI() {
-            isListening = false;
+        function updateUIState(state) {
+            currentUIState = state;
+            
+            // Icon swap logic
+            if (state === 'thinking') {
+                icon.setAttribute('data-feather', 'cpu');
+            } else {
+                icon.setAttribute('data-feather', 'mic');
+            }
+            
+            if (state === "recording") {
+                statusHeader.innerText = "LISTENING";
+                statusHeader.className = "text-xl font-black tracking-widest text-red-500";
+                orb.className = "w-40 h-40 rounded-full border-8 border-red-600 flex flex-col items-center justify-center transition-all duration-500 bg-slate-800 orb-recording animate-pulse";
+                icon.className = "w-14 h-14 text-red-500";
+                label.innerText = "Recording";
+                label.className = "text-xs font-black uppercase mt-3 text-red-400";
+                instructionMain.innerText = "Misty is Listening...";
+                wave.classList.remove('hidden');
 
-            // Header Status
-            statusHeader.innerText = "THINKING...";
-            statusHeader.classList.replace('text-red-500', 'text-amber-400');
+            } else if (state === "thinking") {
+                statusHeader.innerText = "THINKING";
+                statusHeader.className = "text-xl font-black tracking-widest text-amber-400";
+                orb.className = "w-40 h-40 rounded-full border-8 border-amber-500 flex flex-col items-center justify-center transition-all duration-500 bg-slate-800 orb-thinking";
+                icon.className = "w-14 h-14 text-amber-400";
+                label.innerText = "Processing";
+                label.className = "text-xs font-black uppercase mt-3 text-amber-400";
+                instructionMain.innerText = "Analyzing Speech...";
+                wave.classList.add('hidden');
 
-            // Orb Visuals (Yellow/Thinking)
-            orb.classList.remove('animate-pulse');
-            orb.classList.replace('border-red-600', 'border-amber-500');
-            orb.classList.replace('shadow-[0_0_60px_rgba(220,38,38,0.4)]', 'shadow-[0_0_60px_rgba(245,158,11,0.3)]');
-            
-            icon.classList.replace('text-red-500', 'text-amber-400');
-            icon.setAttribute('data-feather', 'cpu'); 
-            feather.replace(); 
-            
-            label.innerText = "Thinking";
-            label.classList.replace('text-red-400', 'text-amber-400');
-            
-            instructionMain.innerText = "Processing Speech...";
-            wave.classList.add('hidden');
+            } else {
+                // IDLE
+                statusHeader.innerText = "IDLE";
+                statusHeader.className = "text-xl font-black tracking-widest text-indigo-400";
+                orb.className = "w-40 h-40 rounded-full border-8 border-slate-700 flex flex-col items-center justify-center transition-all duration-500 bg-slate-800 shadow-2xl";
+                icon.className = "w-14 h-14 text-slate-600";
+                label.innerText = "Standby";
+                label.className = "text-xs font-black uppercase mt-3 text-slate-500";
+                instructionMain.innerText = "Press Bumper to Talk";
+                wave.classList.add('hidden');
+            }
+            feather.replace();
         }
 
         function appendMessage(sender, text) {
@@ -150,15 +181,14 @@
             const alignment = isUser ? 'items-end' : 'items-start';
             const bgColor = isUser ? 'bg-indigo-600' : 'bg-slate-800 border border-slate-700';
             const rounded = isUser ? 'rounded-tr-none' : 'rounded-tl-none';
-            const labelText = isUser ? '' : '<p class="font-black text-indigo-400 text-xs mb-2 uppercase tracking-widest">Misty</p>';
-            const maxWidth = isUser ? 'max-w-[80%]' : 'max-w-[95%] w-full';
+            const labelContent = isUser ? '' : '<p class="font-black text-indigo-400 text-xs mb-2 uppercase tracking-widest">Misty</p>';
 
             const messageDiv = document.createElement('div');
             messageDiv.className = `flex flex-col ${alignment} w-full animate-in fade-in slide-in-from-bottom-4 duration-500`;
             messageDiv.innerHTML = `
-                <div class="${bgColor} p-6 rounded-3xl ${rounded} ${maxWidth} shadow-2xl">
-                    ${labelText}
-                    <p class="text-md leading-relaxed message-text">${text}</p>
+                <div class="${bgColor} p-8 rounded-[2rem] ${rounded} max-w-[85%] shadow-2xl">
+                    ${labelContent}
+                    <p class="text-xl leading-relaxed message-text">${text}</p>
                 </div>
             `;
             chat.appendChild(messageDiv);

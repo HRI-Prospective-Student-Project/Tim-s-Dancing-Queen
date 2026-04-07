@@ -71,15 +71,12 @@
                         <p class="text-slate-600 text-lg leading-relaxed">
                             Before building me, students spent a whole semester looking at how people and robots get along. They studied things like how close a robot should stand and how a robot can show feelings so humans feel comfortable talking to them. I am the result of all that practice!
                         </p>
-                        <div class="bg-slate-50 p-4 rounded-2xl border border-slate-100 mt-auto flex items-center gap-3">
-                            <i data-feather="volume-2" class="text-slate-400"></i>
-                            <p class="text-xs text-slate-500 font-medium italic">Click this bubble to hear me explain!</p>
-                        </div>
                     </div>
                 </div>
             </div>
 
             <div class="col-span-4 flex flex-col gap-4">
+                
                 <div onclick="logInteraction('INFO_CARD_CLICK', 'Web Team Detail'); speakText('The Web team built this UI and the Rock Paper Scissors game!')" 
                      class="cursor-pointer bg-white rounded-3xl p-6 shadow-sm border border-slate-200 flex-1 hover:border-primary/40 transition-all group flex flex-col border-l-8 border-l-primary">
                     <div class="flex items-center gap-3 mb-4">
@@ -91,7 +88,12 @@
                     <p class="text-slate-600 text-sm leading-relaxed mb-2">
                         They designed the <strong>look and feel</strong> of my website and built the <strong>Rock Paper Scissors game</strong>. 
                     </p>
-                    <p class="text-slate-500 text-xs">They connect the screen to my hardware.</p>
+                    <p class="text-slate-500 text-xs mb-4">They connect the screen to my hardware.</p>
+                    
+                    <div class="bg-primary/5 p-5 rounded-2xl border border-primary/10 mt-auto flex items-center gap-4 transition-transform group-hover:scale-[1.02]">
+                        <i data-feather="volume-2" class="text-primary w-6 h-6"></i>
+                        <p class="text-sm text-primary/80 font-bold italic">Click here to hear me explain!</p>
+                    </div>
                 </div>
 
                 <div onclick="logInteraction('INFO_CARD_CLICK', 'AI Team Detail'); speakText('The AI group used Gemini to help me answer questions about F and M!')" 
@@ -105,7 +107,12 @@
                     <p class="text-slate-600 text-sm leading-relaxed mb-2">
                         They used <strong>Google Gemini</strong> to give me a brain that knows all about <strong>F&M and Lancaster</strong>.
                     </p>
-                    <p class="text-slate-500 text-xs">They handle how I listen and talk back.</p>
+                    <p class="text-slate-500 text-xs mb-4">They handle how I listen and talk back.</p>
+                    
+                    <div class="bg-accent/5 p-5 rounded-2xl border border-accent/10 mt-auto flex items-center gap-4 transition-transform group-hover:scale-[1.02]">
+                        <i data-feather="volume-2" class="text-accent w-6 h-6"></i>
+                        <p class="text-sm text-accent/80 font-bold italic">Click here to hear me explain!</p>
+                    </div>
                 </div>
             </div>
 
@@ -131,11 +138,7 @@
 
         const introText = "Hi there! I was built for an HRI class. My friends spent a long time studying how people like you interact with robots. One team made this website and my games, while the other team gave me a brain using Gemini so I can answer your questions!";
 
-        /**
-         * INITIALIZATION
-         */
         function initDevLog() {
-            // Logs entry for this specific research section
             if (typeof logInteraction === 'function') {
                 logInteraction("PAGE_ENTER", "User entered Dev Log / Background page");
             }
@@ -144,16 +147,12 @@
 
         function autoIntro() {
             setTimeout(() => {
-                // Uses global speakText which also logs speech events
                 if (typeof speakText === 'function') {
                     speakText(introText);
                 }
             }, 800);
         }
 
-        /**
-         * GALLERY LOGIC
-         */
         const images = [
             {src: "/static/assets/HRI_JPG/IMG_7334.jpg", text: "Brainstorming Robot Ideas"},
             {src: "/static/assets/HRI_JPG/IMG_7373.jpg", text: "Testing the Game logic"},
@@ -175,7 +174,6 @@
                 textElement.innerText = images[currentIndex].text;
                 imgElement.classList.add('active');
                 
-                // Track visual engagement for the research log
                 if (typeof logInteraction === 'function') {
                     logInteraction("GALLERY_AUTO_STEP", `Viewed Photo: ${images[currentIndex].text}`);
                 }

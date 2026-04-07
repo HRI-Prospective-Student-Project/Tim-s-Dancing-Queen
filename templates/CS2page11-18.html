@@ -84,9 +84,14 @@
                 <div onclick="logInteraction('INFO_CARD_CLICK', 'Robotics Lab'); speakText('Work with our robots including Misty and Nao in the social robotics lab.')" 
                      class="cursor-pointer bg-white rounded-3xl p-6 shadow-sm border border-slate-200 flex-1 hover:border-primary/40 transition-all group flex flex-col border-l-8 border-l-primary">
                     <h2 class="text-2xl font-bold text-primary mb-2">Robotics & HRI</h2>
-                    <p class="text-slate-700 text-lg font-medium leading-relaxed">
+                    <p class="text-slate-700 text-lg font-medium leading-relaxed mb-4">
                         Work with <strong>Misty II</strong> and <strong>Nao</strong> robots. Students conduct research on how robots interact with people.
                     </p>
+                    
+                    <div class="bg-primary/5 p-5 rounded-2xl border border-primary/10 mt-auto flex items-center gap-4 transition-transform group-hover:scale-[1.02]">
+                        <i data-feather="volume-2" class="text-primary w-6 h-6"></i>
+                        <p class="text-sm text-primary/80 font-bold italic">Click here to hear me explain!</p>
+                    </div>
                 </div>
 
                 <div onclick="logInteraction('INFO_CARD_CLICK', 'Core Courses'); speakText('Our core courses include Data Structures, Algorithms, and Software Engineering to build a strong technical foundation.')" 
@@ -97,9 +102,14 @@
                         </div>
                         <h2 class="text-2xl font-bold text-accent tracking-tight">Core Courses</h2>
                     </div>
-                    <p class="text-slate-700 text-lg font-medium leading-relaxed">
+                    <p class="text-slate-700 text-lg font-medium leading-relaxed mb-4">
                         Master the essentials through <strong>Data Structures</strong>, <strong>Algorithms</strong>, and <strong>Software Engineering</strong> labs.
                     </p>
+
+                    <div class="bg-accent/5 p-5 rounded-2xl border border-accent/10 mt-auto flex items-center gap-4 transition-transform group-hover:scale-[1.02]">
+                        <i data-feather="volume-2" class="text-accent w-6 h-6"></i>
+                        <p class="text-sm text-accent/80 font-bold italic">Click here to hear me explain!</p>
+                    </div>
                 </div>
             </div>
 
@@ -157,7 +167,6 @@
         const introText = "Welcome to the Computer Science department! Tap the boxes to learn about our lab and core courses, or click a question on the right.";
 
         function initCSPage() {
-            // Logs a specific entry point for the CS section
             if (typeof logInteraction === 'function') {
                 logInteraction("PAGE_ENTER", "User entered CS Department page");
             }
@@ -166,13 +175,11 @@
 
         function autoIntro() {
             setTimeout(() => {
-                // The global speakText() automatically logs ROBOT_SPEECH_START
                 if (typeof speakText === 'function') {
                     speakText(introText);
                 }
             }, 800);
         }
-
     </script>
 </body>
 </html>

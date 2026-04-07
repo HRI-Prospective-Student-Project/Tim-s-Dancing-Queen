@@ -97,8 +97,7 @@
 
     <script>
         // Define everything first
-        const introText = "Welcome to F and M. My name is misty. Try out our latest Robotics project and chat with me.";
-
+       
         function initPage() {
             // 1. Render Icons
             if (typeof feather !== 'undefined') {
@@ -107,19 +106,9 @@
 
             // 2. Log Session Start
             if (typeof logInteraction === 'function') {
-                logInteraction("SESSION_START", "User entered Main Menu");
+                logInteraction("User entered Main Menu");
             }
 
-            // 3. Trigger Intro
-            autoIntro();
-        }
-
-        function autoIntro() {
-            setTimeout(() => {
-                if (typeof speakText === 'function') {
-                    speakText(introText);
-                }
-            }, 800);
         }
 
         // Use window.onload to ensure EVERYTHING (CDNs included) is ready
