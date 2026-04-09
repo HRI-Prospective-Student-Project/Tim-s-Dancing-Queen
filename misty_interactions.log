@@ -2239,3 +2239,46 @@
 2026-04-06 14:57:08 - ID: sess-fxmu711gx | [PAGE_EXIT] | Page: /gemini_misty | Details: User left page
 2026-04-06 14:57:08 - ID: sess-fxmu711gx | [User entered Main Menu] | Page: /home | Details: N/A
 2026-04-06 14:57:13 - ID: sess-fxmu711gx | [PAGE_EXIT] | Page: /home | Details: User left page
+2026-04-08 14:34:10 - ID: sess-rtm8nphhs | [JS_ERROR] | Page: / | Details: Uncaught SyntaxError: Identifier 'sessionId' has already been declared @ line 1
+2026-04-08 14:34:10 - ID: sess-rtm8nphhs | [Session Start] | Page: / | Details: N/A
+2026-04-08 14:34:11 - ID: sess-rtm8nphhs | [ROBOT_SPEECH_START] | Page: / | Details: Welcome to F and M. My name is misty. Try out our latest Rob...
+2026-04-08 14:34:12 - ID: sess-rtm8nphhs | [NAV_CLICK] | Page: / | Details: To: Start to Home
+2026-04-08 14:34:12 - ID: sess-rtm8nphhs | [ROBOT_STOP] | Page: / | Details: Interrupt triggered
+2026-04-08 14:34:12 - ID: sess-rtm8nphhs | [PAGE_EXIT] | Page: / | Details: User left page
+2026-04-08 14:34:13 - ID: sess-rtm8nphhs | [User entered Main Menu] | Page: /home | Details: N/A
+2026-04-08 14:34:26 - ID: sess-rtm8nphhs | [NAV_CLICK] | Page: /home | Details: To: Menu: Gemini Misty
+2026-04-08 14:34:26 - ID: sess-rtm8nphhs | [ROBOT_STOP] | Page: /home | Details: Interrupt triggered
+2026-04-08 14:34:26 - ID: sess-rtm8nphhs | [PAGE_EXIT] | Page: /home | Details: User left page
+2026-04-08 14:34:27 - ID: sess-rtm8nphhs | [ROBOT_SPEECH_START] | Page: /gemini_misty | Details: Hi! I'm Misty powered by gemini. Press one sticker to start ...
+2026-04-08 14:34:31 - EVENT: [BUMPER_PRESS] | Action: Started Recording
+2026-04-08 14:34:36 - EVENT: [BUMPER_PRESS] | Action: Stopped Recording / Processing
+2026-04-08 14:35:02 - ID: sess-rtm8nphhs | [PAGE_EXIT] | Page: /gemini_misty | Details: User left page
+2026-04-08 14:37:20 - ID: sess-rtm8nphhs | [PAGE_EXIT] | Page: /gemini_misty | Details: User left page
+2026-04-08 14:37:56 - ID: sess-rtm8nphhs | [NAV_CLICK] | Page: /gemini_misty | Details: To: Exit to Home
+2026-04-08 14:37:56 - ID: sess-rtm8nphhs | [ROBOT_STOP] | Page: /gemini_misty | Details: Interrupt triggered
+2026-04-08 14:37:57 - ID: sess-rtm8nphhs | [PAGE_EXIT] | Page: /gemini_misty | Details: User left page
+2026-04-08 14:37:58 - ID: sess-rtm8nphhs | [User entered Main Menu] | Page: /home | Details: N/A
+2026-04-08 14:38:00 - ID: sess-rtm8nphhs | [NAV_CLICK] | Page: /home | Details: To: Menu: Gemini Misty
+2026-04-08 14:38:00 - ID: sess-rtm8nphhs | [ROBOT_STOP] | Page: /home | Details: Interrupt triggered
+2026-04-08 14:38:01 - ID: sess-rtm8nphhs | [PAGE_EXIT] | Page: /home | Details: User left page
+2026-04-08 14:38:02 - ID: sess-rtm8nphhs | [ROBOT_SPEECH_START] | Page: /gemini_misty | Details: Hi! I'm Misty powered by gemini. Press one sticker to start ...
+2026-04-08 14:38:03 - ID: sess-rtm8nphhs | [PAGE_EXIT] | Page: /gemini_misty | Details: User left page
+2026-04-08 14:38:05 - EVENT: [BUMPER_PRESS] | Action: Started Recording
+2026-04-08 14:38:06 - EVENT: [BUMPER_PRESS] | Action: Stopped Recording / Processing
+2026-04-08 14:54:03 - ID: sess-rtm8nphhs | [PAGE_EXIT] | Page: /gemini_misty | Details: User left page
+2026-04-08 14:57:17 - ID: sess-rtm8nphhs | [PAGE_EXIT] | Page: /gemini_misty | Details: User left page
+2026-04-08 14:57:18 - ID: sess-rtm8nphhs | [ROBOT_SPEECH_START] | Page: /gemini_misty | Details: Hi! I'm Misty powered by gemini. Press one sticker to start ...
+2026-04-08 14:57:26 - EVENT: [BUMPER_PRESS] | Action: Started Recording
+2026-04-08 14:57:30 - EVENT: [BUMPER_PRESS] | Action: Stopped Recording / Processing
+2026-04-08 14:57:45 - GEMINI_IO | User: how old is Franklin & Marshall College | Misty: I'm sorry, I'm having trouble thinking right now.
+2026-04-08 14:57:52 - ID: sess-rtm8nphhs | [PAGE_EXIT] | Page: /gemini_misty | Details: User left page
+2026-04-08 14:58:57 - ID: sess-rtm8nphhs | [PAGE_EXIT] | Page: /gemini_misty | Details: User left page
+2026-04-08 14:59:12 - ID: sess-rtm8nphhs | [PAGE_EXIT] | Page: /gemini_misty | Details: User left page
+2026-04-08 14:59:14 - ID: sess-rtm8nphhs | [ROBOT_SPEECH_START] | Page: /gemini_misty | Details: Hi! I'm Misty powered by gemini. Press one sticker to start ...
+2026-04-08 14:59:21 - EVENT: [BUMPER_PRESS] | Action: Started Recording
+2026-04-08 14:59:26 - EVENT: [BUMPER_PRESS] | Action: Stopped Recording / Processing
+2026-04-08 14:59:37 - GEMINI_IO | User: how old is Franklin & Marshall College | Misty: Franklin & Marshall College was founded in 1787, making it about 237 years old.
+2026-04-08 14:59:48 - EVENT: [BUMPER_PRESS] | Action: Started Recording
+2026-04-08 14:59:55 - EVENT: [BUMPER_PRESS] | Action: Stopped Recording / Processing
+2026-04-08 15:00:01 - GEMINI_IO | User: who's the president of the National College how many professors are there how many classes are there | Misty: I'm sorry, I'm having trouble thinking right now.
+2026-04-08 15:00:05 - ID: sess-rtm8nphhs | [PAGE_EXIT] | Page: /gemini_misty | Details: User left page

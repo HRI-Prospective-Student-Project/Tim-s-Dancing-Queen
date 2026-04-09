@@ -29,7 +29,7 @@ RECORDING_TIMEOUT_SECONDS = 300  # 5 Minutes
 rps_active = False
 
 # Thinking Actions List
-THINKING_ACTIONS = [
+THINKING_ACTIONS = [ 
     {"text": "Let me think about that.", "pitch": -15, "roll": 10, "arm": 30},
     {"text": "That is a great question! One second.", "pitch": 0, "roll": -10, "arm": 10},
     {"text": "Let's check my database.", "pitch": 10, "roll": 5, "arm": 50},
