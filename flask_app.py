@@ -17,7 +17,7 @@ app = Flask(__name__)
 MISTY_IP = "192.168.1.3"
 misty = Robot(MISTY_IP)
 misty_actions = MistyActions(MISTY_IP)
-misty.set_default_volume(30) 
+misty.set_default_volume(100) 
 processing_lock = threading.Lock()
 is_recording = False
 
@@ -25,7 +25,7 @@ latest_user_text = ""
 latest_misty_reply = ""
 current_status = "idle" # idle, recording, thinking
 recording_start_time = None
-RECORDING_TIMEOUT_SECONDS = 300  # 5 Minutes
+RECORDING_TIMEOUT_SECONDS = 120  # 5 Minutes
 rps_active = False
 
 # Thinking Actions List
