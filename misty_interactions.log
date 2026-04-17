@@ -1,28 +1,3 @@
-2026-04-10 12:52:47 - ID: sess-vxtl8m75u | [ROBOT_STOP] | Page: / | Details: Interrupt triggered
-2026-04-10 12:52:47 - ID: sess-vxtl8m75u | [NAV_CLICK] | Page: / | Details: To: Start to Home
-2026-04-10 12:52:48 - ID: sess-vxtl8m75u | [PAGE_EXIT] | Page: / | Details: User left page
-2026-04-10 12:52:49 - ID: sess-vxtl8m75u | [User entered Main Menu] | Page: /home | Details: N/A
-2026-04-10 12:53:06 - ID: sess-vxtl8m75u | [NAV_CLICK] | Page: /home | Details: To: Menu: Misty Origins
-2026-04-10 12:53:06 - ID: sess-vxtl8m75u | [ROBOT_STOP] | Page: /home | Details: Interrupt triggered
-2026-04-10 12:53:07 - ID: sess-vxtl8m75u | [PAGE_EXIT] | Page: /home | Details: User left page
-2026-04-10 12:53:08 - ID: sess-vxtl8m75u | [PAGE_ENTER] | Page: /background | Details: User entered Dev Log / Background page
-2026-04-10 12:53:08 - ID: sess-vxtl8m75u | [ROBOT_SPEECH_START] | Page: /background | Details: Hi there! I was built for an HRI class. My friends spent a l...
-2026-04-10 12:53:13 - ID: sess-vxtl8m75u | [GALLERY_AUTO_STEP] | Page: /background | Details: Viewed Photo: Testing the Game logic
-2026-04-10 12:53:18 - ID: sess-vxtl8m75u | [GALLERY_AUTO_STEP] | Page: /background | Details: Viewed Photo: Sharing Between groups
-2026-04-10 12:53:23 - ID: sess-vxtl8m75u | [GALLERY_AUTO_STEP] | Page: /background | Details: Viewed Photo: Trying Different Users
-2026-04-10 12:53:28 - ID: sess-vxtl8m75u | [GALLERY_AUTO_STEP] | Page: /background | Details: Viewed Photo: Running Misty + Gemini
-2026-04-10 12:53:32 - ID: sess-vxtl8m75u | [NAV_CLICK] | Page: /background | Details: To: Exit to Home
-2026-04-10 12:53:32 - ID: sess-vxtl8m75u | [ROBOT_STOP] | Page: /background | Details: Interrupt triggered
-2026-04-10 12:53:32 - ID: sess-vxtl8m75u | [PAGE_EXIT] | Page: /background | Details: User left page
-2026-04-10 12:53:33 - ID: sess-vxtl8m75u | [User entered Main Menu] | Page: /home | Details: N/A
-2026-04-10 12:53:43 - ID: sess-vxtl8m75u | [NAV_CLICK] | Page: /home | Details: To: Menu: Robots at F&M
-2026-04-10 12:53:43 - ID: sess-vxtl8m75u | [ROBOT_STOP] | Page: /home | Details: Interrupt triggered
-2026-04-10 12:53:43 - ID: sess-vxtl8m75u | [PAGE_EXIT] | Page: /home | Details: User left page
-2026-04-10 12:53:44 - ID: sess-vxtl8m75u | [PAGE_ENTER] | Page: /robots_at_fandm | Details: User viewing F&M Robots
-2026-04-10 12:53:45 - ID: sess-vxtl8m75u | [ROBOT_SPEECH_START] | Page: /robots_at_fandm | Details: Meet other robots like me! at F&M...
-2026-04-10 12:53:52 - ID: sess-vxtl8m75u | [ROBOT_CARD_CLICK] | Page: /robots_at_fandm | Details: Misty II
-2026-04-10 12:53:52 - ID: sess-vxtl8m75u | [ROBOT_SPEECH_START] | Page: /robots_at_fandm | Details: Misty 2 is our social robot....
-2026-04-10 12:54:39 - ID: sess-vxtl8m75u | [PAGE_EXIT] | Page: /robots_at_fandm | Details: User left page
 2026-04-10 12:54:39 - ID: sess-kv1e80zri | [JS_ERROR] | Page: / | Details: Uncaught SyntaxError: Identifier 'sessionId' has already been declared @ line 1
 2026-04-10 12:54:40 - ID: sess-kv1e80zri | [Session Start] | Page: / | Details: N/A
 2026-04-10 12:54:41 - ID: sess-kv1e80zri | [ROBOT_SPEECH_START] | Page: / | Details: Welcome to F and M. My name is misty. Try out our latest Rob...
@@ -259,50 +234,6 @@
 2026-04-10 13:35:20 - EVENT: [BUMPER_PRESS] | Action: Stopped Recording / Processing
 2026-04-10 13:35:38 - GEMINI_IO | User: how's the weather here today | Misty: Today at Franklin & Marshall College, the weather is quite pleasant! It's mostly sunny with a mild breeze, perfect for exploring our beautiful campus and enjoying the outdoors.
 2026-04-10 13:36:49 - ID: sess-vjc7hr33f | [PAGE_EXIT] | Page: /gemini_misty | Details: User left page
-2026-04-10 13:38:24 - ID: sess-u3ofsm4i3 | [JS_ERROR] | Page: / | Details: Uncaught SyntaxError: Identifier 'sessionId' has already been declared @ line 1
-2026-04-10 13:38:24 - ID: sess-u3ofsm4i3 | [Session Start] | Page: / | Details: N/A
-2026-04-10 13:38:25 - ID: sess-u3ofsm4i3 | [ROBOT_SPEECH_START] | Page: / | Details: Welcome to F and M. My name is misty. Try out our latest Rob...
-2026-04-10 13:40:20 - ID: sess-u3ofsm4i3 | [NAV_CLICK] | Page: / | Details: To: Start to Home
-2026-04-10 13:40:20 - ID: sess-u3ofsm4i3 | [ROBOT_STOP] | Page: / | Details: Interrupt triggered
-2026-04-10 13:40:21 - ID: sess-u3ofsm4i3 | [PAGE_EXIT] | Page: / | Details: User left page
-2026-04-10 13:40:21 - ID: sess-u3ofsm4i3 | [User entered Main Menu] | Page: /home | Details: N/A
-2026-04-10 13:40:26 - ID: sess-u3ofsm4i3 | [NAV_CLICK] | Page: /home | Details: To: Menu: Misty Origins
-2026-04-10 13:40:26 - ID: sess-u3ofsm4i3 | [ROBOT_STOP] | Page: /home | Details: Interrupt triggered
-2026-04-10 13:40:26 - ID: sess-u3ofsm4i3 | [PAGE_EXIT] | Page: /home | Details: User left page
-2026-04-10 13:40:27 - ID: sess-u3ofsm4i3 | [PAGE_ENTER] | Page: /background | Details: User entered Dev Log / Background page
-2026-04-10 13:40:28 - ID: sess-u3ofsm4i3 | [ROBOT_SPEECH_START] | Page: /background | Details: Hi there! I was built for an HRI class. My friends spent a l...
-2026-04-10 13:40:33 - ID: sess-u3ofsm4i3 | [GALLERY_AUTO_STEP] | Page: /background | Details: Viewed Photo: Testing the Game logic
-2026-04-10 13:40:38 - ID: sess-u3ofsm4i3 | [GALLERY_AUTO_STEP] | Page: /background | Details: Viewed Photo: Sharing Between groups
-2026-04-10 13:40:43 - ID: sess-u3ofsm4i3 | [GALLERY_AUTO_STEP] | Page: /background | Details: Viewed Photo: Trying Different Users
-2026-04-10 13:40:48 - ID: sess-u3ofsm4i3 | [GALLERY_AUTO_STEP] | Page: /background | Details: Viewed Photo: Running Misty + Gemini
-2026-04-10 13:40:49 - ID: sess-u3ofsm4i3 | [INFO_CARD_CLICK] | Page: /background | Details: Web Team Detail
-2026-04-10 13:40:49 - ID: sess-u3ofsm4i3 | [ROBOT_SPEECH_START] | Page: /background | Details: The Web team built this UI and the Rock Paper Scissors game!...
-2026-04-10 13:40:50 - ID: sess-u3ofsm4i3 | [NAV_CLICK] | Page: /background | Details: To: Exit to Home
-2026-04-10 13:40:50 - ID: sess-u3ofsm4i3 | [ROBOT_STOP] | Page: /background | Details: Interrupt triggered
-2026-04-10 13:40:51 - ID: sess-u3ofsm4i3 | [PAGE_EXIT] | Page: /background | Details: User left page
-2026-04-10 13:40:51 - ID: sess-u3ofsm4i3 | [User entered Main Menu] | Page: /home | Details: N/A
-2026-04-10 13:40:56 - ID: sess-u3ofsm4i3 | [NAV_CLICK] | Page: /home | Details: To: Menu: Robots at F&M
-2026-04-10 13:40:56 - ID: sess-u3ofsm4i3 | [ROBOT_STOP] | Page: /home | Details: Interrupt triggered
-2026-04-10 13:40:56 - ID: sess-u3ofsm4i3 | [PAGE_EXIT] | Page: /home | Details: User left page
-2026-04-10 13:40:57 - ID: sess-u3ofsm4i3 | [PAGE_ENTER] | Page: /robots_at_fandm | Details: User viewing F&M Robots
-2026-04-10 13:40:58 - ID: sess-u3ofsm4i3 | [ROBOT_SPEECH_START] | Page: /robots_at_fandm | Details: Meet other robots like me! at F&M...
-2026-04-10 13:41:06 - ID: sess-u3ofsm4i3 | [NAV_CLICK] | Page: /robots_at_fandm | Details: To: Exit to Home
-2026-04-10 13:41:06 - ID: sess-u3ofsm4i3 | [ROBOT_STOP] | Page: /robots_at_fandm | Details: Interrupt triggered
-2026-04-10 13:41:07 - ID: sess-u3ofsm4i3 | [PAGE_EXIT] | Page: /robots_at_fandm | Details: User left page
-2026-04-10 13:41:07 - ID: sess-u3ofsm4i3 | [User entered Main Menu] | Page: /home | Details: N/A
-2026-04-10 13:41:09 - ID: sess-u3ofsm4i3 | [NAV_CLICK] | Page: /home | Details: To: Menu: Meet Team
-2026-04-10 13:41:09 - ID: sess-u3ofsm4i3 | [ROBOT_STOP] | Page: /home | Details: Interrupt triggered
-2026-04-10 13:41:09 - ID: sess-u3ofsm4i3 | [PAGE_EXIT] | Page: /home | Details: User left page
-2026-04-10 13:41:10 - ID: sess-u3ofsm4i3 | [PAGE_ENTER] | Page: /team | Details: User viewing Meet the Team
-2026-04-10 13:41:18 - ID: sess-u3ofsm4i3 | [NAV_CLICK] | Page: /team | Details: To: Exit to Home
-2026-04-10 13:41:18 - ID: sess-u3ofsm4i3 | [ROBOT_STOP] | Page: /team | Details: Interrupt triggered
-2026-04-10 13:41:19 - ID: sess-u3ofsm4i3 | [PAGE_EXIT] | Page: /team | Details: User left page
-2026-04-10 13:41:19 - ID: sess-u3ofsm4i3 | [User entered Main Menu] | Page: /home | Details: N/A
-2026-04-10 13:41:22 - ID: sess-u3ofsm4i3 | [ROBOT_STOP] | Page: /home | Details: Interrupt triggered
-2026-04-10 13:41:22 - ID: sess-u3ofsm4i3 | [NAV_CLICK] | Page: /home | Details: To: Menu: RPS Game
-2026-04-10 13:41:22 - ID: sess-u3ofsm4i3 | [PAGE_EXIT] | Page: /home | Details: User left page
-2026-04-10 13:42:36 - ID: sess-u3ofsm4i3 | [PAGE_EXIT] | Page: /RockPaperScissors | Details: User left page
-2026-04-10 13:42:36 - ID: sess-2dytfretc | [JS_ERROR] | Page: / | Details: Uncaught SyntaxError: Identifier 'sessionId' has already been declared @ line 1
 2026-04-10 13:46:08 - ID: sess-tcz43zi05 | [Session Start] | Page: / | Details: N/A
 2026-04-10 13:46:09 - ID: sess-tcz43zi05 | [ROBOT_SPEECH_START] | Page: / | Details: Welcome to F and M. My name is misty. Try out our latest Rob...
 2026-04-10 13:51:20 - ID: sess-tcz43zi05 | [NAV_CLICK] | Page: / | Details: To: Start to Home
